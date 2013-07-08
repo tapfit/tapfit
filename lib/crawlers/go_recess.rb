@@ -23,7 +23,7 @@ class GoRecess < ResqueJob
           :category_ids => [1, 2, 3, 4, 5, 9, 11, 14], 
           :radius => "25", 
           :type => "class",
-          :date => date.to_date 
+          :date => date.to_date, 
           :page => page, 
           :latitude => @lat,  
           :longitude => @lon 
@@ -44,9 +44,9 @@ class GoRecess < ResqueJob
   end
 
   def self.save_classes_to_database(parsed_json)
-    parsed_json["scheduled_classes"].each do |classes|
-      puts "className: #{classes["class_type"]["name"]}"
-      puts "locationName: #{classes["location"]["name"]}"
+    parsed_json["scheduled_classes"].each do |gym|
+      puts "className: #{gym["class_type"]["name"]}"
+      puts "locationName: #{gym["location"]["name"]}"
     end
   end
 end
