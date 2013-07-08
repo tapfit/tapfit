@@ -1,1 +1,1 @@
-Dir["lib/crawlers/*.rb"].each { |file| require file }
+Dir["/lib/crawlers/*.rb"].each { |file| require file }
