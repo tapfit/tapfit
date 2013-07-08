@@ -52,8 +52,8 @@ class GoRecessLoc < ResqueJob
     attr_accessor :lat, :lon
 
     def initialize(lat, lon)
-      :lat = lat
-      :lon = lon
+      @lat = lat
+      @lon = lon
     end
   end
 end
