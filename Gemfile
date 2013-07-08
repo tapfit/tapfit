@@ -12,6 +12,7 @@ gem 'resque'
 gem 'redis'
 gem 'hirefire-resource'
 gem 'newrelic_rpm'
+gem 'rest-client'
 
 
 # Use SCSS for stylesheets
