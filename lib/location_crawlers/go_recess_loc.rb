@@ -40,7 +40,7 @@ class GoRecessLoc < ResqueJob
     parsed_json = JSON.parse(response.to_str)
 
     parsed_json["providers"].each do |provider|
-      provider["name"]
+      puts provider["name"]
     end
 
     if page < parsed_json["pagination"]["total_pages"]
