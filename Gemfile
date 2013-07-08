@@ -10,6 +10,7 @@ gem 'pg'
 gem 'unicorn'
 gem 'resque'
 gem 'redis'
+gem 'hirefire-resource'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0.rc1'
