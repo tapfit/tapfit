@@ -11,7 +11,7 @@ class GoRecessLoc < ResqueJob
       end
     else
       puts "getting locations"
-      GoRecessLoc.get_locations(page, lat, lon)
+      GoRecessLoc.get_locations(page, lat, lon)   
     end
     
   end
