@@ -11,6 +11,8 @@ gem 'unicorn'
 gem 'resque'
 gem 'redis'
 gem 'hirefire-resource'
+gem 'newrelic_rpm'
+
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0.rc1'
