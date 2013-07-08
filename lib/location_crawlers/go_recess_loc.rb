@@ -15,8 +15,6 @@ class GoRecessLoc < ResqueJob
     end
     
   end
-
-private
   
   def get_lat_lon
     lat_lon_arr = []
