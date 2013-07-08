@@ -7,6 +7,7 @@ module Crawler
       File.open(file).each_line do |line|
         if line.include?("class")
           Resque.enqueue(Kernel.const_get(line.split(" ")[1]), 1, true, DateTime.now)
+          break
         end
       end
     end
