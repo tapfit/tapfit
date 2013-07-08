@@ -7,11 +7,9 @@ class GoRecessLoc < ResqueJob
 
     if rerun.nil? || rerun
       GoRecessLoc.get_lat_lon.each do |latlon|
-        puts "enqueing GoRecessLoc"
         Resque.enqueue(GoRecessLoc, 1, false, latlon.lat, latlon.lon)
       end
     else
-      puts "getting locations"
       GoRecessLoc.get_locations(page, lat, lon)   
     end
     
@@ -50,12 +48,4 @@ class GoRecessLoc < ResqueJob
     end
   end
 
-  class LatLon
-    attr_accessor :lat, :lon
-
-    def initialize(lat, lon)
-      @lat = lat
-      @lon = lon
-    end
-  end
 end
