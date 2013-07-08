@@ -4,13 +4,15 @@ require 'rest-client'
 class GoRecessLoc < ResqueJob
 
   def self.perform(page, rerun, lat, lon)
+    Rails.logger = Logger.new("resque")
+
     if rerun.nil? || rerun
       GoRecessLoc.get_lat_lon.each do |latlon|
-        puts "enqueing GoRecessLoc"
+        Rails.logger.info "enqueing GoRecessLoc"
         Resque.enqueue(GoRecessLoc, 1, false, latlon.lat, latlon.lon)
       end
     else
-      puts "getting locations"
+      Rails.logger.info "getting locations"
       GoRecessLoc.get_locations(page, lat, lon)   
     end
     
@@ -39,11 +41,11 @@ class GoRecessLoc < ResqueJob
 
     parsed_json = JSON.parse(response.to_str)
 
-    puts parsed_json["providers"]
+    Rails.logger.info parsed_json["providers"]
 
     if page < parsed_json["pagination"]["total_pages"]
       page += 1
-      puts "enqueing GoRecessLoc in get_locations"
+      Rails.logger.info "enqueing GoRecessLoc in get_locations"
       Resque.enqueue(GoRecessLoc, page, false, lat, lon)
     end
   end
