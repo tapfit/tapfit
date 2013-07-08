@@ -5,7 +5,7 @@ class GoRecessLoc < ResqueJob
 
   def self.perform(page, rerun, lat, lon)
     if rerun.nil? || rerun
-      get_lat_lon.each do |latlon|
+      GoRecessLoc.get_lat_lon.each do |latlon|
         puts "enqueing GoRecessLoc"
         Resque.enqueue(GoRecessLoc, 1, false, latlon.lat, latlon.lon)
       end
@@ -16,7 +16,7 @@ class GoRecessLoc < ResqueJob
     
   end
   
-  def get_lat_lon
+  def self.get_lat_lon
     lat_lon_arr = []
     lat_lon_arr << LatLon.new(:lat => 39.136111100000001, :lon => -84.503055599999996)
     lat_lon_arr << LatLon.new(:lat => 41.850033000000003, :lon => -87.650052299999999)
