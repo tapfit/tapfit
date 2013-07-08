@@ -18,7 +18,7 @@ class GoRecessLoc < ResqueJob
 
 private
   
-  def get_lan_lon
+  def get_lat_lon
     lat_lon_arr = []
     lat_lon_arr << LatLon.new(:lat => 39.136111100000001, :lon => -84.503055599999996)
     lat_lon_arr << LatLon.new(:lat => 41.850033000000003, :lon => -87.650052299999999)
