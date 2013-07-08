@@ -29,8 +29,9 @@ class GoRecess < ResqueJob
           :longitude => @lon 
         } 
       }
-
-    GoRecess.save_classes_to_database(JSON.parse(response.to_str))
+  
+    parsed_json = JSON.parse(response.to_str)  
+    GoRecess.save_classes_to_database(parsed_json)
 
     if get_pages
       total_pages = parsed_json["pagination"]["total_pages"]
