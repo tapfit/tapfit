@@ -6,7 +6,7 @@ module Crawler
     Dir.glob("./lib/crawlers/*.rb").each do |file|
       File.open(file).each_line do |line|
         if line.include?("class")
-          Resque.enqueue(Kernel.const_get(line.split(" ")[1]))
+          Resque.enqueue(Kernel.const_get(line.split(" ")[1]), true)
         end
       end
     end
