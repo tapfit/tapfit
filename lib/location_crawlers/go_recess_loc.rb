@@ -11,7 +11,7 @@ class GoRecessLoc < ResqueJob
       end
     else
       puts "getting locations"
-      get_locations(page, lat, lon)
+      GoRecessLoc.get_locations(page, lat, lon)
     end
     
   end
@@ -23,7 +23,7 @@ class GoRecessLoc < ResqueJob
     return lat_lon_arr
   end
 
-  def get_locations(page, lat, lon)
+  def self.get_locations(page, lat, lon)
     response = RestClient.post 'https://www.gorecess.com/search', 
       {
         :search => 
