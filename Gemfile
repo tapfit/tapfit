@@ -13,7 +13,12 @@ gem 'redis'
 gem 'hirefire-resource'
 gem 'newrelic_rpm'
 gem 'rest-client'
+gem 'geocoder'
 
+group :test, :development do
+  gem "rspec-rails"  
+  gem "factory_girl_rails"
+end
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0.rc1'

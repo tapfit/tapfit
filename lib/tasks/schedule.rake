@@ -13,6 +13,19 @@ task :start_crawl_jobs => :environment do
   puts "Ending crawl process"
 end
 
+task :rerun_crawl_jobs => :environment do
+  
+  if REDIS.exists(MailerUtils.redis_key)
+    if !REDIS.exists(MailerUtils.redis_key + "sent")
+      MailerUtils.send_error_email
+      REDIS.set(MailerUtils.redis_key + "sent", true)
+    end
+  else
+    Crawler.start_crawler_process
+  end
+
+end
+
 task :get_go_recess_locations => :environment do
   Resque.enqueue(GoRecessLoc, 1, true, nil, nil)
 end
