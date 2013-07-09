@@ -1,4 +1,6 @@
 require './lib/resque_job'
+require 'nokogiri'
+require 'open-uri'
 
 class GoRecess < ResqueJob
 

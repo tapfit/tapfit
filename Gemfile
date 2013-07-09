@@ -14,6 +14,7 @@ gem 'hirefire-resource'
 gem 'newrelic_rpm'
 gem 'rest-client'
 gem 'geocoder'
+gem 'nokogiri'
 
 group :test, :development do
   gem "rspec-rails"  
