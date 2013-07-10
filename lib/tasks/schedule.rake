@@ -16,11 +16,14 @@ end
 task :rerun_crawl_jobs => :environment do
   
   if REDIS.exists(MailerUtils.redis_key)
+    puts "MailerUtils.redis_key exists"
     if !REDIS.exists(MailerUtils.redis_key + "sent")
+      puts "About to send email"
       MailerUtils.send_error_email
       REDIS.set(MailerUtils.redis_key + "sent", true)
     end
   else
+    puts "MailerUtils.redis_key does not exist, running crawler process"
     Crawler.start_crawler_process
   end
 

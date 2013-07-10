@@ -9,6 +9,7 @@ class CrawlerErrorEmail < ActionMailer::Base
   end
 
   def send_email(email, message)
+    puts "Sending Email: message"
     mail(to: email,
          body: message,
          content_type: "text/html",
