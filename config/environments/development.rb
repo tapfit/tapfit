@@ -27,6 +27,6 @@ Tapfit::Application.configure do
   # number of complex assets.
   config.assets.debug = true
   
-  ENV["REDISTOGO_URL"] = "redis://127.0.0.1:6379/0"
-  # ENV["REDISTOGO_URL"] = 'redis://redistogo:285beef99398335fe27f294d915446a9@crestfish.redistogo.com:9225/'
+  # ENV["REDISTOGO_URL"] = "redis://127.0.0.1:6379/0"
+  ENV["REDISTOGO_URL"] = 'redis://redistogo:285beef99398335fe27f294d915446a9@crestfish.redistogo.com:9225/'
 end
