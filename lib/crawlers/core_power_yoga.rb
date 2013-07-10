@@ -1,0 +1,3 @@
+class CorePowerYoga
+
+end
