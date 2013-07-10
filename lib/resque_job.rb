@@ -1,3 +1,5 @@
+require 'crawler_validation/mailer_utils.rb'
+
 class ResqueJob
 
   def self.queue; :crawler; end
@@ -11,6 +13,9 @@ class ResqueJob
     end
   end
 
-
+  def on_failure(e, *args)
+    message = "Resque job failed: [#{self.to_s}, #{args.join(', ')}] : #{e.to_s}"
+    MailerUtils.write_error(message)
+  end
 end
 
