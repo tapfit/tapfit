@@ -48,7 +48,7 @@ class GoRecess < ResqueJob
 
   def self.save_classes_to_database(parsed_json)
     parsed_json["scheduled_classes"].each do |gym|
-      doc = Nokogiri::HTML(open("https://www.gorecess.com/locations/" + gym["location"]["id"]))
+      doc = Nokogiri::HTML(open("https://www.gorecess.com/locations/#{gym["location"]["id"]}"))
       description = doc.xpath("//meta[@name='description']/@content").first.value
       phone_number = doc.xpath("//div[@itemprop='telephone']").first.content
       puts "className: #{gym["class_type"]["name"]}, phone_number: #{phone_number}, description: #{description}"
