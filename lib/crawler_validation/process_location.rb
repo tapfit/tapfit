@@ -18,11 +18,15 @@ class ProcessLocation < ProcessBase
     end
   end
 
+  def attrs
+    instance_variables.map{|ivar| instance_variable_get ivar}
+  end
+
   def save_to_database(source_name)
-    if validate_crawler_values?
+    if validate_crawler_values?(source_name)
       puts "failed to validate location"
     else
-      puts "saving to database: #{self.attributes}"
+      puts "saving to database: #{self.attrs}"
     end
   end
 

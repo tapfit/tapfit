@@ -6,10 +6,10 @@ module MailerUtils
 
   def self.write_error(key, value, source)
     message = "#{key} was not valid: #{value}, from source: #{source}"
-    write_error(message)
+    write_error_message(message)
   end
 
-  def self.write_error(message)
+  def self.write_error_message(message)
     puts "adding message to #{redis_key} with message: #{message}"
     REDIS.lpush(redis_key, message)
   end

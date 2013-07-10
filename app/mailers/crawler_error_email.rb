@@ -1,9 +1,9 @@
 class CrawlerErrorEmail < ActionMailer::Base
   
-  @emails = ["zackmartinsek@gmail.com"]
+  EMAILS = ["zackmartinsek@gmail.com"]
 
   def error_email(message)
-    @emails.each do |email|
+    EMAILS.each do |email|
       send_email(email, message)
     end
   end
