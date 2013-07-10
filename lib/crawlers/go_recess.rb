@@ -50,7 +50,7 @@ class GoRecess < ResqueJob
     parsed_json["scheduled_classes"].each do |gym|
       gym_id = gym["location"]["id"]
       puts gym_id
-      output = `phantomjs ./lib/phantomjs/get_page.js https://www.gorecess.com/locations/#{gym_id}`
+      output = `bin/phantomjs ./lib/phantomjs/get_page.js https://www.gorecess.com/locations/#{gym_id}`
       puts output
       doc = Nokogiri::HTML(output)
       # puts doc
