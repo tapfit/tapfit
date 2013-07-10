@@ -50,7 +50,10 @@ class GoRecess < ResqueJob
     parsed_json["scheduled_classes"].each do |gym|
       gym_id = gym["location"]["id"]
       puts gym_id
-      doc = Nokogiri::HTML(open("https://www.gorecess.com/locations/#{gym_id}"))
+      output = `phantomjs ./lib/phantomjs/get_page.js https://www.gorecess.com/locations/#{gym_id}`
+      puts output
+      doc = Nokogiri::HTML(output)
+      # puts doc
       description = doc.xpath("//meta[@name='description']/@content").first.value
       phone_number = doc.xpath("//div[@itemprop='telephone']").first.content
       puts "className: #{gym["class_type"]["name"]}, phone_number: #{phone_number}, description: #{description}"
