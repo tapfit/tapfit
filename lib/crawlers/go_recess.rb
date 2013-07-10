@@ -54,8 +54,18 @@ class GoRecess < ResqueJob
       puts output
       doc = Nokogiri::HTML(output)
       # puts doc
-      description = doc.xpath("//meta[@name='description']/@content").first.value
-      phone_number = doc.xpath("//div[@itemprop='telephone']").first.content
+      desc_xml = doc.xpath("//meta[@name='description']/@content").first
+      if desc_xml.nil?
+        description = "couldn't find description"
+      else
+        description = desc_xml.value
+      end
+      num_xml = doc.xpath("//div[@itemprop='telephone']").first
+      if num_xml.nil?
+        phone_number = "couldn't find description"
+      else
+        phone_number = num_xml.content
+      end
       puts "className: #{gym["class_type"]["name"]}, phone_number: #{phone_number}, description: #{description}"
       puts "locationName: #{gym["location"]["name"]}"
     end
