@@ -116,6 +116,9 @@ class ProcessBase
       end
     end
 
+    if !failed_processing
+      REDIS.lpush(MailerUtils.redis_key, "")
+    end
     return failed_processing
   end
 
