@@ -13,6 +13,10 @@ task :start_crawl_jobs => :environment do
   puts "Ending crawl process"
 end
 
+task :send_email => :environment do
+  MailerUtils.send_error_email
+end
+
 task :rerun_crawl_jobs => :environment do
   
   if REDIS.exists(MailerUtils.redis_key)
