@@ -1,8 +1,10 @@
 class CrawlerErrorEmail < ActionMailer::Base
   
+  default from: 'zack@tapfit.com'
+
   EMAILS = ["zackmartinsek@gmail.com"]
 
-  def error_email(message)
+  def self.error_email(message)
     EMAILS.each do |email|
       send_email(email, message)
     end
@@ -13,6 +15,6 @@ class CrawlerErrorEmail < ActionMailer::Base
     mail(to: email,
          body: message,
          content_type: "text/html",
-         subject: "Crawler Report #{DateTime.now}")
+         subject: "Crawler Report #{DateTime.now}").deliver
   end
 end

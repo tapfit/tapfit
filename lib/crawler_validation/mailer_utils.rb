@@ -25,7 +25,7 @@ module MailerUtils
       body = "No errors today"
     end
 
-    puts "Sending email: #{body}"
+    #puts "Sending email: #{body}"
     CrawlerErrorEmail.error_email(body)
   end
 end
