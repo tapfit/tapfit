@@ -1,4 +1,5 @@
 require 'uri'
+require './lib/letter_to_phone_number'
 
 class ProcessBase
 
@@ -165,11 +166,27 @@ class ProcessBase
 
   def check_phone_number?
     if !@phone_number.nil?
-      digits_only = @phone_number.gsub(/[^\d]/, '')
-      if digits_only.length >= 10 && digits_only.length <=11
-        return true
-      else
+      if @phone_number.length > 20 || @phone_number.length < 7
+        puts "failed length test"
         return false
+      else
+        @phone_number.split("").each do |char|
+          if char =~ /[[:alpha:]]/
+            integer = LetterToPhoneNumber.get_number_from_letter(char)
+            if !integer.nil?
+              puts "char: #{char}, integer: #{integer.to_s}"
+              @phone_number = @phone_number.gsub(char, integer.to_s)
+            end
+          end
+        end
+        puts "phone_number: #{@phone_number}"
+        digits_only = @phone_number.gsub(/[^\d]/, '')
+        puts "digits_only: #{digits_only}"
+        if digits_only.length >= 10 && digits_only.length <=11
+          return true
+        else
+          return false
+        end
       end
     else
       return false
@@ -177,7 +194,7 @@ class ProcessBase
   end
 
   def check_source_description?
-    special = "?<>[]}{=)(*^$`~{}"
+    special = "?<>[]}{=*^$`~{}"
     regex = /[#{special.gsub(/./){|char| "\\#{char}"}}]/
     return !@source_description.nil? && !(@source_description =~ regex)
   end

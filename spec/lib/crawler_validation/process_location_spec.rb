@@ -16,12 +16,12 @@ describe ProcessLocation do
     not_valid = @process_location.validate_crawler_values?("goRecess")
     MailerUtils.send_error_email
     not_valid.should be_false
-    REDIS.exists(MailerUtils.redis_key).should be_false
+    REDIS.llen(MailerUtils.redis_key).should eql(0)
   end
 
   it 'should validate empty gym' do
     @empty_location.validate_crawler_values?("goRecess").should be_false
-    REDIS.exists(MailerUtils.redis_key).should be_false
+    REDIS.llen(MailerUtils.redis_key).should eql(1)
   end
 
   it 'should not validate an invalid gym' do
