@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130713163009) do
+ActiveRecord::Schema.define(version: 20130713195550) do
 
   create_table "addresses", force: true do |t|
     t.string   "line1"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20130713163009) do
     t.string   "source"
     t.binary   "source_key"
     t.string   "url"
-    t.string   "category",                          null: false
+    t.string   "category"
     t.string   "phone_number"
     t.text     "tapfit_description"
     t.text     "source_description"
@@ -40,6 +40,29 @@ ActiveRecord::Schema.define(version: 20130713163009) do
     t.float    "dropin_price"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  add_index "places", ["can_dropin"], name: "index_places_on_can_dropin", using: :btree
+  add_index "places", ["category"], name: "index_places_on_category", using: :btree
+  add_index "places", ["is_public"], name: "index_places_on_is_public", using: :btree
+  add_index "places", ["source"], name: "index_places_on_source", using: :btree
+  add_index "places", ["source_key"], name: "index_places_on_source_key", using: :btree
+
+  create_table "taggings", force: true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       limit: 128
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
+
+  create_table "tags", force: true do |t|
+    t.string "name"
   end
 
 end

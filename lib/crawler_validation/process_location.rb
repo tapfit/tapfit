@@ -18,16 +18,38 @@ class ProcessLocation < ProcessBase
     end
   end
 
-  def attrs
-    instance_variables.map{|ivar| instance_variable_get ivar}
-  end
+
 
   def save_to_database(source_name)
     if validate_crawler_values?(source_name)
       puts "failed to validate location"
     else
-      puts "saving to database: #{self.attrs}"
+      address = Address.create(:line1 => @address[:line1], :line2 => @address[:line2], :city => @address[:city], :state => @address[:state], :zip => @address[:zip], :lat => @address[:latitude], :lon => @address[:longitude])
+      
+      place = Place.new(:name => @name, :address_id => address.id, :source => @source, :source_key => Digest::SHA1.hexdigest(@source_id.to_s), :url => @url, :phone_number => @phone_number, :source_description => @source_description, :is_public => true, :can_dropin => true)
+
+      if place.save
+        puts "saved to database: #{place.attributes}"
+        if !@tags.nil?
+          @tags.each do |tag|
+            place.category_list.add(tag)
+          end
+        end
+
+        return place.id
+      else
+        puts "failed to save #{place.errors}"
+        return nil
+      end
     end
   end
 
+  def self.get_place_id(source, source_id)
+    place = Place.where(:source => source, :source_key => Digest::SHA1.hexdigest(source_id.to_s))
+    if place.count > 0
+      return place.first.id
+    else
+      return nil
+    end
+  end
 end

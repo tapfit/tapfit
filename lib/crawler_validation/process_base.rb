@@ -3,12 +3,16 @@ require './lib/letter_to_phone_number'
 
 class ProcessBase
 
-  attr_accessor :name, :address, :tags, :url, :photo_url, :phone_number, :source_description, :source, :source_id, :start_time, :end_time, :price, :instructor
+  attr_accessor :name, :address, :tags, :url, :photo_url, :phone_number, :source_description, :source, :source_id, :start_time, :end_time, :price, :instructor, :place_id
 
   @ten_digits = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
   @seven_digits = /^(?:\(?([0-9]{3})\)?[-. ]?)?([0-9]{3})[-. ]?([0-9]{4})$/
   @leading_1 = /^(?:\+?1[-. ]?)?\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
   @valid_keys = []
+
+  def attrs
+    instance_variables.map{|ivar| instance_variable_get ivar}
+  end
 
   def validate_crawler_values?(source_name)
     failed_processing = false  

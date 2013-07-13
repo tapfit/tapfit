@@ -16,6 +16,7 @@ gem 'rest-client'
 gem 'geocoder'
 gem 'nokogiri'
 gem 'devise'
+gem 'acts-as-taggable-on'
 
 group :test, :development do
   gem "rspec-rails"  
