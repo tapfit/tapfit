@@ -128,15 +128,17 @@ class ProcessBase
   end
 
   def check_price?
-    @price = @price.gsub("$", "")
+    @price = @price.to_s.gsub("$", "")
     return @price.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? false : true 
   end
   def check_time?(time)
     begin 
-      Date.parse(time)
-      return true
-    rescue
+      puts time
+      parsed_time = Time.parse(time)
+      puts parsed_time
       return false
+    rescue
+      return true
     end
   end
 

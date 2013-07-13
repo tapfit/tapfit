@@ -1,4 +1,5 @@
 require_relative 'process_base'
+require './lib/workout_key'
 
 class ProcessClass < ProcessBase
   
@@ -29,10 +30,10 @@ class ProcessClass < ProcessBase
         last_name = full_name[1] if full_name.length > 1
         instructor = Instructor.create(:first_name => first_name, :last_name => last_name)
       end
+      
+      workout_key = WorkoutKey.get_workout_key(@place_id, @name)
 
-      workout_key = Digest::SHA1.hexdigest("#{@place_id}#{@name}")
-
-      workout = Workout.new(:name => @name, :place_id => @place_id, :source_description => @source_description, :start_time => @start_time, :end_time => @end_time, :price => @price, :instructor_id => instructor, :source => @source, :workout_key => work_key)
+      workout = Workout.new(:name => @name, :place_id => @place_id, :source_description => @source_description, :start_time => @start_time, :end_time => @end_time, :price => @price, :instructor_id => instructor.id, :source => @source, :workout_key => workout_key)
 
       if workout.save
         puts "saved to database #{workout.attributes}"

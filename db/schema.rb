@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130713195550) do
+ActiveRecord::Schema.define(version: 20130713222215) do
 
   create_table "addresses", force: true do |t|
     t.string   "line1"
@@ -24,6 +24,19 @@ ActiveRecord::Schema.define(version: 20130713195550) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "instructors", force: true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "photo_url"
+    t.string   "phone_number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "instructors", ["email"], name: "index_instructors_on_email", unique: true, using: :btree
+  add_index "instructors", ["phone_number"], name: "index_instructors_on_phone_number", unique: true, using: :btree
 
   create_table "places", force: true do |t|
     t.string   "name",                              null: false
@@ -64,5 +77,28 @@ ActiveRecord::Schema.define(version: 20130713195550) do
   create_table "tags", force: true do |t|
     t.string "name"
   end
+
+  create_table "workouts", force: true do |t|
+    t.string   "name"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer  "instructor_id"
+    t.integer  "place_id"
+    t.text     "source_description"
+    t.binary   "workout_key"
+    t.string   "source"
+    t.boolean  "is_bookable",        default: true
+    t.float    "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "workouts", ["end_time"], name: "index_workouts_on_end_time", using: :btree
+  add_index "workouts", ["instructor_id"], name: "index_workouts_on_instructor_id", using: :btree
+  add_index "workouts", ["is_bookable"], name: "index_workouts_on_is_bookable", using: :btree
+  add_index "workouts", ["place_id"], name: "index_workouts_on_place_id", using: :btree
+  add_index "workouts", ["source"], name: "index_workouts_on_source", using: :btree
+  add_index "workouts", ["start_time"], name: "index_workouts_on_start_time", using: :btree
+  add_index "workouts", ["workout_key"], name: "index_workouts_on_workout_key", using: :btree
 
 end

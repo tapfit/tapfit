@@ -79,6 +79,7 @@ class GoRecess < ResqueJob
     opts[:source] = @source
     process_class = ProcessClass.new(opts)
     puts "process_class: #{process_class.attrs}"
+    process_class.save_to_database(@source)
   end
 
   def self.get_location_info_and_save(location)
