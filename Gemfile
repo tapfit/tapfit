@@ -15,6 +15,7 @@ gem 'newrelic_rpm'
 gem 'rest-client'
 gem 'geocoder'
 gem 'nokogiri'
+gem 'devise'
 
 group :test, :development do
   gem "rspec-rails"  
