@@ -2,6 +2,7 @@ require './lib/resque_job'
 require 'nokogiri'
 require 'open-uri'
 require './lib/crawler_validation/process_location'
+require './lib/crawler_validation/process_class'
 
 class GoRecess < ResqueJob
 
