@@ -25,7 +25,7 @@ class GoRecess < ResqueJob
         :search => 
         { 
           :category_ids => [1, 2, 3, 4, 5, 9, 11, 14], 
-          :radius => "400", 
+          :radius => "25", 
           :type => "class",
           :date => date.to_date, 
           :page => page, 
@@ -67,15 +67,16 @@ class GoRecess < ResqueJob
   end
 
   def self.get_class_info_and_save(json, place_id)
+    puts json
     opts = {}
     opts[:place_id] = place_id
-    opts[:name] = json["class_type"]["name"] 
-    opts[:tags] = json["class_type"]["tags"]
-    date = Time.parse(json["date"])
-    opts[:start_time] = date + json["starts"]
-    opts[:end_time] = date + json["ends"]
-    opts[:price] = json["price"]
-    opts[:instructor] = json["staff"]["name"]
+    opts[:name] = json[:class_type][:name] 
+    opts[:tags] = json[:class_type][:tags]
+    date = Time.parse(json[:date])
+    opts[:start_time] = date + json[:starts]
+    opts[:end_time] = date + json[:ends]
+    opts[:price] = json[:price]
+    opts[:instructor] = json[:staff][:name]
     opts[:source] = @source
     process_class = ProcessClass.new(opts)
     puts "process_class: #{process_class.attrs}"
