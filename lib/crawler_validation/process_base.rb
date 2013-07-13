@@ -148,7 +148,7 @@ class ProcessBase
     end
     address_string = @address[:line1] + @address[:city] + @address[:state] + @address[:zip]
     coordinates = Geocoder.coordinates(address_string)
-    Rails.logger.debug "coordinates: #{coordinates}"
+    puts "coordinates: #{coordinates}"
     if coordinates.nil?
       return false
     else
