@@ -7,6 +7,7 @@ describe Place do
     @address = FactoryGirl.create(:valid_address_with_coordinates)
     @place.address_id = @address.id
     @place.save 
+    @image_url = 'http://cdn04.cdn.justjaredjr.com/wp-content/uploads/headlines/2013/06/miley-cyrus-chanel-selfies-in-miami.jpg'
   end
   
   it 'should return nearby places' do
@@ -43,5 +44,31 @@ describe Place do
     @place.category_list.add("yoga")
     @place.save
     # @place.as_json(:list => true).should eql("")
+  end
+
+  it 'should add icon photo to place' do
+    @place.set_icon_photo(@image_url, nil)
+    url = @place.get_icon_photo
+    @image_url.should eql(url.url)
+    Photo.where(:url => @image_url).count.should eql(1)
+  end
+
+  it 'should add cover photo to place' do
+    @place.set_cover_photo(@image_url, nil)
+    url = @place.get_cover_photo
+    @image_url.should eql(url.url)
+    Photo.where(:url => @image_url).count.should eql(1)
+  end
+
+  it 'should not create another photo if url already exists' do
+    @place.set_cover_photo(@image_url, nil)
+    url = @place.get_cover_photo
+    @place.set_cover_photo(@image_url, nil)
+    @place.get_cover_photo.should eql(url)
+    Photo.where(:url => @image_url).count.should eql(1)
+  end
+
+  it 'should return nil if no photo' do
+    @place.get_cover_photo.should be_nil
   end
 end

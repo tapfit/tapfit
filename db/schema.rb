@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130715164724) do
+ActiveRecord::Schema.define(version: 20130715192937) do
 
   create_table "addresses", force: true do |t|
     t.string   "line1"
@@ -38,6 +38,19 @@ ActiveRecord::Schema.define(version: 20130715164724) do
   add_index "instructors", ["email"], name: "index_instructors_on_email", unique: true, using: :btree
   add_index "instructors", ["phone_number"], name: "index_instructors_on_phone_number", unique: true, using: :btree
 
+  create_table "photos", force: true do |t|
+    t.string   "url"
+    t.integer  "user_id"
+    t.binary   "workout_key"
+    t.integer  "place_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "photos", ["place_id"], name: "index_photos_on_place_id", using: :btree
+  add_index "photos", ["user_id"], name: "index_photos_on_user_id", using: :btree
+  add_index "photos", ["workout_key"], name: "index_photos_on_workout_key", using: :btree
+
   create_table "places", force: true do |t|
     t.string   "name",                              null: false
     t.integer  "address_id"
@@ -53,6 +66,8 @@ ActiveRecord::Schema.define(version: 20130715164724) do
     t.float    "dropin_price"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "icon_photo_id"
+    t.integer  "cover_photo_id"
   end
 
   add_index "places", ["can_dropin"], name: "index_places_on_can_dropin", using: :btree
