@@ -1,7 +1,9 @@
 module Api
   module V1
     class UsersController < ApplicationController
-      
+      skip_before_filter :verify_authenticity_token, :only => [:login, :register, :forgotpassword] 
+      respond_to :json
+
       # Registers a new user
       # POST users/register    
       def register
