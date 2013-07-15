@@ -1,5 +1,6 @@
 class Place < ActiveRecord::Base
   acts_as_taggable_on :categories
+  before_save :normalize_tags
   belongs_to :address
   has_many :workouts
 
@@ -25,7 +26,7 @@ class Place < ActiveRecord::Base
   def as_json(options={})
     if !options[:list].nil?
       except_array ||= [ :url, :category, :phone_number, :source, :source_key, :tapfit_description, :source_description, :is_public, :can_dropin, :dropin_price, :created_at, :updated_at, :address_id ]
-      options[:include] ||= [ :address => {:except => [:updated_at, :created_at, :id] } ]
+      options[:include] ||= [ :address => {:except => [:updated_at, :created_at, :id] }, :category_list ]
       options[:methods] ||= [ :next_class ]
     elsif !options[:detail].nil?      
       except_array ||= [ :created_at, :updated_at, :latitude, :longitude, :physical_address_id, :billing_address_id ]
@@ -35,5 +36,17 @@ class Place < ActiveRecord::Base
     options[:except] ||= except_array
     super(options)
 
+  end
+
+  def normalize_tags
+    size = self.category_list.length
+    i = 0
+    while i < size do
+      category = self.category_list[i]
+      category = category.gsub("_", " ")
+      category = category.split(' ').map(&:capitalize).join(' ')
+      self.category_list[i] = category
+      i = i + 1
+    end 
   end
 end

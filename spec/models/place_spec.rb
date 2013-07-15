@@ -29,4 +29,12 @@ describe Place do
     @place.workouts << workout
     @place.next_class.should eql(workout)
   end
+
+  it 'should update tags to what we want' do
+    @place.category_list.add("yoga")
+    @place.category_list.add("fun_times")
+    @place.save
+    @place.category_list[0].should eql("Yoga")
+    @place.category_list[1].should eql("Fun Times")
+  end
 end

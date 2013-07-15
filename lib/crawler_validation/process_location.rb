@@ -33,6 +33,7 @@ class ProcessLocation < ProcessBase
         if !@tags.nil?
           @tags.each do |tag|
             place.category_list.add(tag)
+            place.save
           end
         end
 
