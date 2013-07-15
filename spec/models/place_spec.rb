@@ -13,4 +13,9 @@ describe Place do
     places = Place.nearby(39.110918, -84.515521, 0.05)
     places.to_a.should eql([@place])
   end
+
+  it 'should return the correct nearby places' do
+    places = Place.get_nearby_places(39.110918, -84.515521)
+    places.to_a.should eql([@place])
+  end
 end
