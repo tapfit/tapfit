@@ -19,4 +19,11 @@ class Address < ActiveRecord::Base
     end
   end
 
+  def as_json(options={})
+    
+    except_array ||= [ :created_at, :updated_at ]
+    options[:except] ||= except_array
+    super(options)
+
+  end
 end

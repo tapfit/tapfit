@@ -8,7 +8,12 @@ class Place < ActiveRecord::Base
   end
 
   def next_class
-    return Workout.where(:place_id => self.id).order("start_time DESC").first
+    workout = Workout.where(:place_id => self.id).where(:is_bookable => true).order("start_time DESC")
+    if workout.nil?
+      return nil
+    else
+      workout.as_json(:place => true)
+    end
   end
 
   scope :nearby, lambda { |lat, lon, radius|
