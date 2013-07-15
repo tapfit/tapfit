@@ -9,7 +9,7 @@ module Api
       # Returns array of place around you (default: cincinnati)
       def index
         @places = Place.get_nearby_places(params[:lat], params[:lon])
-        render @places.as_json
+        render :json => @places.as_json
       end
       
       def show
