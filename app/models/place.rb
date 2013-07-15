@@ -7,8 +7,9 @@ class Place < ActiveRecord::Base
   end
 
   scope :nearby, lambda { |lat, lon, radius|
-      where("address.lat BETWEEN ? AND ?", lat - radius, lat + radius).
-      where("address.lon BETWEEN ? AND ?", lon - radius, lon + radisu)
+      joins(:address).
+      where("lat BETWEEN ? AND ?", lat - radius, lat + radius).
+      where("lon BETWEEN ? AND ?", lon - radius, lon + radius)
   }
 
 end

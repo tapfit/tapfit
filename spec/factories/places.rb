@@ -3,7 +3,6 @@
 FactoryGirl.define do
   factory :place do
     name "MyString"
-    address_id 1
     source "MyString"
     source_key ""
     url "MyString"
@@ -11,8 +10,9 @@ FactoryGirl.define do
     phone_number "MyString"
     tapfit_description "MyText"
     source_description "MyText"
-    is_public false
+    is_public true
     can_dropin false
     dropin_price 1.5
+    after(:create) {|instance| address_id = FactoryGirl.create(:valid_address).id}
   end
 end

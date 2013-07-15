@@ -2,11 +2,11 @@ FactoryGirl.define do
   factory :address do
 
     factory :valid_address do
-      line1 "1507 N Hudson Ave"
-      line2 "#1"
-      city "Chicago"
-      state "IL"
-      zip "60610"
+      line1 "1215 Vine St"
+      line2 ""
+      city "Cincinnati"
+      state "OH"
+      zip "45202"
 
       factory :valid_address_with_coordinates do
         lat 41.909528
