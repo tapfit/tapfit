@@ -4,6 +4,11 @@ class Place < ActiveRecord::Base
   belongs_to :address
   has_many :workouts
 
+  def get_workouts
+    self.workouts.where("start_time > ?", Time.now).order("start_time DESC")
+  end
+
+
   self.per_page = 5
   
   def set_icon_photo(url, user)
@@ -39,6 +44,10 @@ class Place < ActiveRecord::Base
   end
 
   def self.get_nearby_places(lat, lon)
+    if lat.nil? || lon.nil?
+      lat = 39.110918
+      lon = -84.515521
+    end
     return Place.nearby(lat.to_f, lon.to_f, 0.05)  
   end
 

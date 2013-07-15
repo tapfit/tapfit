@@ -71,4 +71,13 @@ describe Place do
   it 'should return nil if no photo' do
     @place.cover_photo.should be_nil
   end
+
+  it 'should not return a workout if past' do
+    workout = FactoryGirl.create(:workout)
+    workout.start_time = Time.now - 5.hours
+    workout.save
+    @place.workouts << workout
+    @place.save
+    @place.get_workouts.count.should eql(0)
+  end
 end
