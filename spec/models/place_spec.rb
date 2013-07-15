@@ -23,4 +23,10 @@ describe Place do
     places = Place.get_nearby_places(39.110918, -84.515521)
     places.to_a.should eql([@place])
   end
+
+  it 'should return next class' do
+    workout = FactoryGirl.create(:workout)
+    @place.workouts << workout
+    @place.next_class.should eql(workout)
+  end
 end

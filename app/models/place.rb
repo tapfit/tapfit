@@ -1,6 +1,7 @@
 class Place < ActiveRecord::Base
   acts_as_taggable_on :categories
   belongs_to :address
+  has_many :workouts
 
   def self.get_nearby_places(lat, lon)
     return Place.nearby(lat.to_f, lon.to_f, 0.05)  
@@ -29,4 +30,5 @@ class Place < ActiveRecord::Base
     options[:except] ||= except_array
     super(options)
 
-  endend
+  end
+end
