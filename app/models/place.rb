@@ -3,7 +3,7 @@ class Place < ActiveRecord::Base
   belongs_to :address
 
   def self.get_nearby_places(lat, lon)
-    return Place.nearby(lat, lon, 0.05)  
+    return Place.nearby(lat.to_f, lon.to_f, 0.05)  
   end
 
   scope :nearby, lambda { |lat, lon, radius|
