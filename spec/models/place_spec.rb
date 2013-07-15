@@ -37,4 +37,10 @@ describe Place do
     @place.category_list[0].should eql("Yoga")
     @place.category_list[1].should eql("Fun Times")
   end
+
+  it 'should return categories' do
+    @place.category_list.add("yoga")
+    @place.save
+    @place.as_json(:list => true).should eql("")
+  end
 end
