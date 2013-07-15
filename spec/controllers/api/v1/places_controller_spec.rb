@@ -10,9 +10,19 @@ describe Api::V1::PlacesController do
   end
 
 
-  it 'returns list of places around you' do
-    get :index, lat: 39.110918, lon: -84.515521
-    response.should be_success
+  describe 'GET #index' do
+    it 'returns list of places around you' do
+      get :index, lat: 39.110918, lon: -84.515521
+      assigns(:places).to_a.should eql([@place])
+    end
+  end
+
+  describe 'GET #show' do
+    
+    it 'returns a specific place' do
+      get :show, id: @place.id
+      assigns(:place).should eql(@place)
+    end
   end
 
 end

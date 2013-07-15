@@ -13,7 +13,12 @@ module Api
       end
       
       def show
-
+        @place = Place.where(:id => params[:id]).first
+        if @place.nil?
+          render :json => { :error => "Could not find place with id, #{params[:id]}" }
+        else
+          render :json => @place.as_json(:detail => true)
+        end
       end
 
       def create

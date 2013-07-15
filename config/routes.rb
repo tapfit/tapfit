@@ -7,7 +7,9 @@ Tapfit::Application.routes.draw do
   # Api Calls
   namespace :api, defaults: {format: 'json'} do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
-      resources :places
+      resources :places do
+        resources :workouts
+      end
 
       resources :users do
         collection do
