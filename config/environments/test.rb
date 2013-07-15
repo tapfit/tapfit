@@ -34,5 +34,7 @@ Tapfit::Application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
   ENV["REDISTOGO_URL"] = "redis://127.0.0.1:6379/0"
 end

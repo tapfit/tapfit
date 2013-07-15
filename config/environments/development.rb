@@ -26,6 +26,8 @@ Tapfit::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   
   # ENV["REDISTOGO_URL"] = "redis://127.0.0.1:6379/0"
   ENV["REDISTOGO_URL"] = 'redis://redistogo:285beef99398335fe27f294d915446a9@crestfish.redistogo.com:9225/'
