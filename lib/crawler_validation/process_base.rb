@@ -153,10 +153,14 @@ class ProcessBase
       return false
     end
     address_string = @address[:line1] + @address[:city] + @address[:state] + @address[:zip]
-    coordinates = Geocoder.coordinates(address_string)
-    puts "coordinates: #{coordinates}"
-    if coordinates.nil?
-      return false
+    if @address[:lat].nil? || @address[:lon].nil?
+      coordinates = Geocoder.coordinates(address_string)
+      puts "coordinates: #{coordinates}"
+      if coordinates.nil?
+        return false
+      else
+        return true
+      end
     else
       return true
     end
