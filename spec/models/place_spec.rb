@@ -48,27 +48,27 @@ describe Place do
 
   it 'should add icon photo to place' do
     @place.set_icon_photo(@image_url, nil)
-    url = @place.get_icon_photo
+    url = @place.icon_photo
     @image_url.should eql(url.url)
     Photo.where(:url => @image_url).count.should eql(1)
   end
 
   it 'should add cover photo to place' do
     @place.set_cover_photo(@image_url, nil)
-    url = @place.get_cover_photo
+    url = @place.cover_photo
     @image_url.should eql(url.url)
     Photo.where(:url => @image_url).count.should eql(1)
   end
 
   it 'should not create another photo if url already exists' do
     @place.set_cover_photo(@image_url, nil)
-    url = @place.get_cover_photo
+    url = @place.cover_photo
     @place.set_cover_photo(@image_url, nil)
-    @place.get_cover_photo.should eql(url)
+    @place.cover_photo.should eql(url)
     Photo.where(:url => @image_url).count.should eql(1)
   end
 
   it 'should return nil if no photo' do
-    @place.get_cover_photo.should be_nil
+    @place.cover_photo.should be_nil
   end
 end
