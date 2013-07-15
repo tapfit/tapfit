@@ -4,12 +4,14 @@ class Place < ActiveRecord::Base
   belongs_to :address
   has_many :workouts
 
+  self.per_page = 5
+  
   def self.get_nearby_places(lat, lon)
     return Place.nearby(lat.to_f, lon.to_f, 0.05)  
   end
 
   def next_class
-    workout = Workout.where(:place_id => self.id).where(:is_bookable => true).order("start_time DESC")
+    workout = Workout.where(:place_id => self.id).order("start_time DESC")
     if workout.nil?
       return nil
     else

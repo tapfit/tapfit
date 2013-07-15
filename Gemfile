@@ -17,6 +17,7 @@ gem 'geocoder'
 gem 'nokogiri'
 gem 'devise'
 gem 'acts-as-taggable-on'
+gem 'will_paginate'
 
 group :test, :development do
   gem "rspec-rails"  

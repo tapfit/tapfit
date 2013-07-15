@@ -9,8 +9,8 @@ FactoryGirl.define do
       zip "45202"
 
       factory :valid_address_with_coordinates do
-        lat 41.909528
-        lon -87.639746
+        lat 39.110918
+        lon -84.515521
       end
     end
 

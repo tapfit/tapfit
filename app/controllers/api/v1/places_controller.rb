@@ -8,7 +8,7 @@ module Api
       # Params: lat, lon. Optional Params: auth_token, q, radius
       # Returns array of place around you (default: cincinnati)
       def index
-        @places = Place.get_nearby_places(params[:lat], params[:lon])
+        @places = Place.get_nearby_places(params[:lat], params[:lon]).paginate(:page => params[:page])
         render :json => @places.as_json(:list => true)
       end
       
