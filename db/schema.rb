@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130715192937) do
+ActiveRecord::Schema.define(version: 20130716145757) do
 
   create_table "addresses", force: true do |t|
     t.string   "line1"
@@ -24,6 +24,21 @@ ActiveRecord::Schema.define(version: 20130715192937) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "favorites", force: true do |t|
+    t.binary   "workout_key"
+    t.integer  "workout_id"
+    t.integer  "user_id"
+    t.integer  "place_id"
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "favorites", ["place_id"], name: "index_favorites_on_place_id", using: :btree
+  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
+  add_index "favorites", ["workout_id"], name: "index_favorites_on_workout_id", using: :btree
+  add_index "favorites", ["workout_key"], name: "index_favorites_on_workout_key", using: :btree
 
   create_table "instructors", force: true do |t|
     t.string   "first_name"
@@ -129,8 +144,10 @@ ActiveRecord::Schema.define(version: 20130715192937) do
     t.float    "price"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active",             default: true
   end
 
+  add_index "workouts", ["active"], name: "index_workouts_on_active", using: :btree
   add_index "workouts", ["end_time"], name: "index_workouts_on_end_time", using: :btree
   add_index "workouts", ["instructor_id"], name: "index_workouts_on_instructor_id", using: :btree
   add_index "workouts", ["is_bookable"], name: "index_workouts_on_is_bookable", using: :btree

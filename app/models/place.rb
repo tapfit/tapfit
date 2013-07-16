@@ -9,7 +9,7 @@ class Place < ActiveRecord::Base
   end
 
 
-  self.per_page = 5
+  self.per_page = 25
   
   def set_icon_photo(url, user)
     photo = Photo.where(:url => url).first

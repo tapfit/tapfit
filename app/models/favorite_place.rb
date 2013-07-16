@@ -1,0 +1,3 @@
+class FavoritePlace < Favorite
+
+end

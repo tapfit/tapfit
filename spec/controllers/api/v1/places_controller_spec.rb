@@ -14,6 +14,7 @@ describe Api::V1::PlacesController do
     it 'returns list of places around you' do
       get :index, lat: 39.110918, lon: -84.515521
       assigns(:places).to_a.should eql([@place])
+      response.body.should eql("")
     end
   end
 
