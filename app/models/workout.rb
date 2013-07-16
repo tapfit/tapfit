@@ -1,6 +1,6 @@
 class Workout < ActiveRecord::Base
 
-  /*default_scope where(active: true)
+  default_scope where(active: true)
 
   def archive_workout
     if self.active?
@@ -8,7 +8,6 @@ class Workout < ActiveRecord::Base
       self.save
     end
   end
-  */
 
   def as_json(options={})
     if !options[:place].nil?

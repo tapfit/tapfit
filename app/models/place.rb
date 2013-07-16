@@ -48,7 +48,7 @@ class Place < ActiveRecord::Base
       lat = 39.110918
       lon = -84.515521
     end
-    return Place.nearby(lat.to_f, lon.to_f, 0.05)  
+    return Place.nearby(lat.to_f, lon.to_f, 0.5)  
   end
 
   def next_class
