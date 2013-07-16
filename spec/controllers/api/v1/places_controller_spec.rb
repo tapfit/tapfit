@@ -4,7 +4,7 @@ describe Api::V1::PlacesController do
 
   before(:each) do
     @place = FactoryGirl.create(:place)
-    @address = FactoryGirl.create(:valid_address)
+    @address = FactoryGirl.create(:valid_address_with_coordinates)
     @place.address_id = @address.id
     @place.save
   end
