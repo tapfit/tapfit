@@ -29,7 +29,7 @@ GEM
       rails (>= 3, < 5)
     arel (4.0.0)
     atomic (1.1.10)
-    bcrypt-ruby (3.0.1)
+    bcrypt-ruby (3.1.1)
     builder (3.1.4)
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
@@ -38,10 +38,11 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
-    devise (1.5.4)
+    devise (3.0.0)
       bcrypt-ruby (~> 3.0)
-      orm_adapter (~> 0.0.3)
-      warden (~> 1.1)
+      orm_adapter (~> 0.1)
+      railties (>= 3.2.6, < 5)
+      warden (~> 1.2.3)
     diff-lcs (1.2.4)
     erubis (2.7.0)
     execjs (1.4.0)
@@ -74,7 +75,7 @@ GEM
     newrelic_rpm (3.5.6.55)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
-    orm_adapter (0.0.7)
+    orm_adapter (0.4.0)
     pg (0.15.1)
     polyglot (0.3.3)
     rack (1.5.2)
@@ -165,7 +166,7 @@ GEM
       raindrops (~> 0.7)
     vegas (0.1.11)
       rack (>= 1.0.0)
-    warden (1.2.1)
+    warden (1.2.3)
       rack (>= 1.0)
     will_paginate (3.0.4)
 
@@ -175,7 +176,7 @@ PLATFORMS
 DEPENDENCIES
   acts-as-taggable-on
   coffee-rails (~> 4.0.0)
-  devise
+  devise (= 3.0.0)
   factory_girl_rails
   geocoder
   hirefire-resource

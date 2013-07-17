@@ -1,8 +1,18 @@
 module Api
   module V1
-    class UsersController < ApplicationController
-      skip_before_filter :verify_authenticity_token, :only => [:login, :register, :forgotpassword] 
+    class UsersController < ApplicationController     
+
+      before_filter :authenticate_user!, :only => [ :show ]
+      skip_before_filter :verify_authenticity_token, :only => [:login, :register, :forgotpassword]
+
       respond_to :json
+
+      # Profile info
+      # GET users/<id> (GET me/ routes to users/<current_user.id>)
+      def show
+        user = user_from_user_id
+        render :json => user.as_json
+      end
 
       # Registers a new user
       # POST users/register    
@@ -60,6 +70,18 @@ module Api
       def user_params
         params.permit(:email, :password, :first_name, :last_name)
       end
+
+      def user_from_user_id
+        if params[:id].nil? && current_user
+          user = current_user
+        else
+          user = User.where(:id => params[:id]).first
+        end
+
+        raise ActiveRecord::RecordNotFound unless user
+        return user
+      end
+
     end
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130716145757) do
+ActiveRecord::Schema.define(version: 20130716230432) do
 
   create_table "addresses", force: true do |t|
     t.string   "line1"
@@ -109,12 +109,12 @@ ActiveRecord::Schema.define(version: 20130716145757) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                              default: "", null: false
-    t.string   "encrypted_password",     limit: 128, default: "", null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0
+    t.integer  "sign_in_count",          default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -122,7 +122,6 @@ ActiveRecord::Schema.define(version: 20130716145757) do
     t.string   "authentication_token"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -144,10 +143,8 @@ ActiveRecord::Schema.define(version: 20130716145757) do
     t.float    "price"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "active",             default: true
   end
 
-  add_index "workouts", ["active"], name: "index_workouts_on_active", using: :btree
   add_index "workouts", ["end_time"], name: "index_workouts_on_end_time", using: :btree
   add_index "workouts", ["instructor_id"], name: "index_workouts_on_instructor_id", using: :btree
   add_index "workouts", ["is_bookable"], name: "index_workouts_on_is_bookable", using: :btree

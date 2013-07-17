@@ -16,7 +16,7 @@ gem 'newrelic_rpm'
 gem 'rest-client'
 gem 'geocoder'
 gem 'nokogiri'
-gem 'devise'
+gem 'devise', '3.0.0'
 gem 'acts-as-taggable-on'
 gem 'will_paginate'
 
