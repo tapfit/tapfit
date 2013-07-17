@@ -4,23 +4,16 @@ class Place < ActiveRecord::Base
   belongs_to :address
   has_many :workouts
   has_many :ratings
+  has_many :photos, as: :imageable
 
   def get_workouts
     self.workouts.where("start_time > ?", Time.now).order("start_time DESC")
   end
 
-
   self.per_page = 25
   
   def set_icon_photo(url, user)
-    photo = Photo.where(:url => url).first
-    if photo.nil?
-      if !user.nil?
-        user_id = user.id
-      end
-      photo = Photo.create(:url => url, :place_id => self.id, :user_id => user_id)
-    end
-    self.icon_photo_id = photo.id
+    self.icon_photo_id = create_photo(url, user).id
     self.save
   end
 
@@ -29,14 +22,7 @@ class Place < ActiveRecord::Base
   end
 
   def set_cover_photo(url, user)
-    photo = Photo.where(:url => url).first
-    if photo.nil?
-      if !user.nil?
-        user_id = user.id
-      end
-      photo = Photo.create(:url => url, :place_id => self.id, :user_id => user_id)
-    end
-    self.cover_photo_id = photo.id
+    self.cover_photo_id = create_photo(url, user).id
     self.save
   end
 
@@ -55,9 +41,9 @@ class Place < ActiveRecord::Base
   def next_class
     workout = Workout.where(:place_id => self.id).order("start_time DESC")
     if workout.nil?
-      return nil
+      return []
     else
-      workout.first.as_json(:place => true)
+      workout.first.as_json(:place => true).to_a
     end
   end
 
@@ -91,6 +77,17 @@ class Place < ActiveRecord::Base
 
   end
 
+  def create_photo(url, user)
+    photo = Photo.where(:url => url).first
+    if photo.nil?
+      if !user.nil?
+        user_id = user.id
+      end
+      photo = Photo.create(:url => url, :place_id => self.id, :user_id => user_id)
+    end
+    return photo
+  end
+
 private
 
   def normalize_tags
@@ -104,4 +101,5 @@ private
       i = i + 1
     end 
   end
+
 end

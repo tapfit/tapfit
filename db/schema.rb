@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130717175002) do
+ActiveRecord::Schema.define(version: 20130717201137) do
 
   create_table "addresses", force: true do |t|
     t.string   "line1"
@@ -72,8 +72,12 @@ ActiveRecord::Schema.define(version: 20130717175002) do
     t.integer  "place_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
   end
 
+  add_index "photos", ["imageable_id"], name: "index_photos_on_imageable_id", using: :btree
+  add_index "photos", ["imageable_type"], name: "index_photos_on_imageable_type", using: :btree
   add_index "photos", ["place_id"], name: "index_photos_on_place_id", using: :btree
   add_index "photos", ["user_id"], name: "index_photos_on_user_id", using: :btree
   add_index "photos", ["workout_key"], name: "index_photos_on_workout_key", using: :btree
