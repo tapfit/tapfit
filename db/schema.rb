@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130717201137) do
+ActiveRecord::Schema.define(version: 20130717225203) do
 
   create_table "addresses", force: true do |t|
     t.string   "line1"
@@ -66,7 +66,6 @@ ActiveRecord::Schema.define(version: 20130717201137) do
   add_index "instructors", ["phone_number"], name: "index_instructors_on_phone_number", unique: true, using: :btree
 
   create_table "photos", force: true do |t|
-    t.string   "url"
     t.integer  "user_id"
     t.binary   "workout_key"
     t.integer  "place_id"
@@ -74,6 +73,10 @@ ActiveRecord::Schema.define(version: 20130717201137) do
     t.datetime "updated_at"
     t.integer  "imageable_id"
     t.string   "imageable_type"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "photos", ["imageable_id"], name: "index_photos_on_imageable_id", using: :btree

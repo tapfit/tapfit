@@ -2,7 +2,7 @@ class Workout < ActiveRecord::Base
   
   default_scope { where("start_time > ?", Time.now) }
 
-  has_one :instructor
+  belongs_to :instructor
 
   def as_json(options={})
     if !options[:place].nil?
