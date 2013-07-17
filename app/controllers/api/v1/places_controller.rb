@@ -2,7 +2,6 @@ module Api
   module V1
     class PlacesController < ApplicationController
       
-      before_filter :authenticate_user!
       respond_to :json
 
       # GET places/
