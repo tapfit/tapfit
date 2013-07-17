@@ -41,9 +41,9 @@ class Place < ActiveRecord::Base
   def next_class
     workout = Workout.where(:place_id => self.id).order("start_time DESC")
     if workout.nil?
-      return []
+      return nil
     else
-      [ workout.first.as_json(:place => true) ]
+      workout.first.as_json(:place => true)
     end
   end
 
