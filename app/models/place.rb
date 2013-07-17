@@ -43,7 +43,7 @@ class Place < ActiveRecord::Base
     if workout.nil?
       return []
     else
-      workout.first.as_json(:place => true).to_a
+      [ workout.first.as_json(:place => true) ]
     end
   end
 
