@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130716230432) do
+ActiveRecord::Schema.define(version: 20130717175002) do
 
   create_table "addresses", force: true do |t|
     t.string   "line1"
@@ -24,6 +24,18 @@ ActiveRecord::Schema.define(version: 20130716230432) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "checkins", force: true do |t|
+    t.integer  "place_id",   null: false
+    t.integer  "user_id",    null: false
+    t.float    "lat"
+    t.float    "lon"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "checkins", ["place_id"], name: "index_checkins_on_place_id", using: :btree
+  add_index "checkins", ["user_id"], name: "index_checkins_on_user_id", using: :btree
 
   create_table "favorites", force: true do |t|
     t.binary   "workout_key"
@@ -90,6 +102,23 @@ ActiveRecord::Schema.define(version: 20130716230432) do
   add_index "places", ["is_public"], name: "index_places_on_is_public", using: :btree
   add_index "places", ["source"], name: "index_places_on_source", using: :btree
   add_index "places", ["source_key"], name: "index_places_on_source_key", using: :btree
+
+  create_table "ratings", force: true do |t|
+    t.integer  "rating",      null: false
+    t.integer  "user_id",     null: false
+    t.binary   "workout_key"
+    t.integer  "workout_id"
+    t.integer  "place_id",    null: false
+    t.text     "review"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ratings", ["place_id"], name: "index_ratings_on_place_id", using: :btree
+  add_index "ratings", ["rating"], name: "index_ratings_on_rating", using: :btree
+  add_index "ratings", ["user_id"], name: "index_ratings_on_user_id", using: :btree
+  add_index "ratings", ["workout_id"], name: "index_ratings_on_workout_id", using: :btree
+  add_index "ratings", ["workout_key"], name: "index_ratings_on_workout_key", using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"

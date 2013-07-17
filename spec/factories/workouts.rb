@@ -8,7 +8,7 @@ FactoryGirl.define do
     instructor_id 1
     place_id 1
     source_description "MyText"
-    workout_key ""
+    workout_key "kdnekowkd"
     source "MyString"
     is_bookable false
   end

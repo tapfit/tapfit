@@ -11,13 +11,16 @@ Tapfit::Application.routes.draw do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
       resources :places do
         resources :workouts
+        resources :ratings
         member do
-          post 'favorite'   
+          post 'favorite'  
+          post 'checkin' 
         end    
       end
  
       def users_resources
         resources :favorites
+        resources :checkins
       end 
 
       resources :users do

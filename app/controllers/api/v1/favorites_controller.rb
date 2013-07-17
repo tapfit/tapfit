@@ -6,7 +6,7 @@ module Api
       before_filter :authenticate_user!
 
       def index
-        @places = current_user.places
+        @places = current_user.place_favorites
         render :json => @places.as_json(:list => true)
       end
       

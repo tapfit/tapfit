@@ -23,6 +23,7 @@ gem 'will_paginate'
 group :test, :development do
   gem "rspec-rails"  
   gem "factory_girl_rails"
+  gem 'database_cleaner'
 end
 
 # Use SCSS for stylesheets

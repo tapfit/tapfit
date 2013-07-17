@@ -38,7 +38,8 @@ describe Api::V1::PlacesController do
     it 'should favorite a place' do
       post :favorite, id: @place.id, auth_token: @user.authentication_token
       favorite = FavoritePlace.where(:user_id => @user.id, :place_id => @place.id).first
-      favorite.should_not be_nil
+      favorite.should_not be_nil      
+      @user.favorite_places.where(:id => favorite.id).first.should_not be_nil
       response.body.should include("1")
     end
 
@@ -54,6 +55,22 @@ describe Api::V1::PlacesController do
       post :favorite, id: @place.id
       response.body.should include("redirected")
     end
+  end
+
+  describe 'POST #checkin' do
+    
+    before(:each) do
+      @user = FactoryGirl.create(:user)
+      @user.ensure_authentication_token!
+    end
+
+    it 'should checkin to a place' do
+      post :checkin, id: @place.id, auth_token: @user.authentication_token
+      checkin = Checkin.where(:user_id => @user.id, :place_id => @place.id).first
+      @user.checkins.where(:id => checkin.id).first.should_not be_nil
+      response.body.should include("1")
+    end
+
   end
 
 end

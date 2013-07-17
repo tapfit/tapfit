@@ -3,6 +3,7 @@ class Place < ActiveRecord::Base
   before_save :normalize_tags
   belongs_to :address
   has_many :workouts
+  has_many :ratings
 
   def get_workouts
     self.workouts.where("start_time > ?", Time.now).order("start_time DESC")
@@ -60,8 +61,12 @@ class Place < ActiveRecord::Base
     end
   end
 
+  def avg_rating
+    return (self.ratings.count > 0) ? self.ratings.average(:rating) : -1
+  end
+
   def reviews
-    return nil
+    return self.ratings.where.not(:review => nil).order("created_at DESC").limit(5)
   end
 
   scope :nearby, lambda { |lat, lon, radius|
@@ -78,7 +83,7 @@ class Place < ActiveRecord::Base
     elsif !options[:detail].nil?    
       except_array ||= [ :icon_photo_id, :cover_photo_id, :category, :source, :source_key, :tapfit_description, :source_description, :is_public, :created_at, :updated_at, :address_id ]
       options[:include] ||= [ :address, :categories ]
-      options[:methods] ||= [ :next_class, :cover_photo, :icon_photo, :reviews ]
+      options[:methods] ||= [ :next_class, :cover_photo, :icon_photo, :reviews, :avg_rating ]
     end
 
     options[:except] ||= except_array
