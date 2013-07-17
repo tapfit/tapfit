@@ -4,6 +4,10 @@ require 'api_constraints'
 Tapfit::Application.routes.draw do
 
   devise_for :users
+
+  resources :places do
+    resources :photos
+  end
   # Api Calls
   namespace :api, defaults: {format: 'json'} do
 
