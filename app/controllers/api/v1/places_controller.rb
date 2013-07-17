@@ -2,6 +2,7 @@ module Api
   module V1
     class PlacesController < ApplicationController
       
+      before_filter :authenticate_user!, :only => [ :favorite ]
       respond_to :json
 
       # GET places/
@@ -40,6 +41,7 @@ module Api
         if @place.nil?
           render :json => { :code => 2, :message => "Could not find place" }
         else
+          if current_user
           @favorite = FavoritePlace.where(:user_id => current_user.id, :place_id => params[:id]).first
           if @favorite.nil?
             @favorite = FavoritePlace.create(:user_id => current_user.id, :place_id => params[:id])
@@ -47,6 +49,9 @@ module Api
           else
             @favorite.destroy
             render :json => { :code => 0, :message =>  "Successfully deleleted"  }
+          end
+          else
+            render :json => { :code => 4, :message => "Must be signed in to favorite" }
           end
         end
       end

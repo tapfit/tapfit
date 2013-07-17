@@ -49,6 +49,11 @@ describe Api::V1::PlacesController do
       favorite.should be_nil
       response.body.should include("0")
     end
+
+    it 'should not allow an unauthorized user to access' do
+      post :favorite, id: @place.id
+      response.body.should include("redirected")
+    end
   end
 
 end
