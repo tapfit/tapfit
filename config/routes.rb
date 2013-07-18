@@ -16,6 +16,7 @@ Tapfit::Application.routes.draw do
       resources :places do
         resources :workouts
         resources :ratings
+        resources :photos
         member do
           post 'favorite'  
           post 'checkin' 
