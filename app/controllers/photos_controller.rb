@@ -27,11 +27,13 @@ class PhotosController < ApplicationController
   end
 
   def create
-    @photo = Photo.new(params[:photo])
+    @photo = Photo.new(photo_params)
     
     respond_to do |format|
       if @photo.save
-        format.html { redirect_to(@photo, :notice => 'Photo successfully created.') }
+        @place = check_place(params[:place_id])
+        @place.photos << @photo
+        format.html { redirect_to(@photo, {:controller => 'photo', :action => 'show', :id => @photo.id}) }
         format.xml  { render :xml => @photo, :status => :created, :location => @photo }
       else
         format.html { render :action => "new" }
@@ -46,5 +48,11 @@ class PhotosController < ApplicationController
 
   def update
 
+  end
+
+  private
+
+  def photo_params
+    params.require(:photo).permit(:user_id, :place_id, :image, :workout_key)
   end
 end

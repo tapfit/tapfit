@@ -31,4 +31,13 @@ Tapfit::Application.configure do
   
   # ENV["REDISTOGO_URL"] = "redis://127.0.0.1:6379/0"
   ENV["REDISTOGO_URL"] = 'redis://redistogo:285beef99398335fe27f294d915446a9@crestfish.redistogo.com:9225/'
+
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :s3_credentials => {
+      :bucket => 'tapfit-staging',
+      :access_key_id => 'AKIAIII6AM3XT6ZJCPAA',
+      :secret_access_key => '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'
+    }
+  }
 end

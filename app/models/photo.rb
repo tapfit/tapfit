@@ -6,6 +6,7 @@ class Photo < ActiveRecord::Base
       icon: '100x100#',
       large: 'x720'
     },
-    :default_style => :icon
+    :default_style => :icon,
+    :path => ":attachment/:style/:id.:extension"
 
 end
