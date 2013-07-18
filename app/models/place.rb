@@ -19,7 +19,7 @@ class Place < ActiveRecord::Base
 
   def icon_photo
     photo = Photo.where(:id => self.icon_photo_id).first
-    return "#{Photo.image_base_url}/images/icon/#{photo.id}.JPG" if !photo.nil?
+    return "#{Photo.image_base_url}/images/icon/#{photo.id}.jpg" if !photo.nil?
   end
 
   def set_cover_photo(url, user)
@@ -29,7 +29,7 @@ class Place < ActiveRecord::Base
 
   def cover_photo
     photo = Photo.where(:id => self.cover_photo_id).first
-    return "#{Photo.image_base_url}/images/large/#{photo.id}.JPG" if !photo.nil?
+    return "#{Photo.image_base_url}/images/large/#{photo.id}.jpg" if !photo.nil?
   end
 
   def self.get_nearby_places(lat, lon)

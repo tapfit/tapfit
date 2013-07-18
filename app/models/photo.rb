@@ -7,7 +7,7 @@ class Photo < ActiveRecord::Base
       large: 'x720'
     },
     :default_style => :icon,
-    :path => ":attachment/:style/:id.:extension"
+    :path => ":attachment/:style/:id.jpg"
 
   def self.image_base_url
     return "https://s3-us-west-2.amazonaws.com/tapfit-staging"
