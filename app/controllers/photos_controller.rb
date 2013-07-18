@@ -33,6 +33,9 @@ class PhotosController < ApplicationController
       if @photo.save
         @place = check_place(params[:place_id])
         @place.photos << @photo
+        @place.icon_photo_id = @photo.id if params[:icon_photo] == "1"
+        @place.cover_photo_id = @photo.id if params[:cover_photo] == "1"
+        @place.save 
         format.html { redirect_to(@photo, {:controller => 'photo', :action => 'show', :id => @photo.id}) }
         format.xml  { render :xml => @photo, :status => :created, :location => @photo }
       else
