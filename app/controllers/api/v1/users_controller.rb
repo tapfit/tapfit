@@ -22,7 +22,7 @@ module Api
           user.save
           sign_in(:user, user)
           user.ensure_authentication_token!
-          render :json => { :email => user.email, :id => user.id, :auth_token => user.authentication_token }
+          render :json => { :email => user.email, :id => user.id, :auth_token => user.authentication_token, :first_name => user.first_name }
         else
           render :json => { :errors => user.errors }
         end
@@ -37,7 +37,7 @@ module Api
         if !user.nil? && user.valid_password?(password)
           sign_in(:user, user)
           user.reset_authentication_token!
-          render :json => { :email => user.email, :id => user.id, :auth_token => user.authentication_token }
+          render :json => { :email => user.email, :id => user.id, :auth_token => user.authentication_token, :first_name => user.first_name }
         else
           render :json => { :errors => "Not valid email or password" }
         end   

@@ -13,6 +13,7 @@ class ProcessLocation < ProcessBase
       @photo_url = opts[:photo_url]
       @phone_number = opts[:phone_number]
       @source_description = opts[:source_description]
+      @dropin_price = opts[:dropin_price]
       @source = opts[:source]
       @source_id = opts[:source_id]
     end
@@ -26,7 +27,7 @@ class ProcessLocation < ProcessBase
     else
       address = Address.create(:line1 => @address[:line1], :line2 => @address[:line2], :city => @address[:city], :state => @address[:state], :zip => @address[:zip], :lat => @address[:latitude], :lon => @address[:longitude])
       
-      place = Place.new(:name => @name, :address_id => address.id, :source => @source, :source_key => Digest::SHA1.hexdigest(@source_id.to_s), :url => @url, :phone_number => @phone_number, :source_description => @source_description, :is_public => true, :can_dropin => true)
+      place = Place.new(:name => @name, :address_id => address.id, :source => @source, :source_key => Digest::SHA1.hexdigest(@source_id.to_s), :url => @url, :phone_number => @phone_number, :source_description => @source_description, :is_public => true, :can_dropin => true, :dropin_price => @dropin_price)
 
       if place.save
         puts "saved to database: #{place.attributes}"

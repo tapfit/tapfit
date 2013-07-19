@@ -3,7 +3,7 @@ require './lib/letter_to_phone_number'
 
 class ProcessBase
 
-  attr_accessor :name, :address, :tags, :url, :photo_url, :phone_number, :source_description, :source, :source_id, :start_time, :end_time, :price, :instructor, :place_id
+  attr_accessor :name, :address, :tags, :url, :photo_url, :phone_number, :source_description, :source, :source_id, :start_time, :end_time, :price, :instructor, :place_id, :dropin_price
 
   @ten_digits = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
   @seven_digits = /^(?:\(?([0-9]{3})\)?[-. ]?)?([0-9]{3})[-. ]?([0-9]{4})$/
@@ -16,6 +16,16 @@ class ProcessBase
 
   def validate_crawler_values?(source_name)
     failed_processing = false  
+
+    if @valid_keys.include?("dropin_price")
+      if !check_price?(@dropin_price)
+        MailerUtils.write_error("dropin_price", @dropin_price, source_name)
+        failed_processing = true
+        puts "failed dropin_price"
+      else
+        @dropin_price = @dropin_price.gsub(/[$A-Za-z ]/,"")
+      end
+    end
 
     if @valid_keys.include?("start_time")
       if !check_time?(@start_time)
@@ -34,10 +44,12 @@ class ProcessBase
     end
 
     if @valid_keys.include?("price")
-      if !check_price?
+      if !check_price?(@price)
         MailerUtils.write_error("price", @price, source_name)
         failed_processing = true
         puts "failed price"
+      else
+        @price = @price.gsub(/[$A-Za-z ]/,"")
       end
     end
 
@@ -127,9 +139,9 @@ class ProcessBase
     return failed_processing
   end
 
-  def check_price?
-    @price = @price.to_s.gsub("$", "")
-    return @price.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? false : true 
+  def check_price?(price)
+    price = price.to_s.gsub(/[$A-Za-z \n\t\r]/, "").rstrip
+    return price.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? false : true 
   end
   def check_time?(time)
     begin 

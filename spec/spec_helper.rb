@@ -1,8 +1,6 @@
-require 'crawlers/go_recess'
-require 'crawler_validation/process_base'
-require 'crawler_validation/process_location'
-require 'crawler_validation/process_class'
-require 'crawler_validation/mailer_utils'
+Dir["./lib/crawlers/*.rb"].each { |file| require file }
+Dir["./lib/crawler_validation/*.rb"].each { |file| require file }
+
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
