@@ -41,7 +41,11 @@ class ProcessLocation < ProcessBase
       puts "failed to validate location"
     else
       address = Address.create(:line1 => @address[:line1], :line2 => @address[:line2], :city => @address[:city], :state => @address[:state], :zip => @address[:zip], :lat => @address[:latitude], :lon => @address[:longitude])
-      
+     
+      if @source_id.nil?
+        @source_id = "#{@source}/#{@name}"
+      end
+
       place = Place.new(:name => @name, :address_id => address.id, :source => @source, :source_key => Digest::SHA1.hexdigest(@source_id.to_s), :url => @url, :phone_number => @phone_number, :source_description => @source_description, :is_public => true, :can_dropin => true, :dropin_price => @dropin_price)
 
       if place.save
