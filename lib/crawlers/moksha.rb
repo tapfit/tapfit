@@ -40,7 +40,8 @@ class Moksha < ResqueJob
       opts[:start_time] = date.beginning_of_day.advance(:hours => starts.strftime("%H").to_i, :minutes => starts.strftime("%M").to_i)      
       opts[:end_time] = date.beginning_of_day.advance(:hours => ends.strftime("%H").to_i, :minutes => ends.strftime("%M").to_i)
       opts[:source] = @source
-      opts[:price] = Place.find(place_id).dropin_price.to_s
+      opts[:price] = Place.find(place_id).dropin_price
+      puts "Place with id, #{place_id}, price: #{Place.find(place_id).dropin_price}"
       process_class = ProcessClass.new(opts)
       puts "process_class: #{process_class.attrs}"
       process_class.save_to_database(@source)
