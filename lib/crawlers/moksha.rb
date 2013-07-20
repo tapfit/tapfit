@@ -6,9 +6,8 @@ class Moksha < ResqueJob
   @source = "moksha"
 
   def self.perform(url, place_id, date)
-    
-    Moksha.get_locations
-    if url == 1
+    if url == 1    
+      Moksha.get_locations
       Place.where(:source => @source).each do |place|
         Resque.enqueue(Moksha, place.url, place.id, DateTime.now)
       end
