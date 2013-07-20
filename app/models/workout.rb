@@ -1,6 +1,6 @@
 class Workout < ActiveRecord::Base
   
-  default_scope { where("start_time > ?", Time.now) }
+  default_scope { where("start_time > ?", Time.zone.now.beginning_of_day) }
 
   belongs_to :instructor
 

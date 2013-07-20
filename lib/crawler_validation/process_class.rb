@@ -35,9 +35,14 @@ class ProcessClass < ProcessBase
 
       workout = Workout.new(:name => @name, :place_id => @place_id, :source_description => @source_description, :start_time => @start_time, :end_time => @end_time, :price => @price, :instructor_id => instructor.id, :source => @source, :workout_key => workout_key)
 
+      if !workout.valid?
+        puts "errors: #{workout.errors}"
+      end
+
       if workout.save
         puts "saved to database #{workout.attributes}"
-        return workout.id
+        puts "Workout count: #{Workout.count}"
+        return workout.id  
       else
         puts "failed to save #{workout.errors}"
         return nil
