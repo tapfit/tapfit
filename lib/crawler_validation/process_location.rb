@@ -19,7 +19,22 @@ class ProcessLocation < ProcessBase
     end
   end
 
-
+  def self.controller_helper(place, address, tags, source_id)
+    
+    
+    opts = {}
+    opts[:name] = place[:name] if !place[:name].nil?
+    opts[:address] = address if !address.nil?
+    opts[:tags] = tags if !tags.nil?
+    opts[:url] = place[:url] if !place[:url].nil?
+    opts[:phone_number] = place[:phone_number] if !place[:phone_number].nil?
+    opts[:source_description] = place[:source_description] if !place[:source_description].nil?
+    opts[:dropin_price] = place[:dropin_price] if !place[:dropin_price].nil?
+    opts[:source] = place[:source] if !place[:source].nil?
+    opts[:source_id] = source_id if !source_id.nil?
+    process_location = ProcessLocation.new(opts)
+    process_location.save_to_database(place[:source])
+  end
 
   def save_to_database(source_name)
     if validate_crawler_values?(source_name)

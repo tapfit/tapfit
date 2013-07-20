@@ -1,0 +1,87 @@
+<%= form_for [@place], :html => { :multipart => true } do |f| %>
+  <% if @place.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@place.errors.count, "error") %> prohibited this place from being saved:</h2>
+
+      <ul>
+      <% @place.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :url %>
+    <%= f.url_field :url %>
+  </div>
+
+  <div class="field">
+    <%= f.label :phone_number %>
+    <%= f.telephone_field :phone_number %>
+  </div>
+
+  <div class="field">
+    <%= f.label :source_description %>
+    <%= f.text_field :source_description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :dropin_price %>
+    <%= f.text_field :dropin_price %>
+  </div>
+
+  <div class="field">
+    <%= f.label :source %>
+    <%= f.text_field :source %>
+  </div>
+
+  <div class="field">
+    <%= label_tag(:source_id, "Source ID") %>
+    <%= text_field_tag(:source_id) %>
+  </div>
+
+  <div class="field">
+    <%= label_tag(:line1, "Address Line 1") %>
+    <%= text_field(:address, :line1) %>
+  </div>
+  
+  <div class="field">
+    <%= label_tag(:line2, "Address Line 2") %>
+    <%= text_field(:address, :line2) %>
+  </div>
+
+  <div class="field">
+    <%= label_tag(:city, "City") %>
+    <%= text_field(:address, :city) %>
+  </div>
+
+  <div class="field">
+    <%= label_tag(:state, "State") %>
+    <%= text_field(:address, :state) %>
+  </div>
+
+  <div class="field">
+    <%= label_tag(:zip, "Zip Code") %>
+    <%= text_field(:address, :zip) %>
+  </div>
+
+  <div class="field">
+    <%= label_tag(:latitude, "Latitude") %>
+    <%= text_field(:address, :latitude) %>
+  </div>
+
+  <div class="field">
+    <%= label_tag(:longitude, "Longitude") %>
+    <%= text_field(:address, :longitude) %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

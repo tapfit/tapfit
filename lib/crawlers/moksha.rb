@@ -8,16 +8,9 @@ class Moksha < ResqueJob
   def self.perform(url, place_id, date)
     
     Moksha.get_locations
-    if page == 1
+    if url == 1
       Place.where(:source => @source).each do |place|
-        date = DateTime.now if date.nil?
-        i = 0 
-        while i < 6 do
-          date = date + 1
-          i = i + 1
-          Resque.enqueue(place.url, place.id, date)
-        end
-        return
+        Resque.enqueue(place.url, place.id, DateTime.now)
       end
     else
       Moksha.get_classes(url, place_id, date)

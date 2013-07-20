@@ -1,5 +1,6 @@
 require 'uri'
 require './lib/letter_to_phone_number'
+require './lib/crawler_validation/mailer_utils'
 
 class ProcessBase
 
@@ -23,7 +24,7 @@ class ProcessBase
         failed_processing = true
         puts "failed dropin_price"
       else
-        @dropin_price = @dropin_price.gsub(/[$A-Za-z ]/,"")
+        @dropin_price = @dropin_price.to_s.gsub(/[$A-Za-z ]/,"")
       end
     end
 
@@ -49,7 +50,7 @@ class ProcessBase
         failed_processing = true
         puts "failed price"
       else
-        @price = @price.gsub(/[$A-Za-z ]/,"")
+        @price = @price.to_s.gsub(/[$A-Za-z ]/,"")
       end
     end
 
