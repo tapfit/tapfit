@@ -17,6 +17,7 @@ class Moksha < ResqueJob
   end
 
   def self.get_classes(url, place_id, date)
+    date = DateTime.parse(date)
     url = "#{url}classes/schedule/?options[start_date]=#{date.strftime('%Y')}-#{date.strftime('%m')}-#{date.strftime('%d')}"
     
     cmd = "phantomjs ./lib/phantomjs/get_page_with_js.js #{url} healcode"
