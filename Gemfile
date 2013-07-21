@@ -21,6 +21,7 @@ gem 'acts-as-taggable-on'
 gem 'will_paginate'
 gem 'paperclip', "~> 3.0"
 gem 'aws-sdk'
+gem 'kaminari'
 
 group :test, :development do
   gem "rspec-rails"  

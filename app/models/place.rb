@@ -58,9 +58,13 @@ class Place < ActiveRecord::Base
   end
 
   scope :nearby, lambda { |lat, lon, radius|
-      joins(:address).
+      find_by_sql("SELECT places.*, 
+                    3956 * 2 * asin( sqrt ( pow ( sin (( #{lat} - lat) * pi() / 180 / 2), 2) + cos (#{lat} * pi() / 180 ) * cos ( lat * pi() / 180 ) * pow ( sin (( #{lon} - lon ) * pi() / 180 / 2 ), 2) ) ) as distance FROM places INNER JOIN addresses ON places.address_id = addresses.id WHERE lat BETWEEN #{lat - radius} AND #{lat + radius} AND lon BETWEEN #{lon - radius} AND #{lon + radius} ORDER BY distance") 
+=begin
+      joins(:address).   
       where("lat BETWEEN ? AND ?", lat - radius, lat + radius).
       where("lon BETWEEN ? AND ?", lon - radius, lon + radius)
+=end 
   }
 
   def as_json(options={})

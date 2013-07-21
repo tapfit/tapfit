@@ -9,7 +9,8 @@ module Api
       # Params: lat, lon. Optional Params: auth_token, q, radius
       # Returns array of place around you (default: cincinnati)
       def index
-        @places = Place.get_nearby_places(params[:lat], params[:lon]).paginate(:page => get_page)
+        # @places = Place.get_nearby_places(params[:lat], params[:lon]).paginate(:page => get_page)
+        @places = Kaminari.paginate_array(Place.get_nearby_places(params[:lat], params[:lon])).page(get_page)
         render :json => 
             { 
               :places => @places.as_json(:list => true),
@@ -17,7 +18,7 @@ module Api
                 { 
                   :page => get_page,
                   :per_page => Place.per_page,
-                  :total_entries => @places.total_entries 
+                  :total_entries => @places.total_count 
                 }
             }
       end
