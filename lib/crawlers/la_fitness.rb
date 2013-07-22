@@ -21,6 +21,7 @@ class LaFitness < ResqueJob
   end
 
   def self.get_classes(num, date)
+    return
     place_id = ProcessLocation.get_place_id(@source, num)
     if place_id.nil?
       place_id = LaFitness.get_location_info_and_save(num)
