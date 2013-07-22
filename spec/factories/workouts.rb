@@ -13,8 +13,8 @@ FactoryGirl.define do
     is_bookable false
 
     factory :old_workout do
-      start_time Time.now - 5.hours
-      end_time Time.now - 4.hours
+      start_time Time.now - 5.days
+      end_time Time.now - 4.days
     end
   end
 end

@@ -29,7 +29,7 @@ describe Place do
     workout = FactoryGirl.create(:workout)
     @place.workouts << workout
     @place.save
-    @place.next_class.should eql(workout.as_json(:place => true))
+    @place.next_class[:id].should eql(workout.as_json(:place => true)[:id])
   end
 
   it 'should update tags to what we want' do
@@ -46,28 +46,6 @@ describe Place do
     # @place.as_json(:list => true).should eql("")
   end
 
-  it 'should add icon photo to place' do
-    @place.set_icon_photo(@image_url, nil)
-    url = @place.icon_photo
-    @image_url.should eql(url.url)
-    Photo.where(:url => @image_url).count.should eql(1)
-  end
-
-  it 'should add cover photo to place' do
-    @place.set_cover_photo(@image_url, nil)
-    url = @place.cover_photo
-    @image_url.should eql(url.url)
-    Photo.where(:url => @image_url).count.should eql(1)
-  end
-
-  it 'should not create another photo if url already exists' do
-    @place.set_cover_photo(@image_url, nil)
-    url = @place.cover_photo
-    @place.set_cover_photo(@image_url, nil)
-    @place.cover_photo.should eql(url)
-    Photo.where(:url => @image_url).count.should eql(1)
-  end
-
   it 'should return nil if no photo' do
     @place.cover_photo.should be_nil
   end
@@ -79,5 +57,14 @@ describe Place do
     @place.workouts << workout
     @place.save
     @place.get_workouts.count.should eql(0)
+  end
+
+  it 'should keep category tags' do
+    @place.category_list.add("my_man")
+    @place.save
+    @place.category_list.should eql(["My Man"])
+    @place.name = "Fuck tard"
+    @place.save
+    @place.category_list.should eql(["My Man"])
   end
 end

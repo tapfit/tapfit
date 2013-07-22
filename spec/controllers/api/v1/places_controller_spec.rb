@@ -59,7 +59,7 @@ describe Api::V1::PlacesController do
 
   describe 'POST #checkin' do
     
-    before(:each) do
+    before(:all) do
       @user = FactoryGirl.create(:user)
       @user.ensure_authentication_token!
     end

@@ -67,4 +67,12 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
+  config.before(:all) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:all) do
+    DatabaseCleaner.clean
+  end
+
 end

@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.0.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0.rc1'
+gem 'rails', '4.0.0'
 
 # Use sqlite3 as the database for Active Record
 gem 'pg'
@@ -22,6 +22,13 @@ gem 'will_paginate'
 gem 'paperclip', "~> 3.0"
 gem 'aws-sdk'
 gem 'kaminari'
+
+# These gems for active admin
+gem 'responders',          github: 'plataformatec/responders'
+gem 'inherited_resources', github: 'josevalim/inherited_resources'
+gem 'ransack',             github: 'ernie/ransack', branch: 'rails-4'
+gem 'activeadmin',         github: 'gregbell/active_admin', branch: 'rails4'
+gem 'formtastic',          github: 'justinfrench/formtastic'
 
 group :test, :development do
   gem "rspec-rails"  

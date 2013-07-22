@@ -147,10 +147,11 @@ class ProcessBase
   def check_time?(time)
     begin 
       puts time
-      parsed_time = Time.parse(time)
+      parsed_time = Time.parse(time.to_s)
       puts parsed_time
       return false
-    rescue
+    rescue => e
+      puts "failed to process time" 
       return true
     end
   end

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Workout do
  
-  before(:each) do
+  before(:all) do
     @place = FactoryGirl.create(:place)
     @workout = FactoryGirl.create(:workout)
     @old_workout = FactoryGirl.create(:old_workout) 

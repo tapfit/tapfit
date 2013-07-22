@@ -19,4 +19,12 @@ class ApplicationController < ActionController::Base
       return params[:page]
     end
   end
+
+  def authenticate_admin!
+    authenticate_user!
+    unless current_user.instance_of?(AdminUser)
+      flash[:alert] = "Unauthorized access"
+      redirect_to root_path
+    end 
+  end
 end

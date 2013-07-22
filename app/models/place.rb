@@ -11,20 +11,10 @@ class Place < ActiveRecord::Base
   end
 
   self.per_page = 25
-  
-  def set_icon_photo(url, user)
-    self.icon_photo_id = create_photo(url, user).id
-    self.save
-  end
 
   def icon_photo
     photo = Photo.where(:id => self.icon_photo_id).first
     return "#{Photo.image_base_url}/images/icon/#{photo.id}.jpg" if !photo.nil?
-  end
-
-  def set_cover_photo(url, user)
-    self.cover_photo_id = create_photo(url, user).id
-    self.save
   end
 
   def cover_photo
@@ -81,17 +71,6 @@ class Place < ActiveRecord::Base
     options[:except] ||= except_array
     super(options)
 
-  end
-
-  def create_photo(url, user)
-    photo = Photo.where(:url => url).first
-    if photo.nil?
-      if !user.nil?
-        user_id = user.id
-      end
-      photo = Photo.create(:url => url, :place_id => self.id, :user_id => user_id)
-    end
-    return photo
   end
 
 private
