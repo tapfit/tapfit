@@ -12,7 +12,8 @@ class LaFitness < ResqueJob
     if url == 1
       num = 2
       while num < 1015 do
-        Resque.enqueue(LaFitness, num, nil, date)
+        # Resque.enqueue(LaFitness, num, nil, date)
+        num = num + 1
       end
     end
 
