@@ -3,8 +3,8 @@ require 'spec_helper'
 describe LaFitness do
 
   it 'should save a location to a database' do
-    num = 1
-    while num < 3 do
+    num = 399
+    while num < 401 do
       place_id = LaFitness.get_location_info_and_save(num)
       #place = Place.find(place_id).category_list.should eql(nil)
       #Place.find(place_id).should_not raise_error

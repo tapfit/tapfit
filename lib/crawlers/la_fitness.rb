@@ -39,6 +39,7 @@ class LaFitness < ResqueJob
     url = "#{@base_schedule_url}#{num}"
     doc = Nokogiri::HTML(open(url))
 
+    date = Time.parse(date.to_s)
     column = date.wday + 1
     headers = doc.xpath("//th[@class='tableDataHeader']")
     rows = doc.xpath("//table[@id='tblSchedule']/tr")
@@ -106,7 +107,7 @@ class LaFitness < ResqueJob
     opts = {}
     opts[:name] = "LA Fitness - #{content.xpath("//td[@class='MainTitle']").first.text.gsub(/[\n\t\r]/, "").strip}"
     opts[:tags] = tags
-    opts[:phone_number] = content.xpath("//span[@id='ctl00_MainContent_lblClubPhone']").first.text
+    opts[:phone_number] = content.xpath("//span[@id='ctl00_MainContent_lblClubPhone']").first.text[0, 14]
     opts[:url] = url
     opts[:schedule_url] = "#{@base_schedule_url}#{num}"
     opts[:source] = @source
