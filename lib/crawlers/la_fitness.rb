@@ -112,6 +112,7 @@ class LaFitness < ResqueJob
     opts[:source] = @source
     opts[:address] = address
     opts[:source_id] = num
+    opts[:category] = Category::Gym
 
     process_location = ProcessLocation.new(opts)
     return process_location.save_to_database(@source)

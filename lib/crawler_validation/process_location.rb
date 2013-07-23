@@ -14,6 +14,7 @@ class ProcessLocation < ProcessBase
       @phone_number = opts[:phone_number]
       @source_description = opts[:source_description]
       @schedule_url = opts[:schedule_url]
+      @category = opts[:category]
       @dropin_price = opts[:dropin_price]
       @source = opts[:source]
       @source_id = opts[:source_id]
@@ -33,6 +34,7 @@ class ProcessLocation < ProcessBase
     opts[:dropin_price] = place[:dropin_price] if !place[:dropin_price].nil?
     opts[:source] = place[:source] if !place[:source].nil?
     opts[:source_id] = source_id if !source_id.nil?
+    opts[:category] = place[:category]
     process_location = ProcessLocation.new(opts)
     process_location.save_to_database(place[:source])
   end
@@ -47,14 +49,19 @@ class ProcessLocation < ProcessBase
         @source_id = "#{@source}/#{@name}"
       end
 
-      place = Place.new(:name => @name, :address_id => address.id, :source => @source, :source_key => Digest::SHA1.hexdigest(@source_id.to_s), :url => @url, :phone_number => @phone_number, :source_description => @source_description, :is_public => true, :can_dropin => true, :dropin_price => @dropin_price, :schedule_url => @schedule_url)
+      place = Place.new(:name => @name, :address_id => address.id, :source => @source, :source_key => Digest::SHA1.hexdigest(@source_id.to_s), :url => @url, :phone_number => @phone_number, :source_description => @source_description, :is_public => true, :can_dropin => true, :dropin_price => @dropin_price, :schedule_url => @schedule_url, :category => @category)
 
       if place.save
         puts "saved to database: #{place.attributes}"
         if !@tags.nil?
           @tags.each do |tag|
             place.category_list.add(tag)
+          end
+          place.save
+          if @category.nil?
+            place.category = Category.get_category(@tags)
             place.save
+            puts "Category: #{place.category}"
           end
         end
 

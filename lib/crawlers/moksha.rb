@@ -104,6 +104,7 @@ class Moksha < ResqueJob
         opts[:phone_number] = gym["phone"]
         opts[:url] = gym["url"]
         opts[:source] = @source
+        opts[:category] = Category::Yoga
 
         process_location = ProcessLocation.new(opts)
         process_location.save_to_database(@source)

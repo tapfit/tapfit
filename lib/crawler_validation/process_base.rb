@@ -1,10 +1,11 @@
 require 'uri'
 require './lib/letter_to_phone_number'
 require './lib/crawler_validation/mailer_utils'
+require './lib/category'
 
 class ProcessBase
 
-  attr_accessor :name, :address, :tags, :url, :photo_url, :phone_number, :source_description, :source, :source_id, :start_time, :end_time, :price, :instructor, :place_id, :dropin_price, :schedule_url
+  attr_accessor :name, :address, :tags, :url, :photo_url, :phone_number, :source_description, :source, :source_id, :start_time, :end_time, :price, :instructor, :place_id, :dropin_price, :schedule_url, :category
 
   @ten_digits = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
   @seven_digits = /^(?:\(?([0-9]{3})\)?[-. ]?)?([0-9]{3})[-. ]?([0-9]{4})$/
