@@ -4,7 +4,7 @@ require './lib/crawler_validation/mailer_utils'
 
 class ProcessBase
 
-  attr_accessor :name, :address, :tags, :url, :photo_url, :phone_number, :source_description, :source, :source_id, :start_time, :end_time, :price, :instructor, :place_id, :dropin_price
+  attr_accessor :name, :address, :tags, :url, :photo_url, :phone_number, :source_description, :source, :source_id, :start_time, :end_time, :price, :instructor, :place_id, :dropin_price, :schedule_url
 
   @ten_digits = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
   @seven_digits = /^(?:\(?([0-9]{3})\)?[-. ]?)?([0-9]{3})[-. ]?([0-9]{4})$/
@@ -17,6 +17,14 @@ class ProcessBase
 
   def validate_crawler_values?(source_name)
     failed_processing = false  
+
+    if @valid_keys.include?("schedule_url")
+      if !check_url?(@schedule_url)
+        MailerUtils.write_error("schedule_url", @schedule_url, source_name)
+        failed_processing = true
+        puts "failed schedule_url"
+      end
+    end
 
     if @valid_keys.include?("dropin_price")
       if !check_price?(@dropin_price)

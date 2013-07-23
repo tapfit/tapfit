@@ -13,6 +13,7 @@ class ProcessLocation < ProcessBase
       @photo_url = opts[:photo_url]
       @phone_number = opts[:phone_number]
       @source_description = opts[:source_description]
+      @schedule_url = opts[:schedule_url]
       @dropin_price = opts[:dropin_price]
       @source = opts[:source]
       @source_id = opts[:source_id]
@@ -46,7 +47,7 @@ class ProcessLocation < ProcessBase
         @source_id = "#{@source}/#{@name}"
       end
 
-      place = Place.new(:name => @name, :address_id => address.id, :source => @source, :source_key => Digest::SHA1.hexdigest(@source_id.to_s), :url => @url, :phone_number => @phone_number, :source_description => @source_description, :is_public => true, :can_dropin => true, :dropin_price => @dropin_price)
+      place = Place.new(:name => @name, :address_id => address.id, :source => @source, :source_key => Digest::SHA1.hexdigest(@source_id.to_s), :url => @url, :phone_number => @phone_number, :source_description => @source_description, :is_public => true, :can_dropin => true, :dropin_price => @dropin_price, :schedule_url => @schedule_url)
 
       if place.save
         puts "saved to database: #{place.attributes}"

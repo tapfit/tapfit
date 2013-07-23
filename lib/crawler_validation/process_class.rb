@@ -22,7 +22,7 @@ class ProcessClass < ProcessBase
 
   def save_to_database(source_name)
     if validate_crawler_values?(source_name)
-      puts "failed to validate location"
+      puts "failed to validate class"
     else
       if !@instructor.nil?
         full_name = @instructor.split(" ")
