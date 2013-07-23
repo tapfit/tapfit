@@ -155,12 +155,16 @@ class ProcessBase
   def check_time?(time)
     begin 
       puts time
+      if time.instance_of?(Time) || time.instance_of?(DateTime)
+        puts "instance of time or datetime"
+        return true
+      end
       parsed_time = Time.parse(time.to_s)
       puts parsed_time
-      return false
+      return true
     rescue => e
       puts "failed to process time" 
-      return true
+      return false
     end
   end
 
