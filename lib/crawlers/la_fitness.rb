@@ -18,7 +18,7 @@ class LaFitness < ResqueJob
       end
     end
 
-    LaFitness.get_classes(num, date)
+    LaFitness.get_classes(url, date)
 
   end
 
