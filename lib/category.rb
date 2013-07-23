@@ -25,6 +25,13 @@ class Category
     end
   end
 
+  def self.update_go_recess
+    
+    Place.where(:source => "goRecess").each do |place|
+      place.category = Category.get_category(place.category_list)
+      place.save
+    end
+  end
   def self.search_tags(tags, params)
     
   end
