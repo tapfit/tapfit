@@ -82,7 +82,7 @@ class LaFitness < ResqueJob
       if !img.nil?
         puts img
         image_source = img.to_s.split('/')
-        if image_source[2] != "BW"
+        if !image_source[2].nil? && image_source[2] != "BW"
           tags << image_source[2].gsub(/(?<=[a-z])(?=[A-Z])/, ' ').split('.')[0]
         end
       end
