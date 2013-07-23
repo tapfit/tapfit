@@ -59,7 +59,7 @@ class Moksha < ResqueJob
   def self.save_locations_to_database(json)
     json["studios"].each do |gym|
 
-      if ProcessLocation.get_place_id(@source, gym['name']).nil?
+      if ProcessLocation.get_place_id(@source, "#{@source}/#{gym['name']}").nil?
 
         puts "#{gym['url']}classes/fees/"
         doc = Nokogiri::HTML(open("#{gym['url']}classes/fees/"))
