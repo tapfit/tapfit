@@ -72,6 +72,9 @@ class LaFitness < ResqueJob
     url = "#{@base_url}#{num}"
     doc = Nokogiri::HTML(open(url))
 
+    puts url
+    # puts doc
+
     content = doc.xpath("//div[@id='mainContent']").first
 
     # Run through amenities and add them as tags
@@ -90,6 +93,11 @@ class LaFitness < ResqueJob
     end
 
     address = {}
+    line1 = content.xpath("//span[@id='ctl00_MainContent_lblClubAddress']").first
+    if line1.nil?
+      puts "Redirected"
+      return
+    end
     address[:line1] = content.xpath("//span[@id='ctl00_MainContent_lblClubAddress']").first.text
     address[:city] = content.xpath("//span[@id='ctl00_MainContent_lblClubCity']").first.text
     address[:state] = content.xpath("//span[@id='ctl00_MainContent_lblClubState']").first.text
