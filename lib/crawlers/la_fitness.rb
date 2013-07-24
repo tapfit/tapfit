@@ -40,14 +40,15 @@ class LaFitness < ResqueJob
     doc = Nokogiri::HTML(open(url))
 
     date = Time.parse(date.to_s)
-    column = date.wday + 1
+    column = (date.wday + 1) * 2
     puts column
     headers = doc.xpath("//th[@class='tableDataHeader']")
     rows = doc.xpath("//table[@id='tblSchedule']/tr")
 
     rows.each do |row|
       data = row.children
-
+      
+      puts "data count: #{data.count}"
       if data[column].children.count > 1
         start_time = data[0].text.strip
         name = data[column].children[1].children[0].text
