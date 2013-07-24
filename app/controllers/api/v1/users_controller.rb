@@ -24,7 +24,7 @@ module Api
           user.ensure_authentication_token!
           render :json => { :email => user.email, :id => user.id, :auth_token => user.authentication_token, :first_name => user.first_name }
         else
-          render :json => { :errors => user.errors }
+          render :json => { :errors => user.errors }, :status => 420
         end
       end
 
@@ -39,7 +39,7 @@ module Api
           user.reset_authentication_token!
           render :json => { :email => user.email, :id => user.id, :auth_token => user.authentication_token, :first_name => user.first_name }
         else
-          render :json => { :errors => "Not valid email or password" }
+          render :json => { :errors => "Not valid email or password" }, :status => 403
         end   
       end
 

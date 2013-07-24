@@ -41,6 +41,7 @@ class LaFitness < ResqueJob
 
     date = Time.parse(date.to_s)
     column = date.wday + 1
+    puts column
     headers = doc.xpath("//th[@class='tableDataHeader']")
     rows = doc.xpath("//table[@id='tblSchedule']/tr")
 
