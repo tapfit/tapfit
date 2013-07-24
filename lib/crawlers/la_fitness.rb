@@ -59,7 +59,7 @@ class LaFitness < ResqueJob
         opts[:start_time] = date.beginning_of_day.advance(:hours => starts.strftime("%H").to_i, :minutes => starts.strftime("%M").to_i)
         opts[:end_time] = date.beginning_of_day.advance(:hours => (starts.strftime("%H").to_i + 1), :minutes => starts.strftime("%M").to_i)
         opts[:source] = @source
-        opts[:instructor] = teacher
+        opts[:instructor] = teacher.gsub("*", "")
 
         process_class = ProcessClass.new(opts)
         process_class.save_to_database(@source)
