@@ -88,8 +88,16 @@ class CincyRec < ResqueJob
     name_upcase = "#{name.upcase} #{amenities.upcase}"
     if name_upcase.include?("POOL")
       return Category::Aquatics
-    elsif name_upcase.include?("BASEBALL") || name_upcase.include?("SOFTBALL") || name_upcase.include?("FOOTBALL") || name_upcase.include?("SOCCER") || name_upcase.include?("TENNIS") || name_upcase.include?("GOLF")
-      return Category::Sports
+    elsif name_upcase.include?("BASEBALL") || name_upcase.include?("SOFTBALL")
+      return Category::Baseball
+    elsif name_upcase.include?("FOOTBALL")
+      return Category::Football
+    elsif name_upcase.include?("SOCCER")
+      return Category::Soccer
+    elsif name_upcase.include?("TENNIS")
+      return Category::Tennis
+    elsif name_upcase.include?("GOLF")
+      return Category::Golf
     else
       return nil
     end

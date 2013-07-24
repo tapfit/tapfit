@@ -9,6 +9,11 @@ class Category
   Dance = "Dance"
   Strength = "Strength"
   MartialArts = "Martial Arts"
+  Baseball = "Baseball" # Baseball and soft
+  Football = "Football"
+  Soccer = "Soccer"
+  Tennis = "Tennis"
+  Golf = "Golf"
 
   def self.get_category(tags)
     array = tags.map(&:upcase) 
@@ -25,11 +30,31 @@ class Category
     end
   end
 
-  def self.update_go_recess
+  def self.update_rec_centers
     
-    Place.where(:source => "goRecess").each do |place|
-      place.category = Category.get_category(place.category_list)
-      place.save
+    Place.where(:source => "cincyrec").each do |place|
+      name = "#{place.name.upcase} #{place.category_list.join(" ").upcase}"
+      if name.include?("POOL")
+        place.category = Category::Aquatics
+        place.save
+      elsif name.include?("BASEBALL") || name.include?("SOFTBALL")
+        place.category = Catgory::Baseball
+        place.save
+      elsif name.include?("FOOTBALL")
+        place.category = Category::Football
+        place.save
+      elsif name.include?("SOCCER")
+        place.category = Category::Soccer
+        place.save
+      elsif name.include?("TENNIS")
+        place.category = Category::Tennis
+        place.save
+      elsif name.include?("GOLF")
+        place.category = Category::Golf
+        place.save
+      end
+      # place.category = Category.get_category(place.category_list)
+      # place.save
     end
   end
   def self.search_tags(tags, params)
