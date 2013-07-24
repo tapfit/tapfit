@@ -38,7 +38,7 @@ class Category
         place.category = Category::Aquatics
         place.save
       elsif name.include?("BASEBALL") || name.include?("SOFTBALL")
-        place.category = Catgory::Baseball
+        place.category = Category::Baseball
         place.save
       elsif name.include?("FOOTBALL")
         place.category = Category::Football
