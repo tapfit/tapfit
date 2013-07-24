@@ -185,7 +185,9 @@ class ProcessBase
       puts "coordinates: #{coordinates}"
       if coordinates.nil?
         return false
-      else
+      else      
+        @address[:latitude] = coordinates[0]
+        @address[:longitude] = coordinates[1]
         return true
       end
     else
