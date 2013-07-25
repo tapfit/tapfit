@@ -2,7 +2,7 @@ require 'nokogiri'
 require 'open-uri'
 require './lib/resque_job'
 
-class AnytimeFitness
+class AnytimeFitness < ResqueJob
 
   attr_accessor :base_url
 
