@@ -34,6 +34,10 @@ task :rerun_crawl_jobs => :environment do
 
 end
 
+task :get_anytime_fitness => :environment do
+  Resque.enqueue(AnytimeFitness, 1, true, true)
+end
+
 task :get_cincy_rec_locations => :environment do
   Resque.enqueue(CincyRec, 1, true, DateTime.now)
 end
