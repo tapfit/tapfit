@@ -26,7 +26,7 @@ class AnytimeFitness < ResqueJob
       puts gym.children.count
       if gym.children[0].content == "open"
         
-        name = gym.children[2].content
+        name = "Anytime Fitness - #{gym.children[2].content}"
         
         if ProcessLocation.get_place_id(@source, "#{@source}/#{name}").nil?
 
@@ -41,7 +41,7 @@ class AnytimeFitness < ResqueJob
 
           opts = {}
 
-          opts[:name] = gym.children[2].content
+          opts[:name] = name
           opts[:address] = address
           opts[:url] = "http://www.anytimefitness.com#{gym.children[8].children[0]['href']}"
           opts[:phone_number] = gym.children[6].content
