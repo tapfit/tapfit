@@ -1,6 +1,7 @@
 require 'nokogiri'
 require 'open-uri'
-require './lib/resque_job' 
+require './lib/resque_job'
+require './lib/crawler'
 
 class CincyRec < ResqueJob
 
@@ -56,15 +57,9 @@ class CincyRec < ResqueJob
         puts "id: #{num}, address: #{loc}"
         address = {}
         address[:line1] = loc[0]
-        puts address[:line1]
-        city_state = loc[1].split(",")
-        address[:city] = city_state[0]
-        puts address[:city]
-        state_zip = city_state[1].split(" ")
-        address[:zip] = state_zip.delete_at(state_zip.length - 1)
-        puts address[:zip]
-        address[:state] = state_zip.join(" ")
-        puts address[:state]
+        address = Crawler.separate_city_state_zip(address, loc[1])
+
+        puts address
 
         opts = {}
         opts[:name] = name
