@@ -12,7 +12,8 @@ class CorePower < ResqueJob
     if url == 1
       CorePower.get_studio_urls
     else
-      CorePower.get_class_info(name, url, schedule_url) 
+      puts "About to get classes"
+      CorePower.get_class_info(name, url, schedule) 
     end
   end
 
@@ -35,6 +36,7 @@ class CorePower < ResqueJob
   def self.get_class_info(name, url, schedule_url)
     place_id = CorePower.get_location_info(name, url, schedule_url)
     if place_id.nil?
+      puts "couldn't find class"
       return
     end
 

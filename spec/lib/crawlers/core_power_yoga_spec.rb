@@ -11,6 +11,9 @@ describe CorePower do
   end
 
   it 'should get classes for location' do
-    CorePower.get_class_info("Berkeley Studio", "http://www.corepoweryoga.com/yoga-studio/california/berkeley", "http://www.corepoweryoga.com/yoga-studio/California/schedule/4")
+    url = "http://www.corepoweryoga.com/yoga-studio/california/berkeley"
+    name = "Berkeley Studio"
+    schedule = "http://www.corepoweryoga.com/yoga-studio/California/schedule/4"
+    CorePower.perform(url, schedule, name)
   end
 end
