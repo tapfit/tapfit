@@ -1,6 +1,7 @@
 require 'nokogiri'
 require 'open-uri'
 require './lib/resque_job'
+require './lib/crawler-helpers/healcode'
 
 class CorePower < ResqueJob
 
@@ -11,7 +12,7 @@ class CorePower < ResqueJob
     if url == 1
       CorePower.get_studio_urls
     else
-      
+      CorePower.get_class_info(name, url, schedule_url) 
     end
   end
 
@@ -20,15 +21,33 @@ class CorePower < ResqueJob
     doc.xpath("//a[@class='studio-link']").each do |loc|
       url = "#{@base_url}#{loc['href']}"
       schedule = loc.parent.children[1]
-      name = schedule.text.split("-")[0].strip
+      name = "Core Power Yoga - #{schedule.text.split("-")[0].strip}"
       schedule_url = "#{@base_url}#{schedule['href']}"
       if !schedule_url.nil? && schedule_url != ""
         puts name
         puts url
         puts schedule_url
-        CorePower.get_location_info(name, url, schedule_url)
+        Resque.enqueue(CorePower, url, schedule_url, name)
       end
     end
+  end
+
+  def self.get_class_info(name, url, schedule_url)
+    place_id = CorePower.get_location_info(name, url, schedule_url)
+    if place_id.nil?
+      return
+    end
+
+    doc = Nokogiri::HTML(open(schedule_url))
+
+    content = doc.xpath("//iframe").first
+
+    schedule_url = "#{@base_url}#{content['src']}"
+    
+    puts schedule_url
+
+    Healcode.get_classes(schedule_url, place_id, DateTime.now, @source)  
+
   end
 
   def self.get_location_info(name, url, schedule_url)
@@ -76,12 +95,13 @@ class CorePower < ResqueJob
         opts[:category] = Category::Yoga
         opts[:tags] = ["Yoga", "Hot Yoga", "Power Yoga"]
         opts[:schedule_url] = schedule_url
+        opts[:dropin_price] = 20.00
 
         process_location = ProcessLocation.new(opts)
         place_id = process_location.save_to_database(@source)    
       rescue => e
         puts "ran into issues: #{e}"
-        MailerUtils.
+        MailerUtils.write_error("#{name} - #{e}", url, @source)
         return
       end
     end

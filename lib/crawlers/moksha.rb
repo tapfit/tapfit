@@ -1,5 +1,6 @@
 require './lib/resque_job'
 require 'nokogiri'
+require './lib/crawler-helpers/healcode'
 
 class Moksha < ResqueJob
 
@@ -20,32 +21,7 @@ class Moksha < ResqueJob
     date = DateTime.parse(date.to_s)
     url = "#{url}classes/schedule/?options[start_date]=#{date.strftime('%Y')}-#{date.strftime('%m')}-#{date.strftime('%d')}"
     
-    cmd = "phantomjs ./lib/phantomjs/get_page_with_js.js #{url} healcode"
-
-    output = `#{cmd}`
-    
-    doc = Nokogiri::HTML(output)
-    Rails.logger = Logger.new(STDOUT)
-
-    doc.xpath("//tr[contains(@class, 'DropIn')]").each do |node|
-      opts = {}
-      opts[:place_id] = place_id
-      opts[:name] =  node.xpath("//td[contains(@class, 'mbo_class')]").first.text.gsub(/[\n\t\r]/, "").strip
-      opts[:tags] = ["Hot Yoga"]
-      opts[:instructor] = node.xpath("//td[contains(@class, 'trainer')]").first.text.gsub(/[\n\t\r]/, "").strip
-      Rails.logger.debug node.xpath("//span[contains(@class, 'starttime')]").first.text.gsub(/- /, "")
-      Rails.logger.debug node.xpath("//span[contains(@class, 'endtime')]").first.text.gsub(/- /, "")
-      starts = Time.parse(node.xpath("//span[contains(@class, 'starttime')]").first.text.gsub(/- /, ""))
-      ends = Time.parse(node.xpath("//span[contains(@class, 'endtime')]").first.text.gsub(/- /, ""))
-      opts[:start_time] = date.beginning_of_day.advance(:hours => starts.strftime("%H").to_i, :minutes => starts.strftime("%M").to_i)      
-      opts[:end_time] = date.beginning_of_day.advance(:hours => ends.strftime("%H").to_i, :minutes => ends.strftime("%M").to_i)
-      opts[:source] = @source
-      opts[:price] = Place.find(place_id).dropin_price
-      puts "Place with id, #{place_id}, price: #{Place.find(place_id).dropin_price}"
-      process_class = ProcessClass.new(opts)
-      puts "process_class: #{process_class.attrs}"
-      process_class.save_to_database(@source)
-    end
+    Healcode.get_classes(url, place_id, date, @source)
   end
 
   def self.get_locations

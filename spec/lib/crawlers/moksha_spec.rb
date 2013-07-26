@@ -22,7 +22,7 @@ describe Moksha do
     Moksha.get_classes("http://minneapolis.mokshayoga.ca/", place.id, DateTime.now)
 
     Workout.where(:source => "moksha").each do |workout|
-      puts workout.attributes
+      # puts workout.attributes
       break
     end
 
