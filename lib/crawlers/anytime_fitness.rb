@@ -30,9 +30,12 @@ class AnytimeFitness < ResqueJob
         
         if ProcessLocation.get_place_id(@source, "#{@source}/#{name}").nil?
 
+          puts "#{name} is not in database"
           address = {}
           split = gym.children[4].content.split("   ")
-          address[:line1] = split[0].strip
+          line = split[0].strip.split("\r\n")
+          address[:line1] = line[0]
+          address[:line2] = line[1]
           city_state = split[split.length - 1].strip.split(",")
           address[:city] = city_state[0]
           state_zip = city_state[1].split(" ")
