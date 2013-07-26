@@ -34,6 +34,10 @@ task :rerun_crawl_jobs => :environment do
 
 end
 
+task :get_core_power => :environment do
+  Resque.enqueue(CorePower, 1, true, true)
+end
+
 task :get_anytime_fitness => :environment do
   Resque.enqueue(AnytimeFitness, 1, true, true)
 end
