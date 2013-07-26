@@ -6,7 +6,10 @@ module Api
 
       def index
         @place = check_place(params[:place_id])
-        render :json => @place.photos.as_json
+        if @place.instance_of?(Place)
+          @photos = @place.photos
+          render :json => @photos.as_json
+        end
       end
 
       def show

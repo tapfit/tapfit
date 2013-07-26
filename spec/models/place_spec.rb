@@ -20,6 +20,11 @@ describe Place do
     places.to_a.should eql([@place])
   end
 
+  it 'should return nearby places wth default' do
+    places = Place.get_nearby_places(nil, nil)
+    places.to_a.should eql([@place])
+  end
+
   it 'should return nearby places with string input' do
     places = Place.get_nearby_places(39.110918, -84.515521)
     places.to_a.should eql([@place])
@@ -28,6 +33,7 @@ describe Place do
   it 'should return next class' do
     workout = FactoryGirl.create(:workout)
     @place.workouts << workout
+    puts workout.attributes
     @place.save
     @place.next_class[:id].should eql(workout.as_json(:place => true)[:id])
   end
@@ -50,13 +56,21 @@ describe Place do
     @place.cover_photo.should be_nil
   end
 
+  it 'should return photo for a place' do
+    @photo = FactoryGirl.create(:photo)
+    @place.icon_photo_id = @photo.id
+    @place.save
+    @place.icon_photo.should eql("#{Photo.image_base_url}/images/icon/#{@photo.id}.jpg")
+  end
+
   it 'should not return a workout if past' do
     workout = FactoryGirl.create(:workout)
-    workout.start_time = Time.now - 5.hours
+    workout.start_time = Time.now - 24.days
     workout.save
     @place.workouts << workout
     @place.save
-    @place.get_workouts.count.should eql(0)
+    puts Time.zone.now
+    @place.workouts.count.should eql(0)
   end
 
   it 'should keep category tags' do
@@ -66,5 +80,39 @@ describe Place do
     @place.name = "Fuck tard"
     @place.save
     @place.category_list.should eql(["My Man"])
+  end
+
+  it 'should return -1 if no ratings' do
+    @place.avg_rating.should eql(-1)
+  end
+
+  it 'should return an avg rating for a place' do
+    rating = FactoryGirl.build(:rating)
+    rating.place_id = @place.id
+    rating1 = FactoryGirl.build(:rating)
+    rating1.place_id = @place.id
+    rating1.rating = 4
+    rating.save
+    rating1.save
+
+    @place.ratings << rating
+    @place.ratings << rating1
+
+    @place.avg_rating.should eql(4.5)
+  end
+
+  it 'should return reviews for only non-nil reviews' do
+    rating = FactoryGirl.build(:rating)
+    rating.place_id = @place.id
+    rating.save
+    rating1 = FactoryGirl.build(:rating)
+    rating1.place_id = @place.id
+    rating1.review = nil
+    rating1.save
+
+    @place.ratings << rating
+    @place.ratings << rating1
+
+    @place.reviews.count.should eql(1)
   end
 end

@@ -6,10 +6,6 @@ class Place < ActiveRecord::Base
   has_many :ratings
   has_many :photos, as: :imageable
 
-  def get_workouts
-    self.workouts.where("start_time > ?", Time.now).order("start_time DESC")
-  end
-
   self.per_page = 25
 
   def icon_photo
@@ -53,7 +49,7 @@ class Place < ActiveRecord::Base
   end
 
   def next_class
-    workout = Workout.where(:place_id => self.id).order("start_time DESC")
+    workout = Workout.where(:place_id => self.id).where("start_time >= ?", Time.now).order("start_time DESC")
     if workout.nil?
       return nil
     else

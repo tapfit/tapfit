@@ -9,7 +9,6 @@ class Address < ActiveRecord::Base
   end
 
   def get_lat_lon
-    puts "checking lat_lat"
     if lat.nil? || lon.nil?
       coordinates = Geocoder.coordinates(address)
       if !coordinates.nil?

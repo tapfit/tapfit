@@ -1,6 +1,6 @@
 class Workout < ActiveRecord::Base
   
-  default_scope { where("start_time BETWEEN ? AND ?", Time.zone.now.beginning_of_day, Time.zone.now.beginning_of_day + 1.days) }
+  default_scope { where("start_time BETWEEN ? AND ?", Time.zone.now.beginning_of_day, (Time.zone.now.beginning_of_day + 24.hours)).order("start_time DESC") }
 
   belongs_to :instructor
   belongs_to :place
