@@ -30,31 +30,10 @@ class Place < ActiveRecord::Base
     return Place.nearby(lat.to_f, lon.to_f, 0.5)  
   end
 
-  def next_class
-    workout = Workout.where(:place_id => self.id).order("start_time DESC")
-    if workout.nil?
-      return nil
-    else
-      workout.first.as_json(:place => true)
-    end
-  end
-
-  def avg_rating
-    return (self.ratings.count > 0) ? self.ratings.average(:rating) : -1
-  end
-
-  def reviews
-    return self.ratings.where.not(:review => nil).order("created_at DESC").limit(5)
-  end
 
   scope :nearby, lambda { |lat, lon, radius|
       find_by_sql("SELECT places.*, 
                     3956 * 2 * asin( sqrt ( pow ( sin (( #{lat} - lat) * pi() / 180 / 2), 2) + cos (#{lat} * pi() / 180 ) * cos ( lat * pi() / 180 ) * pow ( sin (( #{lon} - lon ) * pi() / 180 / 2 ), 2) ) ) as distance FROM places INNER JOIN addresses ON places.address_id = addresses.id WHERE lat BETWEEN #{lat - radius} AND #{lat + radius} AND lon BETWEEN #{lon - radius} AND #{lon + radius} ORDER BY distance") 
-=begin
-      joins(:address).   
-      where("lat BETWEEN ? AND ?", lat - radius, lat + radius).
-      where("lon BETWEEN ? AND ?", lon - radius, lon + radius)
-=end 
   }
 
   def as_json(options={})
@@ -72,6 +51,24 @@ class Place < ActiveRecord::Base
     super(options)
 
   end
+
+  def next_class
+    workout = Workout.where(:place_id => self.id).order("start_time DESC")
+    if workout.nil?
+      return nil
+    else
+      workout.first.as_json(:place => true)
+    end
+  end
+
+  def avg_rating
+    return (self.ratings.count > 0) ? self.ratings.average(:rating) : -1
+  end
+
+  def reviews
+    return self.ratings.where.not(:review => nil).order("created_at DESC").limit(5)
+  end
+
 
 private
 
