@@ -15,6 +15,11 @@ describe Api::V1::WorkoutsController do
       get :index, place_id: @place.id
       assigns(:workouts).to_a.should eql([@workout])
     end
+
+    it 'should not show workout for invalid place' do
+      get :index, place_id: -1
+      response.body.should include("errors") 
+    end
   end
 
   describe 'GET #show' do

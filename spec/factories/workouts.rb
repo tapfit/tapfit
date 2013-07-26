@@ -16,5 +16,10 @@ FactoryGirl.define do
       start_time Time.now - 5.days
       end_time Time.now - 4.days
     end
+
+    factory :future_workout do
+      start_time Time.now + 4.days
+      end_time Time.now + 5.days
+    end
   end
 end

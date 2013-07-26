@@ -1,6 +1,6 @@
 class Workout < ActiveRecord::Base
   
-  default_scope { where("start_time > ?", Time.zone.now.beginning_of_day) }
+  default_scope { where("start_time BETWEEN ? AND ?", Time.zone.now.beginning_of_day, Time.zone.now.beginning_of_day + 1.days) }
 
   belongs_to :instructor
   belongs_to :place
@@ -14,6 +14,5 @@ class Workout < ActiveRecord::Base
     end
     options[:except] ||= except_array
     super(options)
-
   end
 end

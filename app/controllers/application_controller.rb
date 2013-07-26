@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   def check_place(place_id)
     @place = Place.where(:id => place_id).first
     if @place.nil?
-      render :json => { :code => 2, :message => "Could not find place with id: #{place_id}" }
+      render :json => { :code => 2, :errors => "Could not find place with id: #{place_id}" }
     else
       return @place
     end
