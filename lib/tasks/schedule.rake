@@ -35,11 +35,10 @@ task :rerun_crawl_jobs => :environment do
 end
 
 task :update_addresses => :environment do
-  Address.all.each do |address|
-    if address.timezone.nil?
-      address.get_lat_lon
+  Address.where(:timezone => nil).each do |address|
+    puts "Adding timezone to address: #{address.address}"  
+    address.get_lat_lon
       address.save
-    end
   end
 end
 
