@@ -37,6 +37,7 @@ end
 task :update_addresses => :environment do
   Address.all.each do |address|
     address.get_lat_lon
+    address.save
   end
 end
 
