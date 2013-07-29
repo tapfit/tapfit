@@ -34,6 +34,12 @@ task :rerun_crawl_jobs => :environment do
 
 end
 
+task :update_addresses => :environment do
+  Address.all.each do |address|
+    address.get_lat_lon
+  end
+end
+
 task :get_core_power => :environment do
   Resque.enqueue(CorePower, 1, true, true)
 end
