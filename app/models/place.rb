@@ -51,6 +51,10 @@ class Place < ActiveRecord::Base
   end
 
   def next_class
+    if self.address.timezone.nil?
+      self.address.timezone = "America/Chicago"
+      self.address.save
+    end
     timezone = Timezone::Zone.new :zone => self.address.timezone
     workout = Workout.where(:place_id => self.id).where("start_time >= ?", (timezone.time Time.now)).order("start_time DESC")
     if workout.nil?
