@@ -1,13 +1,15 @@
 class Place < ActiveRecord::Base
+  
+  # Definitions
   acts_as_taggable_on :categories
   before_save :normalize_tags
   belongs_to :address
   has_many :workouts
   has_many :ratings
   has_many :photos, as: :imageable
-
   self.per_page = 25
 
+  # Methods
   def icon_photo
     photo = Photo.where(:id => self.icon_photo_id).first
     return "#{Photo.image_base_url}/images/icon/#{photo.id}.jpg" if !photo.nil?
@@ -49,7 +51,8 @@ class Place < ActiveRecord::Base
   end
 
   def next_class
-    workout = Workout.where(:place_id => self.id).where("start_time >= ?", Time.now).order("start_time DESC")
+    timezone = Timezone::Zone.new :zone => self.address.timezone
+    workout = Workout.where(:place_id => self.id).where("start_time >= ?", (timezone.time Time.now)).order("start_time DESC")
     if workout.nil?
       return nil
     else

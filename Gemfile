@@ -22,6 +22,7 @@ gem 'will_paginate'
 gem 'paperclip', "~> 3.0"
 gem 'aws-sdk'
 gem 'kaminari'
+gem 'timezone'
 
 # These gems for active admin
 gem 'responders',          github: 'plataformatec/responders'

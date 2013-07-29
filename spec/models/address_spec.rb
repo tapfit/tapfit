@@ -9,6 +9,7 @@ describe Address do
     address.errors[:lon].should be_empty
     address.lat.should_not be_nil
     address.lon.should_not be_nil
+    address.timezone.should_not be_nil
   end
 
   it 'should create a valid address when lat and lon are there' do
@@ -18,6 +19,7 @@ describe Address do
     address.errors[:lon].should be_empty
     address.lat.should_not be_nil
     address.lon.should_not be_nil
+    address.timezone.should_not be_nil
   end
 
   it 'should not create an invalid address' do
@@ -27,5 +29,6 @@ describe Address do
     address.errors[:lon].should_not be_empty
     address.lat.should be_nil
     address.lon.should be_nil
+    address.timezone.should be_nil
   end
 end

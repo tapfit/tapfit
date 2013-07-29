@@ -16,6 +16,11 @@ class Address < ActiveRecord::Base
         self.lon = coordinates[1]
       end
     end
+
+    if !(self.lat.nil? || self.lon.nil?)
+      timezone = Timezone::Zone.new :latlon => [self.lat, self.lon]
+      self.timezone = timezone.zone
+    end
   end
 
   def self.check_for_duplicate(address)

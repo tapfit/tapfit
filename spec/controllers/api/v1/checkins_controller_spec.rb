@@ -5,7 +5,9 @@ describe Api::V1::CheckinsController do
   before(:each) do
     @user = FactoryGirl.create(:user)
     @place = FactoryGirl.create(:place)
-    
+    @address = FactoryGirl.create(:valid_address_with_coordinates)
+    @place.address = @address
+    @place.save 
     @checkin = Checkin.create(:user_id => @user.id, :place_id => @place.id)
 
   end

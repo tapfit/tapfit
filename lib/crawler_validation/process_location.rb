@@ -49,6 +49,7 @@ class ProcessLocation < ProcessBase
       else
         place = Place.combine_place(address, self.attrs, @tags)
         if !place.nil?
+          puts "same address found: #{place.name}"
           place.source_key = Digest::SHA1.hexdigest("#{@source}/#{place.name}")
           place.save
           return place.id
