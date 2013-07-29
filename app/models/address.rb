@@ -18,8 +18,13 @@ class Address < ActiveRecord::Base
     end
 
     if !(self.lat.nil? || self.lon.nil?)
-      timezone = Timezone::Zone.new :latlon => [self.lat, self.lon]
-      self.timezone = timezone.zone
+      begin
+        timezone = Timezone::Zone.new :latlon => [self.lat, self.lon]
+        self.timezone = timezone.zone
+      rescue
+        self.timezone = "America/Chicago"
+        puts "ran into error for address: #{self.address}"
+      end
     end
   end
 
