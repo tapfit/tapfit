@@ -95,7 +95,7 @@ class GoRecess < ResqueJob
       phone_number = num_xml.content
     end
     
-    address = {:line1 => location["address"], :city => location["city"], :state => location["region"], :zip => location["postal_code"], :latitude => location["latitude"], :longitude => location["longitude"]}
+    address = {:line1 => location["address"], :city => location["city"], :state => location["region"], :zip => location["postal_code"], :lat => location["latitude"], :lon => location["longitude"]}
 
     opts = {:name => location["name"], :address => address, :tags => location["tags"], :phone_number => phone_number, :source => @source, :source_id => gym_id}
     if !description.nil?

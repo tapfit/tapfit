@@ -65,6 +65,19 @@ class Place < ActiveRecord::Base
     return self.ratings.where.not(:review => nil).order("created_at DESC").limit(5)
   end
 
+  def self.combine_place(address, attrs, tags)
+    place = Place.where(:address_id => address.id).first
+    if !place.nil?
+      if place.name != attrs[:name]
+        name = place.name.split(" ") & attrs["name"].split(" ")
+        place.name = name.join(" ")
+      end
+      place.category_list = place.category_list | tags
+      place.save
+    end
+    return place
+  end 
+
 
 private
 

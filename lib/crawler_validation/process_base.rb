@@ -13,7 +13,14 @@ class ProcessBase
   @valid_keys = []
 
   def attrs
-    instance_variables.map{|ivar| instance_variable_get ivar}
+    hash = {}
+    self.instance_variables.each do |var|
+      if var.to_s != "@ten_digits" && var.to_s != "@seven_digits" && var.to_s != "@leading_1" && var.to_s != "@valid_keys" && var.to_s != "@tags" && var.to_s != "@address" && var.to_s != "@photo_url" && var.to_s != "@source_id"
+        hash[var.to_s.delete("@")] = self.instance_variable_get(var)
+      end
+    end
+    puts hash
+    return hash  
   end
 
   def validate_crawler_values?(source_name)
@@ -180,14 +187,14 @@ class ProcessBase
       return false
     end
     address_string = @address[:line1] + @address[:city] + @address[:state] + @address[:zip]
-    if @address[:latitude].nil? || @address[:longitude].nil?
+    if @address[:lat].nil? || @address[:lon].nil?
       coordinates = Geocoder.coordinates(address_string)
       puts "coordinates: #{coordinates}"
       if coordinates.nil?
         return false
       else      
-        @address[:latitude] = coordinates[0]
-        @address[:longitude] = coordinates[1]
+        @address[:lat] = coordinates[0]
+        @address[:lon] = coordinates[1]
         return true
       end
     else

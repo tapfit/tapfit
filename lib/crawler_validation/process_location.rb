@@ -43,13 +43,27 @@ class ProcessLocation < ProcessBase
     if validate_crawler_values?(source_name)
       puts "failed to validate location"
     else
-      address = Address.create(:line1 => @address[:line1], :line2 => @address[:line2], :city => @address[:city], :state => @address[:state], :zip => @address[:zip], :lat => @address[:latitude], :lon => @address[:longitude])
-     
+      address = Address.check_for_duplicate(@address)
+      if address.nil?
+        address = Address.create(@address)
+      else
+        place = Place.combine_place(address, self.attrs, @tags)
+        if !place.nil?
+          place.source_key = Digest::SHA1.hexdigest("#{@source}/#{place.name}")
+          place.save
+          return place.id
+        end
+      end
+
       if @source_id.nil?
         @source_id = "#{@source}/#{@name}"
       end
-
-      place = Place.new(:name => @name, :address_id => address.id, :source => @source, :source_key => Digest::SHA1.hexdigest(@source_id.to_s), :url => @url, :phone_number => @phone_number, :source_description => @source_description, :is_public => true, :can_dropin => true, :dropin_price => @dropin_price, :schedule_url => @schedule_url, :category => @category)
+    
+      place = Place.new(self.attrs)
+      place.address_id = address.id
+      place.is_public = true
+      place.can_dropin = true
+      place.source_key = Digest::SHA1.hexdigest(@source_id.to_s)
 
       if place.save
         puts "saved to database: #{place.attributes}"

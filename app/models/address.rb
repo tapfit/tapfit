@@ -18,6 +18,16 @@ class Address < ActiveRecord::Base
     end
   end
 
+  def self.check_for_duplicate(address)
+    record = Address.where(:line1 => address[:line1], :line2 => address[:line2], :city => address[:city], :state => address[:state], :zip => address[:zip]).first
+  
+    if record.nil?
+      return nil 
+    else
+      return record
+    end
+  end
+
   def as_json(options={})
     
     except_array ||= [ :created_at, :updated_at ]
