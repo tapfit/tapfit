@@ -25,7 +25,7 @@ class GoRecess < ResqueJob
         :search => 
         { 
           :category_ids => [1, 2, 3, 4, 5, 9, 11, 14], 
-          :radius => "25", 
+          :radius => "400", 
           :type => "class",
           :date => date.to_date, 
           :page => page, 

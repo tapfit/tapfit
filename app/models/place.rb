@@ -20,10 +20,15 @@ class Place < ActiveRecord::Base
     return "#{Photo.image_base_url}/images/large/#{photo.id}.jpg" if !photo.nil?
   end
 
-  def self.get_nearby_places(lat, lon)
+  def self.get_nearby_places(lat, lon, radius)
     if lat.nil? || lon.nil?
       lat = 39.110918
       lon = -84.515521
+    end
+    if radius.nil?
+      radius = 0.5
+    else
+      radius = radius / 69
     end
     return Place.nearby(lat.to_f, lon.to_f, 0.5)  
   end

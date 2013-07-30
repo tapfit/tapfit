@@ -16,17 +16,17 @@ describe Place do
   end
 
   it 'should return the correct nearby places' do
-    places = Place.get_nearby_places(39.110918, -84.515521)
+    places = Place.get_nearby_places(39.110918, -84.515521, nil)
     places.to_a.should eql([@place])
   end
 
   it 'should return nearby places wth default' do
-    places = Place.get_nearby_places(nil, nil)
+    places = Place.get_nearby_places(nil, nil, nil)
     places.to_a.should eql([@place])
   end
 
   it 'should return nearby places with string input' do
-    places = Place.get_nearby_places(39.110918, -84.515521)
+    places = Place.get_nearby_places(39.110918, -84.515521, 100)
     places.to_a.should eql([@place])
   end
 
