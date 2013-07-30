@@ -20,6 +20,10 @@ describe Place do
     places.to_a.should eql([@place])
   end
 
+  it 'should return todays workouts' do
+    @place.todays_workouts
+  end
+
   it 'should return nearby places wth default' do
     places = Place.get_nearby_places(nil, nil, nil)
     places.to_a.should eql([@place])
