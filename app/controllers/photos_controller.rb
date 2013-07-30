@@ -1,6 +1,8 @@
 class PhotosController < ApplicationController
   respond_to :json
 
+  before_filter :authenticate_admin!, :only => [:new, :create]
+
   def index
     @place = check_place(params[:place_id])
     render :json => @place.photos.as_json
@@ -36,7 +38,7 @@ class PhotosController < ApplicationController
         @place.icon_photo_id = @photo.id if params[:icon_photo] == "1"
         @place.cover_photo_id = @photo.id if params[:cover_photo] == "1"
         @place.save 
-        format.html { redirect_to(@photo, {:controller => 'photo', :action => 'show', :id => @photo.id}) }
+        format.html { redirect_to admin_place_path(@place) }
         format.xml  { render :xml => @photo, :status => :created, :location => @photo }
       else
         format.html { render :action => "new" }

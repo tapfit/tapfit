@@ -36,7 +36,7 @@ class ProcessLocation < ProcessBase
     opts[:source_id] = source_id if !source_id.nil?
     opts[:category] = place[:category]
     process_location = ProcessLocation.new(opts)
-    process_location.save_to_database(place[:source])
+    return process_location.save_to_database(place[:source])
   end
 
   def save_to_database(source_name)

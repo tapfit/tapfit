@@ -85,7 +85,7 @@ class Place < ActiveRecord::Base
         name = place.name.split(" ") & attrs["name"].split(" ")
         place.name = name.join(" ")
       end
-      place.category_list = place.category_list | tags
+      place.category_list = place.category_list | tags if !tags.nil?
       place.save
     end
     return place

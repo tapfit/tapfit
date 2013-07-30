@@ -7,8 +7,16 @@ ActiveAdmin.register Place do
     column :source
     column :dropin_price
     column :is_public
+    column :icon_photo
+    column :cover_photo
+
     default_actions 
   end
+
+  action_item :only => :show do 
+    link_to('Add a Photo', new_place_photo_path(place))
+  end
+
 
   filter :source
 

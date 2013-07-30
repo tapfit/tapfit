@@ -47,7 +47,7 @@ class PlacesController < ApplicationController
   def create
     id = ProcessLocation.controller_helper(place_params, address_params, params[:tags], params[:source_id])
     if !id.nil?
-      @place = Place.find(1)
+      @place = Place.find(id)
     end
 
     respond_to do |format|
