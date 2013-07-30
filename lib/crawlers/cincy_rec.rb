@@ -29,13 +29,18 @@ class CincyRec < ResqueJob
       name = doc.xpath("//span[@id='lblFacilityName']").first
       amenities = doc.xpath("//span[@id='lblAmenities']").first
       cost = doc.xpath("//span[@id='lblUsageCost']").first
+      description = doc.xpath("//span[@id='lblDescription']").first
 
+      
       if name.nil? 
-        #File.open("cincyrec.txt", "a+") {|f| f <<  "\nCouldn't find page with id: #{num}" }
+        return
+      elsif !description.nil? && description.text.upcase.include?("CLOSED")
+        return        
       else
         name = ( !name.nil? ? name.text : "" )
         cost = ( !cost.nil? ? cost.text : "" ) 
         amenities = ( !amenities.nil? ? amenities.text : "" )
+        description = ( !description.nil? ? description.text : "" )
 
         category = CincyRec.get_facility_category(name, amenities)
         if category.nil?
@@ -69,6 +74,7 @@ class CincyRec < ResqueJob
         opts[:source] = @source
         opts[:source_id] = num
         opts[:url] = url
+        opts[:source_description] = description if !description.upcase.include?("CLOSED")
         opts[:tags] = amenities.split("-").collect(&:strip)
 
         process_location = ProcessLocation.new(opts)
