@@ -38,6 +38,6 @@ module Tapfit
     
     config.assets.initialize_on_precompile = false
 
-    config.assets.precompile += ['active_admin.css.scss', 'active_admin.js']
+    config.assets.precompile += ['active_admin.css', 'active_admin.js']
   end
 end
