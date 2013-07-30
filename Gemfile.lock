@@ -269,7 +269,7 @@ DEPENDENCIES
   hirefire-resource
   inherited_resources!
   jbuilder (~> 1.0.1)
-  jquery-rails
+  jquery-rails (>= 3.0.0)
   kaminari
   newrelic_rpm
   nokogiri
