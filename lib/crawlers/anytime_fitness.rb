@@ -27,8 +27,9 @@ class AnytimeFitness < ResqueJob
       if gym.children[0].content == "open"
         
         name = "Anytime Fitness - #{gym.children[2].content}"
+        url = "http://www.anytimefitness.com#{gym.children[8].children[0]['href']}"
         
-        if ProcessLocation.get_place_id(@source, "#{@source}/#{name}").nil?
+        if ProcessLocation.get_place_id(@source, url).nil?
 
           puts "#{name} is not in database"
           address = {}
@@ -44,12 +45,14 @@ class AnytimeFitness < ResqueJob
 
           opts = {}
 
-          opts[:name] = name
+         
+          opts[:name] = "Anytime Fitness"
           opts[:address] = address
-          opts[:url] = "http://www.anytimefitness.com#{gym.children[8].children[0]['href']}"
+          opts[:url] = url          
           opts[:phone_number] = gym.children[6].content
           opts[:source] = @source
           opts[:category] = Category::Gym
+          opts[:source_id] = url
           opts[:tags] = [Category::Gym, Category::Strength, Category::Cardio]
 
           process_location = ProcessLocation.new(opts)

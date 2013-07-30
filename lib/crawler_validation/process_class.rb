@@ -24,18 +24,20 @@ class ProcessClass < ProcessBase
     if validate_crawler_values?(source_name)
       puts "failed to validate class"
     else
+      place = Place.find(@place_id)
       if !@instructor.nil?
         full_name = @instructor.split(" ")
         first_name = full_name[0] if full_name.length > 0
         last_name = full_name[1] if full_name.length > 1
-        instructor = Instructor.create(:first_name => first_name, :last_name => last_name)
+        instructor = place.instructors.where(:first_name => first_name, :last_name => last_name).first
+        instructor = Instructor.create(:first_name => first_name, :last_name => last_name) if instructor.nil?
       end
       
       workout_key = WorkoutKey.get_workout_key(@place_id, @name)
 
-      Time.zone = Place.find(@place_id).address.timezone
+      Time.zone = place.address.timezone
       starts = Time.zone.now.beginning_of_day.advance(:hours => @start_time.hour, :minutes => @start_time.strftime("%M").to_i)
-      ends = Time.zone.now.beginning_of_day.advance(:hours => @end_time.hour, :minutes => @end_time.strftime("%H").to_i)
+      ends = Time.zone.now.beginning_of_day.advance(:hours => @end_time.hour, :minutes => @end_time.strftime("%M").to_i)
 
       Time.zone = "UTC"
       workout = Workout.new(:name => @name, :place_id => @place_id, :source_description => @source_description, :start_time => starts.utc, :end_time => ends.utc, :price => @price, :instructor_id => instructor.id, :source => @source, :workout_key => workout_key)

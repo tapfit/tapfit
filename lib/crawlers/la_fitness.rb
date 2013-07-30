@@ -101,13 +101,13 @@ class LaFitness < ResqueJob
       puts "Redirected"
       return
     end
-    address[:line1] = content.xpath("//span[@id='ctl00_MainContent_lblClubAddress']").first.text
-    address[:city] = content.xpath("//span[@id='ctl00_MainContent_lblClubCity']").first.text
-    address[:state] = content.xpath("//span[@id='ctl00_MainContent_lblClubState']").first.text
-    address[:zip] = content.xpath("//span[@id='ctl00_MainContent_lblZipCode']").first.text
+    address[:line1] = LaFitness.capitalize_first_words(content.xpath("//span[@id='ctl00_MainContent_lblClubAddress']").first.text)
+    address[:city] = LaFitness.capitalize_first_words(content.xpath("//span[@id='ctl00_MainContent_lblClubCity']").first.text)
+    address[:state] = LaFitness.capitalize_first_words(content.xpath("//span[@id='ctl00_MainContent_lblClubState']").first.text)
+    address[:zip] = LaFitness.capitalize_first_words(content.xpath("//span[@id='ctl00_MainContent_lblZipCode']").first.text)
 
     opts = {}
-    opts[:name] = "LA Fitness - #{content.xpath("//td[@class='MainTitle']").first.text.gsub(/[\n\t\r]/, "").strip}"
+    opts[:name] = "LA Fitness"
     opts[:tags] = tags
     opts[:phone_number] = content.xpath("//span[@id='ctl00_MainContent_lblClubPhone']").first.text[0, 14]
     opts[:url] = url
@@ -121,4 +121,7 @@ class LaFitness < ResqueJob
     return process_location.save_to_database(@source)
   end
 
+  def self.capitalize_first_words(string)
+    return string.downcase.split(' ').map { |w| w.capitalize }.join(' ')
+  end
 end

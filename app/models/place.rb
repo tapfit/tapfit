@@ -7,6 +7,7 @@ class Place < ActiveRecord::Base
   has_many :workouts
   has_many :ratings
   has_many :photos, as: :imageable
+  has_many :instructors, :through => :workouts
   self.per_page = 25
 
   # Methods
@@ -91,7 +92,8 @@ class Place < ActiveRecord::Base
     if !place.nil?
       if place.name != attrs[:name]
         name = place.name.split(" ") & attrs["name"].split(" ")
-        place.name = name.join(" ")
+        name = name.join(" ")
+        place.name = name if name.strip != ""
       end
       place.category_list = place.category_list | tags if !tags.nil?
       place.save
