@@ -70,7 +70,7 @@ describe Place do
     @place.workouts << workout
     @place.save
     puts Time.zone.now
-    @place.workouts.count.should eql(0)
+    @place.todays_workouts.count.should eql(0)
   end
 
   it 'should keep category tags' do

@@ -33,7 +33,12 @@ class ProcessClass < ProcessBase
       
       workout_key = WorkoutKey.get_workout_key(@place_id, @name)
 
-      workout = Workout.new(:name => @name, :place_id => @place_id, :source_description => @source_description, :start_time => @start_time, :end_time => @end_time, :price => @price, :instructor_id => instructor.id, :source => @source, :workout_key => workout_key)
+      Time.zone = Place.find(@place_id).address.timezone
+      starts = Time.zone.now.beginning_of_day.advance(:hours => @start_time.hour, :minutes => @start_time.strftime("%M").to_i)
+      ends = Time.zone.now.beginning_of_day.advance(:hours => @end_time.hour, :minutes => @end_time.strftime("%H").to_i)
+
+      Time.zone = "UTC"
+      workout = Workout.new(:name => @name, :place_id => @place_id, :source_description => @source_description, :start_time => starts.utc, :end_time => ends.utc, :price => @price, :instructor_id => instructor.id, :source => @source, :workout_key => workout_key)
 
       if !workout.valid?
         puts "errors: #{workout.errors}"

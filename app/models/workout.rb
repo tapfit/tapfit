@@ -1,14 +1,8 @@
 class Workout < ActiveRecord::Base
   
-  default_scope { where("start_time BETWEEN ? AND ?", 
-                        (Time.now).beginning_of_day, 
-                        ((Time.now).beginning_of_day + 24.hours))
-                  .order("start_time DESC") }
-
   belongs_to :instructor
   belongs_to :place
-
-  has_one :timezone, :through => :place, :through => :address
+  has_one :address, :through => :place
 
   def as_json(options={})
     if !options[:place].nil?

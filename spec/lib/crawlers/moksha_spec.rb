@@ -17,13 +17,16 @@ describe Moksha do
     
     place = FactoryGirl.build(:place)
     place.dropin_price = 15
+    address = FactoryGirl.create(:valid_address_with_coordinates)
+    place.address = address
     place.save
 
     Moksha.get_classes("http://minneapolis.mokshayoga.ca/", place.id, DateTime.now)
 
-    Workout.where(:source => "moksha").each do |workout|
-      # puts workout.attributes
-      break
+    puts "Time: #{Time.now.beginning_of_day.utc}"
+    place.todays_workouts.count.should eql(10)
+    place.todays_workouts.each do |workout|
+      puts workout.start_time
     end
 
   end

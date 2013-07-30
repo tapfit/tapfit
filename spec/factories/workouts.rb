@@ -3,8 +3,8 @@
 FactoryGirl.define do
   factory :workout do
     name "MyString"
-    start_time Time.now + 1.hours
-    end_time Time.now + 2.hours
+    start_time Time.now.utc + 1.hours
+    end_time Time.now.utc + 2.hours
     instructor_id 1
     place_id 1
     source_description "MyText"

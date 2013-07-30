@@ -14,7 +14,11 @@ describe LaFitness do
   end
 
   it 'should save a class to the database' do
-    LaFitness.save_classes_to_database(995, 1, DateTime.now)
+    place = FactoryGirl.create(:place)
+    address = FactoryGirl.create(:valid_address_with_coordinates)
+    place.address = address
+    place.save
+    LaFitness.save_classes_to_database(995, place.id, DateTime.now)
   end
 
 end

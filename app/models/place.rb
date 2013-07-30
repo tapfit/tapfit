@@ -20,6 +20,11 @@ class Place < ActiveRecord::Base
     return "#{Photo.image_base_url}/images/large/#{photo.id}.jpg" if !photo.nil?
   end
 
+  def todays_workouts
+    Time.zone = self.address.timezone
+    self.workouts.where("start_time BETWEEN ? AND ?", Time.now.beginning_of_day, (Time.now.beginning_of_day + 24.hours))
+  end
+
   def self.get_nearby_places(lat, lon, radius)
     if lat.nil? || lon.nil?
       lat = 39.110918
@@ -56,12 +61,8 @@ class Place < ActiveRecord::Base
   end
 
   def next_class
-    if self.address.timezone.nil?
-      self.address.timezone = "America/Chicago"
-      self.address.save
-    end
-    timezone = Timezone::Zone.new :zone => self.address.timezone
-    workout = Workout.where(:place_id => self.id).where("start_time >= ?", (timezone.time Time.now)).order("start_time DESC")
+
+    workout = self.todays_workouts.where("start_time >= ?", Time.now).order("start_time DESC")
     if workout.nil?
       return nil
     else

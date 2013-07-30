@@ -4,6 +4,9 @@ describe Api::V1::WorkoutsController do
 
   before(:each) do
     @place = FactoryGirl.create(:place)
+    @address = FactoryGirl.create(:valid_address_with_coordinates)
+    @place.address = @address
+    @place.save
     @workout = FactoryGirl.create(:workout)
     @place.workouts << @workout
     puts @place.id
