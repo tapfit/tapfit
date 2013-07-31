@@ -42,6 +42,10 @@ ActiveAdmin.register Place do
 
 
   controller do
+    def new
+        redirect_to new_place_path
+    end
+
     def permitted_params
       params.permit!
     end

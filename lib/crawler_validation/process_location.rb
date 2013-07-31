@@ -28,12 +28,12 @@ class ProcessLocation < ProcessBase
     opts[:name] = place[:name] if !place[:name].nil?
     opts[:address] = address if !address.nil?
     opts[:tags] = tags if !tags.nil?
-    opts[:url] = place[:url] if !place[:url].nil?
-    opts[:phone_number] = place[:phone_number] if !place[:phone_number].nil?
-    opts[:source_description] = place[:source_description] if !place[:source_description].nil?
-    opts[:dropin_price] = place[:dropin_price] if !place[:dropin_price].nil?
+    opts[:url] = place[:url] if !(place[:url].nil? || place[:url] == "")
+    opts[:phone_number] = place[:phone_number] if !(place[:phone_number].nil? || place[:phone_number] == "")
+    opts[:source_description] = place[:source_description] if !(place[:source_description].nil? || place[:source_description] == "")
+    opts[:dropin_price] = place[:dropin_price] if !(place[:dropin_price].nil? || place[:dropin_price] == "")
     opts[:source] = place[:source] if !place[:source].nil?
-    opts[:source_id] = source_id if !source_id.nil?
+    opts[:source_id] = source_id if !(source_id.nil? || source_id == "")
     opts[:category] = place[:category]
     process_location = ProcessLocation.new(opts)
     return process_location.save_to_database(place[:source])

@@ -52,9 +52,9 @@ class PlacesController < ApplicationController
 
     respond_to do |format|
       if !@place.nil?
-        format.html { redirect_to(@place, :notice => 'Place successfully created') } 
+        format.html { redirect_to admin_place_path(@place) } 
       else
-        format.html { render :action => "new" }
+        format.html { redirect_to admin_places_path }
       end
     end  
   end
