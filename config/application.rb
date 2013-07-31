@@ -4,7 +4,7 @@ require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
-Bundler.require(:default, Rails.env)
+Bundler.require(:default, :assets, Rails.env)
 
 module Tapfit
   class Application < Rails::Application
@@ -20,6 +20,10 @@ module Tapfit
         model_specs: true
       g.fixture_replacement :factory_girl, dir: "spec/factories"
     end
+
+    Timezone::Configure.begin do |c|
+      c.username = 'martinza1'
+    end
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -33,5 +37,8 @@ module Tapfit
     # config.i18n.default_locale = :de
     
     config.assets.initialize_on_precompile = false
+
+    config.assets.precompile += ['active_admin.css', 'active_admin.js', 'print.css']
+    config.assets.precompile += ['active_admin/print.css']
   end
 end

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Api::V1::RatingsController do
 
-  before(:each) do
+  before(:all) do
     @user = FactoryGirl.create(:user)
     @user.ensure_authentication_token!
     @place = FactoryGirl.create(:place)

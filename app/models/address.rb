@@ -9,13 +9,32 @@ class Address < ActiveRecord::Base
   end
 
   def get_lat_lon
-    puts "checking lat_lat"
     if lat.nil? || lon.nil?
       coordinates = Geocoder.coordinates(address)
       if !coordinates.nil?
         self.lat = coordinates[0]
         self.lon = coordinates[1]
       end
+    end
+
+    if !(self.lat.nil? || self.lon.nil?)
+      begin
+        timezone = Timezone::Zone.new :latlon => [self.lat, self.lon]
+        self.timezone = timezone.zone
+      rescue
+        self.timezone = "America/Chicago"
+        puts "ran into error for address: #{self.address}"
+      end
+    end
+  end
+
+  def self.check_for_duplicate(address)
+    record = Address.where(:line1 => address[:line1], :line2 => address[:line2], :city => address[:city], :state => address[:state], :zip => address[:zip]).first
+  
+    if record.nil?
+      return nil 
+    else
+      return record
     end
   end
 

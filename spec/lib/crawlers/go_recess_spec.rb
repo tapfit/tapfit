@@ -62,6 +62,7 @@ describe GoRecess do
   end
 
   it 'should not raise an error' do
-    GoRecess.save_classes_to_database(@parsed_json)
+    workout_id = GoRecess.save_classes_to_database(@parsed_json)
+    workout_id.length.should_not eql(0)
   end
 end

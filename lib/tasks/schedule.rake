@@ -2,6 +2,7 @@ require './lib/crawler'
 require './lib/major_cities'
 require 'csv'
 require './lib/location_crawlers/go_recess_loc'
+require './lib/crawlers/moksha'
 
 desc "This task is called by the Heroku scheduler add-on"
 
@@ -31,6 +32,43 @@ task :rerun_crawl_jobs => :environment do
     Crawler.start_crawler_process
   end
 
+end
+
+task :update_addresses => :environment do
+  Address.where(:timezone => nil).each do |address|
+    puts "Adding timezone to address: #{address.address}"  
+    address.get_lat_lon
+      address.save
+  end
+end
+
+task :get_core_power => :environment do
+  Resque.enqueue(CorePower, 1, true, true)
+end
+
+task :get_anytime_fitness => :environment do
+  Resque.enqueue(AnytimeFitness, 1, true, true)
+end
+
+task :get_cincy_rec_locations => :environment do
+  Resque.enqueue(CincyRec, 1, true, DateTime.now)
+end
+
+task :get_la_fitness_locations => :environment do
+  Resque.enqueue(LaFitness, 1, true, DateTime.now)
+end
+
+task :get_moksha_locations => :environment do
+  Resque.enqueue(Moksha, 1, 3, DateTime.now)
+end
+
+task :get_go_recess => :environment do
+  Resque.enqueue(GoRecess, 1, true, DateTime.now) 
+end
+
+task :get_go_recess_chicago => :environment do
+  
+  Resque.enqueue(GoRecess, 1, true, DateTime.now)
 end
 
 task :get_go_recess_locations => :environment do

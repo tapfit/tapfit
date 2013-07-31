@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :photo do
-    url "MyString"
+    # url "MyString"
     user_id 1
     workout_key ""
     place_id 1

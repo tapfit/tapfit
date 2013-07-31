@@ -1,8 +1,8 @@
 class Workout < ActiveRecord::Base
   
-  default_scope { where("start_time > ?", Time.now) }
-
   belongs_to :instructor
+  belongs_to :place
+  has_one :address, :through => :place
 
   def as_json(options={})
     if !options[:place].nil?
@@ -13,6 +13,5 @@ class Workout < ActiveRecord::Base
     end
     options[:except] ||= except_array
     super(options)
-
   end
 end

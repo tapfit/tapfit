@@ -4,6 +4,9 @@ require 'api_constraints'
 Tapfit::Application.routes.draw do
 
   devise_for :users
+  ActiveAdmin.routes(self)
+
+  root :to => "places#index"
 
   resources :places do
     resources :photos
@@ -12,6 +15,7 @@ Tapfit::Application.routes.draw do
   namespace :api, defaults: {format: 'json'} do
 
     devise_for :users
+  ActiveAdmin.routes(self)
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
       resources :places do
         resources :workouts

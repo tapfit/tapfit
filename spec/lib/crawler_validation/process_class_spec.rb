@@ -13,7 +13,8 @@ describe ProcessClass do
 
   it 'should validate valid gyms info' do
     not_valid = @process_class.validate_crawler_values?("goRecess")
-    MailerUtils.send_error_email
+    #MailerUtils.send_error_email
+    REDIS.lpop(MailerUtils.redis_key).should eql("")
     not_valid.should be_false
     REDIS.llen(MailerUtils.redis_key).should eql(0) 
   end

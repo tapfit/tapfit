@@ -1,9 +1,11 @@
 require 'uri'
 require './lib/letter_to_phone_number'
+require './lib/crawler_validation/mailer_utils'
+require './lib/category'
 
 class ProcessBase
 
-  attr_accessor :name, :address, :tags, :url, :photo_url, :phone_number, :source_description, :source, :source_id, :start_time, :end_time, :price, :instructor, :place_id
+  attr_accessor :name, :address, :tags, :url, :photo_url, :phone_number, :source_description, :source, :source_id, :start_time, :end_time, :price, :instructor, :place_id, :dropin_price, :schedule_url, :category
 
   @ten_digits = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
   @seven_digits = /^(?:\(?([0-9]{3})\)?[-. ]?)?([0-9]{3})[-. ]?([0-9]{4})$/
@@ -11,11 +13,36 @@ class ProcessBase
   @valid_keys = []
 
   def attrs
-    instance_variables.map{|ivar| instance_variable_get ivar}
+    hash = {}
+    self.instance_variables.each do |var|
+      if var.to_s != "@ten_digits" && var.to_s != "@seven_digits" && var.to_s != "@leading_1" && var.to_s != "@valid_keys" && var.to_s != "@tags" && var.to_s != "@address" && var.to_s != "@photo_url" && var.to_s != "@source_id"
+        hash[var.to_s.delete("@")] = self.instance_variable_get(var)
+      end
+    end
+    puts hash
+    return hash  
   end
 
   def validate_crawler_values?(source_name)
     failed_processing = false  
+
+    if @valid_keys.include?("schedule_url")
+      if !check_url?(@schedule_url)
+        MailerUtils.write_error("schedule_url", @schedule_url, source_name)
+        failed_processing = true
+        puts "failed schedule_url"
+      end
+    end
+
+    if @valid_keys.include?("dropin_price")
+      if !check_price?(@dropin_price)
+        MailerUtils.write_error("dropin_price", @dropin_price, source_name)
+        failed_processing = true
+        puts "failed dropin_price"
+      else
+        @dropin_price = @dropin_price.to_s.gsub(/[$A-Za-z ]/,"")
+      end
+    end
 
     if @valid_keys.include?("start_time")
       if !check_time?(@start_time)
@@ -34,10 +61,12 @@ class ProcessBase
     end
 
     if @valid_keys.include?("price")
-      if !check_price?
+      if !check_price?(@price)
         MailerUtils.write_error("price", @price, source_name)
         failed_processing = true
         puts "failed price"
+      else
+        @price = @price.to_s.gsub(/[$A-Za-z ]/,"")
       end
     end
 
@@ -127,23 +156,28 @@ class ProcessBase
     return failed_processing
   end
 
-  def check_price?
-    @price = @price.to_s.gsub("$", "")
-    return @price.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? false : true 
+  def check_price?(price)
+    price = price.to_s.gsub(/[$A-Za-z \n\t\r]/, "").rstrip
+    return price.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? false : true 
   end
   def check_time?(time)
     begin 
       puts time
-      parsed_time = Time.parse(time)
+      if time.instance_of?(Time) || time.instance_of?(DateTime)
+        puts "instance of time or datetime"
+        return true
+      end
+      parsed_time = Time.parse(time.to_s)
       puts parsed_time
-      return false
-    rescue
       return true
+    rescue => e
+      puts "failed to process time" 
+      return false
     end
   end
 
   def check_name?(name)
-    special = "?<>?[]}{=*^%$#`~{}"
+    special = "?<>?[]}{=*^%#`~{}"
     regex = /[#{special.gsub(/./){|char| "\\#{char}"}}]/
     return !name.nil? && !(name =~ regex)
   end
@@ -153,12 +187,14 @@ class ProcessBase
       return false
     end
     address_string = @address[:line1] + @address[:city] + @address[:state] + @address[:zip]
-    if @address[:latitude].nil? || @address[:longitude].nil?
+    if @address[:lat].nil? || @address[:lon].nil?
       coordinates = Geocoder.coordinates(address_string)
       puts "coordinates: #{coordinates}"
       if coordinates.nil?
         return false
-      else
+      else      
+        @address[:lat] = coordinates[0]
+        @address[:lon] = coordinates[1]
         return true
       end
     else

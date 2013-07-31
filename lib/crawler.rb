@@ -13,4 +13,13 @@ module Crawler
     end
   end
 
+  def self.separate_city_state_zip(address = {}, line)
+    city_state = line.split(",")
+    address[:city] = city_state[0]
+    state_zip = city_state[1].split(" ")
+    address[:zip] = state_zip.delete_at(state_zip.length - 1)
+    address[:state] = state_zip.join(" ")
+    return address  
+  end
+
 end

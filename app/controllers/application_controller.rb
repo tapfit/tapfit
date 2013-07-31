@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   def check_place(place_id)
     @place = Place.where(:id => place_id).first
     if @place.nil?
-      render :json => { :code => 2, :message => "Could not find place with id: #{place_id}" }
+      render :json => { :code => 2, :errors => "Could not find place with id: #{place_id}" }
     else
       return @place
     end
@@ -18,5 +18,13 @@ class ApplicationController < ActionController::Base
     else
       return params[:page]
     end
+  end
+
+  def authenticate_admin!
+    authenticate_user!
+    unless current_user.instance_of?(AdminUser)
+      flash[:alert] = "Unauthorized access"
+      redirect_to root_path
+    end 
   end
 end

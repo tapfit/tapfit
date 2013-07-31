@@ -22,9 +22,9 @@ module Api
           user.save
           sign_in(:user, user)
           user.ensure_authentication_token!
-          render :json => { :email => user.email, :id => user.id, :auth_token => user.authentication_token }
+          render :json => { :email => user.email, :id => user.id, :auth_token => user.authentication_token, :first_name => user.first_name, :last_name => user.last_name }
         else
-          render :json => { :errors => user.errors }
+          render :json => { :errors => user.errors }, :status => 420
         end
       end
 
@@ -37,9 +37,9 @@ module Api
         if !user.nil? && user.valid_password?(password)
           sign_in(:user, user)
           user.reset_authentication_token!
-          render :json => { :email => user.email, :id => user.id, :auth_token => user.authentication_token }
+          render :json => { :email => user.email, :id => user.id, :auth_token => user.authentication_token, :first_name => user.first_name, :last_name => user.last_name }
         else
-          render :json => { :errors => "Not valid email or password" }
+          render :json => { :errors => "Not valid email or password" }, :status => 403
         end   
       end
 
@@ -68,7 +68,7 @@ module Api
       private
 
       def user_params
-        params.permit(:email, :password, :first_name, :last_name)
+        params.require(:user).permit(:email, :password, :first_name, :last_name)
       end
 
       def user_from_user_id

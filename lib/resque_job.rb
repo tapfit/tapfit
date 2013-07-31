@@ -1,4 +1,5 @@
 require 'crawler_validation/mailer_utils.rb'
+Dir["./lib/crawler_validation/*.rb"].each { |file| require file }
 
 class ResqueJob
 

@@ -4,6 +4,9 @@ describe Api::V1::WorkoutsController do
 
   before(:each) do
     @place = FactoryGirl.create(:place)
+    @address = FactoryGirl.create(:valid_address_with_coordinates)
+    @place.address = @address
+    @place.save
     @workout = FactoryGirl.create(:workout)
     @place.workouts << @workout
     puts @place.id
@@ -14,6 +17,11 @@ describe Api::V1::WorkoutsController do
     it 'should give me all worktous for a place' do
       get :index, place_id: @place.id
       assigns(:workouts).to_a.should eql([@workout])
+    end
+
+    it 'should not show workout for invalid place' do
+      get :index, place_id: -1
+      response.body.should include("errors") 
     end
   end
 

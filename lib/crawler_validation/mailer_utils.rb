@@ -19,7 +19,7 @@ module MailerUtils
     if REDIS.exists(redis_key)
       while REDIS.llen(redis_key) > 0 do
         body = body + "\n#{REDIS.lpop(redis_key)}"
-        puts body
+        # puts body
       end
     else
       body = "No errors today"
