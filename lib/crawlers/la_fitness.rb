@@ -29,7 +29,7 @@ class LaFitness < ResqueJob
     end 
 
     if place_id.nil?
-      MailerUtils.write_error("Gym ID: #{num}", "couldn't save the gym's info", @source)
+      # MailerUtils.write_error("Gym ID: #{num}", "couldn't save the gym's info", @source)
     else
       LaFitness.save_classes_to_database(num, place_id, date)
     end

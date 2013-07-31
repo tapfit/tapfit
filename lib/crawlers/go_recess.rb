@@ -6,8 +6,8 @@ Dir["./lib/crawler_validation/*.rb"].each { |file| require file }
 class GoRecess < ResqueJob
 
   @source = "goRecess"
-  @lat = 41.882863
-  @lon = -87.628812
+  @lat = 39.110874
+  @lon = -84.5157
 
   def self.perform(page, rerun, date)
 
@@ -25,7 +25,7 @@ class GoRecess < ResqueJob
         :search => 
         { 
           :category_ids => [1, 2, 3, 4, 5, 9, 11, 14], 
-          :radius => "400", 
+          :radius => "50", 
           :type => "class",
           :date => date.to_date, 
           :page => page, 
