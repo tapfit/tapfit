@@ -25,12 +25,9 @@ class Place < ActiveRecord::Base
     Time.zone = self.address.timezone
     start_of_day = Time.now.beginning_of_day
     end_of_day = start_of_day + 24.hours
-    puts "start: #{start_of_day}"
-    puts "end: #{end_of_day}"
+
     Time.zone = "UTC"
 
-    puts "startUTC: #{start_of_day}"
-    puts "endUTC: #{end_of_day}"
     self.workouts.where("start_time BETWEEN ? AND ?", start_of_day, end_of_day)
   end
 
@@ -42,9 +39,9 @@ class Place < ActiveRecord::Base
     if radius.nil?
       radius = 0.5
     else
-      radius = radius / 69
+      radius = radius.to_f / 69
     end
-    return Place.nearby(lat.to_f, lon.to_f, 0.5)  
+    return Place.nearby(lat.to_f, lon.to_f, radius)  
   end
 
 
