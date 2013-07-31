@@ -29,8 +29,8 @@ Tapfit::Application.configure do
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   
-  # ENV["REDISTOGO_URL"] = "redis://127.0.0.1:6379/0"
-  ENV["REDISTOGO_URL"] = 'redis://redistogo:f94459718df1ee5942b0ab27f3cc753c@grouper.redistogo.com:9503/'
+  ENV["REDISTOGO_URL"] = "redis://127.0.0.1:6379/0"
+  #ENV["REDISTOGO_URL"] = 'redis://redistogo:f94459718df1ee5942b0ab27f3cc753c@grouper.redistogo.com:9503/'
 
   config.paperclip_defaults = {
     :storage => :s3,

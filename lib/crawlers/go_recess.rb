@@ -8,18 +8,19 @@ class GoRecess < ResqueJob
   @source = "goRecess"
   @locations = [{:lat => 39.110874, :lon => -84.5157}, {:lat => 41.882863, :lon => -87.628812}, {:lat => 37.77493, :lon => -122.419416}]
 
-  def self.perform(page, rerun, date)
+  def self.perform(page, location, date)
 
-    if rerun
-      GoRecess.get_classes(page, date, true)      
+    if page == 1      
+      @locations.each do |location|
+        GoRecess.get_classes(page, date, location)
+      end      
     else
-      GoRecess.get_classes(page, date, false)   
+      GoRecess.get_classes(page, date, location)   
     end
     
   end
   
-  def self.get_classes(page, date, get_pages)
-    @locations.each do |location|
+  def self.get_classes(page, date, location)
       response = RestClient.post 'https://www.gorecess.com/search', 
         {
           :search => 
@@ -37,17 +38,15 @@ class GoRecess < ResqueJob
       parsed_json = JSON.parse(response.to_str)  
       GoRecess.save_classes_to_database(parsed_json)
 
-      if get_pages
+      if page == 1
         total_pages = parsed_json["pagination"]["total_pages"]
         
         page += 1
         while page < total_pages
-          Resque.enqueue(GoRecess, page, false, date)
+          Resque.enqueue(GoRecess, page, location, date)
           page += 1
         end
       end
-
-    end
   end
 
   def self.save_classes_to_database(parsed_json)
