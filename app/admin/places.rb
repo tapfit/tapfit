@@ -9,6 +9,12 @@ ActiveAdmin.register Place do
     column :is_public
     column :icon_photo
     column :cover_photo
+    column "City" do |i|
+      i.address.city
+    end
+    column "State" do |i|
+      i.address.state
+    end
 
     default_actions 
   end
@@ -18,7 +24,8 @@ ActiveAdmin.register Place do
   end
 
 
-  filter :source
+  filter :name, :label => "Name"
+  filter :address_city, :label => "City", :as => :string
 
   form do |f|
     f.inputs "Place Details" do
