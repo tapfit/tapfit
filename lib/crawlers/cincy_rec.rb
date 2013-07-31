@@ -9,6 +9,7 @@ class CincyRec < ResqueJob
   @base_url = "http://cincyrec.org/search/facility.aspx?id="
 
   def self.perform(page, arg, arg1)
+    return
     if page == 1
       num = 2
       while num < 2500 do

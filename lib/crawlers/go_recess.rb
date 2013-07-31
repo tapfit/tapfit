@@ -6,8 +6,7 @@ Dir["./lib/crawler_validation/*.rb"].each { |file| require file }
 class GoRecess < ResqueJob
 
   @source = "goRecess"
-  @lat = 39.110874
-  @lon = -84.5157
+  @locations = [{:lat => 39.110874, :lon => -84.5157}, {:lat => 41.882863, :lon => -87.628812}, {:lat => 37.77493, :lon => -122.419416}]
 
   def self.perform(page, rerun, date)
 
@@ -20,31 +19,34 @@ class GoRecess < ResqueJob
   end
   
   def self.get_classes(page, date, get_pages)
-    response = RestClient.post 'https://www.gorecess.com/search', 
-      {
-        :search => 
-        { 
-          :category_ids => [1, 2, 3, 4, 5, 9, 11, 14], 
-          :radius => "50", 
-          :type => "class",
-          :date => date.to_date, 
-          :page => page, 
-          :latitude => @lat,  
-          :longitude => @lon 
-        } 
-      }
-  
-    parsed_json = JSON.parse(response.to_str)  
-    GoRecess.save_classes_to_database(parsed_json)
+    @locations.each do |location|
+      response = RestClient.post 'https://www.gorecess.com/search', 
+        {
+          :search => 
+          { 
+            :category_ids => [1, 2, 3, 4, 5, 9, 11, 14], 
+            :radius => "50", 
+            :type => "class",
+            :date => date.to_date, 
+            :page => page, 
+            :latitude => location[:lat],  
+            :longitude => location[:lon]
+          } 
+        }
+    
+      parsed_json = JSON.parse(response.to_str)  
+      GoRecess.save_classes_to_database(parsed_json)
 
-    if get_pages
-      total_pages = parsed_json["pagination"]["total_pages"]
-      
-      page += 1
-      while page < total_pages
-        Resque.enqueue(GoRecess, page, false, date)
+      if get_pages
+        total_pages = parsed_json["pagination"]["total_pages"]
+        
         page += 1
+        while page < total_pages
+          Resque.enqueue(GoRecess, page, false, date)
+          page += 1
+        end
       end
+
     end
   end
 
