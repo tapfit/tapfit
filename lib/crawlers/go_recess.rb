@@ -15,13 +15,20 @@ class GoRecess < ResqueJob
         GoRecess.get_classes(page, date, location)
       end      
     else
-      GoRecess.get_classes(page, date, location)   
+      if !location["lat"].nil?
+        loc = {}
+        loc[:lat] = location["lat"]
+        loc[:lon] = location["lon"]
+        GoRecess.get_classes(page, date, loc)
+      else
+        GoRecess.get_classes(page, date, location)   
+      end
     end
     
   end
   
   def self.get_classes(page, date, location)
-    sleep(2)
+
       params = 
       {
         :search => 
