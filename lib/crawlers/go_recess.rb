@@ -35,6 +35,8 @@ class GoRecess < ResqueJob
           } 
         }
 
+      puts "response: #{response.to_str[0..20]}"
+
       parsed_json = JSON.parse(response.to_str)  
       GoRecess.save_classes_to_database(parsed_json)
 

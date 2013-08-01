@@ -65,4 +65,9 @@ describe GoRecess do
     workout_id = GoRecess.save_classes_to_database(@parsed_json)
     workout_id.length.should_not eql(0)
   end
+
+  it 'should make call to go recess' do
+    loc = {:lat => 37.77493, :lon => -122.419416}
+    GoRecess.get_classes(45, DateTime.now, loc)
+  end
 end
