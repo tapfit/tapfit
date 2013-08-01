@@ -21,19 +21,20 @@ class GoRecess < ResqueJob
   end
   
   def self.get_classes(page, date, location)
-      response = RestClient.post 'https://www.gorecess.com/search', 
-        {
-          :search => 
-          { 
-            :category_ids => [1, 2, 3, 4, 5, 9, 11, 14], 
-            :radius => "50", 
-            :type => "class",
-            :date => date.to_date, 
-            :page => page, 
-            :latitude => location[:lat],  
-            :longitude => location[:lon]
-          } 
-        }
+    sleep(2)
+    response = RestClient.post 'https://www.gorecess.com/search', 
+      {
+        :search => 
+        { 
+          :category_ids => [1, 2, 3, 4, 5, 9, 11, 14], 
+          :radius => "50", 
+          :type => "class",
+          :date => date.to_date, 
+          :page => page, 
+          :latitude => location[:lat],  
+          :longitude => location[:lon]
+        } 
+      }
 
       puts "response: #{response.to_str[0..100]}"
 
