@@ -22,7 +22,7 @@ class GoRecess < ResqueJob
   
   def self.get_classes(page, date, location)
     sleep(2)
-    response = RestClient.post 'https://www.gorecess.com/search', 
+      params = 
       {
         :search => 
         { 
@@ -35,6 +35,10 @@ class GoRecess < ResqueJob
           :longitude => location[:lon]
         } 
       }
+      
+      puts params
+
+      response = RestClient.post 'https://www.gorecess.com/search', params
 
       puts "response: #{response.to_str[0..100]}"
 
