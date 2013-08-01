@@ -34,13 +34,16 @@ class GoRecess < ResqueJob
             :longitude => location[:lon]
           } 
         }
-    
+
       parsed_json = JSON.parse(response.to_str)  
       GoRecess.save_classes_to_database(parsed_json)
 
-      if page == 1
-        total_pages = parsed_json["pagination"]["total_pages"]
+      total_pages = parsed_json["pagination"]["total_pages"]
         
+      puts "Made call to get_classes: #{page}, #{location}, #{total_pages}"
+
+      if page == 1
+
         page += 1
         while page < total_pages
           Resque.enqueue(GoRecess, page, location, date)

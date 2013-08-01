@@ -52,8 +52,8 @@ class ProcessClass < ProcessBase
       end
 
       if workout.save
-        puts "saved to database #{workout.attributes}"
-        puts "Workout count: #{Workout.count}"
+        puts "saved to database #{workout.name}, place_id: #{workout.place_id}"
+        # puts "Workout count: #{Workout.count}"
         return workout.id  
       else
         puts "failed to save #{workout.errors}"

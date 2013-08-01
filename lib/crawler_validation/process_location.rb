@@ -67,7 +67,7 @@ class ProcessLocation < ProcessBase
       place.source_key = Digest::SHA1.hexdigest(@source_id.to_s)
 
       if place.save
-        puts "saved to database: #{place.attributes}"
+        puts "saved to database: #{place.name}"
         if !@tags.nil?
           @tags.each do |tag|
             place.category_list.add(tag)
