@@ -69,5 +69,8 @@ describe GoRecess do
   it 'should make call to go recess' do
     loc = {:lat => 37.77493, :lon => -122.419416}
     GoRecess.get_classes(45, DateTime.now, loc)
+    GoRecess.get_classes(46, DateTime.now, loc)
+    GoRecess.get_classes(44, DateTime.now, loc)
+    GoRecess.get_classes(43, DateTime.now, loc)
   end
 end
