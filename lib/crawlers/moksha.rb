@@ -20,7 +20,9 @@ class Moksha < ResqueJob
   def self.get_classes(url, place_id, date)
     date = DateTime.parse(date.to_s)
     url = "#{url}classes/schedule/?options[start_date]=#{date.strftime('%Y')}-#{date.strftime('%m')}-#{date.strftime('%d')}"
-    
+   
+    puts url
+
     Healcode.get_classes(url, place_id, date, @source)
   end
 
