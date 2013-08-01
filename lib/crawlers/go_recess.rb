@@ -43,7 +43,7 @@ class GoRecess < ResqueJob
 
       total_pages = parsed_json["pagination"]["total_pages"]
         
-      puts "Made call to get_classes: #{page}, #{location}, #{total_pages}"
+      puts "Made call to get_classes: #{page}, #{location}, #{total_pages}, #{date}"
 
       if page == 1
 
