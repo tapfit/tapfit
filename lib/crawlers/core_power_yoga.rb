@@ -46,7 +46,7 @@ class CorePower < ResqueJob
     
     puts schedule_url
 
-    Healcode.get_classes(schedule_url, place_id, date, @source)  
+    Healcode.get_classes(schedule_url, place_id, date.to_date, @source)  
 
   end
 
