@@ -24,7 +24,7 @@ class Place < ActiveRecord::Base
   def todays_workouts
     Time.zone = self.address.timezone
     start_of_day = Time.now.beginning_of_day
-    end_of_day = start_of_day + 24.hours
+    end_of_day = start_of_day + 48.hours
 
     Time.zone = "UTC"
 
