@@ -26,8 +26,7 @@ after_fork do |server, worker|
     ActiveRecord::Base.establish_connection
 
   if defined?(Resque)
-    uri = URI.parse(ENV["REDISTOGO_URL"])
-    Resque.redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+    Resque.redis = Redis.connect(:url => ENV["OPENREDIS_URL"])
     Rails.logger.info("Connected to Redis")
   end
 end
