@@ -6,7 +6,7 @@ Tapfit::Application.routes.draw do
   devise_for :users
   ActiveAdmin.routes(self)
 
-  root :to => "places#index"
+  root :to => "application#index"
 
   resources :places do
     resources :photos
