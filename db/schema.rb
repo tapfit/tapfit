@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130729205825) do
+ActiveRecord::Schema.define(version: 20130802170218) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -40,6 +40,10 @@ ActiveRecord::Schema.define(version: 20130729205825) do
     t.datetime "updated_at"
     t.string   "timezone"
   end
+
+  add_index "addresses", ["city"], name: "index_addresses_on_city", using: :btree
+  add_index "addresses", ["lat"], name: "index_addresses_on_lat", using: :btree
+  add_index "addresses", ["lon"], name: "index_addresses_on_lon", using: :btree
 
   create_table "checkins", force: true do |t|
     t.integer  "place_id",   null: false
