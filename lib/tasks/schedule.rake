@@ -3,6 +3,8 @@ require './lib/major_cities'
 require 'csv'
 require './lib/location_crawlers/go_recess_loc'
 require './lib/crawlers/moksha'
+require 'heroku_backup_task'
+require 'heroku_cloud_backup'
 
 desc "This task is called by the Heroku scheduler add-on"
 
@@ -12,6 +14,11 @@ task :start_crawl_jobs => :environment do
   Crawler.start_crawler_process  
 
   puts "Ending crawl process"
+end
+
+task :backup_db => :environment do
+  HerokuBackupTask.execute
+  HerokuCloudBackup.execute
 end
 
 task :send_email => :environment do

@@ -23,6 +23,8 @@ gem 'paperclip', "~> 3.0"
 gem 'aws-sdk'
 gem 'kaminari'
 gem 'timezone'
+gem 'heroku_backup_task'
+gem 'heroku_cloud_backup'
 
 # These gems for active admin
 gem 'responders',          github: 'plataformatec/responders'
