@@ -10,7 +10,7 @@ class Moksha < ResqueJob
     if url == 1    
       Moksha.get_locations
       Place.where(:source => @source).each do |place|
-        Resque.enqueue(Moksha, place.url, place.id, DateTime.now)
+        Resque.enqueue(Moksha, place.url, place.id, date)
       end
     else
       Moksha.get_classes(url, place_id, date)

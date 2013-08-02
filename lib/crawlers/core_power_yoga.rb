@@ -8,33 +8,31 @@ class CorePower < ResqueJob
   @source = "corepower"
   @base_url = "http://www.corepoweryoga.com"
 
-  def self.perform(url, schedule, name)
+  def self.perform(url, schedule, date)
     if url == 1
       CorePower.get_studio_urls
     else
       puts "About to get classes"
-      CorePower.get_class_info(name, url, schedule) 
+      CorePower.get_class_info(date, url, schedule) 
     end
   end
 
-  def self.get_studio_urls
+  def self.get_studio_urls(date)
     doc = Nokogiri::HTML(open("http://www.corepoweryoga.com/yoga-studio"))
     doc.xpath("//a[@class='studio-link']").each do |loc|
       url = "#{@base_url}#{loc['href']}"
       schedule = loc.parent.children[1]
-      name = "Core Power Yoga - #{schedule.text.split("-")[0].strip}"
       schedule_url = "#{@base_url}#{schedule['href']}"
       if !schedule_url.nil? && schedule_url != ""
-        puts name
         puts url
         puts schedule_url
-        Resque.enqueue(CorePower, url, schedule_url, name)
+        Resque.enqueue(CorePower, url, schedule_url, date)
       end
     end
   end
 
-  def self.get_class_info(name, url, schedule_url)
-    place_id = CorePower.get_location_info(name, url, schedule_url)
+  def self.get_class_info(date, url, schedule_url)
+    place_id = CorePower.get_location_info(url, schedule_url)
     if place_id.nil?
       puts "couldn't find class"
       return
@@ -48,15 +46,16 @@ class CorePower < ResqueJob
     
     puts schedule_url
 
-    Healcode.get_classes(schedule_url, place_id, DateTime.now, @source)  
+    Healcode.get_classes(schedule_url, place_id, date, @source)  
 
   end
 
-  def self.get_location_info(name, url, schedule_url)
-    puts "name: #{name}, url: #{url}, schedule_url: #{schedule_url}"
-    place_id = ProcessLocation.get_place_id(@source, "#{@source}/#{name}")
+  def self.get_location_info(url, schedule_url)
+    puts "url: #{url}, schedule_url: #{schedule_url}"
+    place_id = ProcessLocation.get_place_id(@source, url)
     if place_id.nil?
       begin
+        name = "Core Power Yoga"
         doc = Nokogiri::HTML(open(url))
         doc.search('br').each do |n|
             n.replace("\n")
@@ -93,6 +92,7 @@ class CorePower < ResqueJob
         opts[:phone_number] = phone_number
         opts[:source_description] = source_description
         opts[:source] = @source
+        opts[:source_id] = url
         opts[:url] = url
         opts[:category] = Category::Yoga
         opts[:tags] = ["Yoga", "Hot Yoga", "Power Yoga"]

@@ -43,7 +43,8 @@ task :update_addresses => :environment do
 end
 
 task :get_core_power => :environment do
-  Resque.enqueue(CorePower, 1, true, true)
+  Resque.enqueue(CorePower, 1, true, DateTime.now)
+  Resque.enqueue(CorePower, 1, true, DateTime.now + 1.days)
 end
 
 task :get_anytime_fitness => :environment do
@@ -56,14 +57,17 @@ end
 
 task :get_la_fitness_locations => :environment do
   Resque.enqueue(LaFitness, 1, true, DateTime.now)
+  Resque.enqueue(LaFitness, 1, true, DateTime.now + 1.days)
 end
 
 task :get_moksha_locations => :environment do
   Resque.enqueue(Moksha, 1, 3, DateTime.now)
+  Resque.enqueue(Moksha, 1, 3, DateTime.now + 1.days)
 end
 
 task :get_go_recess => :environment do
   Resque.enqueue(GoRecess, 1, true, DateTime.now) 
+  Resque.enqueue(GoRecess, 1, true, DateTime.now + 1.days)
 end
 
 task :get_go_recess_chicago => :environment do
