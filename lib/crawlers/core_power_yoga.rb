@@ -10,7 +10,7 @@ class CorePower < ResqueJob
 
   def self.perform(url, schedule, date)
     if url == 1
-      CorePower.get_studio_urls
+      CorePower.get_studio_urls(date)
     else
       puts "About to get classes"
       CorePower.get_class_info(date, url, schedule) 
