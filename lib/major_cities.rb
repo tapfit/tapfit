@@ -249,7 +249,14 @@ class LatLon
 {'city': 'Riverton', 'dma_code': 767, 'latitude': 43.024959199999998, 'longitude': -108.3801036, 'region': 'WY', 'slug': 'riverton-wy'}"
 
   def self.get_lat_lon
-    return @major_cities
+    loc_array = []
+    @major_cities.split("\n").each do |city|
+      city = city.split(",")
+      loc = {:lat => city[2].split(":")[1].strip.to_f, :lon => city[3].split(":")[1].strip.to_f}
+      loc_array << loc
+    end
+
+    return loc_array
   end
 
 end

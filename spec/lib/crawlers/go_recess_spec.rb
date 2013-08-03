@@ -80,4 +80,8 @@ describe GoRecess do
     #GoRecess.get_classes(44, DateTime.now, loc)
     #GoRecess.get_classes(43, DateTime.now, loc)
   end
+
+  it 'should start location jobs' do
+    # GoRecess.perform(1, true, DateTime.now)
+  end
 end

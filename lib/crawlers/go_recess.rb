@@ -1,17 +1,23 @@
 require './lib/resque_job'
 require 'nokogiri'
 require 'open-uri'
+require './lib/major_cities'
 Dir["./lib/crawler_validation/*.rb"].each { |file| require file }
 
 class GoRecess < ResqueJob
 
   @source = "goRecess"
-  @locations = [{:lat => 39.110874, :lon => -84.5157}, {:lat => 41.882863, :lon => -87.628812}, {:lat => 37.77493, :lon => -122.419416}, {:lat => 40.714353, :lon => -74.005973}]
+  @locations = LatLon.get_lat_lon
+
+=begin
+  @locations = [{:lat => 39.110874, :lon => -84.5157}, {:lat => 41.882863, :lon => -87.628812}, {:lat => 37.77493, :lon => -122.419416}, {:lat => 40.714353, :lon => -74.005973}, {:lat => 38.627003, :lon => -90.199404}, {:lat => 33.835293, :lon => -117.914504}, {:lat => 34.052234, :lon => -118.243685}, {:lat => 29.760193, :lon => -95.36939}, {:lat => 39.952335, :lon => -75.163789}, {:lat => 33.448377, :lon => -112.074037}]
+=end
 
   def self.perform(page, location, date)
 
     if page == 1      
       @locations.each do |location|
+        # puts location
         GoRecess.get_classes(page, date, location)
       end      
     else
