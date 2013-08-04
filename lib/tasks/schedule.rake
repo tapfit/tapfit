@@ -47,6 +47,10 @@ task :update_addresses => :environment do
   end
 end
 
+task :get_pure_barre => :environment do
+  Resque.enqueue(PureBarre, 1, true, DateTime.now)
+end
+
 task :get_core_power => :environment do
   Resque.enqueue(CorePower, 1, true, DateTime.now)
   Resque.enqueue(CorePower, 1, true, DateTime.now + 1.days)
