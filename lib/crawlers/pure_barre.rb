@@ -48,7 +48,7 @@ class PureBarre < ResqueJob
 
     scrape_classes = false
     content.search("tr").each do |row|
-      puts "row: #{row.text}, scrape_classes: #{scrape_classes}"
+      # puts "row: #{row.text}, scrape_classes: #{scrape_classes}"
       if (row["class"] == "oddRow" || row["class"] == "evenRow") && scrape_classes
        
         opts = {}
@@ -79,12 +79,14 @@ class PureBarre < ResqueJob
 
       else
         begin
-          puts row.text
-          row_date = DateTime.parse(row.text)
-          puts "row_date: #{row_date}, date: #{date.utc.beginning_of_day}"
-          if row_date == date.utc.beginning_of_day
+          # puts row.text
+          date_string = date.strftime("%B %d, %Y")
+          puts date_string
+          if row.text.include?(date_string)
+            puts "scrape_classes = true"
             scrape_classes = true
           else
+            puts "scrape_classes = false"
             scrape_classes = false
           end
         rescue
