@@ -70,11 +70,11 @@ describe GoRecess do
 
     loc = {:lat => 37.77493, :lon => -122.419416}
 
-    GoRecess.perform(45, loc, DateTime.now)
+    #GoRecess.perform(45, loc, DateTime.now)
 
     loc = {"lat" => 37.77493, "lon" => -122.419416}
 
-    GoRecess.perform(45, loc, DateTime.now)
+    #GoRecess.perform(45, loc, DateTime.now)
 
     #GoRecess.get_classes(46, DateTime.now, loc)
     #GoRecess.get_classes(44, DateTime.now, loc)
@@ -82,6 +82,6 @@ describe GoRecess do
   end
 
   it 'should start location jobs' do
-    # GoRecess.perform(1, true, DateTime.now)
+    GoRecess.get_classes(2, DateTime.now + 2.days, {:lat => 39.103118, :lon => -84.51202} )
   end
 end

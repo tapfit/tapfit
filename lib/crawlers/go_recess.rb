@@ -40,9 +40,9 @@ class GoRecess < ResqueJob
         :search => 
         { 
           :category_ids => [1, 2, 3, 4, 5, 9, 11, 14], 
-          :radius => "50", 
+          :radius => "5", 
           :type => "class",
-          :date => date.to_date, 
+          :date => date.to_date.strftime("%Y-%m-%d"), 
           :page => page, 
           :latitude => location[:lat],  
           :longitude => location[:lon]
@@ -53,15 +53,11 @@ class GoRecess < ResqueJob
 
       response = RestClient.post 'https://www.gorecess.com/search', params
 
-      puts "response: #{response.to_str[0..100]}"
-
       parsed_json = JSON.parse(response.to_str)  
       GoRecess.save_classes_to_database(parsed_json)
 
       total_pages = parsed_json["pagination"]["total_pages"]
         
-      puts "Made call to get_classes: #{page}, #{location}, #{total_pages}, #{date}"
-
       if page == 1
 
         page += 1
