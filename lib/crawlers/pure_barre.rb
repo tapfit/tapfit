@@ -127,6 +127,7 @@ class PureBarre < ResqueJob
 
               if link.text.upcase.include?("SCHEDULE")
                 schedule_url = link["href"]
+                schedule_url = "https://clients.mindbodyonline.com/ASP/home.asp?studioid=#{schedule_url.split(/[?&]/)[1].split("=")[1]}"
                 break
               end
             end

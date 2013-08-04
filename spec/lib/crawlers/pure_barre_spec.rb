@@ -3,7 +3,7 @@ require 'spec_helper'
 describe PureBarre do
 
   it 'should get locations for pure barre' do
-    # PureBarre.get_locations
+    PureBarre.get_locations(DateTime.now)
   end
 
   it 'should get locations' do
@@ -15,7 +15,7 @@ describe PureBarre do
     address = FactoryGirl.create(:valid_address_with_coordinates)
     place.address = address
     place.save
-    url = "https://clients.mindbodyonline.com/ASP/home.asp?studioid=14789"
-    PureBarre.get_class(url, place.id, DateTime.now)
+    url = "http://clients.mindbodyonline.com/ws.asp?studioid=4578&stype=-7"
+    # PureBarre.get_class(url, place.id, DateTime.now)
   end
 end
