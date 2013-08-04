@@ -36,8 +36,10 @@ class ProcessClass < ProcessBase
       workout_key = WorkoutKey.get_workout_key(@place_id, @name)
 
       Time.zone = place.address.timezone
-      starts = Time.zone.now.beginning_of_day.advance(:days => @start_time.day, :hours => @start_time.hour, :minutes => @start_time.strftime("%M").to_i)
-      ends = Time.zone.now.beginning_of_day.advance(:days => @end_time.day, :hours => @end_time.hour, :minutes => @end_time.strftime("%M").to_i)
+      starts = Time.zone.now.beginning_of_day.change(:day => @start_time.day, :hour => @start_time.hour)
+      starts = starts.advance(:minutes => @start_time.strftime("%M").to_i)
+      ends = Time.zone.now.beginning_of_day.change(:day => @end_time.day, :hour => @end_time.hour)
+      ends = ends.advance(:minutes => @end_time.strftime("%M").to_i)
 
       Time.zone = "UTC"
       workout = Workout.where(:workout_key => workout_key).where(:start_time => starts).where(:end_time => ends).first

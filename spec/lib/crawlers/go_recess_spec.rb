@@ -83,5 +83,8 @@ describe GoRecess do
 
   it 'should start location jobs' do
     GoRecess.get_classes(2, DateTime.now + 2.days, {:lat => 39.103118, :lon => -84.51202} )
+    Workout.all.each do |workout|
+      puts workout.attributes
+    end
   end
 end
