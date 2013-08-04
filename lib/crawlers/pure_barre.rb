@@ -81,12 +81,14 @@ class PureBarre < ResqueJob
         begin
           puts row.text
           row_date = DateTime.parse(row.text)
+          puts "row_date: #{row_date}, date: #{date.utc.beginning_of_day}"
           if row_date == date.utc.beginning_of_day
             scrape_classes = true
           else
             scrape_classes = false
           end
         rescue
+          puts "Failed to parse row.text: #{row.text}"
           scrape_classes = false
         end
       end
