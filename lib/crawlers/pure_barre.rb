@@ -47,8 +47,8 @@ class PureBarre < ResqueJob
     end
 
     scrape_classes = false
-    puts content.search("tr")
     content.search("tr").each do |row|
+      puts "row: #{row.text}, scrape_classes: #{scrape_classes}"
       if (row["class"] == "oddRow" || row["class"] == "evenRow") && scrape_classes
        
         opts = {}
@@ -73,11 +73,13 @@ class PureBarre < ResqueJob
         opts[:tags] = [ Category::PilatesBarre ]
         opts[:place_id] = place_id
 
+        puts opts
         process_class = ProcessClass.new(opts)
         process_class.save_to_database(@source) 
 
       else
         begin
+          puts row.text
           row_date = DateTime.parse(row.text)
           if row_date == date.utc.beginning_of_day
             scrape_classes = true
