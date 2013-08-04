@@ -47,6 +47,7 @@ class PureBarre < ResqueJob
     end
 
     scrape_classes = false
+    puts content.search("tr")
     content.search("tr").each do |row|
       if (row["class"] == "oddRow" || row["class"] == "evenRow") && scrape_classes
        
