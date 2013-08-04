@@ -39,7 +39,8 @@ class PureBarre < ResqueJob
     end
 
     if content.nil?
-      puts "Content is nil"
+      # puts output
+      puts "Content is nil for url: #{url}"
       return
     end
 
@@ -162,7 +163,7 @@ class PureBarre < ResqueJob
                 # opts[:schedule_url] = schedule_url
 
                 process_location = ProcessLocation.new(opts)
-                process_location.save_to_database(@source)
+                place_id = process_location.save_to_database(@source)
                 break
               end
               num = num + 1
