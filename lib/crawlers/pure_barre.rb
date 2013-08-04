@@ -11,13 +11,13 @@ class PureBarre < ResqueJob
   def self.perform(url, place_id, date)
     
     # return
-    
     if url == 1
       PureBarre.get_locations(date)
     else
       PureBarre.get_class(url, place_id, date) 
     end
   end
+
 
   def self.get_class(url, place_id, date)
 
