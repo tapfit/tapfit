@@ -21,6 +21,8 @@ class PureBarre < ResqueJob
 
   def self.get_class(url, place_id, date)
 
+    puts "url: #{url}, place_id: #{place_id}, date: #{date}"
+
     cmd = "phantomjs ./lib/phantomjs/get_frame.js #{url}"
 
     output = `#{cmd}`
