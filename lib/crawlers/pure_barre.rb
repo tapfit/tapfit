@@ -20,7 +20,72 @@ class PureBarre < ResqueJob
   end
 
   def self.get_class(url, place_id, date)
-    puts "Need to implement get classes"
+
+    cmd = "phantomjs ./lib/phantomjs/get_frame.js #{url}"
+
+    output = `#{cmd}`
+
+    doc = Nokogiri::HTML(output)
+
+    content = doc.xpath("//table[@id='classSchedule-mainTable']").first
+
+    num = 0
+
+    while content.nil? && num < 5
+      sleep(1)
+      output = `#{cmd}`
+      content = doc.xpath("//table[@id='classSchedule-mainTable']").first 
+      num = num + 1
+    end
+
+    if content.nil?
+      puts "Content is nil"
+      return
+    end
+
+    scrape_classes = false
+    content.search("tr").each do |row|
+      if (row["class"] == "oddRow" || row["class"] == "evenRow") && scrape_classes
+       
+        opts = {}
+         
+        tds = row.search("td")
+
+        starts = Time.parse(tds[0].text)
+
+        opts[:start_time] = date.beginning_of_day.advance(:hours => starts.strftime("%H").to_i, :minutes => starts.strftime("%M").to_i)
+        opts[:end_time] = opts[:start_time].advance(:hours => 1)        
+
+        opts[:name] = "%"
+        row.search("a").each do |link|
+          if link["class"] == "modalClassDesc"
+            opts[:name] = link.text.strip
+          end
+        end
+        place = Place.where(:id => place_id).first 
+        opts[:instructor] = tds[tds.length - 2].text.split("(")[0].strip
+        opts[:source] = @source
+        opts[:price] = place.dropin_price if !place.nil?
+        opts[:tags] = [ Category::PilatesBarre ]
+        opts[:place_id] = place_id
+
+        process_class = ProcessClass.new(opts)
+        process_class.save_to_database(@source) 
+
+      else
+        begin
+          row_date = DateTime.parse(row.text)
+          if row_date == date.utc.beginning_of_day
+            scrape_classes = true
+          else
+            scrape_classes = false
+          end
+        rescue
+          scrape_classes = false
+        end
+      end
+    end
+
     return
   end
 
