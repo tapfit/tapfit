@@ -186,6 +186,9 @@ class ProcessBase
     if @address.nil?
       return false
     end
+    if @address[:line1].nil? || @address[:city].nil? || @address[:state].nil? || @address[:zip].nil?
+      return false
+    end
     address_string = @address[:line1] + @address[:city] + @address[:state] + @address[:zip]
     if @address[:lat].nil? || @address[:lon].nil?
       coordinates = Geocoder.coordinates(address_string)
