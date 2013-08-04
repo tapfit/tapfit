@@ -97,8 +97,8 @@ class GoRecess < ResqueJob
     opts[:price] = json["price"]
     opts[:instructor] = json["staff"]["name"]
     opts[:source] = @source
+    puts "date: #{date}"
     process_class = ProcessClass.new(opts)
-    puts "process_class: #{process_class.attrs}"
     process_class.save_to_database(@source)
   end
 
