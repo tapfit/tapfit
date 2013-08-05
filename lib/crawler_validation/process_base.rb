@@ -177,7 +177,7 @@ class ProcessBase
   end
 
   def check_name?(name)
-    special = "?<>?[]}{=*^%#`~{}"
+    special = "?<>[]}{{}"
     regex = /[#{special.gsub(/./){|char| "\\#{char}"}}]/
     return !name.nil? && !(name =~ regex)
   end

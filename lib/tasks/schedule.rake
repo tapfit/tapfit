@@ -32,6 +32,10 @@ task :run_go_recess_cin => :environment do
   GoRecess.get_classes(1, DateTime.now + 1.days, {:lat => 39.103118, :lon => -84.51202} )
 end
 
+task :run_go_recess_oak => :environment do
+  GoRecess.get_classes(1, DateTime.now + 1.days, {:lat => 37.804364, :lon => -122.271114} )
+end
+
 task :rerun_crawl_jobs => :environment do
   
   if REDIS.exists(MailerUtils.redis_key)
