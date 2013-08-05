@@ -71,7 +71,11 @@ class PureBarre < ResqueJob
         place = Place.where(:id => place_id).first 
         opts[:instructor] = tds[tds.length - 2].text.split("(")[0].strip
         opts[:source] = @source
-        opts[:price] = place.dropin_price if !place.nil? && !place.dropin_price.nil?
+        
+        if !place.nil? && !place.dropin_price.nil?
+          opts[:price] = place.dropin_price
+        end
+
         opts[:tags] = [ Category::PilatesBarre ]
         opts[:place_id] = place_id
 
