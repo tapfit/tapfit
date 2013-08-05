@@ -57,7 +57,7 @@ class PureBarre < ResqueJob
 
         starts = Time.parse(tds[0].text)
 
-        opts[:start_time] = date.beginning_of_day.advance(:hours => starts.strftime("%H").to_i, :minutes => starts.strftime("%M").to_i)
+        opts[:start_time] = DateTime.parse(date.to_s).beginning_of_day.advance(:hours => starts.strftime("%H").to_i, :minutes => starts.strftime("%M").to_i)
         opts[:end_time] = opts[:start_time].advance(:hours => 1)        
 
         opts[:name] = "%"
