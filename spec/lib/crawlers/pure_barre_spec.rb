@@ -15,7 +15,7 @@ describe PureBarre do
     address = FactoryGirl.create(:valid_address_with_coordinates)
     place.address = address
     place.save
-    url = "http://clients.mindbodyonline.com/ASP/home.asp?studioid=10813"
+    url = "http://clients.mindbodyonline.com/ws.asp?studioid=5807&stype=-7&sLoc=1"
     PureBarre.get_class(url, place.id, DateTime.now)
   end
 end

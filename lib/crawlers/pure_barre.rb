@@ -23,7 +23,7 @@ class PureBarre < ResqueJob
 
     puts "url: #{url}, place_id: #{place_id}, date: #{date}"
 
-    cmd = "phantomjs ./lib/phantomjs/get_frame.js #{url}"
+    cmd = "phantomjs ./lib/phantomjs/get_frame.js '#{url}' evenRow"
 
     output = `#{cmd}`
 
@@ -142,7 +142,6 @@ class PureBarre < ResqueJob
 
               if link.text.upcase.include?("SCHEDULE")
                 schedule_url = link["href"]
-                schedule_url = "http://clients.mindbodyonline.com/ASP/home.asp?studioid=#{schedule_url.split(/[?&]/)[1].split("=")[1]}"
                 break
               end
             end
