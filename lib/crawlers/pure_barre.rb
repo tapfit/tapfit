@@ -57,6 +57,8 @@ class PureBarre < ResqueJob
 
         starts = Time.parse(tds[0].text)
 
+        # Need to parse DateTime because in resque, they convert all types to string
+
         opts[:start_time] = DateTime.parse(date.to_s).beginning_of_day.advance(:hours => starts.strftime("%H").to_i, :minutes => starts.strftime("%M").to_i)
         opts[:end_time] = opts[:start_time].advance(:hours => 1)        
 
@@ -69,7 +71,7 @@ class PureBarre < ResqueJob
         place = Place.where(:id => place_id).first 
         opts[:instructor] = tds[tds.length - 2].text.split("(")[0].strip
         opts[:source] = @source
-        opts[:price] = place.dropin_price if !place.nil?
+        opts[:price] = place.dropin_price if !place.nil? && !place.dropin_price.nil?
         opts[:tags] = [ Category::PilatesBarre ]
         opts[:place_id] = place_id
 
