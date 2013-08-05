@@ -23,6 +23,11 @@ task :send_email => :environment do
   MailerUtils.send_error_email
 end
 
+task :get_club_one => :environment do
+  Resque.enqueue(ClubOne, 1, true, DateTime.now)
+  Resque.enqueue(ClubOne, 1, true, DateTime.now + 1.days)
+end
+
 task :run_go_recess_cin => :environment do
   GoRecess.get_classes(1, DateTime.now + 1.days, {:lat => 39.103118, :lon => -84.51202} )
 end
