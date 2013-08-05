@@ -115,6 +115,7 @@ class ClubOne < ResqueJob
         opts[:address] = address
         opts[:phone_number] = numbers.text.split("\n")[2].strip
         opts[:source] = @source
+        opts[:url] = url
         opts[:source_id] = url
         opts[:category] = Category::Gym
         opts[:tags] = []
