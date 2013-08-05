@@ -80,7 +80,7 @@ class PureBarre < ResqueJob
       else
         begin
           # puts row.text
-          date_string = date.strftime("%B %d, %Y")
+          date_string = DateTime.parse(date.to_s).strftime("%B %d, %Y")
           puts date_string
           if row.text.include?(date_string)
             puts "scrape_classes = true"
