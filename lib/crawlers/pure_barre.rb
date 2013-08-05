@@ -89,8 +89,8 @@ class PureBarre < ResqueJob
             puts "scrape_classes = false"
             scrape_classes = false
           end
-        rescue
-          puts "Failed to parse row.text: #{row.text}"
+        rescue => e
+          puts "Failed to parse row.text: #{row.text}, e: #{e}"
           scrape_classes = false
         end
       end
