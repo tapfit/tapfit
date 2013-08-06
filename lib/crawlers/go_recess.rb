@@ -15,17 +15,17 @@ class GoRecess < ResqueJob
 =end
 
   def self.perform(page, location, date)
+     
+    if Date.today != Date.parse(date.to_s)
+      return
+    end
 
     if !!location == location && location == true
-      puts "setting locations"
-=begin 
+      puts "location count: @locations.length"
       @locations.each do |loc|
         Resque.enqueue(self, 1, loc, date)
       end
-=end
-      Resque.enqueue(self, 1, {:lat => 39.110874, :lon => -84.5157 }, date)
     elsif page == 1     
-      puts "About to get locations"
       if !location["lat"].nil?
         loc = {}
         loc[:lat] = location["lat"]
@@ -35,7 +35,6 @@ class GoRecess < ResqueJob
         GoRecess.get_locations(page, date, location)
       end
     else
-      puts "About to get classes for lcoations"
       GoRecess.get_classes_for_location(page, location, date)   
     end
     
@@ -92,7 +91,6 @@ class GoRecess < ResqueJob
 
       providers.each do |loc|
         place_id = self.get_location_info_and_save(loc)
-        puts "About to get classes for: #{loc["name"]}, place_id: #{place_id}"
         if !place_id.nil?
           puts loc["url"]
           Resque.enqueue(GoRecess, loc["url"], place_id, date)
@@ -144,9 +142,6 @@ class GoRecess < ResqueJob
 
   def self.save_classes_to_database(parsed_json, place_id)
     parsed_json["scheduled_classes"].each do |gym|
-      #location = gym["location"]
-      #gym_id = location["id"]
-      #place_id = GoRecess.get_location_info_and_save(location, gym_id)
       
       if place_id.nil?
         MailerUtils.write_error("Gym ID: #{gym_id}", "couldn't save the gym's info", @source)
@@ -168,7 +163,6 @@ class GoRecess < ResqueJob
     opts[:price] = json["price"]
     opts[:instructor] = json["staff"]["name"]
     opts[:source] = @source
-    puts "date: #{date}"
     process_class = ProcessClass.new(opts)
     process_class.save_to_database(@source)
   end
