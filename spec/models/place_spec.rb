@@ -11,7 +11,7 @@ describe Place do
   end
   
   it 'should return nearby places' do
-    places = Place.nearby(39.110918, -84.515521, 0.05)
+    places = Place.nearby(39.110918, -84.515521, 0.05, nil)
     places.to_a.should eql([@place])
   end
 
@@ -19,6 +19,8 @@ describe Place do
     places = Place.get_nearby_places(39.110918, -84.515521, 100, nil)
     places.to_a.should eql([@place])
   end
+
+
 
   it 'should return todays workouts' do
     @place.todays_workouts
@@ -119,4 +121,19 @@ describe Place do
 
     @place.reviews.count.should eql(1)
   end
+
+  it 'should return search results' do
+    @place.category_list.add("yoga")
+    @place.category = "Kit Kat"
+    @place.save
+
+    Place.get_nearby_places(45, -88, 3000, "yoga").should eql([@place])
+
+    Place.get_nearby_places(45, -88, 3000, "string").should eql([@place])
+
+    Place.get_nearby_places(45, -88, 3000, "kat").should eql([@place])
+
+    Place.get_nearby_places(45, -88, 3000, "kjasdlfkj").should eql([])
+  end
+
 end
