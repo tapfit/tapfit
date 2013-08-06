@@ -38,7 +38,22 @@ body {
         clear: left;
         font: 15px Helvetica,Arial,sans-serif;
         position: absolute;
-        margin: 320px 0 0 0;
+        margin: 380px 0 0 0;
+}
+
+.banner #banner-logo {
+	font-family: 'Helvetica';
+	font-weight: normal;
+	font-size: 50px;
+	color: #fff;
+	text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+	text-transform: uppercase;
+	letter-spacing: -1px;
+	line-height: 1;
+	margin: 60px 0 0 0;
+	position: absolute;
+	top: 0px; left: 0;
+	padding-left: 10px;
 }
 
 .banner h1 {
@@ -51,7 +66,7 @@ body {
 	text-transform: uppercase;
 	letter-spacing: -1px;
 	line-height: 1;
-	margin: 100px 0 0 0;
+	margin: 160px 0 0 0;
 	position: absolute;
 	top: 0px; left: 0;
 	padding-left: 10px;
@@ -68,7 +83,7 @@ body {
 	line-height: 1;
 	position: absolute;
 	font-weight: 200;
-	top: 250px; left: 0;
+	top: 350px; left: 0;
 	text-shadow: 0 1px 1px rgba(255,255,255,0.25);
 	padding-left: 10px;
 }
@@ -269,6 +284,10 @@ ul.steps li.step-3 {
                 padding-left: 0;
                 margin: 30px 5% 0 5%;
                 line-height: 1;
+        }
+
+        .banner #banner-logo {
+                display: none;
         }
 	
 	.banner h2 {
