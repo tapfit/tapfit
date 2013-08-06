@@ -39,14 +39,33 @@ describe ProcessClass do
   it 'should change time to UTC' do
     date = DateTime.now.beginning_of_day.advance(:hours => 10)
     date = ProcessClass.new().change_date_to_utc(date, "America/Chicago")
-    date.should eql(DateTime.now.utc.beginning_of_day.advance(:hours => 6))
+    date.utc.should eql(Time.now.utc.beginning_of_day.advance(:hours => 15))
   end
 
   it 'should save a class to database' do
     @process_class.save_to_database("test")
     workout = Workout.all.first
-    workout.start_time.should eql(@opts[:start_time])
-    workout.end_time.should eql(@opts[:end_time])
+    DateTime.parse(workout.start_time.to_s).should eql((DateTime.parse(@opts[:start_time].to_s)).advance(:hours => 4).utc)
+    DateTime.parse(workout.end_time.to_s).should eql((DateTime.parse(@opts[:end_time].to_s)).advance(:hours => 4).utc)
+  end
+
+  it 'should save an instrcutor' do
+    @process_class.save_to_database("test")
+    instructor = Instructor.all.first
+    instructor.first_name.should eql(@opts[:instructor])
+    instructor.last_name.should be_nil
+  end
+
+  it 'should not save duplicate instructors' do
+    @process_class.save_to_database("test")
+    @opts[:start_time] = DateTime.parse("11/07/2013 15:00:00")
+    @opts[:end_time] = DateTime.parse("11/07/2013 16:00:00")
+    process_class = ProcessClass.new(@opts)
+    process_class.save_to_database("test")
+    Instructor.all.count.should eql(1)
+    instructor = Instructor.all.first
+    instructor.first_name.should eql(@opts[:instructor])
+    instructor.last_name.should be_nil
   end
 
 end

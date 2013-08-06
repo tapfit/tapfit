@@ -41,18 +41,32 @@ class Place < ActiveRecord::Base
     else
       radius = radius.to_f / 69
     end
-    places = Place.nearby(lat.to_f, lon.to_f, radius)
+    
     if search.nil?
-      return places  
+      return Place.nearby(lat.to_f, lon.to_f, radius, nil) 
     else
-      return places
+      ids = Place.tagged_with([search], :any => true, :wild => true).pluck(:id)
+      if ids.length == 0
+        ids = Place.where("lower(name) LIKE ? OR lower(category) LIKE ?", "%#{search}%", "%#{search}%").pluck(:id)
+      else
+        ids = Place.where("lower(name) LIKE ? OR lower(category) LIKE ? OR id IN (?)", "%#{search}%", "%#{search}%", ids.join(",")).pluck(:id)
+      end
+      return Place.nearby(lat.to_f, lon.to_f, radius, ids)
     end
   end
 
 
-  scope :nearby, lambda { |lat, lon, radius|
-      find_by_sql("SELECT places.*, 
+  scope :nearby, lambda { |lat, lon, radius, ids|
+    if ids.nil?
+      return find_by_sql("SELECT places.*, 
                     3956 * 2 * asin( sqrt ( pow ( sin (( #{lat} - lat) * pi() / 180 / 2), 2) + cos (#{lat} * pi() / 180 ) * cos ( lat * pi() / 180 ) * pow ( sin (( #{lon} - lon ) * pi() / 180 / 2 ), 2) ) ) as distance FROM places INNER JOIN addresses ON places.address_id = addresses.id WHERE lat BETWEEN #{lat - radius} AND #{lat + radius} AND lon BETWEEN #{lon - radius} AND #{lon + radius} ORDER BY distance") 
+    elsif ids.length == 0
+      return []
+    else
+      return find_by_sql("SELECT places.*, 
+                    3956 * 2 * asin( sqrt ( pow ( sin (( #{lat} - lat) * pi() / 180 / 2), 2) + cos (#{lat} * pi() / 180 ) * cos ( lat * pi() / 180 ) * pow ( sin (( #{lon} - lon ) * pi() / 180 / 2 ), 2) ) ) as distance FROM places INNER JOIN addresses ON places.address_id = addresses.id WHERE places.id IN (#{ids.join(", ")}) AND lat BETWEEN #{lat - radius} AND #{lat + radius} AND lon BETWEEN #{lon - radius} AND #{lon + radius} ORDER BY distance") 
+
+    end
   }
 
   def as_json(options={})
@@ -72,7 +86,6 @@ class Place < ActiveRecord::Base
   end
 
   def next_class
-
     workout = self.todays_workouts.where("start_time >= ?", Time.now).order("start_time DESC")
     if workout.nil?
       return nil
