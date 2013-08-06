@@ -9,23 +9,29 @@ module Healcode
     
     doc = Nokogiri::HTML(output)
 
+    # puts doc
+
     header = doc.xpath("//table[starts-with(@class, 'schedule filtered_collection')]")
 
     # puts header
     num = 0
     table = header.children[0].children
-    date_string = date.strftime("%B %d, %Y")
-    # puts table
+    date_string = date.strftime("%B %-d, %Y")
+    puts "Table length: #{table.length}"
+    # puts "Table: #{table}"
     scrape_classes = false
     while num < table.length do
       if table[num]['class'] == "schedule_header"
         if table[num].text.include?(date_string)
+          # puts "About to set scrape to true"
           scrape_classes = true
         else
+          # puts "About to set scrape to false: #{table[num].text}, date_string: #{date_string}"
           scrape_classes = false
         end
       else
         if scrape_classes
+          puts "About to scrape classes"
           node = table[num]
           
           opts = {}
@@ -47,6 +53,7 @@ module Healcode
           opts[:end_time] = date.beginning_of_day.advance(:hours => ends.strftime("%H").to_i, :minutes => ends.strftime("%M").to_i)
           opts[:source] = source
           opts[:price] = Place.find(place_id).dropin_price
+
           process_class = ProcessClass.new(opts)
           process_class.save_to_database(source)
 

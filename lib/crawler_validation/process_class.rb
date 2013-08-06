@@ -35,11 +35,14 @@ class ProcessClass < ProcessBase
       
       workout_key = WorkoutKey.get_workout_key(@place_id, @name)
 
-      Time.zone = place.address.timezone
-      starts = Time.zone.now.beginning_of_day.advance(:hours => @start_time.hour, :minutes => @start_time.strftime("%M").to_i)
-      ends = Time.zone.now.beginning_of_day.advance(:hours => @end_time.hour, :minutes => @end_time.strftime("%M").to_i)
+      starts = self.change_date_to_utc(@start_time, place.address.timezone)
+      ends = self.change_date_to_utc(@end_time, place.address.timezone)
 
-      Time.zone = "UTC"
+      workout = Workout.where(:workout_key => workout_key).where(:start_time => starts).where(:end_time => ends).first
+      if !workout.nil?
+        puts "Workout already exists"
+        return
+      end
       workout = Workout.new(:name => @name, :place_id => @place_id, :source_description => @source_description, :start_time => starts.utc, :end_time => ends.utc, :price => @price, :instructor_id => instructor.id, :source => @source, :workout_key => workout_key)
 
       if !workout.valid?
@@ -47,14 +50,21 @@ class ProcessClass < ProcessBase
       end
 
       if workout.save
-        puts "saved to database #{workout.attributes}"
-        puts "Workout count: #{Workout.count}"
+        puts "saved to database #{workout.name}, place_id: #{workout.place_id}"
+
         return workout.id  
       else
         puts "failed to save #{workout.errors}"
         return nil
       end
     end
+  end
+
+  def change_date_to_utc(time, timezone)
+    Time.zone = timezone
+    newTime = Time.zone.now.beginning_of_day.change(:year => time.year, :month => time.month, :day => time.day, :hour => time.hour)
+    Time.zone = "UTC"
+    return newTime
   end
 
 end

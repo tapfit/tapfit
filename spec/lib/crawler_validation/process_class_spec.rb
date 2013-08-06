@@ -3,7 +3,12 @@ require 'spec_helper'
 describe ProcessClass do
 
   before(:each) do
-    @process_class = ProcessClass.new(:name => "Yoga Class", :tags => ["yoga"], :source => "goRecess", :source_id => "16854", :source_description => "Fun Yoga Class", :instructor => "Meg", :price => "$25.00", :start_time => "07/11/2013 9:00:00", :end_time => "07/11/2013 10:00:00")
+    @place = FactoryGirl.create(:place)
+    @address = FactoryGirl.create(:valid_address_with_coordinates)
+    @place.address = @address
+    @place.save
+    @opts = { :name => "Yoga Class", :tags => ["yoga"], :source => "goRecess", :source_id => "16854", :source_description => "Fun Yoga Class", :instructor => "Meg", :price => "$25.00", :start_time => DateTime.parse("11/07/2013 9:00:00"), :end_time => DateTime.parse("11/07/2013 10:00:00"), :place_id => @place.id }
+    @process_class = ProcessClass.new(@opts)
     @empty_class = ProcessClass.new()
   end
 
@@ -29,6 +34,19 @@ describe ProcessClass do
     @process_class.address = nil
     @process_class.validate_crawler_values?("goRecess").should be_true
     REDIS.llen(MailerUtils.redis_key).should be_true
+  end
+
+  it 'should change time to UTC' do
+    date = DateTime.now.beginning_of_day.advance(:hours => 10)
+    date = ProcessClass.new().change_date_to_utc(date, "America/Chicago")
+    date.should eql(DateTime.now.utc.beginning_of_day.advance(:hours => 6))
+  end
+
+  it 'should save a class to database' do
+    @process_class.save_to_database("test")
+    workout = Workout.all.first
+    workout.start_time.should eql(@opts[:start_time])
+    workout.end_time.should eql(@opts[:end_time])
   end
 
 end

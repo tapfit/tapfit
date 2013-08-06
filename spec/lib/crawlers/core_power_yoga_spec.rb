@@ -14,6 +14,6 @@ describe CorePower do
     url = "http://www.corepoweryoga.com/yoga-studio/california/berkeley"
     name = "Berkeley Studio"
     schedule = "http://www.corepoweryoga.com/yoga-studio/California/schedule/4"
-    CorePower.perform(url, schedule, name)
+    CorePower.perform(url, schedule, DateTime.now + 1.days)
   end
 end

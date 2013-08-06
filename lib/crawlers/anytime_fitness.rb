@@ -20,6 +20,10 @@ class AnytimeFitness < ResqueJob
   end
 
   def self.get_location(url)
+    if Place.where(:url => url).count > 0
+      puts "Already have this anytime fitness"
+      return
+    end
     doc = Nokogiri::HTML(open(url))
 
     doc.xpath("//tr[starts-with(@style, 'border-bottom:')]").each do |gym|

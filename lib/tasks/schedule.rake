@@ -14,8 +14,26 @@ task :start_crawl_jobs => :environment do
   puts "Ending crawl process"
 end
 
+task :backup_db => :environment do
+  HerokuBackupTask.execute
+  HerokuCloudBackup.execute
+end
+
 task :send_email => :environment do
   MailerUtils.send_error_email
+end
+
+task :get_club_one => :environment do
+  Resque.enqueue(ClubOne, 1, true, DateTime.now)
+  Resque.enqueue(ClubOne, 1, true, DateTime.now + 1.days)
+end
+
+task :run_go_recess_cin => :environment do
+  GoRecess.get_classes(1, DateTime.now + 1.days, {:lat => 39.103118, :lon => -84.51202} )
+end
+
+task :run_go_recess_oak => :environment do
+  GoRecess.get_classes(1, DateTime.now + 1.days, {:lat => 37.804364, :lon => -122.271114} )
 end
 
 task :rerun_crawl_jobs => :environment do
@@ -42,8 +60,13 @@ task :update_addresses => :environment do
   end
 end
 
+task :get_pure_barre => :environment do
+  Resque.enqueue(PureBarre, 1, true, DateTime.now)
+end
+
 task :get_core_power => :environment do
-  Resque.enqueue(CorePower, 1, true, true)
+  Resque.enqueue(CorePower, 1, true, DateTime.now)
+  Resque.enqueue(CorePower, 1, true, DateTime.now + 1.days)
 end
 
 task :get_anytime_fitness => :environment do
@@ -56,14 +79,17 @@ end
 
 task :get_la_fitness_locations => :environment do
   Resque.enqueue(LaFitness, 1, true, DateTime.now)
+  Resque.enqueue(LaFitness, 1, true, DateTime.now + 1.days)
 end
 
 task :get_moksha_locations => :environment do
   Resque.enqueue(Moksha, 1, 3, DateTime.now)
+  Resque.enqueue(Moksha, 1, 3, DateTime.now + 1.days)
 end
 
 task :get_go_recess => :environment do
   Resque.enqueue(GoRecess, 1, true, DateTime.now) 
+  Resque.enqueue(GoRecess, 1, true, DateTime.now + 1.days)
 end
 
 task :get_go_recess_chicago => :environment do

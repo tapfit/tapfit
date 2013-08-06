@@ -177,13 +177,16 @@ class ProcessBase
   end
 
   def check_name?(name)
-    special = "?<>?[]}{=*^%#`~{}"
+    special = "?<>[]}{{}"
     regex = /[#{special.gsub(/./){|char| "\\#{char}"}}]/
     return !name.nil? && !(name =~ regex)
   end
 
   def check_address?
     if @address.nil?
+      return false
+    end
+    if @address[:line1].nil? || @address[:city].nil? || @address[:state].nil? || @address[:zip].nil?
       return false
     end
     address_string = @address[:line1] + @address[:city] + @address[:state] + @address[:zip]

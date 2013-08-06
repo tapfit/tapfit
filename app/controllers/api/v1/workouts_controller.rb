@@ -8,7 +8,7 @@ module Api
         @place = check_place(params[:place_id])
         if @place.instance_of?(Place) 
           @workouts = @place.todays_workouts
-          render :json => @workouts.as_json.as_json(:detail => true)
+          render :json => @workouts.as_json(:detail => true)
         end
       end
 

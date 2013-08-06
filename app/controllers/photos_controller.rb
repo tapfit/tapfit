@@ -41,7 +41,7 @@ class PhotosController < ApplicationController
         format.html { redirect_to admin_place_path(@place) }
         format.xml  { render :xml => @photo, :status => :created, :location => @photo }
       else
-        format.html { render :action => "new" }
+        format.html { redirect_to admin_place_path(@place) }
         format.xml  { render :xml => @photo.errors, :status => :unprocessable_entity }
       end
     end
