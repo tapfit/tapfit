@@ -82,7 +82,6 @@ class GoRecess < ResqueJob
       response = RestClient.post 'https://www.gorecess.com/search', params
 
       parsed_json = JSON.parse(response.to_str)  
-      GoRecess.save_classes_to_database(parsed_json)
 
       total_pages = parsed_json["pagination"]["total_pages"]
 
@@ -169,7 +168,8 @@ class GoRecess < ResqueJob
     process_class.save_to_database(@source)
   end
 
-  def self.get_location_info_and_save(location, gym_id)
+  def self.get_location_info_and_save(location)
+    gym_id = location["id"]
     place_id = ProcessLocation.get_place_id(@source, gym_id)
     if place_id.nil?
       gym_id = location["id"]
