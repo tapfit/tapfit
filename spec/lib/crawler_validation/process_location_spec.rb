@@ -45,6 +45,22 @@ describe ProcessLocation do
     place.url.should eql(@opts[:url])
     place.category_list.sort.should eql(@opts[:tags].sort.map { |p| p.capitalize })
     place.phone_number.should eql(@opts[:phone_number])
-    puts count
+
   end
+
+  it 'should not duplicate an address' do
+    @process_location.save_to_database("test")
+
+    @opts[:name] = "New Gym"
+    @opts[:source_id] = 92840
+
+    process_location = ProcessLocation.new(@opts)
+
+    process_location.save_to_database("test")
+
+    Place.all.count.should eql(1)
+    place = Place.all.first
+    place.name.should eql("Gym")
+  end
+
 end
