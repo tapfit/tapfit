@@ -93,7 +93,7 @@ describe GoRecess do
     address = FactoryGirl.create(:valid_address_with_coordinates)
     place.address = address
     place.save
-    url = "/8451-move-your-hyde-power-yoga"
+    url = "/locations/8451-move-your-hyde-power-yoga"
     date = DateTime.now
     GoRecess.get_classes_for_location(url, place.id, date)
   end
