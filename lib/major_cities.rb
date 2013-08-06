@@ -31,12 +31,14 @@ class LatLon
 {'city': 'San Diego', 'dma_code': 825, 'latitude': 32.715329199999999, 'longitude': -117.1572551, 'region': 'CA', 'slug': 'san-diego-ca'},
 {'city': 'San Jose', 'dma_code': 807, 'latitude': 37.339385700000001, 'longitude': -121.89495549999999, 'region': 'CA', 'slug': 'san-jose-ca'},
 {'city': 'San Luis Obispo', 'dma_code': 855, 'latitude': 35.2827524, 'longitude': -120.6596156, 'region': 'CA', 'slug': 'san-luis-obispo-ca'},
+{'city': 'Oakland', 'dma_code': 855, 'latitude': 37.804364, 'longitude': -122.271114, 'region': 'CA', 'slug': 'oakland-ca'},
 {'city': 'El Centro', 'dma_code': 771, 'latitude': 32.792000000000002, 'longitude': -115.56305140000001, 'region': 'CA', 'slug': 'el-centro-ca'},
 {'city': 'Pueblo', 'dma_code': 752, 'latitude': 38.254447200000001, 'longitude': -104.6091409, 'region': 'CO', 'slug': 'pueblo-co'},
 {'city': 'Denver', 'dma_code': 751, 'latitude': 39.739153600000002, 'longitude': -104.9847034, 'region': 'CO', 'slug': 'denver-co'},
 {'city': 'Montrose', 'dma_code': 773, 'latitude': 38.478319800000001, 'longitude': -107.8761738, 'region': 'CO', 'slug': 'montrose-co'},
 {'city': 'Hartford', 'dma_code': 533, 'latitude': 41.763711100000002, 'longitude': -72.685093199999997, 'region': 'CT', 'slug': 'hartford-ct'},
 {'city': 'New Haven', 'dma_code': 533, 'latitude': 41.308152700000001, 'longitude': -72.9281577, 'region': 'CT', 'slug': 'new-haven-ct'},
+{'city': 'San Francisco', 'dma_code': 533, 'latitude': 37.77493, 'longitude': -122.419416, 'region': 'CA', 'slug': 'san-francisco-ca'},
 {'city': 'Washington DC ', 'dma_code': 511, 'latitude': 38.895111800000002, 'longitude': -77.036365799999999, 'region': 'MD', 'slug': 'washington-dc-md'},
 {'city': 'Hagerstown', 'dma_code': 511, 'latitude': 39.641762900000003, 'longitude': -77.719993200000005, 'region': 'MD', 'slug': 'hagerstown-md'},
 {'city': 'Naples', 'dma_code': 571, 'latitude': 26.142035799999999, 'longitude': -81.794810299999995, 'region': 'FL', 'slug': 'naples-fl'},
@@ -243,8 +245,6 @@ class LatLon
 {'city': 'Rhinelander', 'dma_code': 705, 'latitude': 45.636622799999998, 'longitude': -89.412075299999998, 'region': 'WI', 'slug': 'rhinelander-wi'},
 {'city': 'Oak Hill', 'dma_code': 559, 'latitude': 37.972333900000002, 'longitude': -81.148713499999999, 'region': 'WV', 'slug': 'oak-hill-wv'},
 {'city': 'Huntington', 'dma_code': 564, 'latitude': 38.419249600000001, 'longitude': -82.445154000000002, 'region': 'WV', 'slug': 'huntington-wv'},
-{'city': 'Weston', 'dma_code': 598, 'latitude': 39.038427400000003, 'longitude': -80.467313000000004, 'region': 'WV', 'slug': 'weston-wv'},
-{'city': 'Parkersburg', 'dma_code': 597, 'latitude': 39.266741799999998, 'longitude': -81.561513500000004, 'region': 'WV', 'slug': 'parkersburg-wv'},
 {'city': 'Steubenville', 'dma_code': 554, 'latitude': 40.369790500000001, 'longitude': -80.633963800000004, 'region': 'OH', 'slug': 'steubenville-oh'},
 {'city': 'Riverton', 'dma_code': 767, 'latitude': 43.024959199999998, 'longitude': -108.3801036, 'region': 'WY', 'slug': 'riverton-wy'}"
 
