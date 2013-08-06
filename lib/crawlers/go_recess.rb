@@ -210,7 +210,8 @@ class GoRecess < ResqueJob
       end
       
       process_location = ProcessLocation.new(opts)
-      return process_location.save_to_database(@source)
+      place_id = process_location.save_to_database(@source)
     end
+    return place_id
   end
 end
