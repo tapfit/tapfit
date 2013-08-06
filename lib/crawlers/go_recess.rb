@@ -16,7 +16,8 @@ class GoRecess < ResqueJob
 
   def self.perform(page, location, date)
 
-    if location == true
+    if !!location == location && location == true
+      puts "setting locations"
 =begin 
       @locations.each do |loc|
         Resque.enqueue(self, 1, loc, date)
@@ -24,6 +25,7 @@ class GoRecess < ResqueJob
 =end
       Resque.enqueue(self, 1, {:lat => 39.110874, :lon => -84.5157 }, date)
     elsif page == 1     
+      puts "About to get locations"
       if !location["lat"].nil?
         loc = {}
         loc[:lat] = location["lat"]
@@ -33,6 +35,7 @@ class GoRecess < ResqueJob
         GoRecess.get_locations(page, date, location)
       end
     else
+      puts "About to get classes for lcoations"
       GoRecess.get_classes_for_location(page, location, date)   
     end
     
@@ -89,7 +92,9 @@ class GoRecess < ResqueJob
 
       providers.each do |loc|
         place_id = self.get_location_info_and_save(loc)
+        puts "About to get classes for: #{loc["name"]}, place_id: #{place_id}"
         if !place_id.nil?
+          puts loc["url"]
           Resque.enqueue(GoRecess, loc["url"], place_id, date)
         end
       end
