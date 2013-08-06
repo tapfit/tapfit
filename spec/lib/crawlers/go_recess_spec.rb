@@ -62,7 +62,7 @@ describe GoRecess do
   end
 
   it 'should not raise an error' do
-    workout_id = GoRecess.save_classes_to_database(@parsed_json)
+    # workout_id = GoRecess.save_classes_to_database(@parsed_json)
     workout_id.length.should_not eql(0)
   end
 
@@ -82,9 +82,19 @@ describe GoRecess do
   end
 
   it 'should start location jobs' do
-    GoRecess.get_classes(2, DateTime.now + 2.days, {:lat => 39.103118, :lon => -84.51202} )
+    # GoRecess.get_classes(2, DateTime.now + 2.days, {:lat => 39.103118, :lon => -84.51202} )
     Workout.all.each do |workout|
       puts workout.attributes
     end
+  end
+
+  it 'should get class from a location url' do
+    place = FactoryGirl.create(:place)
+    address = FactoryGirl.create(:valid_address_with_coordinates)
+    place.address = address
+    place.save
+    url = "/8451-move-your-hyde-power-yoga"
+    date = DateTime.now
+    GoRecess.get_classes_for_location(url, place.id, date)
   end
 end
