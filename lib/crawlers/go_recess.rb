@@ -15,7 +15,9 @@ class GoRecess < ResqueJob
 =end
 
   def self.perform(page, location, date)
-     
+    
+    return
+
     if Date.today != Date.parse(date.to_s)
       return
     end
