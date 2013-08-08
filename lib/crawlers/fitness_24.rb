@@ -1,6 +1,7 @@
 require 'nokogiri'
+require './lib/resque_job'
 
-class Fitness24Hour
+class Fitness24Hour < ResqueJob
 
   @source = "24hourfitness"
 
