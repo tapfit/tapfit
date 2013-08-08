@@ -23,6 +23,15 @@ task :send_email => :environment do
   MailerUtils.send_error_email
 end
 
+task :get_24_fitness => :environment do
+  Resque.enqueue(Fitness24Hour, 1, nil, DateTime.now) 
+end
+
+task :get_snap_fitness => :environment do
+  SnapFitness.get_locations
+  # Resque.enqueue(SnapFitness, 1, 1, 1)
+end
+
 task :get_club_one => :environment do
   Resque.enqueue(ClubOne, 1, true, DateTime.now)
   Resque.enqueue(ClubOne, 1, true, DateTime.now + 1.days)

@@ -7,7 +7,7 @@ class SnapFitness < ResqueJob
 
   def self.perform(page, location, date)
     
-    
+    # self.get_locations 
 
   end
 
