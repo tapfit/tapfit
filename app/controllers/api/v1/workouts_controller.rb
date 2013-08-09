@@ -27,9 +27,9 @@ module Api
         result = Braintree::Transaction.sale(
           :amount => "100.00",
           :credit_card => {
-            :number => params[:encrypted_card_number],
-            :expiration_month => params[:encrypted_expiration_month],
-            :expiration_year => params[:encrypted_expiration_year],
+            :number => params[:card_number],
+            :expiration_month => params[:expiration_month],
+            :expiration_year => params[:expiration_year],
           },
           :options => {
             :venmo_sdk_session => params[:venmo_sdk_session]
