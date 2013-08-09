@@ -23,6 +23,7 @@ gem 'paperclip', "~> 3.0"
 gem 'aws-sdk'
 gem 'kaminari'
 gem 'timezone'
+gem 'braintree'
 
 # These gems for active admin
 gem 'responders',          github: 'plataformatec/responders'

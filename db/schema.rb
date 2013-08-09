@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130802170218) do
+ActiveRecord::Schema.define(version: 20130808235315) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -182,6 +182,7 @@ ActiveRecord::Schema.define(version: 20130802170218) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "type"
+    t.text     "braintree_customer_id"
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
@@ -202,6 +203,7 @@ ActiveRecord::Schema.define(version: 20130802170218) do
     t.float    "price"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "can_buy"
   end
 
   add_index "workouts", ["end_time"], name: "index_workouts_on_end_time", using: :btree

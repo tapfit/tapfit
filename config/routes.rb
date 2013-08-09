@@ -18,7 +18,9 @@ Tapfit::Application.routes.draw do
   ActiveAdmin.routes(self)
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
       resources :places do
-        resources :workouts
+        resources :workouts do
+          post 'buy', on: :member
+        end
         resources :ratings
         resources :photos
         member do
