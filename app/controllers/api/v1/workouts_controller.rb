@@ -24,8 +24,18 @@ module Api
       end
 
       def buy
-
-
+        result = Braintree::Transaction.sale(
+          :amount => "100.00",
+          :credit_card => {
+            :number => params[:encrypted_card_number],
+            :expiration_month => params[:encrypted_expiration_month],
+            :expiration_year => params[:encrypted_expiration_year],
+          },
+          :options => {
+            :venmo_sdk_session => params[:venmo_sdk_session]
+          }
+        )
+=begin
         result = Braintree::Transaction.sale(
           :amount => params[:amount],
           :credit_card => {
@@ -33,7 +43,7 @@ module Api
             :expiration_date => params[:exp_date]
           }
         )
-
+=end
         if result.success?
           render :json => response = {
             :success => true,
