@@ -30,6 +30,11 @@ Tapfit::Application.configure do
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   
   ENV["OPENREDIS_URL"] = "redis://127.0.0.1:6379/0"
+
+  ENV["BRAINTREE_ENV"] = "test"
+  ENV["BRAINTREE_MERCHANT_ID"] = "ych94qxscjgy583h"
+  ENV["BRAINTREE_PUBLIC_KEY"] = "y6md3zm5qz8cvb4g"
+  ENV["BRAINTREE_PRIVATE_KEY"] = "476ce644305022a93f05f8703481dd09"
   #ENV["REDISTOGO_URL"] = 'redis://redistogo:f94459718df1ee5942b0ab27f3cc753c@grouper.redistogo.com:9503/'
 
   config.paperclip_defaults = {

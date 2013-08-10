@@ -1,4 +1,8 @@
-Braintree::Configuration.environment = :sandbox
-Braintree::Configuration.merchant_id = "ych94qxscjgy583h"
-Braintree::Configuration.public_key = "y6md3zm5qz8cvb4g"
-Braintree::Configuration.private_key = "476ce644305022a93f05f8703481dd09"
+if ENV["BRAINTREE_ENV"] == "production"
+  Braintree::Configuration.environment = :production
+else
+  Braintree::Configuration.environment = :sandbox
+end
+Braintree::Configuration.merchant_id = ENV["BRAINTREE_MERCHANT_ID"]
+Braintree::Configuration.public_key = ENV["BRAINTREE_PUBLIC_KEY"]
+Braintree::Configuration.private_key = ENV["BRAINTREE_PRIVATE_KEY"]

@@ -7,10 +7,12 @@ FactoryGirl.define do
     end_time Time.now.utc + 2.hours
     instructor_id 1
     place_id 1
+    price 10.00
     source_description "MyText"
     workout_key "kdnekowkd"
     source "MyString"
     is_bookable false
+    can_buy true
 
     factory :old_workout do
       start_time Time.now - 5.days

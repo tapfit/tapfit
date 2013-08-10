@@ -28,6 +28,10 @@ Tapfit::Application.routes.draw do
           post 'checkin' 
         end    
       end
+
+      resources :payments do
+        post 'usecard', on: :collection
+      end
  
       def users_resources
         resources :favorites

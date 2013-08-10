@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130809180608) do
+ActiveRecord::Schema.define(version: 20130810215759) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -148,6 +148,24 @@ ActiveRecord::Schema.define(version: 20130809180608) do
   add_index "ratings", ["user_id"], name: "index_ratings_on_user_id", using: :btree
   add_index "ratings", ["workout_id"], name: "index_ratings_on_workout_id", using: :btree
   add_index "ratings", ["workout_key"], name: "index_ratings_on_workout_key", using: :btree
+
+  create_table "receipts", force: true do |t|
+    t.integer  "place_id"
+    t.integer  "user_id"
+    t.integer  "workout_id"
+    t.float    "price"
+    t.binary   "workout_key"
+    t.datetime "expiration_date"
+    t.boolean  "has_used",        default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "receipts", ["has_used"], name: "index_receipts_on_has_used", using: :btree
+  add_index "receipts", ["place_id"], name: "index_receipts_on_place_id", using: :btree
+  add_index "receipts", ["user_id"], name: "index_receipts_on_user_id", using: :btree
+  add_index "receipts", ["workout_id"], name: "index_receipts_on_workout_id", using: :btree
+  add_index "receipts", ["workout_key"], name: "index_receipts_on_workout_key", using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"

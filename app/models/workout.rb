@@ -5,7 +5,19 @@ class Workout < ActiveRecord::Base
   has_one :address, :through => :place
 
   def buy_workout(user)
-    
+    if self.can_buy
+          
+      receipt_params = 
+      {
+        :place_id => self.place_id,
+        :workout_id => self.id,
+        :user_id => user.id,
+        :workout_key => self.workout_key
+      }
+
+      receipt = Receipt.create(receipt_params)
+      return receipt
+    end   
   end
 
   def as_json(options={})

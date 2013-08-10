@@ -1,11 +1,7 @@
 class User < ActiveRecord::Base
 
-  FIELDS = [:first_name, :last_name, :phone, :website, :company, :fax, :addresses, :credit_cards, :custom_fields]
-  
   devise :database_authenticatable, :registerable, :token_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
-
-  attr_accessor *FIELDS
 
   has_many :favorite_places
   has_many :favorite_workouts
@@ -22,19 +18,4 @@ class User < ActiveRecord::Base
     !!braintree_customer_id
   end
 
-  def with_braintree_data!
-    return self unless has_payment_info?
-    braintree_data = Braintree::Customer.find(braintree_customer_id)
-
-    FIELDS.each do |field|
-      send(:"#{field}=", braintree_data.send(field))
-    end
-    self
-  end
-
-  def default_credit_card
-    return unless has_payment_info?
-
-    credit_cards.find { |cc| cc.default? }
-  end
 end

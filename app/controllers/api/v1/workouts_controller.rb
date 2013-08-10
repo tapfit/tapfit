@@ -4,7 +4,7 @@ module Api
   module V1
     class WorkoutsController < ApplicationController
      
-      # before_filter :authenticate_user!, :only => [ :buy ] 
+      before_filter :authenticate_user!, :only => [ :buy ] 
       respond_to :json
 
       def index
@@ -25,69 +25,40 @@ module Api
       end
 
       def buy
-        if !user_signed_in?
-          user = User.new(user_params)
-          if user.valid?
-            user.save
-            sign_in(:user, user)
-            user.ensure_authentication_token!
-          else
-            render :json => { :errors => user.errors }, :status => 420
-            return
-          end
+        
+        if !current_user.has_payment_info?
+          render :json => { :error => "User has no credit card saved" }, :status => 422
+          return
         end
 
-        if !current_user.has_payment_info?
-
-          if params[:venmo_sdk_session].nil?
-           
-            result = Braintree::Customer.create(
-              :credit_card => {
-                :number => params[:card_number],
-                :expiration_month => params[:expiration_month],
-                :expiration_year => params[:expiration_year]
-              }
-            )
-          else
-            result = Braintree::Customer.create(
-              :credit_card => {
-                :number => params[:card_number],
-                :expiration_month => params[:expiration_month],
-                :expiration_year => params[:expiration_year]
-              },
-              :options => {
-                :venmo_sdk_session => params[:venmo_sdk_session]
-              } 
-
-            )
-          end
-
-          if result.success?
-            current_user.braintree_customer_id = result.customer.id
-            current_user.save
-          else
-            render :json => { :errors => result.errors }, :status => 420
-            return
-          end
+        @workout = Workout.where(:id => params[:id]).first
+        if @workout.nil?
+          render :json => { :error => "Workout with id, #{params[:id]}, is nil" }, :status => 420
+          return
+        elsif !@workout.can_buy
+          render :json => { :error => "Can't buy workout with id, #{params[:id]}" }, :status => 420
+          return
         end
 
         result = Braintree::Transaction.sale(
-          :amount => "100.00",
+          :amount => @workout.price,
           :customer_id => current_user.braintree_customer_id,
           :venmo_sdk_payment_method_code => params[:venmo_sdk_payment_method_code]        
         )
 
         if result.success?
-          render :json => response = {
+          receipt = @workout.buy_workout(current_user)
+          render :json => {
             :success => true,
             :credit_card_number => result.transaction.credit_card_details.masked_number,
-            :credit_card_type => result.transaction.credit_card_details.card_type
-          }.to_json
+            :credit_card_type => result.transaction.credit_card_details.card_type,
+            :receipt => receipt
+          }
         else
-          render :json => response = {
+          render :json => {
             :success => false,
             :error_message => result.message
-          }.to_json
+          }, :status => 422
         end
       end
 

@@ -18,10 +18,23 @@ module Api
       # POST users/register    
       def register
         user = User.new(user_params)
+
         if user.valid?
           user.save
           sign_in(:user, user)
           user.ensure_authentication_token!
+          
+          result = Braintree::Customer.create(
+            :first_name => user.first_name,
+            :last_name => user.last_name,
+            :email => user.email
+          )
+          
+          if result.success?
+            user.braintree_customer_id = result.customer.id
+            user.save
+          end
+
           render :json => { :email => user.email, :id => user.id, :auth_token => user.authentication_token, :first_name => user.first_name, :last_name => user.last_name }
         else
           render :json => { :errors => user.errors }, :status => 420
