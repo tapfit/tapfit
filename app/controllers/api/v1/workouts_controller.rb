@@ -25,7 +25,7 @@ module Api
       end
 
       def buy
-        if !authenticate_user
+        if !user_signed_in?
           user = User.new(user_params)
           if user.valid?
             user.save
@@ -56,6 +56,7 @@ module Api
             render :json => { :errors => result.errors }, :status => 420
             return
           end
+        end
 
         result = Braintree::Transaction.sale(
           :amount => "100.00",
