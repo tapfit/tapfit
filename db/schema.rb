@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130808235315) do
+ActiveRecord::Schema.define(version: 20130809180608) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(version: 20130808235315) do
     t.integer  "icon_photo_id"
     t.integer  "cover_photo_id"
     t.string   "schedule_url"
+    t.boolean  "can_buy"
   end
 
   add_index "places", ["can_dropin"], name: "index_places_on_can_dropin", using: :btree

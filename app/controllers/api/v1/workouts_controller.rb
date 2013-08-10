@@ -3,7 +3,8 @@ require 'braintree'
 module Api
   module V1
     class WorkoutsController < ApplicationController
-      
+     
+      before_filter :authenticate_user!, :only => [ :buy ] 
       respond_to :json
 
       def index
@@ -24,26 +25,44 @@ module Api
       end
 
       def buy
+        if !authenticate_user
+          user = User.new(user_params)
+          if user.valid?
+            user.save
+            sign_in(:user, user)
+            user.ensure_authentication_token!
+          else
+            render :json => { :errors => user.errors }, :status => 420
+            return
+          end
+        end
+
+        if current_user.has_payment_info?
+
+          result = Braintree::Transaction.sale(
+            :credit_card => {
+              :number => params[:card_number],
+              :expiration_month => params[:expiration_month],
+              :expiration_year= => params[:expiration_year]
+            },
+            :options => {
+              :venmo_sdk_session => params
+            } 
+          )
+
+          if result.success?
+            current_user.braintree_customer_id = result.customer.id
+          else
+            render :json => { :errors => result.errors }, :status => 420
+            return
+          end
+
         result = Braintree::Transaction.sale(
           :amount => "100.00",
-          :credit_card => {
-            :number => params[:card_number],
-            :expiration_month => params[:expiration_month],
-            :expiration_year => params[:expiration_year],
-          },
-          :options => {
-            :venmo_sdk_session => params[:venmo_sdk_session]
-          }
+          :customer_id => current_user.id,
+          :venmo_sdk_payment_method_code => params[:venmo_sdk_payment_method_code]        
         )
-=begin
-        result = Braintree::Transaction.sale(
-          :amount => params[:amount],
-          :credit_card => {
-            :number => params[:cc_num],
-            :expiration_date => params[:exp_date]
-          }
-        )
-=end
+
         if result.success?
           render :json => response = {
             :success => true,
@@ -69,6 +88,13 @@ module Api
       def delete
 
       end
+
+      private
+
+      def user_params
+        params.require(:user).permit(:email, :password, :first_name, :last_name)
+      end
+
     end
   end
 end
