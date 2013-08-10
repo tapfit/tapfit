@@ -4,6 +4,10 @@ class Workout < ActiveRecord::Base
   belongs_to :place
   has_one :address, :through => :place
 
+  def buy_workout(user)
+    
+  end
+
   def as_json(options={})
     if !options[:place].nil?
       except_array ||= [ :instructor_id, :place_id, :source_description, :workout_key, :source, :price, :created_at, :updated_at ]

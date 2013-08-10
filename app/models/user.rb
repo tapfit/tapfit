@@ -1,9 +1,11 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
+
+  FIELDS = [:first_name, :last_name, :phone, :website, :company, :fax, :addresses, :credit_cards, :custom_fields]
+  
   devise :database_authenticatable, :registerable, :token_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  attr_accessor *FIELDS
 
   has_many :favorite_places
   has_many :favorite_workouts
@@ -15,4 +17,24 @@ class User < ActiveRecord::Base
   def write_review_for_place(params, place_id)
     return Rating.new(:rating => params[:rating].to_i, :review => params[:review], :place_id => place_id.to_i, :user_id => self.id)
   end 
+
+  def has_payment_info?
+    !!braintree_customer_id
+  end
+
+  def with_braintree_data!
+    return self unless has_payment_info?
+    braintree_data = Braintree::Customer.find(braintree_customer_id)
+
+    FIELDS.each do |field|
+      send(:"#{field}=", braintree_data.send(field))
+    end
+    self
+  end
+
+  def default_credit_card
+    return unless has_payment_info?
+
+    credit_cards.find { |cc| cc.default? }
+  end
 end
