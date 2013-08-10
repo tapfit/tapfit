@@ -32,4 +32,10 @@ describe Api::V1::WorkoutsController do
     end
   end
 
+  describe 'POST #buy' do
+    it 'should buy a pass for a user' do
+      
+    end
+  end
+
 end
