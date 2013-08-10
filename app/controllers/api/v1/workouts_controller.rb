@@ -37,21 +37,34 @@ module Api
           end
         end
 
-        if current_user.has_payment_info?
+        if !current_user.has_payment_info?
 
-          result = Braintree::Transaction.sale(
-            :credit_card => {
-              :number => params[:card_number],
-              :expiration_month => params[:expiration_month],
-              :expiration_year= => params[:expiration_year]
-            },
-            :options => {
-              :venmo_sdk_session => params
-            } 
-          )
+          if params[:venmo_sdk_session].nil?
+           
+            result = Braintree::Customer.create(
+              :credit_card => {
+                :number => params[:card_number],
+                :expiration_month => params[:expiration_month],
+                :expiration_year => params[:expiration_year]
+              }
+            )
+          else
+            result = Braintree::Customer.create(
+              :credit_card => {
+                :number => params[:card_number],
+                :expiration_month => params[:expiration_month],
+                :expiration_year => params[:expiration_year]
+              },
+              :options => {
+                :venmo_sdk_session => params[:venmo_sdk_session]
+              } 
+
+            )
+          end
 
           if result.success?
             current_user.braintree_customer_id = result.customer.id
+            current_user.save
           else
             render :json => { :errors => result.errors }, :status => 420
             return
@@ -60,7 +73,7 @@ module Api
 
         result = Braintree::Transaction.sale(
           :amount => "100.00",
-          :customer_id => current_user.id,
+          :customer_id => current_user.braintree_customer_id,
           :venmo_sdk_payment_method_code => params[:venmo_sdk_payment_method_code]        
         )
 
