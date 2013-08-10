@@ -17,15 +17,14 @@ body {
 
 .photo-1 {background: url(/assets/photo-bg-1.jpg) no-repeat center top;}
 .photo-2 {background: url(/assets/photo-bg-2.jpg) no-repeat center top;}
-.photo-3 {background: url(/assets/photo-bg-3.jpg) no-repeat center top;}
+.photo-3 {background: url(/assets/photo-bg-3.jpg) no-repeat center top #111111;}
 .photo-4 {background: url(/assets/photo-bg-4.jpg) no-repeat center top;}
 
 .banner {
-	height: 550px;
+	height: 740px;
 	width: 960px;
 	margin: 0 auto;
 	position: relative;
-	border-bottom: 1px solid #f5f5f5;
 }
 
 .clear {
@@ -34,11 +33,25 @@ body {
 
 #mc_embed_signup {
         background: none;
-        width: 700px;
+        width: 600px;
         clear: left;
         font: 15px Helvetica,Arial,sans-serif;
         position: absolute;
         margin: 380px 0 0 0;
+}
+
+#mc_embed_signup input.email {
+        height: 36px;
+        font-size: 20px;
+        width: 500px !important;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+}
+
+#mc_embed_signup .button {
+        background-color: #3e4a5d !important;
+        height: 44px !important;
 }
 
 .banner #banner-logo {
@@ -54,6 +67,9 @@ body {
 	position: absolute;
 	top: 0px; left: 0;
 	padding-left: 10px;
+        width: 247px;
+        height: 76px;
+        background: url(/assets/logo.png) no-repeat center top;
 }
 
 .banner h1 {
@@ -219,9 +235,10 @@ ul.steps li.step-3 {
 }
 
 .footer .logo {
-	width: 60px;
+	width: 120px;
 	height: 45px;
 	background: url(/assets/logo.png) no-repeat;
+        background-size: 120px;
 	text-indent: -4999px;
 	float: left;
 	margin: 30px 0 20px 10px;
@@ -229,8 +246,8 @@ ul.steps li.step-3 {
 
 .footer .tagline {
 	float: left;
-	margin: 45px 0 0 20px;
-	color: #858585;
+	margin: 40px 0 0 20px;
+	color: #aaaaaa;
 	font-size: 16px;
 	font-weight: lighter;
 	letter-spacing: 1px;
@@ -238,9 +255,9 @@ ul.steps li.step-3 {
 
 .copyright {
 	clear: both;
-	border-top: 1px solid #eee;
+	border-top: 1px solid #333;
 	padding: 20px 0 40px 10px;
-	color: #858585;
+	color: #aaaaaa;
 	font-size: 12px;
 	font-weight: lighter;
 	letter-spacing: 1px;
@@ -282,12 +299,35 @@ ul.steps li.step-3 {
                 position: static;
                 text-align: center;
                 padding-left: 0;
-                margin: 30px 5% 0 5%;
+                margin: 20px 5% 0 5%;
                 line-height: 1;
         }
 
+        #mc_embed_signup input.email {
+                height: 36px;
+                font-size: 14px;
+                width: 100% !important;
+                -moz-border-radius: 5px;
+                -webkit-border-radius: 5px;
+                border-radius: 5px;
+        }
+
+        #mc_embed_signup .button {
+                background-color: #3e4a5d !important;
+                height: 44px !important;
+                width: 100% !important;
+        }
+
         .banner #banner-logo {
-                display: none;
+		width: 90%;
+		font-size: 50px;
+		color: #fff;
+		line-height: 1;
+		text-shadow: none;
+		margin: 40px 5% 0 5%;
+		text-align: center;
+		position: static;
+		padding-left: 0;
         }
 	
 	.banner h2 {
