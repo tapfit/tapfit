@@ -2,7 +2,7 @@ module Api
   module V1
     class CheckinsController < ApplicationController
       
-      before_filter :authenticate_user!
+      before_filter :check_non_guest
       respond_to :json
 
       def index

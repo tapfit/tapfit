@@ -6,6 +6,40 @@ describe Api::V1::UsersController do
     @user = FactoryGirl.build(:user)
   end
 
+  describe "POST #guest" do
+    
+    it 'saves a guest' do
+      post :guest
+      response.body.should include("guest")
+      user = User.where(:is_guest => true).first
+      puts user.email
+    end
+
+    it 'updates a user from guest to user' do
+
+      attr = 
+      {
+        :email => @user.email,
+        :password => @user.password,
+        :first_name => @user.first_name,
+        :last_name => @user.last_name
+      }
+      post :register, user: attr
+
+
+      post :guest
+      response.body.should include("guest")
+      user = User.where(:is_guest => true).first
+      attr[:email] = "ben@example.com"
+      post :register, user: attr, auth_token: user.authentication_token
+      User.where(:is_guest => true).count.should eql(0)
+      User.all.last.id.should eql(user.id)
+      user = User.all.first
+      user.has_payment_info?.should be_true
+    end
+
+  end
+
   describe "POST #register" do
     
     it 'fails to load user if no email/password' do

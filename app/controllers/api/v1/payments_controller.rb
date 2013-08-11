@@ -48,7 +48,7 @@ module Api
       private
 
       def check_braintree
-        authenticate_user!
+        check_non_guest
         if !current_user.has_payment_info?
           result = Braintree::Customer.create(
             :first_name => current_user.first_name,

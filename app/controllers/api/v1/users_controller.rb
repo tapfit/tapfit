@@ -17,7 +17,19 @@ module Api
       # Registers a new user
       # POST users/register    
       def register
-        user = User.new(user_params)
+        puts current_user
+        if user_signed_in?
+          puts current_user
+          user = User.where(:email => user_params[:email]).first
+          if !user.nil?
+            render :json => { :error => "Email, #{user_params[:email]} already exists" } and return
+          end
+          current_user.update_attributes(user_params)
+          current_user.update_attributes(:is_guest => false)
+          user = current_user
+        else
+          user = User.new(user_params)
+        end
 
         if user.valid?
           user.save
@@ -54,6 +66,26 @@ module Api
         else
           render :json => { :errors => "Not valid email or password" }, :status => 403
         end   
+      end
+
+      # Register guest
+      # POST users/guest
+      def guest
+        temp_email = "guest_#{Time.now.to_i}#{rand(99)}@example.com"
+        user = User.new(:email => temp_email, :password => "12345678")
+
+        user.is_guest = true
+
+        if user.valid?
+          user.save
+          sign_in(:user, user)
+          user.ensure_authentication_token!
+
+          render :json => { :guest => true, :email => user.email, :id => user.id, :auth_token => user.authentication_token }
+        else
+          render :json => { :errors => user.errors }, :status => 420
+        end
+
       end
 
       # Logouts a user out

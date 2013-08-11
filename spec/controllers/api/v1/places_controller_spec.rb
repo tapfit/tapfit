@@ -55,6 +55,13 @@ describe Api::V1::PlacesController do
       post :favorite, id: @place.id
       response.body.should include("redirected")
     end
+
+    it 'should not allow a guest user to access' do
+      @user.is_guest = true
+      @user.save
+      post :favorite, id: @place.id, auth_token: @user.authentication_token
+      response.body.should include("register")
+    end
   end
 
   describe 'POST #checkin' do

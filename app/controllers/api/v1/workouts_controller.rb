@@ -4,7 +4,7 @@ module Api
   module V1
     class WorkoutsController < ApplicationController
      
-      before_filter :authenticate_user!, :only => [ :buy ] 
+      before_filter :check_non_guest, :only => [ :buy ] 
       respond_to :json
 
       def index

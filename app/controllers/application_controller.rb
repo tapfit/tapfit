@@ -3,6 +3,13 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :null_session
 
+  def check_non_guest
+    authenticate_user!
+    if current_user.is_guest
+      render :json => { :error => "User needs to register" } and return
+    end
+  end
+
   def check_place(place_id)
     @place = Place.where(:id => place_id).first
     if @place.nil?

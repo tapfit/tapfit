@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130810215759) do
+ActiveRecord::Schema.define(version: 20130811191343) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -185,8 +185,8 @@ ActiveRecord::Schema.define(version: 20130810215759) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -202,10 +202,12 @@ ActiveRecord::Schema.define(version: 20130810215759) do
     t.datetime "updated_at"
     t.string   "type"
     t.text     "braintree_customer_id"
+    t.boolean  "is_guest",               default: false
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["is_guest"], name: "index_users_on_is_guest", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["type"], name: "index_users_on_type", using: :btree
 

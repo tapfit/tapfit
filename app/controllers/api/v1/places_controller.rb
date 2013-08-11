@@ -2,7 +2,7 @@ module Api
   module V1
     class PlacesController < ApplicationController
       
-      before_filter :authenticate_user!, :only => [ :favorite, :checkin ]
+      before_filter :check_non_guest, :only => [ :favorite, :checkin ]
       respond_to :json
 
       # GET places/

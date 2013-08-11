@@ -44,6 +44,7 @@ Tapfit::Application.routes.draw do
           post 'register'
           post 'logout'
           post 'forgotpassword'
+          post 'guest'
         end
       end  
 

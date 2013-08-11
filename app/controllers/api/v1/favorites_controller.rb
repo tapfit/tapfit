@@ -3,7 +3,7 @@ module Api
     class FavoritesController < ApplicationController
       
       respond_to :json
-      before_filter :authenticate_user!
+      before_filter :check_non_guest
 
       def index
         @places = current_user.place_favorites
