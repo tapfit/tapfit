@@ -15,6 +15,7 @@ describe Api::V1::PaymentsController do
       
       @attr = 
       {
+        :user_id => "me",
         :credit_card => 4111111111111111,
         :expiration_month => 4,
         :expiration_year => 16,
@@ -52,6 +53,7 @@ describe Api::V1::PaymentsController do
     it 'should use credit card for a user' do
       @attr = 
       {
+        :user_id => "me",
         :auth_token => @user.authentication_token,
         :venmo_sdk_payment_method_code =>  
           Braintree::Test::VenmoSDK.generate_test_payment_method_code("4111111111111111")
