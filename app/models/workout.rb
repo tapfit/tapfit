@@ -16,6 +16,9 @@ class Workout < ActiveRecord::Base
       }
 
       receipt = Receipt.create(receipt_params)
+
+      BuyNotificationMailer.send_buy_email(receipt).deliver 
+
       return receipt
     end   
   end

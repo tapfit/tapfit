@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1> 
+      Hey!, <%= @receipt.user.first_name %> has just booked a class! 
+    </h1>
+    <p>
+    Place: <%= @receipt.place.name %>, Number: <%= @receipt.place.phone_number %>, ID: <% @receipt.place.id %>  <br/>
+    </p>
+    <p>
+      To login to the site, just follow this link.
+    </p>
+    <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>
