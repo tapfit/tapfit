@@ -13,7 +13,8 @@ class Workout < ActiveRecord::Base
         :workout_id => self.id,
         :user_id => user.id,
         :workout_key => self.workout_key,
-        :has_booked => false 
+        :has_booked => false,
+        :price => self.price 
       }
 
       receipt = Receipt.create(receipt_params)

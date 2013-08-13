@@ -5,6 +5,14 @@ ActiveAdmin.register Receipt do
       i.place.name
     end
 
+    column "Workout Name" do |i|
+      i.workout.name
+    end
+
+    column "Workout start time" do |i|
+      i.workout.start_time
+    end
+
     column "Schedule Url" do |i|
       i.place.schedule_url
     end

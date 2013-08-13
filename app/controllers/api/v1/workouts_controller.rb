@@ -27,38 +27,37 @@ module Api
       def buy
         
         if !current_user.has_payment_info?
-          render :json => { :error => "User has no credit card saved" }, :status => 422
-          return
+          render :json => { :error => "User has no credit card saved" }, :status => 422 and return
         end
 
         @workout = Workout.where(:id => params[:id]).first
+        puts "can_buy: #{@workout.can_buy}"
         if @workout.nil?
-          render :json => { :error => "Workout with id, #{params[:id]}, is nil" }, :status => 420
-          return
-        elsif !@workout.can_buy
-          render :json => { :error => "Can't buy workout with id, #{params[:id]}" }, :status => 420
-          return
-        end
-
-        result = Braintree::Transaction.sale(
-          :amount => @workout.price,
-          :customer_id => current_user.braintree_customer_id,
-          :venmo_sdk_payment_method_code => params[:venmo_sdk_payment_method_code]        
-        )
-
-        if result.success?
-          receipt = @workout.buy_workout(current_user)
-          render :json => {
-            :success => true,
-            :credit_card_number => result.transaction.credit_card_details.masked_number,
-            :credit_card_type => result.transaction.credit_card_details.card_type,
-            :receipt => receipt
-          }
+          render :json => { :error => "Workout with id, #{params[:id]}, is nil" }, :status => 422
+        elsif @workout.can_buy.nil? || !@workout.can_buy
+          render :json => { :error => "Can't buy workout with id, #{params[:id]}" }, :status => 422
         else
-          render :json => {
-            :success => false,
-            :error_message => result.message
-          }, :status => 422
+
+          result = Braintree::Transaction.sale(
+            :amount => @workout.price,
+            :customer_id => current_user.braintree_customer_id,
+            :venmo_sdk_payment_method_code => params[:venmo_sdk_payment_method_code]        
+          )
+
+          if result.success?
+            receipt = @workout.buy_workout(current_user)
+            render :json => {
+              :success => true,
+              :credit_card_number => result.transaction.credit_card_details.masked_number,
+              :credit_card_type => result.transaction.credit_card_details.card_type,
+              :receipt => receipt
+            }
+          else
+            render :json => {
+              :success => false,
+              :error_message => result.message
+            }, :status => 422
+          end
         end
       end
 
