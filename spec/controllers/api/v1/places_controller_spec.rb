@@ -16,6 +16,13 @@ describe Api::V1::PlacesController do
       assigns(:places).to_a.should eql([@place])
       #response.body.should eql("")
     end
+
+    it 'returns only places you can buy' do
+      @place.can_buy = false
+      @place.save
+      get :index
+      assigns(:places).to_a.should eql([]) 
+    end
   end
 
   describe 'GET #show' do

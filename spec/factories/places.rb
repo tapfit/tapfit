@@ -13,6 +13,7 @@ FactoryGirl.define do
     is_public true
     can_dropin false
     dropin_price 1.5
+    can_buy true
     after(:create) {|instance| address_id = FactoryGirl.create(:valid_address_with_coordinates).id}
   end
 end
