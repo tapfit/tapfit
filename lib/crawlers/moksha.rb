@@ -74,7 +74,7 @@ class Moksha < ResqueJob
           puts el.next_element.text
           opts[:dropin_price] = el.next_element.text
         end
-        address = { :line1 => gym["address"], :city => gym["city"], :state => gym["province"], :zip => gym["postal"], :latitude => gym["lat"], :longitude => gym["lng"] }
+        address = { :line1 => gym["address"], :city => gym["city"], :state => gym["province"], :zip => gym["postal"], :lat => gym["lat"], :lon => gym["lng"] }
 
         opts[:name] = gym["name"]
         opts[:address] = address

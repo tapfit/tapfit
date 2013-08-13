@@ -149,6 +149,7 @@ GEM
     mono_logger (1.1.0)
     multi_json (1.7.8)
     newrelic_rpm (3.6.6.147)
+    nexmo (1.1.0)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
     orm_adapter (0.4.0)
@@ -275,6 +276,7 @@ DEPENDENCIES
   jquery-rails (>= 3.0.0)
   kaminari
   newrelic_rpm
+  nexmo
   nokogiri
   paperclip (~> 3.0)
   pg

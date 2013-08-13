@@ -6,7 +6,7 @@ describe Moksha do
   
     Rails.logger = Logger.new(STDOUT)
     
-    #Moksha.get_locations
+    Moksha.get_locations
 
     Place.where(:source => "moksha").each do |place|
       # Rails.logger.debug place.attributes

@@ -187,7 +187,9 @@ class ProcessBase
       return false
     end
     if @address[:line1].nil? || @address[:city].nil? || @address[:state].nil? || @address[:zip].nil?
-      return false
+      if @address[:lat].nil? || @address[:lon].nil?
+        return false
+      end
     end
     address_string = @address[:line1] + @address[:city] + @address[:state] + @address[:zip]
     if @address[:lat].nil? || @address[:lon].nil?

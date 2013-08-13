@@ -50,6 +50,13 @@ ActiveAdmin.register Receipt do
   end 
   
   controller do
+
+    def update
+      update! do |format|
+        format.html { redirect_to admin_receipts_path }
+      end
+    end
+
     def permitted_params
       params.permit!
     end

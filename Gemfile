@@ -24,6 +24,7 @@ gem 'aws-sdk'
 gem 'kaminari'
 gem 'timezone'
 gem 'braintree'
+gem 'nexmo'
 
 # These gems for active admin
 gem 'responders',          github: 'plataformatec/responders'
