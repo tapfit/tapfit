@@ -8,6 +8,7 @@ class BuyNotificationMailer < ActionMailer::Base
   def send_buy_email(receipt)
     puts "place: #{receipt.place}"
     @receipt = receipt
+    @url = admin_receipts_url
     mail(to: 'zack@tapfit.co', subject: 'New Class Purchased!')
   end 
 end

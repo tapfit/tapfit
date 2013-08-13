@@ -6,7 +6,7 @@ ActiveAdmin.register Place do
     column :url
     column :source
     column :dropin_price
-    column :is_public
+    column :can_buy
     column :icon_photo
     column :cover_photo
     column "City" do |i|
@@ -37,6 +37,7 @@ ActiveAdmin.register Place do
       f.input :source_description
       f.input :source
       f.input :dropin_price
+      f.input :can_buy
     end
     f.actions
   end

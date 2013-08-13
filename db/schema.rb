@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130811191343) do
+ActiveRecord::Schema.define(version: 20130813123622) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -159,6 +159,7 @@ ActiveRecord::Schema.define(version: 20130811191343) do
     t.boolean  "has_used",        default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "has_booked"
   end
 
   add_index "receipts", ["has_used"], name: "index_receipts_on_has_used", using: :btree
