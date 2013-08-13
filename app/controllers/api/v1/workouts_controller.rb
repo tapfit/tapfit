@@ -31,7 +31,7 @@ module Api
         end
 
         @workout = Workout.where(:id => params[:id]).first
-        puts "can_buy: #{@workout.can_buy}"
+        # puts "can_buy: #{@workout.can_buy}"
         if @workout.nil?
           render :json => { :error => "Workout with id, #{params[:id]}, is nil" }, :status => 422
         elsif @workout.can_buy.nil? || !@workout.can_buy
