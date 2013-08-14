@@ -43,7 +43,7 @@ describe Place do
     workout2.start_time = workout2.start_time.advance(:hours => 1)
     @place.workouts << workout2
     @place.save
-    @place.class_times.should eql("11a 12p")
+    @place.class_times.should eql("11:00a 12:00p")
   end
 
   it 'should update tags to what we want' do

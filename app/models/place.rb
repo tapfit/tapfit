@@ -94,13 +94,7 @@ class Place < ActiveRecord::Base
     workouts = self.workouts.where("start_time BETWEEN ? AND ?", now, end_of_day).order("start_time ASC")
     
     next_class_string = ""
-    workouts.each do |workout|
-      if workout.start_time.min > 0
-        next_class_string += "#{workout.start_time.strftime("%l:%M%P").chomp('m')} "
-      else
-        next_class_string += "#{workout.start_time.strftime("%l%P").chomp('m')} "
-      end
-    end
+    workouts.each { |workout| next_class_string += "#{workout.start_time.strftime("%l:%M%P").chomp('m')} " }
     Time.zone = "UTC"
     return next_class_string.strip
   end
