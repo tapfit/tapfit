@@ -73,11 +73,11 @@ class Place < ActiveRecord::Base
     if !options[:list].nil?
       except_array ||= [ :url, :icon_photo_id, :cover_photo_id, :source, :source_key, :tapfit_description, :source_description, :is_public, :can_dropin, :dropin_price, :created_at, :updated_at, :address_id ]
       options[:include] ||= [ :address, :categories ]
-      options[:methods] ||= [ :next_class, :cover_photo, :icon_photo ]
+      options[:methods] ||= [ :class_times, :cover_photo, :icon_photo ]
     elsif !options[:detail].nil?    
       except_array ||= [ :icon_photo_id, :cover_photo_id, :source, :source_key, :tapfit_description, :source_description, :is_public, :created_at, :updated_at, :address_id ]
       options[:include] ||= [ :address, :categories ]
-      options[:methods] ||= [ :next_class, :cover_photo, :icon_photo, :reviews, :avg_rating ]
+      options[:methods] ||= [ :class_times, :cover_photo, :icon_photo, :reviews, :avg_rating ]
     end
 
     options[:except] ||= except_array
@@ -85,13 +85,24 @@ class Place < ActiveRecord::Base
 
   end
 
-  def next_class
-    workout = self.todays_workouts.where("start_time >= ?", Time.now).order("start_time DESC")
-    if workout.nil?
-      return nil
-    else
-      workout.first.as_json(:place => true)
+  def class_times    
+    
+    Time.zone = self.address.timezone
+    now = Time.now
+    end_of_day = Time.now.beginning_of_day + 24.hours
+
+    workouts = self.workouts.where("start_time BETWEEN ? AND ?", now, end_of_day).order("start_time ASC")
+    
+    next_class_string = ""
+    workouts.each do |workout|
+      if workout.start_time.min > 0
+        next_class_string += "#{workout.start_time.strftime("%l:%M%P").chomp('m')} "
+      else
+        next_class_string += "#{workout.start_time.strftime("%l%P").chomp('m')} "
+      end
     end
+    Time.zone = "UTC"
+    return next_class_string.strip
   end
 
   def avg_rating

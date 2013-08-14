@@ -36,12 +36,14 @@ describe Place do
     places.to_a.should eql([@place])
   end
 
-  it 'should return next class' do
+  it 'should return class times' do
     workout = FactoryGirl.create(:workout)
     @place.workouts << workout
-    puts workout.attributes
+    workout2 = FactoryGirl.create(:workout)
+    workout2.start_time = workout2.start_time.advance(:hours => 1)
+    @place.workouts << workout2
     @place.save
-    @place.next_class[:id].should eql(workout.as_json(:place => true)[:id])
+    @place.class_times.should eql("11a 12p")
   end
 
   it 'should update tags to what we want' do
