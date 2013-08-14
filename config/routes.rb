@@ -15,7 +15,7 @@ Tapfit::Application.routes.draw do
   namespace :api, defaults: {format: 'json'} do
 
     devise_for :users
-  ActiveAdmin.routes(self)
+    ActiveAdmin.routes(self)
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
       resources :places do
         resources :workouts do
@@ -32,6 +32,7 @@ Tapfit::Application.routes.draw do
       def users_resources
         resources :favorites
         resources :checkins
+        resources :receipts
         resources :payments do
           post 'usecard', on: :collection
         end
@@ -48,13 +49,13 @@ Tapfit::Application.routes.draw do
         end
       end  
 
+
       scope '/:user_id', :constraints => { :user_id => 'me' },
-                         :defaults => { :format => 'json' }, :as => 'me' do
+                       :defaults => { :format => 'json' }, :as => 'me' do
         users_resources
       end
       
-      get 'me', to: 'users#show'
-
+      get 'me', to: 'users#show' 
 
     end
   end

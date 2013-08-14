@@ -18,4 +18,14 @@ class User < ActiveRecord::Base
     !!braintree_customer_id
   end
 
+  def timeout_in
+    
+    if user.instance_of?(AdminUser)
+      1.year
+    else
+      0.seconds
+    end
+
+  end
+
 end

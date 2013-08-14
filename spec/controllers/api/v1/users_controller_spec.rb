@@ -103,4 +103,35 @@ describe Api::V1::UsersController do
     end
   end
 
+  describe "GET #show" do
+    
+    before(:each) do
+      @user2 = FactoryGirl.build(:user)
+      @user2.email = "new@email.com"
+      @user2.save
+      @user.save
+
+      @user2.ensure_authentication_token!
+      @user.ensure_authentication_token!
+    end
+
+    it 'should show me as user with auth token' do
+      get :show, auth_token: @user.authentication_token
+      response.body.should include(@user.email.to_s)
+    end
+
+    it 'should not show anything without auth token' do
+      get :show
+      response.body.should include("redirected")
+    end
+
+    it 'should not cache users' do
+      get :show, auth_token: @user.authentication_token
+      sleep(5)
+      get :show, auth_token: @user2.authentication_token
+      response.body.should include(@user2.email.to_s)
+    end
+
+  end
+
 end

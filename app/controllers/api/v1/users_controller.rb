@@ -1,15 +1,16 @@
 module Api
   module V1
     class UsersController < ApplicationController     
-
+      # before_filter :authenticate_user!
       before_filter :authenticate_user!, :only => [ :show ]
       skip_before_filter :verify_authenticity_token, :only => [:login, :register, :forgotpassword]
 
-      respond_to :json
+      respond_to :json 
 
       # Profile info
       # GET users/<id> (GET me/ routes to users/<current_user.id>)
       def show
+        puts "auth token: #{current_user.authentication_token}"
         user = user_from_user_id
         render :json => user.as_json
       end
@@ -117,9 +118,11 @@ module Api
       end
 
       def user_from_user_id
+        puts "params: #{params[:id]}"
         if params[:id].nil? && current_user
           user = current_user
         else
+          puts "finding current user"
           user = User.where(:id => params[:id]).first
         end
 
