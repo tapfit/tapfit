@@ -28,13 +28,16 @@ module Mindbody
     content.search("tr").each do |row|
       # puts "row: #{row.text}, scrape_classes: #{scrape_classes}"
       if (row["class"] == "oddRow" || row["class"] == "evenRow") && scrape_classes
-       
+        
+        puts "row: #{row.text}"
+
         opts = {}
          
         tds = row.search("td")
 
         starts = Time.parse(tds[0].text)
 
+        puts "starts: #{starts}"
         # Need to parse DateTime because in resque, they convert all types to string
 
         opts[:start_time] = DateTime.parse(date.to_s).beginning_of_day.advance(:hours => starts.strftime("%H").to_i, :minutes => starts.strftime("%M").to_i)

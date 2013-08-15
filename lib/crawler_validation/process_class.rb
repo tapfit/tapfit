@@ -17,6 +17,7 @@ class ProcessClass < ProcessBase
       @end_time = opts[:end_time]
       @price = opts[:price]
       @instructor = opts[:instructor]
+      @can_buy = opts[:can_buy]
     end
   end
 
@@ -33,6 +34,12 @@ class ProcessClass < ProcessBase
         instructor = Instructor.create(:first_name => first_name, :last_name => last_name) if instructor.nil?
       end
       
+      if place.can_buy == true
+        @can_buy = true
+      else
+        @can_buy = false
+      end
+
       workout_key = WorkoutKey.get_workout_key(@place_id, @name)
 
       starts = self.change_date_to_utc(@start_time, place.address.timezone)
@@ -43,7 +50,7 @@ class ProcessClass < ProcessBase
         puts "Workout already exists"
         return
       end
-      workout = Workout.new(:name => @name, :place_id => @place_id, :source_description => @source_description, :start_time => starts.utc, :end_time => ends.utc, :price => @price, :instructor_id => instructor.id, :source => @source, :workout_key => workout_key)
+      workout = Workout.new(:name => @name, :place_id => @place_id, :source_description => @source_description, :start_time => starts.utc, :end_time => ends.utc, :price => @price, :instructor_id => instructor.id, :source => @source, :workout_key => workout_key, :is_bookable => @is_bookable)
 
       if !workout.valid?
         puts "errors: #{workout.errors}"

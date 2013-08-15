@@ -32,4 +32,14 @@ module Crawler
     return address  
   end
 
+  def self.update_classes
+    Place.all.each do |place|
+      if place.can_buy == true
+        place.workouts.update_all(:can_buy => true)
+      else
+        place.workouts.update_all(:can_buy => false)
+      end
+    end
+  end
+
 end
