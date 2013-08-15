@@ -7,7 +7,7 @@ describe Healcode do
     address = FactoryGirl.create(:valid_address_with_coordinates)
     place.address = address
     place.save
-    url = "http://www.yogawithpooja.com/schedule/"
+    url = "http://cincinnati.mokshayoga.ca/classes/schedule/"
     Healcode.get_classes(url, place.id, DateTime.now, "test")
   end
 

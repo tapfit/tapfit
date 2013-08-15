@@ -14,12 +14,12 @@ class CrawlCincyLocal < ResqueJob
       place = Place.find(place_id)
       date = DateTime.parse(date.to_s)
       if place.crawler_source == CrawlerSource::Mindbody
-        Mindbody.get_classes(place.url, place.id, date, place.source) 
+        Mindbody.get_classes(place.schedule_url, place.id, date, place.source) 
       elsif place.crawler_source == CrawlerSource::Healcode
-        Healcode.get_classes(place.url, place.id, date, place.source)
+        Healcode.get_classes(place.schedule_url, place.id, date, place.source)
       elsif place.crawler_source == CrawlerSource::GoRecess
         if place.workouts.where("start_time > ?", DateTime.now + 2.days).count < 1
-          GoRecess.get_classes(place.url, place.id, date)
+          GoRecess.get_classes(place.schedule_url, place.id, date)
         end
       end
     end
