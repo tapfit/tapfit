@@ -52,6 +52,11 @@ module Mindbody
         
         if !place.nil? && !place.dropin_price.nil?
           opts[:price] = place.dropin_price
+        else
+          old_workout = place.workouts.where(:workout_key => WorkoutKey.get_workout_key(place.id, opts[:name])).order("start_time DESC").first
+          if !old_workout.nil?
+            opts[:price] = old_workout.price
+          end
         end
 
         opts[:tags] = [ Category::PilatesBarre ]

@@ -56,7 +56,7 @@ class GoRecess < ResqueJob
       'X-Requested-With' => 'XMLHttpRequest'
     }
 
-    call_url = "https://www.gorecess.com#{url}/schedule"
+    call_url = "#{url}/schedule"
     headers = { 'X-Requested-With' => 'XMLHttpRequest' }
     puts params
     puts call_url 

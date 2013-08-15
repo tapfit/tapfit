@@ -14,35 +14,8 @@ task :start_crawl_jobs => :environment do
   puts "Ending crawl process"
 end
 
-task :backup_db => :environment do
-  HerokuBackupTask.execute
-  HerokuCloudBackup.execute
-end
-
 task :send_email => :environment do
   MailerUtils.send_error_email
-end
-
-task :get_24_fitness => :environment do
-  Resque.enqueue(Fitness24Hour, 1, nil, DateTime.now) 
-end
-
-task :get_snap_fitness => :environment do
-  SnapFitness.get_locations
-  # Resque.enqueue(SnapFitness, 1, 1, 1)
-end
-
-task :get_club_one => :environment do
-  Resque.enqueue(ClubOne, 1, true, DateTime.now)
-  Resque.enqueue(ClubOne, 1, true, DateTime.now + 1.days)
-end
-
-task :run_go_recess_cin => :environment do
-  GoRecess.get_classes(1, DateTime.now + 1.days, {:lat => 39.103118, :lon => -84.51202} )
-end
-
-task :run_go_recess_oak => :environment do
-  GoRecess.get_classes(1, DateTime.now + 1.days, {:lat => 37.804364, :lon => -122.271114} )
 end
 
 task :rerun_crawl_jobs => :environment do
@@ -61,95 +34,7 @@ task :rerun_crawl_jobs => :environment do
 
 end
 
-task :update_addresses => :environment do
-  Address.where(:timezone => nil).each do |address|
-    puts "Adding timezone to address: #{address.address}"  
-    address.get_lat_lon
-      address.save
-  end
-end
-
-task :get_pure_barre => :environment do
-  Resque.enqueue(PureBarre, 1, true, DateTime.now)
-end
-
-task :get_core_power => :environment do
-  Resque.enqueue(CorePower, 1, true, DateTime.now)
-  Resque.enqueue(CorePower, 1, true, DateTime.now + 1.days)
-end
-
-task :get_anytime_fitness => :environment do
-  Resque.enqueue(AnytimeFitness, 1, true, true)
-end
-
-task :get_cincy_rec_locations => :environment do
-  Resque.enqueue(CincyRec, 1, true, DateTime.now)
-end
-
-task :get_la_fitness_locations => :environment do
-  Resque.enqueue(LaFitness, 1, true, DateTime.now)
-  Resque.enqueue(LaFitness, 1, true, DateTime.now + 1.days)
-end
-
-task :get_moksha_locations => :environment do
-  Resque.enqueue(Moksha, 1, 3, DateTime.now)
-  Resque.enqueue(Moksha, 1, 3, DateTime.now + 1.days)
-end
-
-task :get_go_recess => :environment do
-  Resque.enqueue(GoRecess, 1, true, DateTime.now) 
-  Resque.enqueue(GoRecess, 1, true, DateTime.now + 1.days)
-end
-
-task :get_go_recess_chicago => :environment do
-  
-  Resque.enqueue(GoRecess, 1, true, DateTime.now)
-end
-
-task :get_go_recess_locations => :environment do
-  Resque.enqueue(GoRecessLoc, 1, true, nil, nil)
-end
-
-task :list_lat_lon => :environment do
-  
-  new_string = LatLon.get_lat_lon.gsub("{", "")
-  new_string = new_string.gsub(",", "")
-  new_string = new_string.gsub(":", "")
-  new_string = new_string.gsub("}", "")
-  new_string = new_string.gsub("'", '"')
-
-  new_string.each_line do |line|
-    string = ""
-    line = line.split(" ")
-    if line[4] == '"latitude"'
-      string = string + "lat: #{line[5]}"
-    else
-      i = 5
-      while i < line.length do
-        if line[i] == '"latitude"'
-          string = string + "lat: #{line[i + 1]}"
-          break
-        else
-          i += 1
-        end
-      end 
-    end
-
-    if line[6] == '"longitude"'
-      string = string + ", lon: #{line[7]}"
-    else
-      i = 7
-      while i < line.length do
-        if line[i] == '"longitude"'
-          string = string + ", lon: #{line[i + 1]}"
-          break
-        else
-          i += 1
-        end
-      end
-    end
-
-    puts string
-  end 
-
+task :get_cincy_local => :environment do
+  Resque.enqueue(CrawlCincyLocal, DateTime.now, nil)
+  Resque.enqueue(CrawlCincyLocal, DateTime.now + 1, nil)
 end
