@@ -1,4 +1,5 @@
 require 'nokogiri'
+require './lib/resque_job'
 Dir["./lib/crawler_validation/*.rb"].each { |file| require file }
 
 class SnapFitness < ResqueJob
