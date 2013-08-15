@@ -40,12 +40,7 @@ module Mindbody
         opts[:start_time] = DateTime.parse(date.to_s).beginning_of_day.advance(:hours => starts.strftime("%H").to_i, :minutes => starts.strftime("%M").to_i)
         opts[:end_time] = opts[:start_time].advance(:hours => 1)        
 
-        opts[:name] = "%"
-        row.search("a").each do |link|
-          if link["class"] == "modalClassDesc"
-            opts[:name] = link.text.strip
-          end
-        end
+        opts[:name] = tds[tds.length - 3].text.strip
         place = Place.where(:id => place_id).first 
         opts[:instructor] = tds[tds.length - 2].text.split("(")[0].strip
         opts[:source] = source
