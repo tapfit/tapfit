@@ -14,6 +14,7 @@ class PureBarre < ResqueJob
     if url == 1
       PureBarre.get_locations(date)
     else
+      # Mindbody.get_classes(url, place_id, date, source)
       PureBarre.get_class(url, place_id, date) 
     end
   end

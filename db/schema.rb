@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130813205738) do
+ActiveRecord::Schema.define(version: 20130815131940) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -124,11 +124,13 @@ ActiveRecord::Schema.define(version: 20130813205738) do
     t.integer  "cover_photo_id"
     t.string   "schedule_url"
     t.boolean  "can_buy"
+    t.integer  "crawler_source"
   end
 
   add_index "places", ["can_buy"], name: "index_places_on_can_buy", using: :btree
   add_index "places", ["can_dropin"], name: "index_places_on_can_dropin", using: :btree
   add_index "places", ["category"], name: "index_places_on_category", using: :btree
+  add_index "places", ["crawler_source"], name: "index_places_on_crawler_source", using: :btree
   add_index "places", ["is_public"], name: "index_places_on_is_public", using: :btree
   add_index "places", ["source"], name: "index_places_on_source", using: :btree
   add_index "places", ["source_key"], name: "index_places_on_source_key", using: :btree

@@ -1,5 +1,6 @@
 Dir["./lib/crawlers/*.rb"].each { |file| require file }
 Dir["./lib/crawler_validation/*.rb"].each { |file| require file }
+Dir["./lib/crawler-helpers/*.rb"].each { |file| require file }
 
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'

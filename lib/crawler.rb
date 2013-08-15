@@ -3,11 +3,13 @@ Dir["./lib/crawlers/*.rb"].each {|file| require file }
 module Crawler
   
   def self.start_crawler_process
+    Resque.enqueue(CrawlCincyLocal, DateTime.now, nil)
+    Resque.enqueue(CrawlCincyLocal, DateTime.now + 1.days, nil)
     Dir.glob("./lib/crawlers/*.rb").each do |file|
       File.open(file).each_line do |line|
         if line.include?("class")
-          Resque.enqueue(Kernel.const_get(line.split(" ")[1]), 1, true, DateTime.now)
-          Resque.enqueue(Kernel.const_get(line.split(" ")[1]), 1, true, DateTime.now + 1.days)
+          # Resque.enqueue(Kernel.const_get(line.split(" ")[1]), 1, true, DateTime.now)
+          # Resque.enqueue(Kernel.const_get(line.split(" ")[1]), 1, true, DateTime.now + 1.days)
           break
         end
       end

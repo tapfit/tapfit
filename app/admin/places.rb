@@ -9,6 +9,7 @@ ActiveAdmin.register Place do
     column :can_buy
     column :icon_photo
     column :cover_photo
+    column :crawler_source
     column "City" do |i|
       i.address.city
     end
@@ -36,6 +37,7 @@ ActiveAdmin.register Place do
       f.input :phone_number
       f.input :source_description
       f.input :source
+      f.input :crawler_source
       f.input :dropin_price
       f.input :can_buy
     end
