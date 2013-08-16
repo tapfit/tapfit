@@ -1,0 +1,12 @@
+#!/bin/zsh 
+
+echo "Capturing production..."
+heroku pgbackups:capture --remote prod --expire
+ 
+echo "Fetching latest URL..."
+latest_production_url=`heroku pgbackups:url --remote prod`
+ 
+echo "Restoring staging to latest..."
+heroku pgbackups:restore DATABASE_URL $latest_production_url --remote staging
+ 
+echo "Done."
