@@ -7,7 +7,7 @@ module Api
 
       def index
         @places = current_user.place_favorites
-        render :json => @places.as_json(:list => true)
+        render :json => { :places => @places.as_json(:list => true) }
       end
       
       def show

@@ -31,6 +31,18 @@ module Api
         
       end
 
+      def use
+        
+        @receipt = Receipt.where(:user_id => current_user.id, :id => params[:id]).first
+        if @receipt.nil?
+          render :json => { :error => "Either receipt does not exist or receipt does not belong to user." }
+        else
+          @receipt.has_used = true
+          @receipt.save
+          render :json => { :success => true }
+        end
+      end
+
     end
   end
 end

@@ -25,23 +25,30 @@ module Api
       
       def show
         @place = check_place(params[:id])
+        if @place.nil?
+          return
+        end
         render :json => @place.as_json(:detail => true)
       end
 
       def favorite
-        check_place(params[:id])        
+        if check_place(params[:id]).nil?
+          return
+        end        
         @favorite = FavoritePlace.where(:user_id => current_user.id, :place_id => params[:id]).first
         if @favorite.nil?
           @favorite = FavoritePlace.create(:user_id => current_user.id, :place_id => params[:id])
-          render :json => { :code => 1, :favorite => @favorite.as_json }
+          render :json => { :success_code => 1 }
         else
           @favorite.destroy
-          render :json => { :code => 0, :message =>  "Successfully deleleted"  }
+          render :json => { :success_code => 0 }
         end
       end
 
       def checkin
-        check_place(params[:id])
+        if check_place(params[:id]).nil?
+          return
+        end
         @checkin = Checkin.where(:user_id => current_user.id, :place_id => params[:id]).order("created_at DESC").first
         if @checkin.nil? || @checkin.created_at + 1.hours < Time.now  
           @checkin = Checkin.create(:user_id => current_user.id, :place_id => params[:id], :lat => params[:lat], :lon => params[:lon])

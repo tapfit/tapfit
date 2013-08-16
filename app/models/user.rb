@@ -28,4 +28,12 @@ class User < ActiveRecord::Base
 
   end
 
+  def as_json(opts={})
+
+    opts[:except] ||= [ :braintree_customer_id, :updated_at, :created_at ]
+
+    super(opts)
+    
+  end
+
 end
