@@ -43,7 +43,7 @@ describe Place do
     workout2.start_time = workout2.start_time.advance(:hours => 1)
     @place.workouts << workout2
     @place.save
-    @place.class_times.should eql("11:00a 12:00p")
+    @place.class_times.should eql(@place.todays_workouts.pluck(:start_time))
   end
 
   it 'should update tags to what we want' do
@@ -110,11 +110,14 @@ describe Place do
   end
 
   it 'should return reviews for only non-nil reviews' do
+    user = FactoryGirl.create(:user)
     rating = FactoryGirl.build(:rating)
     rating.place_id = @place.id
+    rating.user_id = user.id
     rating.save
     rating1 = FactoryGirl.build(:rating)
     rating1.place_id = @place.id
+    rating1.user_id = user.id
     rating1.review = nil
     rating1.save
 

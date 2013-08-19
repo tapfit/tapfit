@@ -93,10 +93,8 @@ class Place < ActiveRecord::Base
 
     workouts = self.workouts.where("start_time BETWEEN ? AND ?", now, end_of_day).order("start_time ASC")
     
-    next_class_string = ""
-    workouts.each { |workout| next_class_string += "#{workout.start_time.strftime("%l:%M%P").chomp('m')} " }
     Time.zone = "UTC"
-    return next_class_string.strip
+    return workouts.pluck(:start_time)
   end
 
   def avg_rating
