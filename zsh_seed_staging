@@ -8,5 +8,8 @@ latest_production_url=`heroku pgbackups:url --remote prod`
  
 echo "Restoring staging to latest..."
 heroku pgbackups:restore DATABASE_URL $latest_production_url --remote staging
- 
+
+echo "Restarting staging server..."
+heroku restart --remote staging
+
 echo "Done."
