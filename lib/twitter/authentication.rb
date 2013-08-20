@@ -2,8 +2,8 @@ module Authentication
 
   def self.prepare_access_token(oauth_token, oauth_token_secret)
     
-    consumer = OAuth::Consumer.new("zfn17AnzuDG6puceIaP5oA", 
-                                   "Hm3SvTQx4wEqockhBNeK7DrsMmQFjmdz2LwNHz8PA4",
+    consumer = OAuth::Consumer.new("Uuhgk5ZIIsfIctxGGRPqKw", 
+                                   "e9Knzq63ALP9Y3ZkzlKww3iR6Oef6f6QwM612Zo34w",
                                        { :site => "http://api.twitter.com",
                                                :scheme => :header
         })

@@ -3,8 +3,8 @@ require './lib/twitter/get_followers'
 
 module Favorite
 
-  @oauth_token = "22325444-MIrizHkY7CykYDVIsm7oELS6elhcIoDj5zzgTYHNA"
-  @oauth_token_secret = "QapdzXFfqKUY60HkSoUey1TkMdaS8yHmyewYxNMpgEo"
+  @oauth_token = "22325444-KmejZYvgilgLgCVdmjuq8tGdo9YQvy8AjY9K4BM"
+  @oauth_token_secret = "eyAEOtmq4Wr2YeZ4DI1BLcGrjJExk2rohXx44vMvybs"
 
   def self.favorite_tweets
 
@@ -24,7 +24,7 @@ module Favorite
       json["statuses"].each do |status|
         
         if !GetFollowers.followers.include?(status["user"]["id"].to_i)
-          access_token.request(:post, "https://api.twitter.com/1.1/favorites/create.json?id=#{status["id_str"]}")
+          response = access_token.request(:post, "https://api.twitter.com/1.1/favorites/create.json?id=#{status["id_str"]}")
           puts "Favorited tweet: #{status["text"]}"
         end
       end
