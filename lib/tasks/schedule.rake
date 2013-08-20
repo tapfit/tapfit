@@ -18,6 +18,17 @@ task :send_email => :environment do
   MailerUtils.send_error_email
 end
 
+task :run_twitter_favorite => :environment do
+  Time.zone = "America/New_York"
+  if Time.now.hour > 7 && Time.now.hour < 23
+    Favorite.favorite_tweets
+  end
+end
+
+task :run_twitter_get_followers => :environment do
+  GetFollowers.get_followers
+end
+
 task :rerun_crawl_jobs => :environment do
   
   if REDIS.exists(MailerUtils.redis_key)
