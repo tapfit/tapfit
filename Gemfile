@@ -25,6 +25,7 @@ gem 'kaminari'
 gem 'timezone'
 gem 'braintree'
 gem 'nexmo'
+gem 'oauth'
 
 # These gems for active admin
 gem 'responders',          github: 'plataformatec/responders'
