@@ -14,7 +14,7 @@ module Favorite
       GetFollowers.get_followers
     end
 
-    search_params = [ "database", "android", "startup", "yoga", "zumba" ]
+    search_params = [ "sql", "android", "startup", "yoga", "fitness" ]
     search_params.each do |search|
 
       response = access_token.request(:get, "https://api.twitter.com/1.1/search/tweets.json?q=#{search}")
