@@ -34,6 +34,37 @@ module FavoriteTweet
     return nil
   end
 
+  def self.clear_favorites
+     
+    access_token = Authentication.prepare_access_token(@oauth_token, @oauth_token_secret)
+
+    num = 25
+
+    while num > 10 do
+
+      response = access_token.request(:get, "https://api.twitter.com/1.1/favorites/list.json")
+
+      json = JSON.parse(response.body.to_str)
+
+      num =  json.length
+          
+      json.each do |status|
+        # puts "ID: #{status}" 
+
+        if !status["id"].nil? 
+          response = access_token.request(:post, "https://api.twitter.com/1.1/favorites/destroy.json?id=#{status["id"]}")
+          
+          puts "Deleted tweet: #{status["id"]}"
+        end
+      end
+      
+      # return
+    end
+
+    return nil
+
+  end
+
   def self.oauth_token
     return @oauth_token
   end

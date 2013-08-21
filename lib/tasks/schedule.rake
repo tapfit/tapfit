@@ -26,8 +26,28 @@ task :run_twitter_favorite => :environment do
   end
 end
 
+task :run_twitter_follow => :environment do
+  
+  Time.zone = "America/New_York"
+  days_of_week = [ 1, 3, 4, 6 ]
+  if days_of_week.include?(Time.now.wday)
+    if Time.now.hour > 9 && Time.now.hour < 19
+      Follow.follow
+    end
+  end
+end
+
+task :run_twitter_unfollow => :environment do
+  Time.zone = "America/New_York"
+  days_of_week = [ 0, 2, 5 ]
+  if days_of_week.include?(Time.now.wday)
+    Follow.unfollow
+  end
+end
+
 task :run_twitter_get_followers => :environment do
   GetFollowers.get_followers
+  FavoriteTweet.clear_favorites
 end
 
 task :rerun_crawl_jobs => :environment do
