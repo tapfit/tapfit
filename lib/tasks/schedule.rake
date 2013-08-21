@@ -22,7 +22,7 @@ end
 task :run_twitter_favorite => :environment do
   Time.zone = "America/New_York"
   if Time.now.hour > 7 && Time.now.hour < 23
-    Favorite.favorite_tweets
+    FavoriteTweet.favorite_tweets
   end
 end
 
