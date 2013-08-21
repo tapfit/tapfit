@@ -4,6 +4,7 @@ require 'csv'
 require './lib/location_crawlers/go_recess_loc'
 require './lib/crawlers/moksha'
 require './lib/twitter/favorite'
+require './lib/twitter/follow'
 
 desc "This task is called by the Heroku scheduler add-on"
 
