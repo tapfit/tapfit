@@ -6,7 +6,7 @@ module GetFollowers
 
   def self.get_followers
     
-    access_token = Authentication.prepare_access_token(Favorite.oauth_token, Favorite.oauth_token_secret)
+    access_token = Authentication.prepare_access_token(FavoriteTweet.oauth_token, FavoriteTweet.oauth_token_secret)
     
     response = access_token.request(:get, "https://api.twitter.com/1.1/followers/ids.json")
 

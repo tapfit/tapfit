@@ -1,7 +1,7 @@
 require './lib/twitter/authentication'
 require './lib/twitter/get_followers'
 
-module Favorite
+module FavoriteTweet
 
   @oauth_token = "22325444-KmejZYvgilgLgCVdmjuq8tGdo9YQvy8AjY9K4BM"
   @oauth_token_secret = "eyAEOtmq4Wr2YeZ4DI1BLcGrjJExk2rohXx44vMvybs"
