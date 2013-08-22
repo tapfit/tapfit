@@ -71,11 +71,11 @@ class Place < ActiveRecord::Base
 
   def as_json(options={})
     if !options[:list].nil?
-      except_array ||= [ :crawler_source, :url, :icon_photo_id, :cover_photo_id, :source, :source_key, :tapfit_description, :source_description, :is_public, :can_dropin, :dropin_price, :created_at, :updated_at, :address_id ]
+      except_array ||= [ :crawler_source, :url, :icon_photo_id, :cover_photo_id, :source, :source_key, :tapfit_description, :source_description, :is_public, :can_dropin, :dropin_price, :updated_at, :address_id ]
       options[:include] ||= [ :address, :categories ]
       options[:methods] ||= [ :class_times, :cover_photo, :icon_photo ]
     elsif !options[:detail].nil?    
-      except_array ||= [ :crawler_source, :icon_photo_id, :cover_photo_id, :source, :source_key, :tapfit_description, :source_description, :is_public, :created_at, :updated_at, :address_id ]
+      except_array ||= [ :crawler_source, :icon_photo_id, :cover_photo_id, :source, :source_key, :tapfit_description, :source_description, :is_public, :updated_at, :address_id ]
       options[:include] ||= [ :address, :categories ]
       options[:methods] ||= [ :class_times, :cover_photo, :icon_photo, :reviews, :avg_rating, :total_ratings ]
     end

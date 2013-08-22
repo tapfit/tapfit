@@ -18,10 +18,10 @@ class Rating < ActiveRecord::Base
   def as_json(opts={})
     
     if !opts[:list].nil?
-      opts[:except] ||= [ :created_at, :updated_at, :workout_id, :workout_key, :place_id, :user_id ]
+      opts[:except] ||= [ :updated_at, :workout_id, :workout_key, :place_id, :user_id ]
       opts[:methods] ||= [ :name ]
     elsif !opts[:detail].nil?
-      opts[:except] ||= [ :created_at, :updated_at, :workout_id, :workout_key, :place_id ]
+      opts[:except] ||= [ :updated_at, :workout_id, :workout_key, :place_id ]
       opts[:methods] ||= [ :name ]
     end
     super(opts)
