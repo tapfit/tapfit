@@ -77,7 +77,7 @@ class Place < ActiveRecord::Base
     elsif !options[:detail].nil?    
       except_array ||= [ :crawler_source, :icon_photo_id, :cover_photo_id, :source, :source_key, :tapfit_description, :source_description, :is_public, :created_at, :updated_at, :address_id ]
       options[:include] ||= [ :address, :categories ]
-      options[:methods] ||= [ :class_times, :cover_photo, :icon_photo, :reviews, :avg_rating ]
+      options[:methods] ||= [ :class_times, :cover_photo, :icon_photo, :reviews, :avg_rating, :total_ratings ]
     end
 
     options[:except] ||= except_array
@@ -103,6 +103,10 @@ class Place < ActiveRecord::Base
 
   def reviews
     return self.ratings.where.not(:review => nil).order("created_at DESC").limit(5).as_json(:list => true)
+  end
+
+  def total_ratings
+    return self.ratings.count
   end
 
   def self.combine_place(address, attrs, tags)
