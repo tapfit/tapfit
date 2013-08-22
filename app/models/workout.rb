@@ -4,6 +4,10 @@ class Workout < ActiveRecord::Base
   belongs_to :place
   has_one :address, :through => :place
 
+  def ratings
+    return Rating.where(:workout_key => self.workout_key)
+  end
+
   def buy_workout(user)
     if self.can_buy
           

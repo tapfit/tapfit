@@ -12,6 +12,10 @@ class User < ActiveRecord::Base
   
   def write_review_for_place(params, place_id)
     return Rating.new(:rating => params[:rating].to_i, :review => params[:review], :place_id => place_id.to_i, :user_id => self.id)
+  end
+
+  def write_review_for_workout(params, workout)
+    return Rating.new(:rating => params[:rating].to_i, :review => params[:review], :place_id => workout.place_id, :user_id => self.id, :workout_id => workout.id, :workout_key => workout.workout_key)
   end 
 
   def has_payment_info?

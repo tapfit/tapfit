@@ -17,14 +17,23 @@ module Api
       end
 
       def index
-        @place = check_place(params[:place_id])
-        if @place.nil?
-          return
-        end
-        if params[:reviews]
-          @ratings = @place.ratings.reviews
+        @workout = Workout.where(:id => params[:workout_id]).first
+        if !@workout.nil?
+          if params[:reviews]
+            @ratings = @workout.ratings.reviews
+          else
+            @ratings = @workout.ratings
+          end
         else
-          @ratings = @place.ratings
+          @place = check_place(params[:place_id])
+          if @place.nil?
+            return
+          end
+          if params[:reviews]
+            @ratings = @place.ratings.reviews
+          else
+            @ratings = @place.ratings
+          end
         end
         @ratings.paginate(:page => get_page)
         render :json => 
@@ -40,10 +49,19 @@ module Api
       end
 
       def create
-        if check_place(params[:place_id]).nil?
-          return
+        if !params[:workout_id].nil?
+          @workout = Workout.where(:id => params[:workout_id]).first
+          if @workout.nil?
+            render :json => { :errors => "Could not find workout with id: #{params[:workout_id]}" } and return
+          else
+            @rating = current_user.write_review_for_workout(rating_params, @workout)
+          end
+        else
+          if check_place(params[:place_id]).nil?
+            return
+          end
+          @rating = current_user.write_review_for_place(rating_params, params[:place_id])
         end
-        @rating = current_user.write_review_for_place(rating_params, params[:place_id])
         if @rating.valid?
           @rating.save
           render :json => @rating.as_json(:list => true)
