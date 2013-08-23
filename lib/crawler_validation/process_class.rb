@@ -42,6 +42,9 @@ class ProcessClass < ProcessBase
 
       workout_key = WorkoutKey.get_workout_key(@place_id, @name)
 
+      if @source_description.nil?
+        @source_description = Workout.where(:workout_key => workout_key).first.source_description
+      end
       starts = self.change_date_to_utc(@start_time, place.address.timezone)
       ends = self.change_date_to_utc(@end_time, place.address.timezone)
 

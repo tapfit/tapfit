@@ -71,3 +71,9 @@ task :get_cincy_local => :environment do
   Resque.enqueue(CrawlCincyLocal, DateTime.now, nil)
   Resque.enqueue(CrawlCincyLocal, DateTime.now + 1, nil)
 end
+
+task :populate_class_descriptions => :environment do
+  Workout.where(:can_buy => true).where("start_time > ?", Time.now).where("source_description IS NOT NULL").each do |workout|
+    
+  end
+end
