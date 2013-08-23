@@ -34,7 +34,7 @@ class ProcessClass < ProcessBase
         instructor = Instructor.create(:first_name => first_name, :last_name => last_name) if instructor.nil?
       end
       
-      if place.can_buy == true
+      if place.can_buy
         @can_buy = true
       else
         @can_buy = false
@@ -51,12 +51,12 @@ class ProcessClass < ProcessBase
       starts = self.change_date_to_utc(@start_time, place.address.timezone)
       ends = self.change_date_to_utc(@end_time, place.address.timezone)
 
-      workout = Workout.where(:workout_key => workout_key).where(:start_time => starts).where(:end_time => ends).first
+      workout = Workout.where(:workout_key => workout_key).where(:start_time => starts).first
       if !workout.nil?
         puts "Workout already exists"
         return
       end
-      workout = Workout.new(:name => @name, :place_id => @place_id, :source_description => @source_description, :start_time => starts.utc, :end_time => ends.utc, :price => @price, :instructor_id => instructor.id, :source => @source, :workout_key => workout_key, :is_bookable => @is_bookable)
+      workout = Workout.new(:name => @name, :place_id => @place_id, :source_description => @source_description, :start_time => starts.utc, :end_time => ends.utc, :price => @price, :instructor_id => instructor.id, :source => @source, :workout_key => workout_key, :is_bookable => @is_bookable, :can_buy => true)
 
       if !workout.valid?
         puts "errors: #{workout.errors}"
