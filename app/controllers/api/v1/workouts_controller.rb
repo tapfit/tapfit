@@ -48,7 +48,7 @@ module Api
             receipt = @workout.buy_workout(current_user)
             render :json => {
               :success => true,
-              :credit_card_number => result.transaction.credit_card_details.masked_number,
+              :card_number => result.transaction.credit_card_details.masked_number,
               :credit_card_type => result.transaction.credit_card_details.card_type,
               :receipt => receipt
             }

@@ -16,6 +16,7 @@ module Mindbody
     while content.nil? && num < 5
       sleep(1)
       output = `#{cmd}`
+      puts output
       content = doc.xpath("//table[@id='classSchedule-mainTable']").first 
       num = num + 1
     end
