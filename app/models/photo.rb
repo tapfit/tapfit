@@ -10,6 +10,6 @@ class Photo < ActiveRecord::Base
     :path => ":attachment/:style/:id.jpg"
 
   def self.image_base_url
-    return "https://s3-us-west-2.amazonaws.com/tapfit-staging"
+    return "https://s3-us-west-2.amazonaws.com/tapfit-production"
   end
 end
