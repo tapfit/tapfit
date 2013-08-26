@@ -75,7 +75,7 @@ class ProcessClass < ProcessBase
 
   def change_date_to_utc(time, timezone)
     Time.zone = timezone
-    newTime = Time.zone.now.beginning_of_day.change(:year => time.year, :month => time.month, :day => time.day, :hour => time.hour)
+    newTime = Time.zone.now.beginning_of_day.change(:year => time.year, :month => time.month, :day => time.day, :hour => time.hour, :min => time.strftime("%M").to_i )
     Time.zone = "UTC"
     return newTime
   end

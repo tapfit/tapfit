@@ -42,7 +42,9 @@ module Mindbody
         # Need to parse DateTime because in resque, they convert all types to string
 
         opts[:start_time] = DateTime.parse(date.to_s).beginning_of_day.advance(:hours => starts.strftime("%H").to_i, :minutes => starts.strftime("%M").to_i)
-        opts[:end_time] = opts[:start_time].advance(:hours => 1)        
+        opts[:end_time] = opts[:start_time].advance(:hours => 1)    
+
+        puts "start_time: #{opts[:start_time]}"    
 
         opts[:name] = tds[2].text.strip
         place = Place.where(:id => place_id).first 

@@ -53,7 +53,7 @@ module Api
           result = Braintree::Customer.create(
             :first_name => current_user.first_name,
             :last_name => current_user.last_name,
-            :customer_id => current_user.id
+            :id => current_user.id
           )
           if result.success?
             current_user.braintree_customer_id = result.customer.id
