@@ -18,9 +18,10 @@ module Api
       # Registers a new user
       # POST users/register    
       def register
-        puts current_user
-        if user_signed_in?
-          puts current_user
+        # puts current_user
+        if !params[:auth_token].nil? && user_signed_in?
+          puts params[:auth_token]
+          # puts current_user
           user = User.where(:email => user_params[:email]).first
           if !user.nil?
             render :json => { :error => "Email, #{user_params[:email]} already exists" } and return
@@ -50,7 +51,9 @@ module Api
 
           render :json => { :email => user.email, :id => user.id, :auth_token => user.authentication_token, :first_name => user.first_name, :last_name => user.last_name }
         else
-          render :json => { :errors => user.errors }, :status => 420
+          puts "user failed rendering json"
+          puts "full messages: #{user.errors.full_messages.join(", ")}"
+          render :json => { :error => "#{user.errors.full_messages.join(", ")}" }, :status => 422 and return
         end
       end
 

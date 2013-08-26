@@ -9,7 +9,7 @@ module Api
 
         result = Braintree::CreditCard.create(
           :customer_id => current_user.braintree_customer_id,
-          :number => params[:credit_card],
+          :number => params[:card_number],
           :expiration_month => params[:expiration_month],
           :expiration_year => params[:expiration_year],
           :options => {

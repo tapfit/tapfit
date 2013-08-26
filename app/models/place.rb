@@ -75,7 +75,7 @@ class Place < ActiveRecord::Base
       options[:include] ||= [ :address, :categories ]
       options[:methods] ||= [ :class_times, :cover_photo, :icon_photo ]
     elsif !options[:detail].nil?    
-      except_array ||= [ :crawler_source, :icon_photo_id, :cover_photo_id, :source, :source_key, :tapfit_description, :source_description, :is_public, :updated_at, :address_id ]
+      except_array ||= [ :crawler_source, :icon_photo_id, :cover_photo_id, :source, :source_key, :is_public, :updated_at, :address_id ]
       options[:include] ||= [ :address, :categories ]
       options[:methods] ||= [ :class_times, :cover_photo, :icon_photo, :reviews, :avg_rating, :total_ratings ]
     end
