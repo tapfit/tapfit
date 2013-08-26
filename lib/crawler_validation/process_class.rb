@@ -43,7 +43,7 @@ class ProcessClass < ProcessBase
       workout_key = WorkoutKey.get_workout_key(@place_id, @name)
 
       if @source_description.nil?
-        old_workout = Workout.where(:workout_key => workout_key).first
+        old_workout = Workout.where(:workout_key => workout_key).where("source_description IS NOT NULL").first
         if !old_workout.nil?
           @source_description = old_workout.source_description
         end

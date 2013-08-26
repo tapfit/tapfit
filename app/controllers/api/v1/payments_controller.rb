@@ -30,7 +30,7 @@ module Api
 
         result = Braintree::CreditCard.create(
           :customer_id => current_user.braintree_customer_id,
-          :venmo_sdk_payment_method_code => params[:venmo_sdk_payment_method_code],
+          :venmo_sdk_payment_method_code => params[:venmo_sdk_payment_method_code]
         )
 
         if result.success?
