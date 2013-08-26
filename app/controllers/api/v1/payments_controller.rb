@@ -29,6 +29,7 @@ module Api
       def usecard
 
         result = Braintree::CreditCard.create(
+          :customer_id => current_user.braintree_customer_id,
           :venmo_sdk_payment_method_code => params[:venmo_sdk_payment_method_code]
         )
 
@@ -51,7 +52,8 @@ module Api
         if !current_user.has_payment_info?
           result = Braintree::Customer.create(
             :first_name => current_user.first_name,
-            :last_name => current_user.last_name
+            :last_name => current_user.last_name,
+            :customer_id => current_user.id
           )
           if result.success?
             current_user.braintree_customer_id = result.customer.id
