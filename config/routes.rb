@@ -29,6 +29,8 @@ Tapfit::Application.routes.draw do
         end    
       end
  
+      resources :regions
+
       def users_resources
         resources :favorites
         resources :checkins
