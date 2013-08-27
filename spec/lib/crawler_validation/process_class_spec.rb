@@ -68,4 +68,20 @@ describe ProcessClass do
     instructor.last_name.should be_nil
   end
 
+  it 'should update class to old price' do
+    @place.dropin_price = nil
+    @place.save
+    @process_class.save_to_database("test")
+    price = 25
+    @opts[:price] = 15
+    @opts[:start_time] = DateTime.parse("11/07/2013 15:00:00")
+    @opts[:end_time] = DateTime.parse("11/07/2013 16:00:00")
+    process_class = ProcessClass.new(@opts)
+    process_class.save_to_database("test")
+    Workout.all.each do |workout|
+      puts "workout.price: #{workout.price}"
+    end
+    Workout.where(:price => price).count.should eql(2)
+  end
+
 end

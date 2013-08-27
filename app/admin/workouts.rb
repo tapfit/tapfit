@@ -26,8 +26,18 @@ ActiveAdmin.register Workout do
     redirect_to admin_workouts_path
   end
 
+  member_action :update_prices, :method => :get do
+    workout = Workout.find(params[:id])
+    Workout.where(:workout_key => workout.workout_key).update_all(:price => workout.price)
+    redirect_to admin_workouts_path
+  end
+
   action_item :only => :show do
     link_to("Update Descriptions", update_description_admin_workout_path(workout)) if !workout.source_description.nil? 
+  end
+
+  action_item :only => :show do
+    link_to("Update Prices", update_prices_admin_workout_path(workout)) if !workout.price.nil?
   end
 
   form do |f|

@@ -42,6 +42,13 @@ class ProcessClass < ProcessBase
 
       workout_key = WorkoutKey.get_workout_key(@place_id, @name)
 
+      if place.dropin_price.nil?
+        old_workout = Workout.where(:workout_key => workout_key).where("price IS NOT NULL").order("start_time DESC").first
+        if !old_workout.nil?
+          @price = old_workout.price
+        end
+      end
+
       if @source_description.nil?
         old_workout = Workout.where(:workout_key => workout_key).where("source_description IS NOT NULL").first
         if !old_workout.nil?
