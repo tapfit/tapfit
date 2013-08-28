@@ -17,7 +17,7 @@ describe Api::V1::ReceiptsController do
   end
 
   it 'should return a single receipt for a user' do
-    get :show, auth_token: @user.authentication_token, user_id: @user.id
+    get :show, auth_token: @user.authentication_token, user_id: 'me'
     assigns(:receipt).should eql(@receipt)
   end
 

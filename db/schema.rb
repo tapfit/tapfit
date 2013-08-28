@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130827023353) do
+ActiveRecord::Schema.define(version: 20130828000312) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -125,6 +125,7 @@ ActiveRecord::Schema.define(version: 20130827023353) do
     t.string   "schedule_url"
     t.boolean  "can_buy"
     t.integer  "crawler_source"
+    t.integer  "facility_type"
   end
 
   add_index "places", ["can_buy"], name: "index_places_on_can_buy", using: :btree
@@ -240,11 +241,13 @@ ActiveRecord::Schema.define(version: 20130827023353) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "can_buy"
+    t.boolean  "is_day_pass",        default: false
   end
 
   add_index "workouts", ["end_time"], name: "index_workouts_on_end_time", using: :btree
   add_index "workouts", ["instructor_id"], name: "index_workouts_on_instructor_id", using: :btree
   add_index "workouts", ["is_bookable"], name: "index_workouts_on_is_bookable", using: :btree
+  add_index "workouts", ["is_day_pass"], name: "index_workouts_on_is_day_pass", using: :btree
   add_index "workouts", ["place_id"], name: "index_workouts_on_place_id", using: :btree
   add_index "workouts", ["source"], name: "index_workouts_on_source", using: :btree
   add_index "workouts", ["start_time"], name: "index_workouts_on_start_time", using: :btree

@@ -19,7 +19,7 @@ describe Api::V1::PaymentsController do
         :credit_card => 4111111111111111,
         :expiration_month => 4,
         :expiration_year => 16,
-        :venmo_sdk_session => Braintree::Test::VenmoSDK::Session,
+        :venmo_sdk_session => Braintree::Test::VenmoSDK::Session
       }
 
     end
@@ -41,7 +41,7 @@ describe Api::V1::PaymentsController do
         :first_name => @user.first_name,
         :last_name => @user.last_name
       )
-      @user.braintree_customer_id = result.customer.id
+      @user.braintree_customer_id = @user.id
       @user.save
       @attr[:auth_token] = @user.authentication_token
       post :create, @attr

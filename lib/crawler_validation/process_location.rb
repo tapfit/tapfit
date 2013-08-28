@@ -63,7 +63,6 @@ class ProcessLocation < ProcessBase
       place = Place.new(self.attrs)
       place.address_id = address.id
       place.is_public = true
-      place.can_dropin = true
       place.source_key = Digest::SHA1.hexdigest(@source_id.to_s)
 
       if place.save
