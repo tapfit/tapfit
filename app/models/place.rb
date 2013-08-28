@@ -1,3 +1,5 @@
+require './lib/facility_type'
+
 class Place < ActiveRecord::Base
   
   # Definitions
@@ -22,6 +24,10 @@ class Place < ActiveRecord::Base
   end
 
   def todays_workouts
+    self.next_workouts.where(:is_day_pass => false)
+  end
+
+  def next_workouts
     Time.zone = self.address.timezone
     start_of_day = Time.now.beginning_of_day
     end_of_day = start_of_day + 48.hours
@@ -77,12 +83,20 @@ class Place < ActiveRecord::Base
     elsif !options[:detail].nil?    
       except_array ||= [ :crawler_source, :icon_photo_id, :cover_photo_id, :source, :source_key, :is_public, :updated_at, :address_id ]
       options[:include] ||= [ :address, :categories ]
-      options[:methods] ||= [ :class_times, :cover_photo, :icon_photo, :reviews, :avg_rating, :total_ratings ]
+      options[:methods] ||= [ :class_times, :cover_photo, :day_pass, :icon_photo, :reviews, :avg_rating, :total_ratings ]
     end
 
     options[:except] ||= except_array
     super(options)
 
+  end
+
+  def day_pass
+    if self.facility_type == FacilityType::DayPassWithClass || self.facility_type == FacilityType::DayPassNoClass
+      return self.next_workouts.where(:is_day_pass => true)
+    else
+      return nil
+    end
   end
 
   def class_times    
@@ -91,7 +105,7 @@ class Place < ActiveRecord::Base
     now = Time.now
     end_of_day = Time.now.beginning_of_day + 24.hours
 
-    workouts = self.workouts.where("start_time BETWEEN ? AND ?", now, end_of_day).order("start_time ASC")
+    workouts = self.workouts.where("start_time BETWEEN ? AND ?", now, end_of_day).where(:is_day_pass => false).order("start_time ASC")
     
     Time.zone = "UTC"
     return workouts.pluck(:start_time)

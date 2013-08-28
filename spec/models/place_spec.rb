@@ -20,7 +20,29 @@ describe Place do
     places.to_a.should eql([@place])
   end
 
+  it 'should return day pass only' do
+    workout = FactoryGirl.create(:workout)
+    workout2 = FactoryGirl.create(:workout)
+    workout2.is_day_pass = true
+    workout2.save
+    @place.workouts << workout
+    @place.workouts << workout2
+    @place.todays_workouts.to_a.should eql([workout])
+  end
 
+  it 'should return day passes' do
+    workout = FactoryGirl.build(:workout)
+    workout.is_day_pass = true
+    workout.save
+    @place.workouts << workout
+    @place.facility_type = FacilityType::DayPassWithClass
+    @place.save
+
+    @place.day_pass.to_a.should eql([workout])
+    @place.facility_type = FacilityType::CanBuyClass
+    @place.save
+    @place.day_pass.should be_nil
+  end
 
   it 'should return todays workouts' do
     @place.todays_workouts
