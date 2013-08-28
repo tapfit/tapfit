@@ -7,7 +7,7 @@ describe ProcessClass do
     @address = FactoryGirl.create(:valid_address_with_coordinates)
     @place.address = @address
     @place.save
-    @opts = { :name => "Yoga Class", :tags => ["yoga"], :source => "goRecess", :source_id => "16854", :source_description => "Fun Yoga Class", :instructor => "Meg", :price => "$25.00", :start_time => DateTime.parse("11/07/2013 9:00:00"), :end_time => DateTime.parse("11/07/2013 10:00:00"), :place_id => @place.id }
+    @opts = { :name => "Yoga Class", :tags => ["yoga"], :source => "goRecess", :source_id => "16854", :source_description => "Fun Yoga Class", :instructor => "Meg", :price => "$25.00", :start_time => DateTime.parse("11/07/2013 9:00:00"), :end_time => DateTime.parse("11/07/2013 10:00:00"), :place_id => @place.id, :is_day_pass => true }
     @process_class = ProcessClass.new(@opts)
     @empty_class = ProcessClass.new()
   end
@@ -47,6 +47,7 @@ describe ProcessClass do
     workout = Workout.all.first
     DateTime.parse(workout.start_time.to_s).should eql((DateTime.parse(@opts[:start_time].to_s)).advance(:hours => 4).utc)
     DateTime.parse(workout.end_time.to_s).should eql((DateTime.parse(@opts[:end_time].to_s)).advance(:hours => 4).utc)
+    workout.is_day_pass.should be_true
   end
 
   it 'should save an instrcutor' do

@@ -18,6 +18,7 @@ class ProcessClass < ProcessBase
       @price = opts[:price]
       @instructor = opts[:instructor]
       @can_buy = opts[:can_buy]
+      @is_day_pass = opts[:is_day_pass]
     end
   end
 
@@ -63,7 +64,10 @@ class ProcessClass < ProcessBase
         puts "Workout already exists"
         return
       end
-      workout = Workout.new(:name => @name, :place_id => @place_id, :source_description => @source_description, :start_time => starts.utc, :end_time => ends.utc, :price => @price, :instructor_id => instructor.id, :source => @source, :workout_key => workout_key, :is_bookable => @is_bookable, :can_buy => true)
+      puts "is_day_pass: #{@is_day_pass}"
+      workout = Workout.new(:name => @name, :place_id => @place_id, :source_description => @source_description, :start_time => starts.utc, :end_time => ends.utc, :price => @price, :instructor_id => instructor.id, :source => @source, :workout_key => workout_key, :is_bookable => @is_bookable, :can_buy => true, :is_day_pass => @is_day_pass)
+      
+      workout.is_day_pass = @is_day_pass 
 
       if !workout.valid?
         puts "errors: #{workout.errors}"

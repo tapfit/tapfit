@@ -3,6 +3,10 @@ require 'api_constraints'
 
 Tapfit::Application.routes.draw do
 
+  get "pages/about"
+  get "pages/terms"
+  get "pages/privacy"
+  get "pages/faq"
   devise_for :users
   ActiveAdmin.routes(self)
 
