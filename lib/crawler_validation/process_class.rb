@@ -31,6 +31,10 @@ class ProcessClass < ProcessBase
         full_name = @instructor.split(" ")
         first_name = full_name[0] if full_name.length > 0
         last_name = full_name[1] if full_name.length > 1
+        if "#{first_name} #{last_name}" == "Cancelled Today"
+          puts "Workout cancelled today"
+          return
+        end
         instructor = place.instructors.where(:first_name => first_name, :last_name => last_name).first
         instructor = Instructor.create(:first_name => first_name, :last_name => last_name) if instructor.nil?
       end

@@ -30,7 +30,12 @@ module Mindbody
       # puts "row: #{row.text}, scrape_classes: #{scrape_classes}"
       if (row["class"] == "oddRow" || row["class"] == "evenRow") && scrape_classes
         
-        puts "row: #{row.text}"
+        # puts "row: #{row.to_s.upcase}"
+
+        if !row.to_s.upcase.include?("SIGNUP")
+          puts "Can't sign up for this class"
+          next
+        end
 
         opts = {}
          

@@ -42,7 +42,7 @@ class Workout < ActiveRecord::Base
     elsif !options[:detail].nil?      
       except_array ||= [ :updated_at, :workout_key, :source ]
       options[:include] ||= [ :instructor ]
-      options[:method] ||= [ :quantity_left ]
+      options[:method] ||= [ :quantity_left, :avg_rating ]
     end
     options[:except] ||= except_array
     super(options)
@@ -61,4 +61,7 @@ class Workout < ActiveRecord::Base
     end
   end
 
+  def avg_rating
+    return (self.ratings.count > 0) ? self.ratings.average(:rating) : -1
+  end
 end
