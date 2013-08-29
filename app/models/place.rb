@@ -10,6 +10,9 @@ class Place < ActiveRecord::Base
   has_many :ratings
   has_many :photos, as: :imageable
   has_many :instructors, :through => :workouts
+  has_many :receipts
+  has_one :place_contract
+  accepts_nested_attributes_for :place_contract
   self.per_page = 25
 
   # Methods
@@ -74,6 +77,14 @@ class Place < ActiveRecord::Base
 
     end
   }
+
+  def passes_sold_today
+    Time.zone = self.address.timezone
+    starts = Time.now.beginning_of_day
+    ends = starts + 24.hours
+    Time.zone = "UTC"
+    self.receipts.where("created_at BETWEEN ? AND ?", starts, ends).count
+  end
 
   def as_json(options={})
     if !options[:list].nil?

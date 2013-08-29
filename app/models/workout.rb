@@ -11,7 +11,12 @@ class Workout < ActiveRecord::Base
 
   def buy_workout(user)
     if self.can_buy
-          
+      contract = self.place.place_contract
+      if !contract.nil? && !contract.quantity.nil?
+        if contract.quantity - self.place.passes_sold_today < 1
+          return nil
+        end
+      end
       receipt_params = 
       {
         :place_id => self.place_id,
@@ -37,16 +42,22 @@ class Workout < ActiveRecord::Base
     elsif !options[:detail].nil?      
       except_array ||= [ :updated_at, :workout_key, :source ]
       options[:include] ||= [ :instructor ]
+      options[:method] ||= [ :quantity_left ]
     end
     options[:except] ||= except_array
     super(options)
   end
 
-  def discount_price
+  def quantity_left
     if self.place.place_contract.nil?
       return nil
     else
-      return self.place.place_contract.price
+      quantity = self.place.place_contract.quantity
+      if quantity.nil?
+        return nil
+      else
+        return quantity - self.place.passes_sold_today
+      end
     end
   end
 

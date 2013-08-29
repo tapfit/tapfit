@@ -71,8 +71,6 @@ ActiveAdmin.register Workout do
     end
 
     def create
-      puts "In create controller"
-      puts "params: #{permitted_params}"
       
       workout = permitted_params[:workout]
       instructor = "#{workout[:instructor][:first_name]} #{workout[:instructor][:last_name]}"

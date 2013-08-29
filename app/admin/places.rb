@@ -41,6 +41,13 @@ ActiveAdmin.register Place do
       f.input :dropin_price
       f.input :can_buy
     end
+
+    f.inputs "Contract", :for => [ :place_contract, f.object.place_contract || PlaceContract.new ] do  |contract|
+      contract.input :price
+      contract.input :quantity
+      contract.input :discount
+    end 
+    
     f.actions
   end
 
@@ -48,6 +55,23 @@ ActiveAdmin.register Place do
   controller do
     def new
         redirect_to new_place_path
+    end
+
+    def update
+      place_params = permitted_params[:place]
+      contract_params = place_params[:place_contract_attributes]
+      contract_params[:place_id] = permitted_params[:id]
+      place_params = place_params.except!(:place_contract_attributes)
+      place = Place.find(permitted_params[:id])
+      place.update_attributes!(place_params)
+      if !place.place_contract.nil?
+        place.place_contract.destroy
+      end  
+      contract = PlaceContract.create(contract_params)
+      
+      place.workouts.where("start_time > ?", Time.now).update_all(:price => contract.price)
+      redirect_to admin_place_path(place)
+
     end
 
     def permitted_params
