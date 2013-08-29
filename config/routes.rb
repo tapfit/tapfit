@@ -44,7 +44,11 @@ Tapfit::Application.routes.draw do
           end
         end
         resources :payments do
-          post 'usecard', on: :collection
+          collection do
+            post 'usecard'
+            delete 'delete'
+            put 'default'
+          end
         end
       end 
 
