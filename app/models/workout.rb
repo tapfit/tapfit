@@ -3,6 +3,7 @@ class Workout < ActiveRecord::Base
   belongs_to :instructor
   belongs_to :place
   has_one :address, :through => :place
+  has_many :receipts
 
   def ratings
     return Rating.where(:workout_key => self.workout_key)
@@ -40,4 +41,13 @@ class Workout < ActiveRecord::Base
     options[:except] ||= except_array
     super(options)
   end
+
+  def discount_price
+    if self.place.place_contract.nil?
+      return nil
+    else
+      return self.place.place_contract.price
+    end
+  end
+
 end

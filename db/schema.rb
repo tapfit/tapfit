@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130828141419) do
+ActiveRecord::Schema.define(version: 20130829142657) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -253,6 +253,7 @@ ActiveRecord::Schema.define(version: 20130828141419) do
     t.datetime "updated_at"
     t.boolean  "can_buy"
     t.boolean  "is_day_pass",        default: false
+    t.float    "original_price"
   end
 
   add_index "workouts", ["end_time"], name: "index_workouts_on_end_time", using: :btree

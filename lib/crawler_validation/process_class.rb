@@ -50,6 +50,11 @@ class ProcessClass < ProcessBase
         end
       end
 
+      original_price = @price
+      if !place.place_contract.nil?
+        @price = place.place_contract.price
+      end
+
       if @source_description.nil?
         old_workout = Workout.where(:workout_key => workout_key).where("source_description IS NOT NULL").first
         if !old_workout.nil?
@@ -65,7 +70,7 @@ class ProcessClass < ProcessBase
         return
       end
       puts "is_day_pass: #{@is_day_pass}"
-      workout = Workout.new(:name => @name, :place_id => @place_id, :source_description => @source_description, :start_time => starts.utc, :end_time => ends.utc, :price => @price, :instructor_id => instructor.id, :source => @source, :workout_key => workout_key, :is_bookable => @is_bookable, :can_buy => true, :is_day_pass => @is_day_pass)
+      workout = Workout.new(:name => @name, :place_id => @place_id, :source_description => @source_description, :start_time => starts.utc, :end_time => ends.utc, :price => @price, :instructor_id => instructor.id, :source => @source, :workout_key => workout_key, :is_bookable => @is_bookable, :can_buy => true, :is_day_pass => @is_day_pass, :original_price => original_price)
       
       workout.is_day_pass = @is_day_pass 
 
