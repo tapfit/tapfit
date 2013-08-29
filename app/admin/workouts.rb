@@ -101,6 +101,14 @@ ActiveAdmin.register Workout do
       redirect_to admin_workout_path(workout) 
     end
 
+    def update
+      workout = permitted_params[:workout]
+      workout = workout.except!(:instructor)
+      workout = Workout.update(permitted_params[:id], workout)
+
+      redirect_to admin_workout_path(workout)
+    end
+
     def permitted_params
       params.permit!
     end
