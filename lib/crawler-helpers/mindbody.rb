@@ -29,15 +29,12 @@ module Mindbody
     content.search("tr").each do |row|
       # puts "row: #{row.text}, scrape_classes: #{scrape_classes}"
       if (row["class"] == "oddRow" || row["class"] == "evenRow") && scrape_classes
-        
-        puts "row: #{row.text}"
-
-        if !row.to_s.upcase.include?("SIGNUP")
-          puts "Can't sign up for this class"
-          next
-        end
 
         opts = {}
+        if !row.to_s.upcase.include?("SIGNUP")
+          puts "Can't sign up for this class"
+          opts[:is_cancelled] = true
+        end
          
         tds = row.search("td")
 
@@ -45,7 +42,7 @@ module Mindbody
           array = tds[1].text.split(" ")
           if array[2].to_i == 0
             puts "0 spots open in this class"
-            next
+            opts[:is_cancelled] = true
           end 
         end
         starts = Time.parse(tds[0].text)
