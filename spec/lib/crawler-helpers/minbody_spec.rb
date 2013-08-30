@@ -9,9 +9,12 @@ describe Mindbody do
     place.address = address
     place.can_buy = true
     place.save
-    url = "https://clients.mindbodyonline.com/ASP/home.asp?studioid=1815"
+    url = "http://clients.mindbodyonline.com/ws.asp?studio=PendletonPilates&stype=1&sLoc=2"
     puts "url: #{url}, time: #{DateTime.now + 1.days}"
-    Mindbody.get_classes(url, place.id, DateTime.now, "test")
+    Mindbody.get_classes(url, place.id, DateTime.now + 1, "test")
+
+    # Mindbody.get_classes(url, place.id, DateTime.now, "test")
+
 
     Workout.all.each do |w|
       puts w.attributes

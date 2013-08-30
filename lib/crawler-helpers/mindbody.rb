@@ -39,8 +39,12 @@ module Mindbody
         tds = row.search("td")
 
         if tds[1].text.include?("Open")
-          array = tds[1].text.split(" ")
-          if array[2].to_i == 0
+          text = tds[1].text
+          nbsp = Nokogiri::HTML("&nbsp;").text
+          puts "text: #{tds[1].text.to_s.strip}"
+          array = tds[1].content.split(nbsp)
+          puts "array: #{array}"
+          if array[3].to_i == 0
             puts "0 spots open in this class"
             opts[:is_cancelled] = true
           end 
