@@ -43,14 +43,13 @@ module Api
 
         result = Braintree::CreditCard.delete(token)
 
-        if result.success?
+        if result
           render :json => {
             :success => true
           }
         else
           render :json => {
-            :success => false,
-            :error_message => result.message
+            :success => false
           }, :status => 422
         end
       end
@@ -64,7 +63,7 @@ module Api
           }
         )
 
-        customer = Braintree::Customer.find(current_user.id)
+        # customer = Braintree::Customer.find(current_user.id)
 
         if result.success?
           render :json => {
@@ -122,20 +121,26 @@ module Api
         check_non_guest
         puts "has_payment_info: #{current_user.has_payment_info?}, braintree_id: #{current_user.braintree_customer_id}"
         if !current_user.has_payment_info?
-          result = Braintree::Customer.create(
-            :first_name => current_user.first_name,
-            :last_name => current_user.last_name,
-            :id => current_user.id
-          )
-          if result.success?
-            current_user.braintree_customer_id = result.customer.id
+          begin
+            customer = Braintree::Customer.find(current_user.id)
+            current_user.braintree_customer_id = current_user.id
             current_user.save
-          else
-            render :json => 
-            {
-              :success => false,
-              :error_message => result.message
-            }, :status => 422 and return
+          rescue Braintree::NotFoundError => e
+            result = Braintree::Customer.create(
+              :first_name => current_user.first_name,
+              :last_name => current_user.last_name,
+              :id => current_user.id
+            )
+            if result.success?
+              current_user.braintree_customer_id = result.customer.id
+              current_user.save
+            else
+              render :json => 
+              {
+                :success => false,
+                :error_message => result.message
+              }, :status => 422 and return
+            end
           end
         end
       end

@@ -23,7 +23,6 @@ describe Api::V1::PaymentsController do
 
     end
     it 'should add a credit card to a user who does not have a braintree id yet' do
-      Braintree::Customer.delete(1937402)
       @attr[:auth_token] = @user.authentication_token
       @user.id = 1937402
       @user.save
@@ -39,7 +38,7 @@ describe Api::V1::PaymentsController do
     end
 
     it 'should add a credit card to a user with a braintree account' do
-      Braintree::Customer.delete(@user.id)
+      # Braintree::Customer.delete(@user.id)
       result = Braintree::Customer.create(
         :first_name => @user.first_name,
         :last_name => @user.last_name,

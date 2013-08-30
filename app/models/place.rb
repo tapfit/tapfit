@@ -37,7 +37,7 @@ class Place < ActiveRecord::Base
 
     Time.zone = "UTC"
 
-    self.workouts.where("start_time BETWEEN ? AND ?", start_of_day, end_of_day)
+    self.workouts.where("start_time BETWEEN ? AND ?", start_of_day, end_of_day).where("price IS NOT NULL").where(:is_cancelled => false)
   end
 
   def self.get_nearby_places(lat, lon, radius, search)
@@ -88,11 +88,11 @@ class Place < ActiveRecord::Base
 
   def as_json(options={})
     if !options[:list].nil?
-      except_array ||= [ :crawler_source, :url, :icon_photo_id, :cover_photo_id, :source, :source_key, :tapfit_description, :source_description, :is_public, :can_dropin, :dropin_price, :updated_at, :address_id ]
+      except_array ||= [ :crawler_source, :url, :icon_photo_id, :cover_photo_id, :source, :source_key, :tapfit_description, :source_description, :is_public, :can_dropin, :dropin_price, :updated_at, :address_id, :is_cancelled ]
       options[:include] ||= [ :address, :categories ]
       options[:methods] ||= [ :class_times, :cover_photo, :icon_photo ]
     elsif !options[:detail].nil?    
-      except_array ||= [ :crawler_source, :icon_photo_id, :cover_photo_id, :source, :source_key, :is_public, :updated_at, :address_id ]
+      except_array ||= [ :crawler_source, :icon_photo_id, :cover_photo_id, :source, :source_key, :is_public, :updated_at, :address_id, :is_cancelled ]
       options[:include] ||= [ :address, :categories ]
       options[:methods] ||= [ :class_times, :cover_photo, :day_pass, :icon_photo, :reviews, :avg_rating, :total_ratings ]
     end

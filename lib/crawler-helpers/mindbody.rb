@@ -30,7 +30,7 @@ module Mindbody
       # puts "row: #{row.text}, scrape_classes: #{scrape_classes}"
       if (row["class"] == "oddRow" || row["class"] == "evenRow") && scrape_classes
         
-        # puts "row: #{row.to_s.upcase}"
+        puts "row: #{row.text}"
 
         if !row.to_s.upcase.include?("SIGNUP")
           puts "Can't sign up for this class"
@@ -41,6 +41,13 @@ module Mindbody
          
         tds = row.search("td")
 
+        if tds[1].text.include?("Open")
+          array = tds[1].text.split(" ")
+          if array[2].to_i == 0
+            puts "0 spots open in this class"
+            next
+          end 
+        end
         starts = Time.parse(tds[0].text)
 
         puts "starts: #{starts}"
