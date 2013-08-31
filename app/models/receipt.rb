@@ -16,6 +16,7 @@ class Receipt < ActiveRecord::Base
   def as_json(options={})
     options[:except] ||= [:place_id, :user_id, :workout_id, :workout_key, :updated_at, :has_booked ]
     options[:methods] ||= [ :workout_json, :place_json ]
+    options[:include] ||= [ :user ] 
     super(options)
   end 
 
