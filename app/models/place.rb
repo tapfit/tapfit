@@ -90,7 +90,7 @@ class Place < ActiveRecord::Base
     if !options[:list].nil?
       except_array ||= [ :crawler_source, :url, :icon_photo_id, :cover_photo_id, :source, :source_key, :tapfit_description, :is_public, :can_dropin, :dropin_price, :updated_at, :address_id, :is_cancelled ]
       options[:include] ||= [ :address, :categories ]
-      options[:methods] ||= [ :class_times, :cover_photo, :icon_photo ]
+      options[:methods] ||= [ :class_times, :cover_photo, :icon_photo, :avg_rating, :total_ratings ]
     elsif !options[:detail].nil?    
       except_array ||= [ :crawler_source, :icon_photo_id, :cover_photo_id, :source, :source_key, :is_public, :updated_at, :address_id, :is_cancelled ]
       options[:include] ||= [ :address, :categories ]

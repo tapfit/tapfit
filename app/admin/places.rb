@@ -9,6 +9,7 @@ ActiveAdmin.register Place do
     column :can_buy
     column :icon_photo
     column :cover_photo
+    column :category
     column :crawler_source
     column "City" do |i|
       i.address.city
@@ -40,6 +41,7 @@ ActiveAdmin.register Place do
       f.input :crawler_source
       f.input :dropin_price
       f.input :can_buy
+      f.input :category
     end
 
     f.inputs "Contract", :for => [ :place_contract, f.object.place_contract || PlaceContract.new ] do  |contract|
@@ -64,12 +66,17 @@ ActiveAdmin.register Place do
       place_params = place_params.except!(:place_contract_attributes)
       place = Place.find(permitted_params[:id])
       place.update_attributes!(place_params)
-      if !place.place_contract.nil?
-        place.place_contract.destroy
-      end  
-      contract = PlaceContract.create(contract_params)
+
+      puts contract_params
       
-      place.workouts.where("start_time > ?", Time.now).update_all(:price => contract.price)
+      if (!contract_params[:price].empty? || !contract_params[:discount].empty?) && !contract_params[:quantity]
+        if !place.place_contract.nil?
+          place.place_contract.destroy
+        end  
+        contract = PlaceContract.create(contract_params)
+        place.workouts.where("start_time > ?", Time.now).update_all(:price => contract.price)
+      end
+
       redirect_to admin_place_path(place)
 
     end
