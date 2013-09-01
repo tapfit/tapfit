@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130830172813) do
+ActiveRecord::Schema.define(version: 20130901230436) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -137,6 +137,7 @@ ActiveRecord::Schema.define(version: 20130830172813) do
     t.boolean  "can_buy"
     t.integer  "crawler_source"
     t.integer  "facility_type"
+    t.float    "lowest_price"
   end
 
   add_index "places", ["can_buy"], name: "index_places_on_can_buy", using: :btree
