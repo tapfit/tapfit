@@ -62,6 +62,6 @@ class Workout < ActiveRecord::Base
   end
 
   def avg_rating
-    return (self.ratings.count > 0) ? self.ratings.average(:rating) : -1
+    return (self.ratings.count > 0) ? self.ratings.average(:rating).to_i : -1
   end
 end
