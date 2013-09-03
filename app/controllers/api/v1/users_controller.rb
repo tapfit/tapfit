@@ -37,6 +37,7 @@ module Api
           user.save
           sign_in(:user, user)
           user.ensure_authentication_token!
+         
           
           result = Braintree::Customer.create(
             :first_name => user.first_name,

@@ -24,7 +24,7 @@ describe Api::V1::UsersController do
         :first_name => @user.first_name,
         :last_name => @user.last_name
       }
-      post :register, user: attr
+      # post :register, user: attr
 
 
       post :guest
@@ -34,7 +34,7 @@ describe Api::V1::UsersController do
       post :register, user: attr, auth_token: user.authentication_token
       User.where(:is_guest => true).count.should eql(0)
       User.all.last.id.should eql(user.id)
-      user = User.all.first
+      user = User.all.last
       user.has_payment_info?.should be_true
     end
 

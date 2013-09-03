@@ -119,6 +119,7 @@ describe Place do
   it 'should return an avg rating for a place' do
     rating = FactoryGirl.build(:rating)
     rating.place_id = @place.id
+    rating.rating = 5
     rating1 = FactoryGirl.build(:rating)
     rating1.place_id = @place.id
     rating1.rating = 4
