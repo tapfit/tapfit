@@ -62,7 +62,7 @@ class ProcessBase
 
     if @valid_keys.include?("price")
       if !check_price?(@price)
-        MailerUtils.write_error("price", @price, "#{source_name} from place: #{@place_id}")
+        MailerUtils.write_error("price", @price, "#{source_name} from place: #{@place_id}, for name: #{@name}")
         failed_processing = true
         puts "failed price"
       else
