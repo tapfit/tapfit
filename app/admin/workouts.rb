@@ -18,6 +18,12 @@ ActiveAdmin.register Workout do
 
   end
 
+  show do
+    panel "Workouts" do
+      table_for place.workouts
+    end
+  end
+
   filter :can_buy
   filter :place_name, :label => "Place Name", :as => :string
   filter :start_time
