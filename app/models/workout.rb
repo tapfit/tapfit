@@ -4,6 +4,7 @@ class Workout < ActiveRecord::Base
   belongs_to :place
   has_one :address, :through => :place
   has_many :receipts
+  belongs_to :pass_detail
 
   def ratings
     return Rating.where(:workout_key => self.workout_key)
@@ -64,4 +65,5 @@ class Workout < ActiveRecord::Base
   def avg_rating
     return (self.ratings.count > 0) ? self.ratings.average(:rating).to_i : -1
   end
+
 end

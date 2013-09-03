@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130901230436) do
+ActiveRecord::Schema.define(version: 20130903001946) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -84,6 +84,16 @@ ActiveRecord::Schema.define(version: 20130901230436) do
 
   add_index "instructors", ["email"], name: "index_instructors_on_email", unique: true, using: :btree
   add_index "instructors", ["phone_number"], name: "index_instructors_on_phone_number", unique: true, using: :btree
+
+  create_table "pass_details", force: true do |t|
+    t.integer  "place_id"
+    t.text     "fine_print"
+    t.text     "instructions"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "pass_details", ["place_id"], name: "index_pass_details_on_place_id", using: :btree
 
   create_table "photos", force: true do |t|
     t.integer  "user_id"
@@ -256,6 +266,7 @@ ActiveRecord::Schema.define(version: 20130901230436) do
     t.boolean  "is_day_pass",        default: false
     t.float    "original_price"
     t.boolean  "is_cancelled",       default: false
+    t.integer  "pass_detail_id"
   end
 
   add_index "workouts", ["end_time"], name: "index_workouts_on_end_time", using: :btree
@@ -263,6 +274,7 @@ ActiveRecord::Schema.define(version: 20130901230436) do
   add_index "workouts", ["is_bookable"], name: "index_workouts_on_is_bookable", using: :btree
   add_index "workouts", ["is_cancelled"], name: "index_workouts_on_is_cancelled", using: :btree
   add_index "workouts", ["is_day_pass"], name: "index_workouts_on_is_day_pass", using: :btree
+  add_index "workouts", ["pass_detail_id"], name: "index_workouts_on_pass_detail_id", using: :btree
   add_index "workouts", ["place_id"], name: "index_workouts_on_place_id", using: :btree
   add_index "workouts", ["source"], name: "index_workouts_on_source", using: :btree
   add_index "workouts", ["start_time"], name: "index_workouts_on_start_time", using: :btree

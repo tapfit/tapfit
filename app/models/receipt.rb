@@ -3,6 +3,7 @@ class Receipt < ActiveRecord::Base
   belongs_to :user
   belongs_to :place
   belongs_to :workout
+  has_one :pass_detail, :through => :workout
 
   def place_json
     self.place.as_json(:detail => true)
