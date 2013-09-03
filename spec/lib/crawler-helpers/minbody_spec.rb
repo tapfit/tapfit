@@ -8,19 +8,18 @@ describe Mindbody do
     address = FactoryGirl.create(:valid_address_with_coordinates)
     place.address = address
     place.can_buy = true
+    place.dropin_price = nil
     place.save
-    url = "http://clients.mindbodyonline.com/ws.asp?studio=PendletonPilates&stype=1&sLoc=2"
+    url = "https://clients.mindbodyonline.com/ASP/home.asp?studioid=25012"
     puts "url: #{url}, time: #{DateTime.now + 1.days}"
-    Mindbody.get_classes(url, place.id, DateTime.now + 1, "test")
+    Mindbody.get_classes(url, place.id, DateTime.now, "test")
 
     # Mindbody.get_classes(url, place.id, DateTime.now, "test")
 
-
+    # puts REDIS.lrange(MailerUtils.redis_key, 0, 100)  
     Workout.all.each do |w|
       puts w.attributes
     end
   end
-
-
 
 end

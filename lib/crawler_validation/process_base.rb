@@ -158,6 +158,9 @@ class ProcessBase
 
   def check_price?(price)
     price = price.to_s.gsub(/[$A-Za-z \n\t\r]/, "").rstrip
+    if price.nil?
+      return true
+    end
     return price.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? false : true 
   end
   def check_time?(time)
