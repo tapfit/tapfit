@@ -96,7 +96,11 @@ class ProcessClass < ProcessBase
 
       if workout.save
         puts "saved to database #{workout.name}, place_id: #{workout.place_id}"
-
+        lowest_price_workout = place.todays_workouts.order("price ASC").first
+        if !lowest_price_workout.nil?
+          place.lowest_price = lowest_price_workout.price
+          place.save
+        end
         return workout.id  
       else
         puts "failed to save #{workout.errors}"
