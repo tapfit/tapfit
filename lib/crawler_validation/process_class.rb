@@ -53,6 +53,8 @@ class ProcessClass < ProcessBase
         if !old_workout.nil?
           @price = old_workout.price
         end
+      else
+        @price = place.dropin_price
       end
 
       original_price = @price
@@ -86,7 +88,10 @@ class ProcessClass < ProcessBase
       if @is_day_pass.nil?
         @is_day_pass = false
       end
-      workout = Workout.new(:name => @name, :place_id => @place_id, :source_description => @source_description, :start_time => starts.utc, :end_time => ends.utc, :price => @price, :instructor_id => instructor.id, :source => @source, :workout_key => workout_key, :is_bookable => @is_bookable, :can_buy => true, :is_day_pass => @is_day_pass, :original_price => original_price, :is_cancelled => @is_cancelled)
+      
+      pass_detail = place.pass_details.first
+
+      workout = Workout.new(:name => @name, :place_id => @place_id, :source_description => @source_description, :start_time => starts.utc, :end_time => ends.utc, :price => @price, :instructor_id => instructor.id, :source => @source, :workout_key => workout_key, :is_bookable => @is_bookable, :can_buy => true, :is_day_pass => @is_day_pass, :original_price => original_price, :is_cancelled => @is_cancelled, :pass_detail_id = pass_detail)
       
       workout.is_day_pass = @is_day_pass 
 

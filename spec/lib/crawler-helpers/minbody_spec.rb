@@ -8,9 +8,9 @@ describe Mindbody do
     address = FactoryGirl.create(:valid_address_with_coordinates)
     place.address = address
     place.can_buy = true
-    place.dropin_price = nil
+    # place.dropin_price = nil
     place.save
-    url = "https://clients.mindbodyonline.com/ASP/home.asp?studioid=25012"
+    url = "https://clients.mindbodyonline.com/ASP/home.asp?studioid=19938"
     puts "url: #{url}, time: #{DateTime.now + 1.days}"
     Mindbody.get_classes(url, place.id, DateTime.now, "test")
 
