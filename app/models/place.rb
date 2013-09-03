@@ -28,7 +28,7 @@ class Place < ActiveRecord::Base
   end
 
   def todays_workouts
-    self.next_workouts.where(:is_day_pass => false)
+    self.next_workouts
   end
 
   def next_workouts
