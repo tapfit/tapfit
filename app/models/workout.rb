@@ -37,13 +37,14 @@ class Workout < ActiveRecord::Base
   end
 
   def as_json(options={})
+    
     if !options[:place].nil?
       except_array ||= [ :instructor_id, :place_id, :source_description, :workout_key, :source, :price, :updated_at, :pass_detail_id ]
-      options[:include] ||= [ :instructor, :fine_print ]
+      options[:include] ||= [ :instructor ]
     elsif !options[:detail].nil?      
       except_array ||= [ :updated_at, :workout_key, :source, :pass_detail_id ]
       options[:include] ||= [ :instructor ]
-      options[:method] ||= [ :quantity_left, :avg_rating, :fine_print ]
+      options[:methods] ||= [ :quantity_left, :avg_rating, :fine_print ]
     end
     options[:except] ||= except_array
     super(options)
