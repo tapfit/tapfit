@@ -9,14 +9,13 @@ class GoRecess < ResqueJob
 
   @source = "goRecess"
   @locations = LatLon.get_lat_lon
+  @base_url = "http://www.gorecess.com"
 
 =begin
   @locations = [{:lat => 39.110874, :lon => -84.5157}, {:lat => 41.882863, :lon => -87.628812}, {:lat => 37.77493, :lon => -122.419416}, {:lat => 40.714353, :lon => -74.005973}, {:lat => 38.627003, :lon => -90.199404}, {:lat => 33.835293, :lon => -117.914504}, {:lat => 34.052234, :lon => -118.243685}, {:lat => 29.760193, :lon => -95.36939}, {:lat => 39.952335, :lon => -75.163789}, {:lat => 33.448377, :lon => -112.074037}]
 =end
 
   def self.perform(page, location, date)
-    
-    return
 
     if Date.today != Date.parse(date.to_s)
       return
@@ -36,12 +35,9 @@ class GoRecess < ResqueJob
       else
         GoRecess.get_locations(page, date, location)
       end
-    else
-      GoRecess.get_classes_for_location(page, location, date)   
-    end
-    
+    end    
   end
-  
+
   def self.get_classes_for_location(url, place_id, date)
     date = DateTime.parse(date.to_s)
     params = 
@@ -93,6 +89,7 @@ class GoRecess < ResqueJob
 
       providers.each do |loc|
         place_id = self.get_location_info_and_save(loc)
+        return
         if !place_id.nil?
           puts loc["url"]
           # Resque.enqueue(GoRecess, loc["url"], place_id, date)
@@ -200,7 +197,7 @@ class GoRecess < ResqueJob
       opts[:phone_number] = phone_number
       opts[:source] = @source
       opts[:source_id] = gym_id
-      opts[:url] = location["url"]
+      opts[:schedule_url] = "#{@base_url}#{location["url"]}"
 
       if !description.nil?
         opts[:source_description] = description
@@ -211,7 +208,7 @@ class GoRecess < ResqueJob
     else
       place = Place.find(place_id)
       if (place.can_buy.nil? || !place.can_buy) && place.schedule_url.nil?
-        place.schedule_url = location["url"]
+        place.schedule_url = "#{@base_url}#{location["url"]}"
         place.save
       end
     end

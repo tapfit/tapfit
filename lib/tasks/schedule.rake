@@ -67,6 +67,14 @@ task :rerun_crawl_jobs => :environment do
 
 end
 
+task :update_go_recess_locations => :environment do
+  Resque.enqueue(GoRecess, 1, true, DateTime.now)
+end
+
+task :update_go_recess_boulder => :environment do
+  GoRecess.get_locations(1, DateTime.now, {:lat => 40.014986, :lon => -105.270546 } )
+end
+
 task :get_cincy_local => :environment do
   Resque.enqueue(CrawlCincyLocal, DateTime.now, nil)
   Resque.enqueue(CrawlCincyLocal, DateTime.now + 1, nil)

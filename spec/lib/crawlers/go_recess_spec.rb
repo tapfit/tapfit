@@ -103,7 +103,7 @@ describe GoRecess do
 
     place = Place.all.last
 
-    place.can_buy = true
+    # place.can_buy = true
     place.schedule_url = nil
     place.save
 
@@ -111,6 +111,6 @@ describe GoRecess do
 
     place = Place.find(place.id)
 
-
+    place.schedule_url.should be_nil
   end
 end
