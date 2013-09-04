@@ -24,7 +24,6 @@ class GoRecess < ResqueJob
     if !!location == location && location == true
       puts "location count: @locations.length"
       @locations.each do |loc|
-        sleep(10)
         Resque.enqueue(self, 1, loc, date)
       end
     elsif page == 1     
