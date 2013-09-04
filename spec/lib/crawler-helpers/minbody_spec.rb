@@ -10,7 +10,7 @@ describe Mindbody do
     place.can_buy = true
     place.dropin_price = nil
     place.save
-    url = "https://clients.mindbodyonline.com/ASP/home.asp?studioid=8432"
+    url = "https://clients.mindbodyonline.com/ASP/home.asp?studioid=619"
     puts "url: #{url}, time: #{DateTime.now + 1.days}"
     Mindbody.get_classes(url, place.id, DateTime.now, "test")
 

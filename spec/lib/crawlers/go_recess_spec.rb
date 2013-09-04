@@ -99,6 +99,18 @@ describe GoRecess do
   end
 
   it 'should get locations from go recess' do
-    # GoRecess.get_locations(1, DateTime.now, {:lat => 39.110874, :lon => -84.5157 } ) 
+    GoRecess.get_locations(1, DateTime.now, {:lat => 40.014986, :lon => -105.270546 } ) 
+
+    place = Place.all.last
+
+    place.can_buy = true
+    place.schedule_url = nil
+    place.save
+
+    GoRecess.get_locations(1, DateTime.now, {:lat => 40.014986, :lon => -105.270546 } )
+
+    place = Place.find(place.id)
+
+
   end
 end

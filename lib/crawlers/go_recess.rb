@@ -95,7 +95,7 @@ class GoRecess < ResqueJob
         place_id = self.get_location_info_and_save(loc)
         if !place_id.nil?
           puts loc["url"]
-          Resque.enqueue(GoRecess, loc["url"], place_id, date)
+          # Resque.enqueue(GoRecess, loc["url"], place_id, date)
         end
       end
       if page == 1 
@@ -200,6 +200,7 @@ class GoRecess < ResqueJob
       opts[:phone_number] = phone_number
       opts[:source] = @source
       opts[:source_id] = gym_id
+      opts[:url] = location["url"]
 
       if !description.nil?
         opts[:source_description] = description
@@ -207,6 +208,12 @@ class GoRecess < ResqueJob
       
       process_location = ProcessLocation.new(opts)
       place_id = process_location.save_to_database(@source)
+    else
+      place = Place.find(place_id)
+      if (place.can_buy.nil? || !place.can_buy) && place.schedule_url.nil?
+        place.schedule_url = location["url"]
+        place.save
+      end
     end
     return place_id
   end
