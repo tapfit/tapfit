@@ -89,7 +89,6 @@ class GoRecess < ResqueJob
 
       providers.each do |loc|
         place_id = self.get_location_info_and_save(loc)
-        return
         if !place_id.nil?
           puts loc["url"]
           # Resque.enqueue(GoRecess, loc["url"], place_id, date)
