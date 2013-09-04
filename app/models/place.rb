@@ -14,7 +14,7 @@ class Place < ActiveRecord::Base
   has_one :place_contract
   has_many :pass_details
   accepts_nested_attributes_for :place_contract
-  self.per_page = 25
+  self.per_page = 30
 
   # Methods
   def icon_photo
@@ -69,12 +69,12 @@ class Place < ActiveRecord::Base
   scope :nearby, lambda { |lat, lon, radius, ids|
     if ids.nil?
       return find_by_sql("SELECT places.*, 
-                    3956 * 2 * asin( sqrt ( pow ( sin (( #{lat} - lat) * pi() / 180 / 2), 2) + cos (#{lat} * pi() / 180 ) * cos ( lat * pi() / 180 ) * pow ( sin (( #{lon} - lon ) * pi() / 180 / 2 ), 2) ) ) as distance FROM places INNER JOIN addresses ON places.address_id = addresses.id WHERE lat BETWEEN #{lat - radius} AND #{lat + radius} AND lon BETWEEN #{lon - radius} AND #{lon + radius} ORDER BY distance") 
+                    3956 * 2 * asin( sqrt ( pow ( sin (( #{lat} - lat) * pi() / 180 / 2), 2) + cos (#{lat} * pi() / 180 ) * cos ( lat * pi() / 180 ) * pow ( sin (( #{lon} - lon ) * pi() / 180 / 2 ), 2) ) ) as distance FROM places INNER JOIN addresses ON places.address_id = addresses.id WHERE lat BETWEEN #{lat - radius} AND #{lat + radius} AND lon BETWEEN #{lon - radius} AND #{lon + radius} ORDER BY distance LIMIT 30") 
     elsif ids.length == 0
       return []
     else
       return find_by_sql("SELECT places.*, 
-                    3956 * 2 * asin( sqrt ( pow ( sin (( #{lat} - lat) * pi() / 180 / 2), 2) + cos (#{lat} * pi() / 180 ) * cos ( lat * pi() / 180 ) * pow ( sin (( #{lon} - lon ) * pi() / 180 / 2 ), 2) ) ) as distance FROM places INNER JOIN addresses ON places.address_id = addresses.id WHERE places.id IN (#{ids.join(", ")}) AND lat BETWEEN #{lat - radius} AND #{lat + radius} AND lon BETWEEN #{lon - radius} AND #{lon + radius} ORDER BY distance") 
+                    3956 * 2 * asin( sqrt ( pow ( sin (( #{lat} - lat) * pi() / 180 / 2), 2) + cos (#{lat} * pi() / 180 ) * cos ( lat * pi() / 180 ) * pow ( sin (( #{lon} - lon ) * pi() / 180 / 2 ), 2) ) ) as distance FROM places INNER JOIN addresses ON places.address_id = addresses.id WHERE places.id IN (#{ids.join(", ")}) AND lat BETWEEN #{lat - radius} AND #{lat + radius} AND lon BETWEEN #{lon - radius} AND #{lon + radius} ORDER BY distance LIMIT 30") 
 
     end
   }
