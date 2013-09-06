@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130903001946) do
+ActiveRecord::Schema.define(version: 20130905190324) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -125,6 +125,17 @@ ActiveRecord::Schema.define(version: 20130903001946) do
   end
 
   add_index "place_contracts", ["place_id"], name: "index_place_contracts_on_place_id", using: :btree
+
+  create_table "place_hours", force: true do |t|
+    t.integer  "day_of_week"
+    t.datetime "open"
+    t.datetime "close"
+    t.integer  "place_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "place_hours", ["place_id"], name: "index_place_hours_on_place_id", using: :btree
 
   create_table "places", force: true do |t|
     t.string   "name",                              null: false

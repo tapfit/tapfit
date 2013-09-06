@@ -22,6 +22,12 @@ class CrawlCincyLocal < ResqueJob
           GoRecess.get_classes(place.schedule_url, place.id, date)
         end
       end
+
+      if place.facility_type == FacilityType::DayPassWithClass || place.facility_type == FacilityType::DayPassNoClass
+        place.place_hours do |hour|
+          DayPass.create_day_pass(place, hour, date)
+        end
+      end 
     end
 
   end

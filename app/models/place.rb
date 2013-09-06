@@ -13,6 +13,8 @@ class Place < ActiveRecord::Base
   has_many :receipts
   has_one :place_contract
   has_many :pass_details
+  has_many :place_hours
+  accepts_nested_attributes_for :place_hours
   accepts_nested_attributes_for :place_contract
   self.per_page = 30
 

@@ -3,8 +3,7 @@
 FactoryGirl.define do
   factory :pass_detail do
     place_id 1
-    workout_id 1
     fine_print "MyText"
-    instructioins "MyText"
+    instructions "MyText"
   end
 end

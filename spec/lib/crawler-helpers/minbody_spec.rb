@@ -6,10 +6,14 @@ describe Mindbody do
   it 'should save a class from mindbody' do
     place = FactoryGirl.create(:place)
     address = FactoryGirl.create(:valid_address_with_coordinates)
+    pass_detail = FactoryGirl.build(:pass_detail)
+    pass_detail.place_id = place.id
+    pass_detail.save
     place.address = address
     place.can_buy = true
     place.dropin_price = nil
     place.save
+    place.pass_details.first.should_not be_nil
     url = "https://clients.mindbodyonline.com/ASP/home.asp?studioid=619"
     puts "url: #{url}, time: #{DateTime.now + 1.days}"
     Mindbody.get_classes(url, place.id, DateTime.now, "test")
