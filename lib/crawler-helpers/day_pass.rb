@@ -17,6 +17,7 @@ module DayPass
       opts[:price] = place.dropin_price
       opts[:source] = place.source
       opts[:place_id] = place.id
+      opts[:instructor] = "Open Gym"
       opts[:is_day_pass] = true
       opts[:source_description] = "Get full access to our facilities. Whether you want to run on the treadmill, lift weights or try one of our classes, we have you covered."
 
