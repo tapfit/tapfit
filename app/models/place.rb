@@ -119,7 +119,7 @@ class Place < ActiveRecord::Base
     now = Time.now
     end_of_day = Time.now.beginning_of_day + 24.hours
 
-    workouts = self.workouts.where("start_time BETWEEN ? AND ?", now, end_of_day).where(:is_day_pass => false).order("start_time ASC")
+    workouts = self.next_workouts.where("start_time BETWEEN ? AND ?", now, end_of_day).where(:is_day_pass => false).order("start_time ASC")
     
     Time.zone = "UTC"
     return workouts.pluck(:start_time)
