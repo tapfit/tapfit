@@ -20,6 +20,17 @@ task :send_email => :environment do
   MailerUtils.send_error_email
 end
 
+task :add_day_pass => :environment do
+  Place.where(:can_buy => true).each do |place|
+    if place.facility_type == 1 || place.facility_type == 2
+      place.place_hours.each do |hour|
+        DayPass.create_day_pass(place, hour, DateTime.now)
+        DayPass.create_day_pass(place, hour, DateTime.now + 1.days)
+      end
+    end
+  end
+end
+
 task :run_twitter_favorite => :environment do
   Time.zone = "America/New_York"
   if Time.now.hour > 7 && Time.now.hour < 23
