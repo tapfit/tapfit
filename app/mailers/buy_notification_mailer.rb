@@ -3,11 +3,13 @@ class BuyNotificationMailer < ActionMailer::Base
   default to: ["zack@tapfit.co"]
 
 
-  @emails = [ "zack@tapfit.co", "nick@tapfit.co", "scott@tapfit.co" ]
-  @numbers = [ "19377763643", "13126593275", "18474364229" ]
+
 
 
   def send_buy_email(receipt)
+    @emails = [ "zack@tapfit.co", "nick@tapfit.co", "scott@tapfit.co" ]
+    @numbers = [ "19377763643", "13126593275", "18474364229" ]
+
     @receipt = receipt
     @url = admin_receipts_url
     body = "#{receipt.user.first_name} just bought a pass. #{@url}"
