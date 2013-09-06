@@ -13,6 +13,7 @@ class BuyNotificationMailer < ActionMailer::Base
     @receipt = receipt
     @url = admin_receipts_url
     body = "#{receipt.user.first_name} just bought a pass. #{@url}"
+    puts body
     @numbers.each do |number|
       response = $nexmo.send_message({:to => number, :from => '17324409825', :text => body})
       if !response.ok?
