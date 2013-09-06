@@ -54,6 +54,7 @@ ActiveAdmin.register Place do
       contract.input :price
       contract.input :quantity
       contract.input :discount
+      contract.input :_destroy, :as => :boolean, :required => false, :label => "Delete Contract"
     end 
     
     f.actions
@@ -108,16 +109,27 @@ ActiveAdmin.register Place do
         end
       end
 
-      if (!contract_params[:price].empty? || !contract_params[:discount].empty?) && !contract_params[:quantity]
-        if !place.place_contract.nil?
-          place.place_contract.destroy
-        end  
-        contract = PlaceContract.create(contract_params)
-        place.workouts.where("start_time > ?", Time.now).update_all(:price => contract.price)
+      if contract_params[:id].nil?
+        contract_params = contract_params.except!(:_destroy)
+        create_contract(contract_params, place)
+      else
+        if contract_params[:_destroy] == "1"
+          PlaceContract.find(contract_params[:id]).destroy
+        else
+          PlaceContract.find(contract_params[:id]).destroy
+          contract_params = contract_params.except!(:id)
+          contract_params = contract_params.except!(:_destroy)
+          create_contract(contract_params, place)
+        end
       end
 
       redirect_to admin_place_path(place)
 
+    end
+
+    def create_contract(contract_params, place)        
+      contract = PlaceContract.create(contract_params)
+      place.workouts.where("start_time > ?", Time.now).update_all(:price => contract.price)
     end
 
     def permitted_params
