@@ -4,7 +4,9 @@ class BuyNotificationMailer < ActionMailer::Base
 
 
   @emails = [ "zack@tapfit.co", "nick@tapfit.co", "scott@tapfit.co" ]
-  @numbers = [ '19377763643', '13126593275', '18474364229' ]
+  @numbers = [ "19377763643", "13126593275", "18474364229" ]
+
+
   def send_buy_email(receipt)
     @receipt = receipt
     @url = admin_receipts_url
