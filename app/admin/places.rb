@@ -46,6 +46,7 @@ ActiveAdmin.register Place do
         hour.input :day_of_week
         hour.input :open
         hour.input :close
+        hour.input :_destroy, :as=>:boolean, :required => false, :label => 'Delete Hour'
       end
     end
 
@@ -97,7 +98,13 @@ ActiveAdmin.register Place do
         if hour_param[:id].nil?  
           PlaceHour.create(:day_of_week => hour_param[:day_of_week], :open => open, :close => close, :place_id => place_id)
         else
-          PlaceHour.update(hour_param[:id], :day_of_week => hour_param[:day_of_week], :open => open, :close => close)
+          puts hour_param[:_destroy]
+          if hour_param[:_destroy] == "1"
+            puts "Going to destroy"
+            PlaceHour.find(hour_param[:id]).destroy
+          else
+            PlaceHour.update(hour_param[:id], :day_of_week => hour_param[:day_of_week], :open => open, :close => close)
+          end
         end
       end
 
