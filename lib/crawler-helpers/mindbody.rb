@@ -54,6 +54,9 @@ module Mindbody
         puts "starts: #{starts}"
         # Need to parse DateTime because in resque, they convert all types to string
 
+        puts tds
+        puts tds[3].text.split("(")[0].strip
+
         opts[:start_time] = DateTime.parse(date.to_s).beginning_of_day.advance(:hours => starts.strftime("%H").to_i, :minutes => starts.strftime("%M").to_i)
         opts[:end_time] = opts[:start_time].advance(:hours => 1)    
 

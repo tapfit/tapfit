@@ -28,6 +28,7 @@ class ProcessClass < ProcessBase
       puts "failed to validate class"
     else
       place = Place.find(@place_id)
+      instructor_id = nil
       if !@instructor.nil?
         full_name = @instructor.split(" ")
         first_name = full_name[0] if full_name.length > 0
@@ -38,6 +39,7 @@ class ProcessClass < ProcessBase
         end
         instructor = place.instructors.where(:first_name => first_name, :last_name => last_name).first
         instructor = Instructor.create(:first_name => first_name, :last_name => last_name) if instructor.nil?
+        instructor_id = instructor.id
       end
       
       if place.can_buy
