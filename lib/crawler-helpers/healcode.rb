@@ -33,7 +33,13 @@ module Healcode
         if scrape_classes
           puts "About to scrape classes"
           node = table[num]
-          
+         
+          if !node.to_s.include?("signup")
+            puts "Can't sign into this class"
+            num = num + 1 
+            next
+          end
+
           opts = {}
           i = 0
           while i < node.children.length do
