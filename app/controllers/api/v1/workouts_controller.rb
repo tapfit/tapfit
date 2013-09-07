@@ -36,6 +36,8 @@ module Api
           render :json => { :error => "Workout with id, #{params[:id]}, is nil" }, :status => 422
         elsif @workout.can_buy.nil? || !@workout.can_buy
           render :json => { :error => "Can't buy workout with id, #{params[:id]}" }, :status => 422
+        elsif !@workout.quantity_left.nil? && @workout.quantity_left < 1
+          render :json => { :error => "No more passes left for the workout with id: #{params[:id]}" }, :status => 422
         else
 
           result = Braintree::Transaction.sale(
