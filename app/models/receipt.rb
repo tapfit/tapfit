@@ -28,6 +28,27 @@ class Receipt < ActiveRecord::Base
       self.pass_detail.instructions
     end
   end
+
+  def send_receipt_email
+    
+    template_name = "example template name"
+    template_content = [{"content"=>"example content", "name" => "example name"}] 
+    message = {}
+    message["subject"] = "Thanks for purchasing a pass!"
+    message["from_email"] = "support@tapfit.co"
+    message["from_name"] = "TapFit Team"
+    message["to"] = [ {"email" => self.user.email, "name" => self.user.first_name} ]
+    message["html"] = ""
+    message["text"] = ""
+    message["track_opens"] = true
+    message["track_clicks"] = true
+    async = false
+    ip_pool = "Main Pool"
+    puts message
+    $mandrill.messages.send_template(template_name, template_content, message, async, ip_pool)
+
+
+  end
   
 
   def as_json(options={})
