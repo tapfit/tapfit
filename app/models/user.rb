@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :place_favorites, :through => :favorite_places, :source => :place
   has_many :checkins
   has_many :place_checkins, :through => :checkins, :source => :place
+  # after_create :send_welcome_email
   
   def write_review_for_place(params, place_id)
     return Rating.new(:rating => params[:rating].to_i, :review => params[:review], :place_id => place_id.to_i, :user_id => self.id)
@@ -38,6 +39,24 @@ class User < ActiveRecord::Base
 
     super(opts)
     
+  end
+
+  def send_welcome_email
+    if !self.is_guest
+      message = {}
+      message["subject"] = "Welcome to TapFit!"
+      message["from_email"] = "support@tapfit.co"
+      message["from_name"] = "TapFit Team"
+      message["to"] = [ {"email" => self.email, "name" => self.first_name} ]
+      message["html"] = ""
+      message["text"] = ""
+      message["track_opens"] = true
+      message["track_clicks"] = true
+      async = false
+      ip_pool = "Main Pool"
+      puts message
+      $mandrill.messages.send(message, async, ip_pool)
+    end
   end
 
 end

@@ -37,6 +37,8 @@ module Api
           user.save
           sign_in(:user, user)
           user.ensure_authentication_token!
+
+          user.send_welcome_email
          
           
           result = Braintree::Customer.create(

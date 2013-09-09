@@ -26,6 +26,7 @@ gem 'timezone'
 gem 'braintree'
 gem 'nexmo'
 gem 'oauth'
+gem 'mandrill-api'
 
 # These gems for active admin
 gem 'responders',          github: 'plataformatec/responders'
