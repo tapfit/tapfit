@@ -15,6 +15,14 @@ describe User do
 
     rating = @user.write_review_for_place(params, @place.id)
     rating.save.should_not raise_error
-    @place.avg_rating.should eql(4)
+    @place.avg_rating.should eql(4.0)
+  end
+
+  it 'should send email' do
+    @user.email = "scott@tapfit.co"
+    @user.is_guest = false
+    @user.save
+
+    @user.send_welcome_email
   end 
 end
