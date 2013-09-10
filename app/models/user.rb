@@ -43,20 +43,21 @@ class User < ActiveRecord::Base
 
   def send_welcome_email
     if !self.is_guest
-      message = {}
-      message["subject"] = "Welcome to TapFit!"
-      message["from_email"] = "support@tapfit.co"
-      message["from_name"] = "TapFit Team"
-      message["to"] = [ {"email" => self.email, "name" => self.first_name} ]
-      message["html"] = ""
-      message["text"] = ""
-      message["track_opens"] = true
-      message["track_clicks"] = true
-      async = false
-      ip_pool = "Main Pool"
-      puts message
-      $mandrill.messages.send(message, async, ip_pool)
+        template_name = "tapfit-welcome-email"
+        template_content = [{"content"=>"example content", "name" => "example name"}] 
+        message = {}
+        message["subject"] = "Welcome to TapFit!"
+        message["from_email"] = "support@tapfit.co"
+        message["from_name"] = "TapFit"
+        message["to"] = [ {"email" => self.email, "name" => self.first_name} ]
+        message["html"] = ""
+        message["text"] = ""
+        message["track_opens"] = true
+        message["track_clicks"] = true
+        async = false
+        ip_pool = "Main Pool"
+        puts message
+        $mandrill.messages.send_template(template_name, template_content, message, async, ip_pool)
     end
   end
-
 end

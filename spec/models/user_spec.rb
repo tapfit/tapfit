@@ -22,7 +22,6 @@ describe User do
     @user.email = "scott@tapfit.co"
     @user.is_guest = false
     @user.save
-
     @user.send_welcome_email
   end 
 end
