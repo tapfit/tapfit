@@ -20,7 +20,7 @@ module Api
 
         token = nil
 
-        customer = Braintree::Customer.find(current_user.braintree_customer_id)
+        customer = get_braintree_customer
         customer.credit_cards.each do |cc|
           if cc.default?
             token = cc.token
@@ -99,7 +99,7 @@ module Api
       def index
         
         default_token = nil
-        braintree_customer = Braintree::Customer.find(current_user.braintree_customer_id)
+        braintree_customer = get_braintree_customer        
         braintree_customer.credit_cards.each do |cc|
           if cc.default?
             default_token = cc.token
@@ -143,6 +143,33 @@ module Api
             end
           end
         end
+      end
+
+      def get_braintree_customer
+        begin
+          customer = Braintree::Customer.find(current_user.id)
+          current_user.braintree_customer_id = current_user.id
+          current_user.save
+          return customer
+        rescue Braintree::NotFoundError => e
+          result = Braintree::Customer.create(
+            :first_name => current_user.first_name,
+            :last_name => current_user.last_name,
+            :id => current_user.id
+          )
+          if result.success?
+            current_user.braintree_customer_id = result.customer.id
+            current_user.save
+            return result.customer
+          else
+            render :json => 
+            {
+              :success => false,
+              :error_message => result.message
+            }, :status => 422 and return
+          end
+        end
+
       end
     end
   end
