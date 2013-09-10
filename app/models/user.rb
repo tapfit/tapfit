@@ -43,56 +43,21 @@ class User < ActiveRecord::Base
 
   def send_welcome_email
     if !self.is_guest
-    begin
-    mandrill = Mandrill::API.new 'w-ahykM1JL_ruQwu40d-5w'
-    template_name = "tapfit-purchase-confirmation"
-    template_content = [{"content"=>"example content", "name"=>"example name"}]
-    message = {"global_merge_vars"=>[{"content"=>"merge1 content", "name"=>"merge1"}],
-    "to"=>[{"name"=>self.first_name + self.last_name, "email"=>self.email}],
-    "signing_domain"=>nil,
-    "preserve_recipients"=>nil,
-    "google_analytics_domains"=>["example.com"],
-    "return_path_domain"=>nil,
-        "auto_text"=>nil,
-        "track_opens"=>nil,
-        "images"=>
-        [{"content"=>"ZXhhbXBsZSBmaWxl", "name"=>"IMAGECID", "type"=>"image/png"}],
-        "tracking_domain"=>nil,
-        "view_content_link"=>nil,
-        "track_clicks"=>nil,
-        "important"=>false,
-        "subject"=>"Purchase Confirmed: Thanks for your purchase!",
-        "html"=>"<p>Example HTML content</p>",
-        "auto_html"=>nil,
-        "inline_css"=>nil,
-        "from_email"=>"message.from_email@example.com",
-        "attachments"=>
-        [{"content"=>"ZXhhbXBsZSBmaWxl",
-        "name"=>"myfile.txt",
-        "type"=>"text/plain"}],
-        "tags"=>["password-resets"],
-        "merge_vars"=>
-        [{"vars"=>[{"content"=>"merge2 content", "name"=>"merge2"}],
-        "rcpt"=>self.email}],
-        "merge"=>true,
-        "bcc_address"=>"support@tapfit.co",
-        "text"=>"Example text content",
-        "metadata"=>{"website"=>"www.tapfit.co"},
-        "subaccount"=>"customer-123",
-        "url_strip_qs"=>nil,
-        "headers"=>{"Reply-To"=>"support@tapfit.co"},
-        "recipient_metadata"=>
-        [{"values"=>{"user_id"=>self.id}, "rcpt"=>self.email}],
-        "from_name"=>"TapFit"}
+        template_name = "tapfit-welcome-email"
+        template_content = [{"content"=>"example content", "name" => "example name"}] 
+        message = {}
+        message["subject"] = "Welcome to TapFit!"
+        message["from_email"] = "support@tapfit.co"
+        message["from_name"] = "TapFit"
+        message["to"] = [ {"email" => self.email, "name" => self.first_name} ]
+        message["html"] = ""
+        message["text"] = ""
+        message["track_opens"] = true
+        message["track_clicks"] = true
         async = false
         ip_pool = "Main Pool"
-        result = mandrill.messages.send_template template_name, template_content, message, async, ip_pool, send_at
-        rescue Mandrill::Error => e
-        # Mandrill errors are thrown as exceptions
-        puts "A mandrill error occurred: #{e.class} - #{e.message}"
-        # A mandrill error occurred: Mandrill::UnknownSubaccountError - No subaccount exists with the id 'customer-123'    
-        raise
-        end
-      end
+        puts message
+        $mandrill.messages.send_template(template_name, template_content, message, async, ip_pool)
+    end
   end
 end
