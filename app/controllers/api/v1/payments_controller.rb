@@ -6,6 +6,8 @@ module Api
       respond_to :json
 
       def create
+        
+        puts params
 
         result = Braintree::CreditCard.create(
           :customer_id => current_user.braintree_customer_id,
