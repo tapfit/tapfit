@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :place_favorites, :through => :favorite_places, :source => :place
   has_many :checkins
   has_many :place_checkins, :through => :checkins, :source => :place
+  has_many :credits
   # after_create :send_welcome_email
   
   def write_review_for_place(params, place_id)
@@ -34,11 +35,13 @@ class User < ActiveRecord::Base
   end
 
   def as_json(opts={})
-
-    opts[:except] ||= [ :braintree_customer_id, :updated_at, :created_at ]
+    if (!opts[:auth].nil?)
+      opts[:methods] ||= [:credit_amount]
+    end
+    
+    opts[:except] ||= [ :braintree_customer_id, :updated_at, :created_at, :title, :phone, :company_id ]
 
     super(opts)
-    
   end
 
   def send_welcome_email
@@ -58,6 +61,14 @@ class User < ActiveRecord::Base
         ip_pool = "Main Pool"
         puts message
         $mandrill.messages.send_template(template_name, template_content, message, async, ip_pool)
+    end
+  end
+
+  def credit_amount
+    if self.credits.count > 0
+      return self.credits.where("expiration_date IS NULL OR (expiration_date > ?)", DateTime.now).sum(:remaining)
+    else
+      return 0
     end
   end
 end

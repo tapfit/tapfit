@@ -12,7 +12,11 @@ module Api
       def show
         puts "auth token: #{current_user.authentication_token}"
         user = user_from_user_id
-        render :json => { :user => user.as_json }
+        if (current_user == user)
+          render :json => { :user => user.as_json(:auth => true) }
+        else
+          render :json => { :user => user.as_json }
+        end
       end
 
       # Registers a new user

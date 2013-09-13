@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130905190324) do
+ActiveRecord::Schema.define(version: 20130913172909) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -56,6 +56,26 @@ ActiveRecord::Schema.define(version: 20130905190324) do
 
   add_index "checkins", ["place_id"], name: "index_checkins_on_place_id", using: :btree
   add_index "checkins", ["user_id"], name: "index_checkins_on_user_id", using: :btree
+
+  create_table "companies", force: true do |t|
+    t.string   "name"
+    t.integer  "address_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "credits", force: true do |t|
+    t.float    "total"
+    t.float    "remaining"
+    t.datetime "expiration_date"
+    t.integer  "user_id"
+    t.integer  "promo_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "credits", ["promo_id"], name: "index_credits_on_promo_id", using: :btree
+  add_index "credits", ["user_id"], name: "index_credits_on_user_id", using: :btree
 
   create_table "favorites", force: true do |t|
     t.binary   "workout_key"
@@ -169,6 +189,18 @@ ActiveRecord::Schema.define(version: 20130905190324) do
   add_index "places", ["source"], name: "index_places_on_source", using: :btree
   add_index "places", ["source_key"], name: "index_places_on_source_key", using: :btree
 
+  create_table "promo_codes", force: true do |t|
+    t.integer  "company_id"
+    t.string   "code"
+    t.boolean  "has_used"
+    t.float    "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "promo_codes", ["company_id"], name: "index_promo_codes_on_company_id", using: :btree
+  add_index "promo_codes", ["has_used"], name: "index_promo_codes_on_has_used", using: :btree
+
   create_table "ratings", force: true do |t|
     t.integer  "rating",      null: false
     t.integer  "user_id",     null: false
@@ -252,9 +284,13 @@ ActiveRecord::Schema.define(version: 20130905190324) do
     t.string   "type"
     t.text     "braintree_customer_id"
     t.boolean  "is_guest",               default: false
+    t.string   "title"
+    t.string   "phone"
+    t.integer  "company_id"
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
+  add_index "users", ["company_id"], name: "index_users_on_company_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["is_guest"], name: "index_users_on_is_guest", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
