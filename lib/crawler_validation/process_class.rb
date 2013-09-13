@@ -76,7 +76,7 @@ class ProcessClass < ProcessBase
       workout = Workout.where(:workout_key => workout_key).where(:start_time => starts).first
       if !workout.nil?
         puts "Workout already exists"
-        if @is_cancelled == true
+        if !@is_cancelled.nil?
           puts "Updating workout to is_cancelled"
           workout.update_attributes(:is_cancelled => true)
         end

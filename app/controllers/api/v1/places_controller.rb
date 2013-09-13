@@ -28,6 +28,7 @@ module Api
         if @place.nil?
           return
         end
+
         render :json => @place.as_json(:detail => true)
       end
 
