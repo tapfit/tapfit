@@ -58,6 +58,12 @@ describe Api::V1::WorkoutsController do
         :place_id => @place.id,
         :id => @workout.id      
       }
+      
+      @credit = FactoryGirl.build(:credit)
+      @credit.total = 20
+      @credit.expiration_date = DateTime.now + 5.days
+      @credit.save
+      @user.credits << @credit
 
     end
 
@@ -68,6 +74,12 @@ describe Api::V1::WorkoutsController do
 
       post :buy, @attr     
       response.body.should include("no credit card")
+    end
+
+    it 'should use credits for user if it has them' do
+      post :buy, @attr
+      response.body.should include("true")
+      @user.credit_amount.should eql(20 - @workout.price)
     end
 
     it 'should buy a pass for a user with a credit card' do

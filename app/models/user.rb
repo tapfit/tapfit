@@ -71,4 +71,18 @@ class User < ActiveRecord::Base
       return 0
     end
   end
+
+  def use_credits(used_credits)
+    self.credits.where("expiration_date IS NULL OR (expiration_date > ?)", DateTime.now).order(:expiration_date).each do |credit|
+      if credit.remaining > used_credits
+        credit.remaining = credit.remaining - used_credits
+        credit.save
+        break
+      elsif credit.remaining > 0
+        used_credits = used_credits - credit.remaining
+        credit.remaining = 0
+        credit.save
+      end
+    end
+  end 
 end

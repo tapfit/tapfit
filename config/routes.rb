@@ -51,6 +51,7 @@ Tapfit::Application.routes.draw do
             put 'default'
           end
         end
+        resources :promo_codes, only: [ :create ]
       end 
 
       resources :users do

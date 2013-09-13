@@ -39,9 +39,23 @@ module Api
         elsif !@workout.quantity_left.nil? && @workout.quantity_left < 1
           render :json => { :error => "No more passes left for the workout with id: #{params[:id]}" }, :status => 422
         else
+          
+          price = @workout.price
 
+          if (current_user.credit_amount > price)
+            receipt = @workout.buy_workout(current_user)
+            current_user.use_credits(price)
+            render :json => {
+              :success => true,
+              :card_number => "Credits Used",
+              :credit_card_type => "credits",
+              :receipt => receipt } and return
+          elsif (current_user.credit_amount > 0)
+            price = price - current_user.credit_amount
+            current_user.use_credits(current_user.credit_amount)
+          end
           result = Braintree::Transaction.sale(
-            :amount => @workout.price,
+            :amount => price,
             :customer_id => current_user.braintree_customer_id,
             :venmo_sdk_payment_method_code => params[:venmo_sdk_payment_method_code]        
           )

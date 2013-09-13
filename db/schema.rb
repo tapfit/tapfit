@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130913172909) do
+ActiveRecord::Schema.define(version: 20130913191524) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -69,12 +69,12 @@ ActiveRecord::Schema.define(version: 20130913172909) do
     t.float    "remaining"
     t.datetime "expiration_date"
     t.integer  "user_id"
-    t.integer  "promo_id"
+    t.integer  "promo_code_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "credits", ["promo_id"], name: "index_credits_on_promo_id", using: :btree
+  add_index "credits", ["promo_code_id"], name: "index_credits_on_promo_code_id", using: :btree
   add_index "credits", ["user_id"], name: "index_credits_on_user_id", using: :btree
 
   create_table "favorites", force: true do |t|
