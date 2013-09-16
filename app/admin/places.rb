@@ -84,27 +84,28 @@ ActiveAdmin.register Place do
 
       # puts contract_params
       
+      if !hour_params.nil?
+        hour_params.keys.each do |key|
+          hour_param = hour_params[key]
+          hour_param[:place_id] = place_id
+          puts hour_param
 
-      hour_params.keys.each do |key|
-        hour_param = hour_params[key]
-        hour_param[:place_id] = place_id
-        puts hour_param
+          Time.zone = "UTC"
+          open = Time.now.utc.beginning_of_day.advance(:hours => hour_param["open(4i)"].to_i, :minutes => hour_param["open(5i)"].to_i)
+          close = Time.now.utc.beginning_of_day.advance(:hours => hour_param["close(4i)"].to_i, :minutes => hour_param["close(5i)"].to_i)
+          puts "open: #{open}"
+          puts "close: #{close}"
 
-        Time.zone = "UTC"
-        open = Time.now.utc.beginning_of_day.advance(:hours => hour_param["open(4i)"].to_i, :minutes => hour_param["open(5i)"].to_i)
-        close = Time.now.utc.beginning_of_day.advance(:hours => hour_param["close(4i)"].to_i, :minutes => hour_param["close(5i)"].to_i)
-        puts "open: #{open}"
-        puts "close: #{close}"
-
-        if hour_param[:id].nil?  
-          PlaceHour.create(:day_of_week => hour_param[:day_of_week], :open => open, :close => close, :place_id => place_id)
-        else
-          puts hour_param[:_destroy]
-          if hour_param[:_destroy] == "1"
-            puts "Going to destroy"
-            PlaceHour.find(hour_param[:id]).destroy
+          if hour_param[:id].nil?  
+            PlaceHour.create(:day_of_week => hour_param[:day_of_week], :open => open, :close => close, :place_id => place_id)
           else
-            PlaceHour.update(hour_param[:id], :day_of_week => hour_param[:day_of_week], :open => open, :close => close)
+            puts hour_param[:_destroy]
+            if hour_param[:_destroy] == "1"
+              puts "Going to destroy"
+              PlaceHour.find(hour_param[:id]).destroy
+            else
+              PlaceHour.update(hour_param[:id], :day_of_week => hour_param[:day_of_week], :open => open, :close => close)
+            end
           end
         end
       end

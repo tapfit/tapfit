@@ -6,6 +6,7 @@ class PromoCode < ActiveRecord::Base
   def default_values
     if self.has_used.nil?
       self.has_used = false
+      return true
     end
   end
 end
