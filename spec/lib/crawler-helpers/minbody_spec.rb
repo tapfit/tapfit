@@ -16,7 +16,7 @@ describe Mindbody do
     place.pass_details.first.should_not be_nil
     url = "https://clients.mindbodyonline.com/ASP/home.asp?studioid=30154"
     puts "url: #{url}, time: #{DateTime.now + 1.days}"
-    Mindbody.get_classes(url, place.id, DateTime.now, "test")
+    Mindbody.get_classes(url, place.id, DateTime.now + 1.days, "test")
 
     # Mindbody.get_classes(url, place.id, DateTime.now, "test")
 
