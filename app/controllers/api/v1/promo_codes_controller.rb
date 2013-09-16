@@ -15,7 +15,7 @@ module Api
           render :json => { :error => "Could not find promo code" }
         else
           if promo_code.has_used
-            render :json => { :error => "Promo code has been used" }
+            render :json => { :error => "Promo code has already been used" }
           else
             credit = Credit.create(:total => promo_code.amount, :user_id => current_user.id, :promo_code_id => promo_code.id)
             promo_code.has_used = true

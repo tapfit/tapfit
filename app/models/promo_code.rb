@@ -1,7 +1,7 @@
 class PromoCode < ActiveRecord::Base
   belongs_to :company
 
-  after_create :default_values
+  before_create :default_values
 
   def default_values
     if self.has_used.nil?
