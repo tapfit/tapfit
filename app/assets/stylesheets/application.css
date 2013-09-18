@@ -29,6 +29,7 @@ body {
 }
 
 .splash_container p {
+    line-height: 1.8em;
     font-size: 18px;
     color: #333333;
 }
@@ -163,8 +164,8 @@ body {
 #benefits_content {
     position: absolute;
     top: 70px;
-    left: 360px;
-    width: 420px;
+    left: 330px;
+    width: 450px;
     margin: 0;
     padding: 0;
 }
@@ -183,7 +184,7 @@ body {
 
 #benefits p {
     text-align: center;
-    font-size: 38px;
+    font-size: 32px;
     font-weight: 100;
     color: #EB4840;
 }
@@ -196,7 +197,7 @@ body {
 
 #what_content {
     position: absolute;
-    top: 70px;
+    top: 40px;
     left: 240px;
     width: 520px;
 }
@@ -222,8 +223,7 @@ body {
 
 #wellness {
     position: relative;
-    height: 900px;
-    border-top: 10px solid #EEEEEE;
+    height: 980px;
     background: url("splash_wellness.jpg") no-repeat bottom #FFFFFF;
     background-size: contain;
 }
@@ -236,7 +236,7 @@ body {
 }
 
 #wellness_icon {
-    top: 50px;
+    top: 70px;
 }
 
 .back_to_top {
@@ -267,6 +267,17 @@ body {
 
 #footer {
     position: relative;
+    text-align: center;
     background: #000000;
     height: 320px;
+}
+
+#footer h2 {
+    margin: 0;
+    padding: 40px;
+    color: #EB4840;
+}
+
+#footer img {
+    margin: 0 auto;
 }
