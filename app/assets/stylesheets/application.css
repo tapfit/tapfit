@@ -1,473 +1,220 @@
 /*
+ *
+ * TapFit
+ * Copyright 2013 TAPFIT, LLC
+ * Written by Scott Lieberman
+ *
+ */
 
-Mobile App Splash Page Template by MediaLoot
-URL: http://medialoot.com/item/mobile-app-splash-page-template
-
-Designer: Tony Thomas
-
-*/
 
 /*Main Styles*/
 
+html {
+    margin: 0;
+    padding: 0;
+}
+
 body {
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	margin: 0;padding: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-.photo-1 {background: url(/assets/photo-bg-1.jpg) no-repeat center top;}
-.photo-2 {background: url(/assets/photo-bg-2.jpg) no-repeat center top;}
-.photo-3 {background: url(/assets/photo-bg-3.jpg) no-repeat center top #111111;}
-.photo-4 {background: url(/assets/photo-bg-4.jpg) no-repeat center top;}
-
-.banner {
-	height: 740px;
-	width: 960px;
-	margin: 0 auto;
-	position: relative;
+.splash_container {
+    width: 100%;
 }
 
-.clear {
-	clear: both;
+.splash_container p {
+    font-size: 18px;
+    color: #333333;
 }
 
-.iphone_container
-{
-    width: 320px;
-    font-size: 12px;
+.icon_right {
+    position: absolute;
+    top: 70px;
+    left: 800px;
 }
 
-#mc_embed_signup {
-        background: none;
-        width: 600px;
-        clear: left;
-        font: 15px Helvetica,Arial,sans-serif;
-        position: absolute;
-        margin: 380px 0 0 0;
+.icon_left {
+    position: absolute;
+    top: 60px;
+    left: 200px;
 }
 
-#mc_embed_signup input.email {
-        height: 36px;
-        font-size: 20px;
-        width: 500px !important;
-        -moz-border-radius: 5px;
-        -webkit-border-radius: 5px;
-        border-radius: 5px;
+#tapfit_splash {
+    position: relative;
+    min-width: 1280px;
+    margin: 0 auto;
+    background: #FFFFFF;
 }
 
-#mc_embed_signup .button {
-        background-color: #3e4a5d !important;
-        height: 44px !important;
+#header {
+    height: 80px;
 }
 
-.banner #banner-logo {
-	font-family: 'Helvetica';
-	font-weight: normal;
-	font-size: 50px;
-	color: #fff;
-	text-shadow: 0 1px 1px rgba(0,0,0,0.5);
-	text-transform: uppercase;
-	letter-spacing: -1px;
-	line-height: 1;
-	margin: 60px 0 0 0;
-	position: absolute;
-	top: 0px; left: 0;
-	padding-left: 10px;
-        width: 247px;
-        height: 76px;
-        background: url(/assets/logo.png) no-repeat center top;
+#header ul {
+    list-style: none;
+    margin-left: 200px;
 }
 
-.banner h1 {
-	width: 600px;
-	font-family: 'Helvetica';
-	font-weight: normal;
-	font-size: 50px;
-	color: #fff;
-	text-shadow: 0 1px 1px rgba(0,0,0,0.5);
-	text-transform: uppercase;
-	letter-spacing: -1px;
-	line-height: 1;
-	margin: 160px 0 0 0;
-	position: absolute;
-	top: 0px; left: 0;
-	padding-left: 10px;
+#header ul li {
+    float: left;
+    margin-right: 70px;
+    line-height: 50px;
+    font-size: 18px;
+    color: #777;
+    cursor: pointer;
 }
 
-.banner h2 {
-	width: 620px;
-	font-family: 'Helvetica';
-	text-transform: uppercase;
-	font-size: 34px;
-	color: black;
-	color: rgba(0,0,0,.9);
-	letter-spacing: 0px;
-	line-height: 1;
-	position: absolute;
-	font-weight: 200;
-	top: 350px; left: 0;
-	text-shadow: 0 1px 1px rgba(255,255,255,0.25);
-	padding-left: 10px;
+#header ul li:hover {
+    color: #EB4840;
 }
 
-a.download-btn {
-	text-indent: -4999px;
-	display: block;
-	width: 224px;
-	height: 74px;
-	float: left;
-	margin: 0 20px 0 0;
-	position: absolute;
+#header ul li a {
+    font-size: 18px;
+    color: #777;
+    text-decoration: none;
+    cursor: pointer;
 }
 
-a.appstore {
-	background: url(/assets/download-app-store.png) no-repeat;
-	top: 380px; left: 10px;
+#top {
+    position: relative;
+    height: 550px;
 }
 
-a.android {
-	background: url(/assets/download-android.png) no-repeat;
-	top: 380px; left: 250px;
+.splash_phone {
+    position: absolute;
+    left: 200px;
+    top: 0px;
 }
 
-.iphone-5 {
-	width: 268px;
-	height: 586px;
-	display: block;
-	float: right;
-	position: absolute;
-	top: 20px; right: 50px;
-	background: url(/assets/iphone-5.png);
+.splash_logo {
+    position: absolute;
+    top: 0px;
 }
 
-.iphone-5 img {
-	margin: 84px 0 0 23px;
-        width: 220px;
+#top_content {
+    position: relative;
+    left: 600px;
+    top: 80px;
 }
 
-.galaxy-s3 {
-	width: 287px;
-	height: 583px;
-	display: block;
-	float: right;
-	position: absolute;
-	top: 20px; right: 50px;
-	background: url(/assets/galaxy-s3.png);
+#top_content_tagline {
+    position: absolute;
+    top: 100px;
+    width: 500px;
 }
 
-.galaxy-s3 img {
-	margin: 52px 0 0 19px;
+#top_content_cta {
+    position: absolute;
+    top: 250px;
+    width: 210px;
+    height: 50px;
+    background: url("download_button.png");
 }
 
-.page-content {
-	background: #f5f5f5 url(/assets/background.png) repeat;
-	min-height: 600px;
-	border-top: 1px solid #fff;
-	border-bottom: 1px solid #eee;
+#top_content_cta:hover {
+    background: url("download_button_hover.png");
+    cursor: pointer;
 }
 
-h3 {
-	text-align: center;
-	color: #3e444a;
-	font-family: 'Helvetica';
-	font-size: 62px;
-	text-transform: uppercase;
-	margin: 60px auto 0 auto;
-	width: 960px;
-	letter-spacing: -1px;
-	text-shadow: 0 1px 0 #fff;
+#benefits_link {
+    height: 140px;
+    background: #EB4840;
 }
 
-p {
-	text-align: center; 
-	color: #858585;
-	font-size: 20px;
-	font-weight: lighter;
-	margin: 10px auto 0 auto;
-	text-shadow: 0 1px 0 #fff;
+.link_to_benefits {
+    position: relative;
+    left: 600px;
+    top: 50px;
+    width: 500px;
+    font-size: 30px;
+    text-decoration: none;
+    color: #FFFFFF;
 }
 
-.hr {
-	width: 960px;
-	height: 11px;
-	background: url(/assets/hr.png) no-repeat;
-	display: block;
-	position: static;
-	margin: 40px auto;
+.link_to_benefits:hover {
+    color: #CCCCCC;
 }
 
-ul.steps {
-	list-style: none;
-	width: 920px;
-	margin: 0 auto;
-	
+.benefits_ss {
+    position: absolute;
+    top: 100px;
+    left: 840px;
 }
 
-ul.steps li {
-	float: left;
-	display: inline-block;
-	width: 280px;
-	margin: 0 10px;
-	
+#benefits {
+    position: relative;
+    height: 746px;
+    background: url("splash_benefits.png") no-repeat top center;
+    background-size: cover;
 }
 
-ul.steps li.step-1 {
-	background: url(/assets/step-1.png) no-repeat center top;
-}
-ul.steps li.step-2 {
-	background: url(/assets/step-2.png) no-repeat center top;
-}
-ul.steps li.step-3 {
-	background: url(/assets/step-3.png) no-repeat center top;
-}
-
-.steps h4 {
-	font-size: 22px;
-	color: #353434;
-	text-align: center;
-	margin: 135px 0 15px 0;
+#benefits_content {
+    position: absolute;
+    top: 180px;
+    left: 360px;
+    width: 420px;
+    margin: 0;
+    padding: 0;
 }
 
-.steps p {
-	font-size: 14px;
-	color: #a6adb6;
-	margin: 0;
-	letter-spacing: 0px;
+#benefits h1, #what h1, #who h1, #trainers h1 {
+    font-size: 50px;
+    color: #111;
 }
 
-.footer {
-	width: 960px;
-	margin: 0 auto;
+#benefits p, #what p, #who p, #trainers p {
+    font-size: 18px;
+    color: #333333;
 }
 
-.footer .logo {
-	width: 120px;
-	height: 45px;
-	background: url(/assets/logo.png) no-repeat;
-        background-size: 120px;
-	text-indent: -4999px;
-	float: left;
-	margin: 30px 0 20px 10px;
+#what {
+    position: relative;
+    height: 450px;
+    border-top: 10px solid #AAAAAA;
 }
 
-.footer .tagline {
-	float: left;
-	margin: 40px 0 0 20px;
-	color: #aaaaaa;
-	font-size: 16px;
-	font-weight: lighter;
-	letter-spacing: 1px;
+#what_content {
+    position: absolute;
+    top: 70px;
+    left: 200px;
+    width: 520px;
 }
 
-.copyright {
-	clear: both;
-	border-top: 1px solid #333;
-	padding: 20px 0 40px 10px;
-	color: #aaaaaa;
-	font-size: 12px;
-	font-weight: lighter;
-	letter-spacing: 1px;
+#who {
+    position: relative;
+    height: 750px;
+    background: url("splash_who.png") no-repeat top #FFFFFF;
+    background-size: contain;
 }
 
-/*Mobile Device Styles*/
-
-@media only screen and (max-width:960px){
-	.page-content{
-		width: 960px;
-		margin: 0 auto;
-	}
-
+#who_icon, #trainers_icon {
+    top: 400px;
 }
-@media only screen and (max-width:480px){
-	
-	.banner {
-		width: 100%;
-		height: inherit;
-		position: static;
-		padding-bottom: 20px;
-	}
-	.banner h1 {
-		width: 90%;
-		font-size: 50px;
-		color: #fff;
-		line-height: 1;
-		text-shadow: none;
-		margin: 40px 5% 0 5%;
-		text-align: center;
-		position: static;
-		padding-left: 0;
-	}
-        
-        #mc_embed_signup {
-                background: none;
-                width: 90%;
-                font: 15px Helvetica,Arial,sans-serif;
-                position: static;
-                text-align: center;
-                padding-left: 0;
-                margin: 20px 5% 0 5%;
-                line-height: 1;
-        }
 
-        #mc_embed_signup input.email {
-                height: 36px;
-                font-size: 14px;
-                width: 100% !important;
-                -moz-border-radius: 5px;
-                -webkit-border-radius: 5px;
-                border-radius: 5px;
-        }
+#who_content {
+    position: absolute;
+    top: 420px;
+    left: 600px;
+    width: 520px;
+}
 
-        #mc_embed_signup .button {
-                background-color: #3e4a5d !important;
-                height: 44px !important;
-                width: 100% !important;
-        }
+#trainers {
+    position: relative;
+    height: 850px;
+    background: url("splash_trainers.png") no-repeat top #FFFFFF;
+    background-size: contain;
+}
 
-        .banner #banner-logo {
-		width: 90%;
-		font-size: 50px;
-		color: #fff;
-		line-height: 1;
-		text-shadow: none;
-		margin: 40px 5% 0 5%;
-		text-align: center;
-		position: static;
-		padding-left: 0;
-        }
-	
-	.banner h2 {
-		width: 90%;
-		font-size: 24px;
-		line-height: 1;
-		margin: 30px 5% 40px 5%;
-		text-align: center;
-		position: static;
-		padding-left: 0;
-	}
-	
-	a.download-btn {
-		margin: 0px auto 20px auto;
-		display: block;
-		float: none;
-		position: static;
-	}
-	
-	.iphone-5 {
-		position: static;
-		width: 268px;
-		float: none;
-		margin: 50px auto 0 auto;
-	}
-	
-	.galaxy-s3 {
-		position: static;
-		width: 287px;
-		float: none;
-		margin: 50px auto 0 auto;
-	}
-		
-	.iphone-5 img {
-		margin: 84px 0 0 23px;
-	}
-	
-	.page-content {
-		border-top: 1px solid #fff;
-		border-bottom: 1px solid #eee;
-		width: inherit;
-		display: block;
-		height: inherit;
-		padding: 0 auto;
-	}
-	
-	h3 {
-		text-align: center;
-		color: #3e444a;
-		font-family: 'Helvetica';
-		font-size: 46px;
-		text-transform: uppercase;
-		margin: 50px auto 0 auto;
-		letter-spacing: -1px;
-		text-shadow: 0 1px 0 #fff;
-		width: inherit;
-	}
-	
-	p {
-		text-align: center;
-		color: #858585;
-		font-size: 18px;
-		font-weight: lighter;
-		margin: 10px auto 0 auto;
-		text-shadow: 0 1px 0 #fff;
-		letter-spacing: 1px;
-	}
-	
-	.hr {
-		display: none;
-	}
-	
-	ul.steps {
-		list-style: none;
-		width: 100%;
-		margin: 60px 0 0 0;
-		padding: 0;
-		position: static;
-		float: none;
-	}
-	
-	ul.steps li {
-		display: block;
-		width: 80%;
-		margin: 0 auto 50px auto;
-		padding: 0;
-		position: static;
-		float: none;
-	}
-	
-	ul.steps li.step-1 {
-		background: url(/assets/step-1.png) no-repeat center top;
-	}
-	ul.steps li.step-2 {
-		background: url(/assets/step-2.png) no-repeat center top;
-	}
-	ul.steps li.step-3 {
-		background: url(/assets/step-3.png) no-repeat center top;
-	}
-	
-	.steps h4 {
-		font-size: 22px;
-		color: #353434;
-		text-align: center;
-		margin: 50px 0 15px 0;
-		padding-top: 140px;
-	}
-	
-	.steps p {
-		font-size: 15px;
-		color: #a6adb6;
-		margin: 0;
-		letter-spacing: 0px;
-	}
-	
-	.footer {
-		width: 100%;
-	}
-	
-	.footer .logo {
-		float: none;
-		margin: 30px auto 0px auto;
-	}
-	
-	.footer .tagline {
-		float: none;
-		margin: 30px 0 0 0px;
-		padding: 0 20px;
-		text-align: center;
-	}
-	
-	.copyright {
-		text-align: center;
-		float: none;
-		margin-top: 20px;
-		padding: 20px;
-	}
+#trainers_content {
+    position: absolute;
+    top: 420px;
+    left: 200px;
+    width: 520px;
+}
+
+#footer {
+    background: #000000;
+    height: 320px;
 }
