@@ -16,12 +16,13 @@ html {
 }
 
 body {
+    background: #EF4840;
     width: 100%;
     height: 100%;
     margin: 0px;
     padding: 0px;
     overflow-x: hidden; 
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "effra", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .splash_container {
@@ -30,6 +31,12 @@ body {
 .splash_container p {
     font-size: 18px;
     color: #333333;
+}
+
+.centerizer {
+    position: relative;
+    width: 1280px;
+    margin: 0 auto;
 }
 
 .icon_right {
@@ -58,7 +65,7 @@ body {
 
 #header ul {
     list-style: none;
-    margin-left: 200px;
+    margin-left: 140px;
 }
 
 #header ul li {
@@ -70,12 +77,12 @@ body {
     cursor: pointer;
 }
 
-#header ul li:hover {
+#header ul li a:hover {
     color: #EB4840;
 }
 
 #header ul li a {
-    font-size: 18px;
+    font-size: 16px;
     color: #777;
     text-decoration: none;
     cursor: pointer;
@@ -106,19 +113,18 @@ body {
 #top_content_tagline {
     position: absolute;
     top: 100px;
-    width: 500px;
+    width: 550px;
 }
 
 #top_content_cta {
     position: absolute;
-    top: 250px;
+    top: 320px;
     width: 210px;
     height: 50px;
     background: url("download_button.png");
 }
 
 #top_content_cta:hover {
-    background: url("download_button_hover.png");
     cursor: pointer;
 }
 
@@ -163,50 +169,86 @@ body {
     padding: 0;
 }
 
-#benefits h1, #what h1, #who h1, #trainers h1 {
+.splash_container p {
+    font-family: "proxima-nova", sans-serif;
+    font-weight: 100;
+    font-size: 20px;
+    color: #333333;
+}
+
+#benefits h1, #what h1, #who h1, #trainers h1, #wellness h1 {
     font-size: 50px;
     color: #111;
 }
 
-#what p, #who p, #trainers p {
-    font-size: 18px;
-    color: #333333;
-}
-
 #benefits p {
-    font-size: 34px;
+    text-align: center;
+    font-size: 38px;
+    font-weight: 100;
     color: #EB4840;
 }
 
 #what {
     position: relative;
     height: 450px;
-    border-top: 10px solid #AAAAAA;
+    border-top: 10px solid #CCCCCC;
 }
 
 #what_content {
     position: absolute;
     top: 70px;
-    left: 200px;
+    left: 240px;
     width: 520px;
 }
 
 #who {
     position: relative;
     height: 800px;
+    border-top: 10px solid #DDDDDD;
     background: url("splash_who.png") no-repeat top #FFFFFF;
     background-size: contain;
 }
 
 #who_icon, #trainers_icon {
-    top: 400px;
+    top: 440px;
 }
 
 #who_content {
     position: absolute;
     top: 420px;
-    left: 600px;
+    left: 540px;
+    width: 540px;
+}
+
+#wellness {
+    position: relative;
+    height: 900px;
+    border-top: 10px solid #EEEEEE;
+    background: url("splash_wellness.jpg") no-repeat bottom #FFFFFF;
+    background-size: contain;
+}
+
+#wellness_content {
+    position: absolute;
+    top: 30px;
+    left: 540px;
     width: 520px;
+}
+
+#wellness_icon {
+    top: 50px;
+}
+
+.back_to_top {
+    position: absolute;
+    top: 200px;
+    right: 140px;
+}
+
+.next_button {
+    position: absolute;
+    top: 200px;
+    right: 240px;
 }
 
 #trainers {
@@ -219,7 +261,7 @@ body {
 #trainers_content {
     position: absolute;
     top: 420px;
-    left: 200px;
+    left: 240px;
     width: 520px;
 }
 
