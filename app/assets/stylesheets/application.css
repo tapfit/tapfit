@@ -10,18 +10,21 @@
 /*Main Styles*/
 
 html {
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
 }
 
 body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    margin: 0;
-    padding: 0;
 }
 
 .splash_container {
-    width: 100%;
 }
 
 .splash_container p {
@@ -49,6 +52,7 @@ body {
 }
 
 #header {
+    position: relative;
     height: 80px;
 }
 
@@ -152,7 +156,7 @@ body {
 
 #benefits_content {
     position: absolute;
-    top: 180px;
+    top: 70px;
     left: 360px;
     width: 420px;
     margin: 0;
@@ -164,9 +168,14 @@ body {
     color: #111;
 }
 
-#benefits p, #what p, #who p, #trainers p {
+#what p, #who p, #trainers p {
     font-size: 18px;
     color: #333333;
+}
+
+#benefits p {
+    font-size: 34px;
+    color: #EB4840;
 }
 
 #what {
@@ -184,7 +193,7 @@ body {
 
 #who {
     position: relative;
-    height: 750px;
+    height: 800px;
     background: url("splash_who.png") no-repeat top #FFFFFF;
     background-size: contain;
 }
@@ -215,6 +224,7 @@ body {
 }
 
 #footer {
+    position: relative;
     background: #000000;
     height: 320px;
 }
