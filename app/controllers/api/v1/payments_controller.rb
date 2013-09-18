@@ -56,9 +56,20 @@ module Api
 
         result = Braintree::CreditCard.delete(token)
 
+        token = nil
+
+        customer = get_braintree_customer
+        customer.credit_cards.each do |cc|
+          if cc.default?
+            token = cc.token
+            break
+          end
+        end
+
         if result
           render :json => {
-            :success => true
+            :success => true,
+            :default_card => token
           }
         else
           render :json => {
