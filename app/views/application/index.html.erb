@@ -1,51 +1,56 @@
-<!DOCTYPE html>
-
-<html>
-<head>
-	
-	<meta charset="utf-8" />
-	
-	<title>Mobile App Splash Page Template</title>
-	<meta name="viewport" content="width=device-width" />
-</head>
-<body class="photo-3">
-	<div class="banner">
-                <div id="banner-logo"></div>
-		<h1>Your workout should be tough. Finding one shouldn't be.</h1>
-                <!-- Begin MailChimp Signup Form -->
-                <link href="http://cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
-                  <div id="mc_embed_signup">
-                  <form action="http://tapfit.us7.list-manage.com/subscribe/post?u=b919071f943ccf9dda0f85af2&amp;id=63b9dd7f9c" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                        <label for="mce-EMAIL"></label>
-                        <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email to get notified when we launch!" required>
-                        <div class="clear"><input type="submit" value="Keep Me Posted" name="subscribe" id="mc-embedded-subscribe" class="button" onClick="_gaq.push(['_trackEvent', 'Forms', 'Sign Up', 'Pre-Launch']);"></div>
-                   </form>
-                </div>
-                <!--End mc_embed_signup-->
-	</div>
-	<div class="page-content">
-		<h3>WE'RE LAUNCHING SOON</h3>
-		<p>Stay tuned as we work hard to launch and help you take control of your fitness!</p>
-		<div class="hr"></div>
-		
-		<ul class="steps">
-			<li class="step-1">
-				<h4>Shake up your routine</h4>
-				<p>We've done the leg work so you can just work out.  Discover the best local options going on right now, near you!</p>
-			</li>
-			<li class="step-2">
-				<h4>New city? No problem!</h4>
-				<p>Pack a bag, some shoes and TapFit to help you break free from hotel gyms and into a healthier life on the road!</p>
-			</li>
-			<li class="step-3">
-				<h4>At your service</h4>
-				<p>TapFit acts as your personal fitness concierge, finding you the best workouts nearby. And we're always here to help.</p>
-			</li><br class="clear" />
-		</ul>
-	</div>
-	<div class="footer">
-		<div class="logo">TapFit</div><div class="tagline">Less Work. More Workouts.</div>
-		<div class="copyright">Copyright notice &copy; 2013 TAPFIT, LLC. All Rights Reserved.
-	</div>
-</body>
-</html>
+<div id="tapfit_splash">
+    <div id="header">
+        <ul>
+            <li class="link_to_what">WHAT IS TAPFIT?</li>
+            <li class="link_to_who">OUR MISSION</li>
+            <li class="link_to_trainers">FOR TRAINERS</li>
+            <li class="link_to_blog"><a href="http://blog.tapfit.co" target="_blank">BLOG</a></li>
+        </ul>
+    </div>
+    <div class="splash_container" id="top">
+        <%= image_tag "splash_iphone.png", :class => "splash_phone" %>
+        <div id="top_content">
+          <%= image_tag "logo_horizontal.png", :class => "splash_logo" %>
+          <p id="top_content_tagline">
+            <%= image_tag "tagline.png" %>
+            <br/><br/><br/>
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+          <a href="https://itunes.apple.com/us/app/tapfit/id683430709?ls=1&mt=8" id="top_content_cta" target="_blank"></a>
+          <div id="top_content_social_links">
+          </div>
+        </div>
+    </div>
+    <div class="splash_container" id="benefits_link">
+        <a href="#benefits" class="link_to_benefits">See what we're all about</a>
+    </div>
+    <div class="splash_container" id="benefits">
+        <%= image_tag "benefits_ss_1.png", :class => "benefits_ss" %>
+        <div id="benefits_content">
+            <p>It's very simple. I want to run, jump, lift, stretch, and play. I don't want to sign contracts, pay for something I don't use, fit my life around someone else's schedule, and feel tied down to something I don't believe in. Why does something so simple have to feel so complicated?</p>
+        </div>
+    </div>
+    <div class="splash_container" id="what">
+        <%= image_tag "what_icon.png", :class => "icon_right", :id => "what_icon" %>
+        <div id="what_content">
+            <h1>What is TapFit?</h1>
+            <p>TapFit's team of fitness experts works hard to curate the best gyms in the country. So whether you're moving across the country, traveling for work, or just want to try something new, TapFit will always be there with the best fitness recommendations.</p>
+        </div>
+    </div>
+    <div class="splash_container" id="who">
+        <%= image_tag "who_icon.png", :class => "icon_left", :id => "who_icon" %>
+        <div id="who_content">
+            <h1>Who is TapFit?</h1>
+            <p>TapFit's team of fitness experts works hard to curate the best gyms in the country. So whether you're moving across the country, traveling for work, or just want to try something new, TapFit will always be there with the best fitness recommendations.</p>
+        </div>
+    </div>
+    <div class="splash_container" id="trainers">
+        <%= image_tag "trainers_icon.png", :class => "icon_right", :id => "trainers_icon" %>
+        <div id="trainers_content">
+            <h1>For Trainers</h1>
+            <p>TapFit's team of fitness experts works hard to curate the best gyms in the country. So whether you're moving across the country, traveling for work, or just want to try something new, TapFit will always be there with the best fitness recommendations.</p>
+        </div>
+    </div>
+    <div id="footer">
+    </div>
+</div>

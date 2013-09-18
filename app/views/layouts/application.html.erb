@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Tapfit</title>
+  <title>TapFit</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
@@ -13,13 +13,9 @@
 
     ga('create', 'UA-43021003-1', 'tapfit.co');
     ga('send', 'pageview');
-    setTimeout("_gaq.push(['_trackEvent', '15_seconds', 'read'])",15000);
-
     </script>
 </head>
 <body>
-
 <%= yield %>
-
 </body>
 </html>
