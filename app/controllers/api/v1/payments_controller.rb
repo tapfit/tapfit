@@ -21,11 +21,19 @@ module Api
         )
 
         token = nil
+        last_four = nil
+        card_type = nil
+        image_url = nil
+
+
 
         customer = get_braintree_customer
         customer.credit_cards.each do |cc|
           if cc.default?
             token = cc.token
+            last_four = cc.last_4
+            card_type = cc.card_type
+            image_url = cc.image_url
             break
           end
         end
@@ -33,7 +41,10 @@ module Api
         if result.success?
           render :json => { 
             :success => true,
-            :credit_card => token
+            :credit_card => token,
+            :last_four => last_four,
+            :card_type => card_type,
+            :image_url => image_url
           }
         else
           render :json => { :success => false, :error_message => result.message }, :status => 422
