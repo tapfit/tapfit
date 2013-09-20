@@ -32,6 +32,9 @@ Tapfit::Application.routes.draw do
           post 'favorite'  
           post 'checkin' 
         end    
+        collection do
+          get 'search'
+        end
       end
  
       resources :regions

@@ -32,6 +32,11 @@ module Api
         render :json => @place.as_json(:detail => true)
       end
 
+      def search
+        @places = Place.where("UPPER(name) LIKE ?", "%#{params[:q].to_s.upcase}%") 
+        render :json => @places.as_json(:search => true)
+      end
+
       def favorite
         if check_place(params[:id]).nil?
           return
