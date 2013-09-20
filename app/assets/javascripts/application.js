@@ -22,6 +22,19 @@ $(window).bind('scroll',function(e){
 parallaxScroll();
 });
 
+$(window).bind('resize',function(e){
+adjustElementsOnResize();
+});
+
+$('a.link_to_top').click(function(){
+$('html, body').animate({
+scrollTop:$('#header').offset().top
+}, 1000, function() {
+parallaxScroll(); // Callback is required for iOS
+});
+return false;
+});
+
 $('a.link_to_benefits').click(function(){
 $('html, body').animate({
 scrollTop:$('#benefits').offset().top
@@ -31,7 +44,7 @@ parallaxScroll(); // Callback is required for iOS
 return false;
 });
 
-$('li.link_to_what').click(function(){
+$('a.link_to_what').click(function(){
 $('html, body').animate({
 scrollTop:$('#what').offset().top
 }, 1000, function() {
@@ -40,7 +53,7 @@ parallaxScroll(); // Callback is required for iOS
 return false;
 });
 
-$('li.link_to_who').click(function(){
+$('a.link_to_who').click(function(){
 $('html, body').animate({
 scrollTop:$('#who').offset().top
 }, 1000, function() {
@@ -49,9 +62,18 @@ parallaxScroll(); // Callback is required for iOS
 return false;
 });
 
-$('li.link_to_trainers').click(function(){
+$('a.link_to_trainers').click(function(){
 $('html, body').animate({
 scrollTop:$('#trainers').offset().top
+}, 1000, function() {
+parallaxScroll(); // Callback is required for iOS
+});
+return false;
+});
+
+$('a.link_to_wellness').click(function(){
+$('html, body').animate({
+scrollTop:$('#wellness').offset().top
 }, 1000, function() {
 parallaxScroll(); // Callback is required for iOS
 });
@@ -71,3 +93,10 @@ $('.benefits_ss').css('top',(400-(scrolled*.40))+'px');
 //$('#parallax-bg2').css('top',(0-(scrolled*.5))+'px');
 //$('#parallax-bg3').css('top',(0-(scrolled*.75))+'px');
 }
+
+/* Adjust screen elements such as the phone on resize */
+function adjustElementsOnResize(){
+var bodyHeight = $(window).height();
+$('.splash_phone').css('height',bodyHeight*.8+'px');
+}
+
