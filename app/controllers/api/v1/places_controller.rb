@@ -33,7 +33,11 @@ module Api
       end
 
       def search
-        @places = Place.where("UPPER(name) LIKE ?", "%#{params[:q].to_s.upcase}%") 
+        lat = params[:lat].to_f
+        lon = params[:lon].to_f
+        @places = Place.joins(:address).where("UPPER(name) LIKE ?", "%#{params[:q].to_s.upcase}%")
+          .where("lat BETWEEN ? AND ?", lat - 1, lat + 1)
+          .where("lon BETWEEN ? AND ?", lon - 1, lon + 1)
         render :json => @places.as_json(:search => true)
       end
 
