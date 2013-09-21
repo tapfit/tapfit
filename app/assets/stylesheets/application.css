@@ -12,17 +12,16 @@
 html {
     margin: 0px;
     padding: 0px;
-    overflow-x: hidden; 
+    overflow-x: hidden;
 }
 
 body {
-    background: #EF4840;
     width: 100%;
     height: 100%;
     margin: 0px;
     padding: 0px;
-    overflow-x: hidden; 
     font-family: "effra", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    overflow-x: hidden;
 }
 
 .splash_container {
@@ -280,4 +279,233 @@ body {
 
 #footer img {
     margin: 0 auto;
+}
+
+@media only screen and (max-width:480px) {
+
+    #tapfit_splash {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .centerizer {
+        width: 100%;
+    }
+
+    #header {
+        position: relative;
+        height: auto;
+    }
+
+    #header ul {
+        display: block;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    #header ul li {
+        width: 100%;
+        float: none;
+        display: block;
+        line-height: 50px;
+        color: #777;
+    }
+
+    #header ul li a:hover {
+        color: #EB4840;
+    }
+
+    #header ul li a {
+        font-size: 20px;
+        color: #777;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .icon_right {
+        display: none;
+    }
+
+    .icon_left {
+        display: none;
+    }
+
+    #top {
+        position: relative;
+        height: auto;
+    }
+
+    .splash_phone {
+        display: none;
+    }
+
+    .splash_logo {
+        position: absolute;
+        top: 0;
+    }
+
+    #top_content {
+        position: relative;
+        left: 0px;
+        top: 0px;
+    }
+
+    #top_content_tagline {
+        position: relative;
+        top: 100px;
+        width: 100%;
+    }
+
+    #top_content_cta {
+        position: absolute;
+        top: 0;
+        width: 320px;
+        height: 50px;
+        background: url("download_button.png");
+    }
+
+    #top_content_cta:hover {
+        cursor: pointer;
+    }
+
+    #benefits_link {
+        height: 140px;
+        background: #EB4840;
+    }
+
+    .link_to_benefits {
+        position: relative;
+        left: 0px;
+        top: 50px;
+        width: 100%;
+        font-size: 30px;
+        text-decoration: none;
+        color: #FFFFFF;
+    }
+
+    .link_to_benefits:hover {
+        color: #CCCCCC;
+    }
+
+    .benefits_ss {
+        position: relative;
+        top: 100px;
+        left: 25%;
+        width: 50%;
+    }
+
+    #benefits {
+        position: relative;
+        height: auto;
+        background: url("splash_benefits.png") no-repeat top center;
+        background-size: cover;
+    }
+
+    #benefits_content {
+        position: relative;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .splash_container p {
+        font-family: "proxima-nova", sans-serif;
+        font-weight: 100;
+        font-size: 20px;
+        color: #333333;
+    }
+
+    #benefits h1, #what h1, #who h1, #trainers h1, #wellness h1 {
+        font-size: 50px;
+        color: #111;
+    }
+
+    #benefits p {
+        text-align: center;
+        font-size: 32px;
+        font-weight: 100;
+        color: #EB4840;
+    }
+
+    #what {
+        position: relative;
+        height: auto;
+        border-top: none;
+    }
+
+    #what_content {
+        position: relative;
+        top: 40px;
+        left: 0px;
+        width: 100%;
+    }
+
+    #who {
+        position: relative;
+        height: auto;
+        border-top: none;
+        background: none;
+    }
+
+    #who_content {
+        position: relative;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+    }
+
+    #wellness {
+        position: relative;
+        height: auto;
+        background: none;
+    }
+
+    #wellness_content {
+        position: relative;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+    }
+
+    .back_to_top {
+        display: none;
+    }
+
+    .next_button {
+        display: none;
+    }
+
+    #trainers {
+        position: relative;
+        height: auto;
+        background: none;
+    }
+
+    #trainers_content {
+        position: relative;
+        top: 0px;
+        left: 0;
+        width: 100%;
+    }
+
+    #footer {
+        position: relative;
+        text-align: center;
+        background: #000000;
+        height: 320px;
+    }
+
+    #footer h2 {
+        margin: 0;
+        padding: 40px 0;
+        color: #EB4840;
+    }
+
+    #footer img {
+        margin: 0 auto;
+    }
 }
