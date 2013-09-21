@@ -3,6 +3,8 @@ module Mindbody
 
   def self.get_classes(url, place_id, date, source)
 
+    url = "#{url}&sDate=#{date.strftime("%m/%d/%Y")}"
+
     cmd = "phantomjs ./lib/phantomjs/get_frame.js '#{url}' evenRow"
 
     output = `#{cmd}`
