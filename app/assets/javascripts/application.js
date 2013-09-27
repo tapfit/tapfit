@@ -97,6 +97,6 @@ $('.benefits_ss').css('top',(400-(scrolled*.40))+'px');
 /* Adjust screen elements such as the phone on resize */
 function adjustElementsOnResize(){
 var bodyHeight = $(window).height();
-$('.splash_phone').css('height',bodyHeight*.8+'px');
+//$('.splash_phone').css('height',bodyHeight*.8+'px');
 }
 
