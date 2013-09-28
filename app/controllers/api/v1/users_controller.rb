@@ -88,10 +88,16 @@ module Api
       # Signs in an existing user
       # POST customers/login
       def login
-        email = params[:email]
-        password = params[:password]
-        user = User.where(:email => email).first
-        if !user.nil? && user.valid_password?(password)
+        if !params[:access_token].nil?
+          user = register_facebook_user(params[:access_token])
+          user = User.where(:email => user.email).first
+        else
+          email = params[:email]
+          password = params[:password]
+          user = User.where(:email => email).first
+        end
+        
+        if !user.nil? && (user.valid_password?(password) || !params[:access_token].nil?)
           sign_in(:user, user)
           user.reset_authentication_token!
           render :json => { :email => user.email, :id => user.id, :auth_token => user.authentication_token, :first_name => user.first_name, :last_name => user.last_name }
@@ -167,11 +173,11 @@ module Api
         id = JSON.parse(http.body_str)['id']
         
         puts "facebook id: #{id}"
-
+=begin
         if (id != "567244006675246")
           render :json => { :message => "Access token came from a different app than TapFit" } and return
         end
-
+=end
         http = Curl.get("https://graph.facebook.com/me?scope=email,first_name,last_name,id,gender,birthday", { :access_token => access_token })
         result = JSON.parse(http.body_str)
         uid = result['id']
