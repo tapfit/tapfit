@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
         message["text"] = ""
         message["track_opens"] = true
         message["track_clicks"] = true
-        async = false
+        async = true
         ip_pool = "Main Pool"
         puts message
         $mandrill.messages.send_template(template_name, template_content, message, async, ip_pool)

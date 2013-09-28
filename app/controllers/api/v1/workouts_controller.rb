@@ -42,7 +42,7 @@ module Api
           
           price = @workout.price
 
-          if (current_user.credit_amount > price)
+          if (current_user.credit_amount >= price)
             receipt = @workout.buy_workout(current_user)
             current_user.use_credits(price)
             render :json => {
