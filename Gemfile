@@ -16,6 +16,7 @@ gem 'newrelic_rpm'
 gem 'rest-client'
 gem 'geocoder'
 gem 'nokogiri'
+gem 'curb'
 gem 'devise', '3.0.0'
 gem 'acts-as-taggable-on'
 gem 'will_paginate'
@@ -27,6 +28,9 @@ gem 'braintree'
 gem 'nexmo'
 gem 'oauth'
 gem 'mandrill-api'
+gem 'omniauth'
+gem 'omniauth-facebook'
+
 
 # These gems for active admin
 gem 'responders',          github: 'plataformatec/responders'

@@ -24,17 +24,38 @@ module Api
       def register
         # puts current_user
         if !params[:auth_token].nil? && user_signed_in?
-          puts params[:auth_token]
-          # puts current_user
-          user = User.where(:email => user_params[:email]).first
-          if !user.nil?
-            render :json => { :error => "Email, #{user_params[:email]} already exists" } and return
+
+          if !params[:access_token].nil?
+            facebook_user = register_facebook_user(params[:access_token])
+            current_user.update_attributes(:provider => "facebook", :uid => facebook_user.uid)
+            if current_user.is_guest
+              current_user.update_attributes(:first_name => facebook_user.first_name,
+                                             :last_name => facebook_user.last_name,
+                                             :email => facebook_user.email)
+            end
+          else
+
+            user = User.where(:email => user_params[:email]).first
+            if !user.nil?
+              render :json => { :error => "Email, #{user_params[:email]} already exists" } and return
+            end
+            current_user.update_attributes(user_params)
           end
-          current_user.update_attributes(user_params)
+          
           current_user.update_attributes(:is_guest => false)
+
           user = current_user
+        
         else
-          user = User.new(user_params)
+          if !params[:access_token].nil?
+            user = register_facebook_user(params[:access_token])
+          else
+            user = User.new(user_params)
+          end
+        end
+
+        if user.nil?
+          return
         end
 
         if user.valid?
@@ -139,6 +160,45 @@ module Api
         raise ActiveRecord::RecordNotFound unless user
         return user
       end
+
+      def register_facebook_user(access_token)
+        http = Curl.get("https://graph.facebook.com/app", { :access_token => access_token } )
+
+        id = JSON.parse(http.body_str)['id']
+        
+        puts "facebook id: #{id}"
+=begin
+        if (id != "567244006675246")
+          render :json => { :message => "Access token came from a different app than TapFit" } and return
+        end
+=end
+        http = Curl.get("https://graph.facebook.com/me?scope=email,first_name,last_name,id,gender,birthday", { :access_token => access_token })
+        result = JSON.parse(http.body_str)
+        uid = result['id']
+
+        puts "uid: #{uid}" 
+
+        user = User.where(:uid => uid).first
+
+        unless user
+          puts "creating user: #{http.body_str}"
+          email = result['email']
+          first_name = result['first_name']
+          last_name = result['last_name']
+          gender = result['gender']
+          birthday = result['birthday']
+
+          puts "facebook info: #{email}, #{first_name}, #{last_name}, #{gender}, #{birthday}"
+
+          user = User.new(:email => email,
+                             :first_name => first_name,
+                             :last_name => last_name,
+                             :password => Devise.friendly_token[0,20])
+
+        end
+        return user
+      end
+
 
     end
   end
