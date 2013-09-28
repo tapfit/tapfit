@@ -167,11 +167,11 @@ module Api
         id = JSON.parse(http.body_str)['id']
         
         puts "facebook id: #{id}"
-=begin
+
         if (id != "567244006675246")
           render :json => { :message => "Access token came from a different app than TapFit" } and return
         end
-=end
+
         http = Curl.get("https://graph.facebook.com/me?scope=email,first_name,last_name,id,gender,birthday", { :access_token => access_token })
         result = JSON.parse(http.body_str)
         uid = result['id']
