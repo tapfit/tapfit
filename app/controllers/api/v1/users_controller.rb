@@ -182,7 +182,7 @@ module Api
           render :json => { :message => "Access token came from a different app than TapFit" } and return
         end
 
-        http = Curl.get("https://graph.facebook.com/me?scope=email,first_name,last_name,id,gender,birthday", { :access_token => access_token })
+        http = Curl.get("https://graph.facebook.com/me?scope=email,first_name,last_name,id,gender,birthday,location", { :access_token => access_token })
         result = JSON.parse(http.body_str)
         uid = result['id']
 
@@ -191,19 +191,31 @@ module Api
         user = User.where(:uid => uid).first
 
         unless user
-          puts "creating user: #{http.body_str}"
+
           email = result['email']
           first_name = result['first_name']
           last_name = result['last_name']
           gender = result['gender']
-          birthday = result['birthday']
-
-          puts "facebook info: #{email}, #{first_name}, #{last_name}, #{gender}, #{birthday}"
+          begin
+            birthday = Date.strptime(result['birthday'], "%m/%d/%Y")
+          rescue
+            birthday = nil
+          end
+          location = ""
+          if !result['location'].nil?
+            location = result['location']['name']
+          end
 
           user = User.new(:email => email,
                              :first_name => first_name,
                              :last_name => last_name,
-                             :password => Devise.friendly_token[0,20])
+                             :password => Devise.friendly_token[0,20],
+                             :gender => gender,
+                             :birthday => birthday,
+                             :location => location,
+                             :uid => uid,
+                             :provider => "facebook"
+                         )
 
         end
         return user

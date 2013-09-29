@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130928180750) do
+ActiveRecord::Schema.define(version: 20130929165040) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -289,6 +289,9 @@ ActiveRecord::Schema.define(version: 20130928180750) do
     t.integer  "company_id"
     t.string   "provider"
     t.string   "uid"
+    t.string   "gender"
+    t.datetime "birthday"
+    t.string   "location"
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
