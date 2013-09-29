@@ -172,6 +172,7 @@ module Api
       end
 
       def register_facebook_user(access_token)
+        puts "register_facebook_user"
         http = Curl.get("https://graph.facebook.com/app", { :access_token => access_token } )
 
         id = JSON.parse(http.body_str)['id']
