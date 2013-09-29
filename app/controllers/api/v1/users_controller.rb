@@ -89,8 +89,12 @@ module Api
       # POST customers/login
       def login
         if !params[:access_token].nil?
-          user = register_facebook_user(params[:access_token])
-          user = User.where(:email => user.email).first
+          facebook_user = register_facebook_user(params[:access_token])
+          user = User.where(:email => facebook_user.email).first
+          if user.nil?
+            register
+            return
+          end
         else
           email = params[:email]
           password = params[:password]
