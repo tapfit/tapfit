@@ -124,6 +124,7 @@ class ProcessClass < ProcessBase
         lowest_price_workout = place.todays_workouts.order("price ASC").first
         if !lowest_price_workout.nil?
           place.lowest_price = lowest_price_workout.price
+          place.lowest_original_price = lowest_price_workout.original_price
           place.save
         end
         return workout.id  

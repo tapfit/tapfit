@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130929165040) do
+ActiveRecord::Schema.define(version: 20130930174828) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -158,7 +158,7 @@ ActiveRecord::Schema.define(version: 20130929165040) do
   add_index "place_hours", ["place_id"], name: "index_place_hours_on_place_id", using: :btree
 
   create_table "places", force: true do |t|
-    t.string   "name",                              null: false
+    t.string   "name",                                 null: false
     t.integer  "address_id"
     t.string   "source"
     t.binary   "source_key"
@@ -167,8 +167,8 @@ ActiveRecord::Schema.define(version: 20130929165040) do
     t.string   "phone_number"
     t.text     "tapfit_description"
     t.text     "source_description"
-    t.boolean  "is_public",          default: true, null: false
-    t.boolean  "can_dropin",         default: true, null: false
+    t.boolean  "is_public",             default: true, null: false
+    t.boolean  "can_dropin",            default: true, null: false
     t.float    "dropin_price"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -179,6 +179,7 @@ ActiveRecord::Schema.define(version: 20130929165040) do
     t.integer  "crawler_source"
     t.integer  "facility_type"
     t.float    "lowest_price"
+    t.float    "lowest_original_price"
   end
 
   add_index "places", ["can_buy"], name: "index_places_on_can_buy", using: :btree

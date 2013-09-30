@@ -32,6 +32,12 @@ task :update_place_contracts => :environment do
         workout.price = ((1 - place_contract.discount) * workout.original_price).round
         workout.save
       end
+      workout = place.todays_workouts.order("price ASC").first
+      if !workout.nil?
+        place.lowest_price = workout.price
+        place.lowest_original_price = workout.original_price
+        place.save
+      end 
     end
   end
 end

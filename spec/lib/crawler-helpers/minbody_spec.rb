@@ -35,7 +35,13 @@ describe Mindbody do
 
     # Mindbody.get_classes(url, place.id, DateTime.now, "test")
 
-    # puts REDIS.lrange(MailerUtils.redis_key, 0, 100)  
+    # puts REDIS.lrange(MailerUtils.redis_key, 0, 100) 
+  
+    place = Place.find(place.id)
+
+    puts "lowest_price = #{place.lowest_price}"
+    puts "lowest_original_price = #{place.lowest_original_price}"
+
     Workout.all.each do |w|
       puts w.attributes
     end
