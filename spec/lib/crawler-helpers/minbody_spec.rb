@@ -11,7 +11,7 @@ describe Mindbody do
     pass_detail.save
     place.address = address
     place.can_buy = true
-    place.dropin_price = nil
+    place.dropin_price = 15
     place.save
     place.pass_details.first.should_not be_nil
     url = "https://clients.mindbodyonline.com/ASP/home.asp?studioid=30154"
