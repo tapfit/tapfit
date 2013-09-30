@@ -25,7 +25,7 @@ task :update_place_contracts => :environment do
     if place.place_contract.nil?
       place_contract = PlaceContract.create(:discount => 0.20, :quantity => 100, :place_id => place.id)
       place.workouts.where("start_time > ?", Time.now).each do |workout|
-        workout.price = ((1 - place.place_contract.discount) * workout.original_price).round
+        workout.price = ((1 - place_contract.discount) * workout.original_price).round
         workout.save
       end
     end
