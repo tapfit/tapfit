@@ -53,7 +53,10 @@ class ProcessClass < ProcessBase
       if place.dropin_price.nil?
         old_workout = Workout.where(:workout_key => workout_key).where("price IS NOT NULL").order("start_time DESC").first
         if !old_workout.nil?
-          @price = old_workout.price
+          @price = old_workout.original_price
+          if @price.nil?
+            @price = old_workout.price
+          end
         end
       else
         @price = place.dropin_price
@@ -61,7 +64,13 @@ class ProcessClass < ProcessBase
 
       original_price = @price
       if !place.place_contract.nil?
-        @price = place.place_contract.price
+        if place.place_contract.price.nil?
+          if !place.place_contract.discount.nil? && !@price.nil?
+            @price = ((1 - place.place_contract.discount) * @price).round
+          end
+        else
+          @price = place.place_contract.price
+        end
         old_workout = Workout.where(:workout_key => workout_key).where("price IS NOT NULL").order("start_time DESC").first
         if !old_workout.nil?
           original_price = old_workout.original_price
@@ -81,7 +90,7 @@ class ProcessClass < ProcessBase
       workout = Workout.where(:workout_key => workout_key).where(:start_time => starts).first
       if !workout.nil?
         puts "Workout already exists"
-        if !@is_cancelled.nil?
+        if !@is_cancelled.nil? && @is_cancelled
           puts "Updating workout to is_cancelled"
           workout.update_attributes(:is_cancelled => true)
         end

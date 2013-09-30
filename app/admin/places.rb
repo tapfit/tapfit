@@ -130,7 +130,14 @@ ActiveAdmin.register Place do
 
     def create_contract(contract_params, place)        
       contract = PlaceContract.create(contract_params)
-      place.workouts.where("start_time > ?", Time.now).update_all(:price => contract.price)
+      if !contract.price.nil?
+        place.workouts.where("start_time > ?", Time.now).update_all(:price => contract.price)
+      elsif !contract.discount.nil?
+        place.workouts.where("start_time > ?", Time.now).each do |workout|
+          workout.price = ((1 - contract.discount) * workout.original_price).round
+          workout.save
+        end
+      end
     end
 
     def permitted_params

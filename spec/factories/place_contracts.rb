@@ -2,9 +2,7 @@
 
 FactoryGirl.define do
   factory :place_contract do
-    quantity 1
-    price 1.5
-    discount 1.5
-    place_id 1
+    quantity 20
+    discount 0.20
   end
 end
