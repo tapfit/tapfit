@@ -36,7 +36,7 @@ ActiveAdmin.register Receipt do
     default_actions 
   end
 
-  config.sort_order = "has_booked_desc"
+  config.sort_order = "has_booked_asc"
 
   filter :has_booked
 

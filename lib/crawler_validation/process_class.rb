@@ -62,6 +62,11 @@ class ProcessClass < ProcessBase
       original_price = @price
       if !place.place_contract.nil?
         @price = place.place_contract.price
+        old_workout = Workout.where(:workout_key => workout_key).where("price IS NOT NULL").order("start_time DESC").first
+        if !old_workout.nil?
+          original_price = old_workout.original_price
+        end
+
       end
 
       if @source_description.nil?

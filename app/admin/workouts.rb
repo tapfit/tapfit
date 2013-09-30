@@ -52,6 +52,7 @@ ActiveAdmin.register Workout do
       f.input :price
       f.input :is_day_pass
       f.input :place_id
+      f.input :original_price
     end
     
     f.inputs "Instructor", :for => [:instructor, f.object.instructor || Instructor.new] do |meta_form|
