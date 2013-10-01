@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130930174828) do
+ActiveRecord::Schema.define(version: 20131001185023) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -197,6 +197,7 @@ ActiveRecord::Schema.define(version: 20130930174828) do
     t.float    "amount"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "quantity"
   end
 
   add_index "promo_codes", ["company_id"], name: "index_promo_codes_on_company_id", using: :btree
