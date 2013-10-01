@@ -129,7 +129,7 @@ class ProcessClass < ProcessBase
       
       if workout.save
         puts "saved to database #{workout.name}, place_id: #{workout.place_id}"
-        update_lowest_prices(workout.place_id)
+        update_lowest_price(workout.place_id)
         return workout.id  
       else
         puts "failed to save #{workout.errors}"
