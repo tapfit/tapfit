@@ -92,7 +92,9 @@ class ProcessClass < ProcessBase
         puts "Workout already exists"
         if !@is_cancelled.nil? && @is_cancelled
           puts "Updating workout to is_cancelled"
-          workout.update_attributes(:is_cancelled => true)
+          if place.id != 1931
+            workout.update_attributes(:is_cancelled => true)
+          end
         end
         return
       end
@@ -105,6 +107,10 @@ class ProcessClass < ProcessBase
         @is_day_pass = false
       end
       
+      if place.id == 1931
+        @is_cancelled = true
+      end
+
       pass_detail = place.pass_details.first
       pass_detail_id = nil
       if !pass_detail.nil?
@@ -121,6 +127,7 @@ class ProcessClass < ProcessBase
 
       if workout.save
         puts "saved to database #{workout.name}, place_id: #{workout.place_id}"
+        place = Place.find(workout.place_id)
         lowest_price_workout = place.todays_workouts.order("price ASC").first
         if !lowest_price_workout.nil?
           place.lowest_price = lowest_price_workout.price

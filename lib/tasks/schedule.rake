@@ -5,6 +5,7 @@ require './lib/location_crawlers/go_recess_loc'
 require './lib/crawlers/moksha'
 require './lib/twitter/favorite'
 require './lib/twitter/follow'
+require './lib/crawler-helpers/mindbody'
 
 desc "This task is called by the Heroku scheduler add-on"
 
@@ -40,6 +41,11 @@ task :update_place_contracts => :environment do
       end 
     end
   end
+end
+
+task :scrape_core_movement => :environment do
+  place = Place.find(1931)
+  Mindboy.get_classes(place.schedule_url, place.id, DateTime.now + 1.days, place.source)
 end
 
 task :add_day_pass => :environment do
