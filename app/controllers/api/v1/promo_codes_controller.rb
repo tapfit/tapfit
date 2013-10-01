@@ -8,8 +8,10 @@ module Api
 
       def create
         code = params[:promo_code]
-
-        promo_code = PromoCode.where(:code => code).first
+        
+        if (!code.nil?)
+          promo_code = PromoCode.where("upper(code) = ?", code.upcase).first
+        end
 
         if promo_code.nil?
           render :json => { :error => "Could not find promo code" }
