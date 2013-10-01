@@ -96,6 +96,7 @@ class ProcessClass < ProcessBase
             workout.update_attributes(:is_cancelled => true)
           end
         end
+        update_lowest_price(place.id)
         return
       end
       puts "is_cancelled: #{@is_cancelled}"
@@ -125,17 +126,10 @@ class ProcessClass < ProcessBase
         puts "errors: #{workout.errors}"
       end
 
-      place = Place.find(workout.place_id)
-      lowest_price_workout = place.todays_workouts.order("price ASC").first
-      if !lowest_price_workout.nil?
-        place.lowest_price = lowest_price_workout.price
-        place.lowest_original_price = lowest_price_workout.original_price
-        place.save
-      end
       
       if workout.save
         puts "saved to database #{workout.name}, place_id: #{workout.place_id}"
-
+        update_lowest_prices(workout.place_id)
         return workout.id  
       else
         puts "failed to save #{workout.errors}"
@@ -151,4 +145,13 @@ class ProcessClass < ProcessBase
     return newTime
   end
 
+  def update_lowest_price(place_id)
+    place = Place.find(place_id)
+    lowest_price_workout = place.todays_workouts.order("price ASC").first
+    if !lowest_price_workout.nil?
+      place.lowest_price = lowest_price_workout.price
+      place.lowest_original_price = lowest_price_workout.original_price
+      place.save
+    end
+  end
 end
