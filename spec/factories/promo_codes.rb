@@ -3,8 +3,9 @@
 FactoryGirl.define do
   factory :promo_code do
     company_id 1
-    code "MyString"
+    code "55555"
     has_used false
-    amount 1.5
+    amount 2
+    quantity 2
   end
 end
