@@ -129,15 +129,24 @@ body {
     top: 340px;
 }
 
-#top_content_cta {
+#top_content_apple {
     position: absolute;
     top: 260px;
-    width: 210px;
-    height: 50px;
-    background: url("download_button.png");
+    width: 160px;
+    height: 111px;
+    background: url("apple_badge.png");
 }
 
-#top_content_cta:hover {
+#top_content_android {
+    position: absolute;
+    top: 260px;
+    left: 200px;
+    width: 160px;
+    height: 111px;
+    background: url("android_badge.png");
+}
+
+#top_content_apple:hover, #top_content_android:hover {
     cursor: pointer;
 }
 
@@ -347,15 +356,13 @@ body {
         width: 100%;
     }
 
-    #top_content_cta {
+    #top_content_apple {
         top: 300px;
         left: 0;
-        width: 100%;
-        background: url("download_button.png") no-repeat center;
     }
 
-    #top_content_cta:hover {
-        cursor: pointer;
+    #top_content_android {
+        top: 300px;
     }
 
     #benefits_link {
