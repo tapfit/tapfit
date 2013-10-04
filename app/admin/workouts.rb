@@ -21,6 +21,7 @@ ActiveAdmin.register Workout do
   filter :can_buy
   filter :place_name, :label => "Place Name", :as => :string
   filter :start_time
+  filter :name
 
   member_action :update_description, :method => :get do
     workout = Workout.find(params[:id])
