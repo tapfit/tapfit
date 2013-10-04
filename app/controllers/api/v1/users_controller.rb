@@ -63,7 +63,8 @@ module Api
           sign_in(:user, user)
           user.ensure_authentication_token!
 
-          user.send_welcome_email
+          Resque.enqueue(SendWelcomeEmail, user.id)
+          # user.send_welcome_email
           
           result = Braintree::Customer.create(
             :first_name => user.first_name,

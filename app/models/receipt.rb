@@ -7,6 +7,8 @@ class Receipt < ActiveRecord::Base
   belongs_to :workout
   has_one :pass_detail, :through => :workout
 
+  after_create :send_emails
+
   def place_json
     self.place.as_json(:detail => true)
   end
@@ -60,6 +62,11 @@ class Receipt < ActiveRecord::Base
 
   end
   
+  def send_emails
+    Resque.enqueue(SendReceiptEmail, self.id)
+
+    BuyNotificationMailer.send_buy_email(self).deliver 
+  end
 
   def as_json(options={})
     options[:except] ||= [:place_id, :user_id, :workout_id, :workout_key, :updated_at, :has_booked ]
