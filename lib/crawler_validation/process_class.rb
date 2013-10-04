@@ -109,7 +109,7 @@ class ProcessClass < ProcessBase
       end
       
       if place.id == 1931
-        @is_cancelled = true
+        @is_cancelled = false
       end
 
       pass_detail = place.pass_details.first
