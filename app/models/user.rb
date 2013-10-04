@@ -1,3 +1,5 @@
+require 'mandrill'
+
 class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable, :token_authenticatable,
@@ -46,6 +48,7 @@ class User < ActiveRecord::Base
 
   def send_welcome_email
     if !self.is_guest
+        mandrill = Mandrill::API.new
         template_name = "tapfit-welcome-email"
         template_content = [{"content"=>"example content", "name" => "example name"}] 
         message = {}
@@ -60,7 +63,7 @@ class User < ActiveRecord::Base
         async = true
         ip_pool = "Main Pool"
         puts message
-        $mandrill.messages.send_template(template_name, template_content, message, async, ip_pool)
+        mandrill.messages.send_template(template_name, template_content, message, async, ip_pool)
     end
   end
 

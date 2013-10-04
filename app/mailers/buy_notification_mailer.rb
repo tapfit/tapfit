@@ -16,8 +16,6 @@ class BuyNotificationMailer < ActionMailer::Base
         puts response.body
       end
     end
-    @emails.each do |email|
-      mail(to: email, subject: 'New Class Purchased!')
-    end
+    mail(to: @emails.join("; "), subject: 'New Class Purchased!')
   end 
 end

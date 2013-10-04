@@ -1,3 +1,5 @@
+require 'mandrill'
+
 class Receipt < ActiveRecord::Base
 
   belongs_to :user
@@ -31,6 +33,7 @@ class Receipt < ActiveRecord::Base
 
   def send_receipt_email
     
+    mandrill = Mandrill::API.new 
     template_name = "tapfit-purchase-confirmation"
     template_content = [{"content"=>"example content", "name" => "example name"}] 
     message = {}
@@ -50,10 +53,10 @@ class Receipt < ActiveRecord::Base
     message["merge"] = true
     message["track_opens"] = true
     message["track_clicks"] = true
-    async = false
+    async = true
     ip_pool = "Main Pool"
     puts message
-    $mandrill.messages.send_template(template_name, template_content, message, async, ip_pool)
+    mandrill.messages.send_template(template_name, template_content, message, async, ip_pool)
 
   end
   
