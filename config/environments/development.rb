@@ -37,7 +37,9 @@ Tapfit::Application.configure do
   ENV["BRAINTREE_PRIVATE_KEY"] = "476ce644305022a93f05f8703481dd09"
   #ENV["REDISTOGO_URL"] = 'redis://redistogo:f94459718df1ee5942b0ab27f3cc753c@grouper.redistogo.com:9503/'
   
-  ENV["MANDRILL_APIKEY"] = 'XdYDGPC2pLDIrcWUXiH7hg' 
+  ENV["MANDRILL_APIKEY"] = 'XdYDGPC2pLDIrcWUXiH7hg'
+
+  ENV["SEND_TEXTS"] = 'false' 
 
   config.paperclip_defaults = {
     :storage => :s3,
