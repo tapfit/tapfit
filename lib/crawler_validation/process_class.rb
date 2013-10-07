@@ -92,7 +92,7 @@ class ProcessClass < ProcessBase
         puts "Workout already exists"
         if !@is_cancelled.nil? && @is_cancelled
           puts "Updating workout to is_cancelled"
-          if place.id != 1931
+          if place.id != 1931 && place.id != 2308
             workout.update_attributes(:is_cancelled => true)
           end
         end
@@ -108,7 +108,7 @@ class ProcessClass < ProcessBase
         @is_day_pass = false
       end
       
-      if place.id == 1931
+      if place.id == 1931 || place.id == 2308
         @is_cancelled = false
       end
 

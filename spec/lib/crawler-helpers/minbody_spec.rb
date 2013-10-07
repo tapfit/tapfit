@@ -29,9 +29,9 @@ describe Mindbody do
 
     place.workouts << workout
 
-    url = "https://clients.mindbodyonline.com/ASP/home.asp?studioid=30154"
+    url = "https://clients.mindbodyonline.com/ASP/home.asp?studioid=2839"
     puts "url: #{url}, time: #{DateTime.now + 1.days}"
-    Mindbody.get_classes(url, place.id, DateTime.now + 1.days, place.source)
+    Mindbody.get_classes(url, place.id, DateTime.now, place.source)
 
     # Mindbody.get_classes(url, place.id, DateTime.now, "test")
 
