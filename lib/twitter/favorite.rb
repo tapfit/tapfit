@@ -3,8 +3,8 @@ require './lib/twitter/get_followers'
 
 module FavoriteTweet
 
-  @oauth_token = "22325444-KmejZYvgilgLgCVdmjuq8tGdo9YQvy8AjY9K4BM"
-  @oauth_token_secret = "eyAEOtmq4Wr2YeZ4DI1BLcGrjJExk2rohXx44vMvybs"
+  @oauth_token = "1545914628-CoaxLwU0tts4dX6d0BIpeSGIZ3jhYyzejTDc5Y1"
+  @oauth_token_secret = "3AmObnDiYwPIAht25Y6FOn9AWCUuPdouBrq4ANeY"
 
   def self.favorite_tweets
 
@@ -14,21 +14,32 @@ module FavoriteTweet
       GetFollowers.get_followers
     end
 
-    search_params = [ "sql", "android", "startup", "yoga", "fitness" ]
+    search_params = [ "cincinnati", "health", "gym", "yoga", "fitness" ]
     search_params.each do |search|
-
-      response = access_token.request(:get, "https://api.twitter.com/1.1/search/tweets.json?q=#{search}")
-
+      
+      response = ""
+      since_id = REDIS.get("since_id_#{search}")
+      if since_id == nil
+        puts "since_id does not exist"
+        response = access_token.request(:get, "https://api.twitter.com/1.1/search/tweets.json?q=#{search}")
+      else
+        puts "since_id = #{since_id}"
+        response = access_token.request(:get, "https://api.twitter.com/1.1/search/tweets.json?q=#{search}&since_id=#{since_id}")
+      end
+      
+      puts response.body.to_str
       json = JSON.parse(response.body.to_str)
         
       json["statuses"].each do |status|
         
         if !GetFollowers.followers.include?(status["user"]["id"].to_i)
           response = access_token.request(:post, "https://api.twitter.com/1.1/favorites/create.json?id=#{status["id_str"]}")
+          REDIS.set("since_id_#{search}", status["id_str"])
           puts "Favorited tweet: #{status["text"]}"
         end
       end
-
+      
+      puts "since_id is now = #{REDIS.get("since_id_#{search}")}"
     end
 
     return nil

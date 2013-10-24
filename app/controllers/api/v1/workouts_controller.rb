@@ -57,7 +57,10 @@ module Api
           result = Braintree::Transaction.sale(
             :amount => price,
             :customer_id => current_user.braintree_customer_id,
-            :venmo_sdk_payment_method_code => params[:venmo_sdk_payment_method_code]        
+            :venmo_sdk_payment_method_code => params[:venmo_sdk_payment_method_code],
+            :options => {
+              :submit_for_settlement => true
+            }       
           )
 
           if result.success?
