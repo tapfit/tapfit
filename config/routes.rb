@@ -11,7 +11,7 @@ Tapfit::Application.routes.draw do
   devise_for :users
   ActiveAdmin.routes(self)
 
-  root :to => "application#index"
+  root :to => "pages#index"
 
   resources :places do
     resources :photos
