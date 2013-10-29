@@ -17,6 +17,8 @@ class CrawlCincyLocal < ResqueJob
         Mindbody.get_classes(place.schedule_url, place.id, date, place.source) 
       elsif place.crawler_source == CrawlerSource::Healcode
         Healcode.get_classes(place.schedule_url, place.id, date, place.source)
+      elsif
+        Zenplanner.get_classes(place.schedule_url, place.id, date, place.source)
       elsif place.crawler_source == CrawlerSource::GoRecess
         if place.workouts.where("start_time > ?", DateTime.now + 2.days).count < 1
           GoRecess.get_classes(place.schedule_url, place.id, date)

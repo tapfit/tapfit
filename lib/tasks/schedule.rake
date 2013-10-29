@@ -17,6 +17,15 @@ task :start_crawl_jobs => :environment do
   puts "Ending crawl process"
 end
 
+task :get_zenplanner_jobs => :environment do
+
+  Place.where(:can_buy => true).where(:source => "zenplanner").each do |place|
+    Zenplanner.get_classes(place.schedule_url, place.id, DateTime.now, place.source)
+    Zenplanner.get_classes(place.schedule_url, place.id, DateTime.now + 1.days, place.source)
+  end
+
+end
+
 task :send_email => :environment do
   MailerUtils.send_error_email
 end

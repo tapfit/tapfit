@@ -21,7 +21,7 @@ describe Zenplanner do
 
     url = "https://thepunchhouse.sites.zenplanner.com/calendar.cfm"
 
-    Zenplanner.get_classes(url, place.id, DateTime.now, place.source)
+    Zenplanner.get_classes(url, place.id, DateTime.now + 1.days, place.source)
     
   end
 

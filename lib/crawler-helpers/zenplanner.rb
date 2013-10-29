@@ -8,6 +8,8 @@ module Zenplanner
 
     output = `#{cmd}`
 
+    # puts output
+
     doc = Nokogiri::HTML(output)
 
     dayLabel = date.strftime("%-d")
@@ -26,11 +28,13 @@ module Zenplanner
               time = child.text.split("AM")[0]
               name = child.text.split("AM")[1].split("(")[0]
               time = DateTime.parse("#{time.strip} AM")
+              time = time.change(:month => date.month, :day => date.day)
               Zenplanner.save_to_database(name, time, place_id)
             elsif child.text.include?("PM")
               time = child.text.split("PM")[0]
               name = child.text.split("PM")[1].split("(")[0]
               time = DateTime.parse("#{time.strip} PM")
+              time = time.change(:month => date.month, :day => date.day)
               Zenplanner.save_to_database(name, time, place_id)              
             end
           end

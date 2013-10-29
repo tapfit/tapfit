@@ -9,6 +9,7 @@ class Category
   Dance = "Dance"
   Strength = "Strength"
   MartialArts = "Martial Arts"
+  Boxing = "Boxing"
   Baseball = "Baseball" # Baseball and soft
   Football = "Football"
   Soccer = "Soccer"
