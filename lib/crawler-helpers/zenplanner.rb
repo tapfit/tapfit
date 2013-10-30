@@ -26,13 +26,13 @@ module Zenplanner
           if !child['class'].nil? && child['class'].include?("clickable") && !(child['class'].include?("sessionFull") || child['class'].include?("RED"))
             if child.text.include?("AM")
               time = child.text.split("AM")[0]
-              name = child.text.split("AM")[1].split("(")[0]
+              name = child.text.split("AM")[1].split("(")[0].strip
               time = DateTime.parse("#{time.strip} AM")
               time = time.change(:month => date.month, :day => date.day)
               Zenplanner.save_to_database(name, time, place_id)
             elsif child.text.include?("PM")
               time = child.text.split("PM")[0]
-              name = child.text.split("PM")[1].split("(")[0]
+              name = child.text.split("PM")[1].split("(")[0].strip
               time = DateTime.parse("#{time.strip} PM")
               time = time.change(:month => date.month, :day => date.day)
               Zenplanner.save_to_database(name, time, place_id)              
