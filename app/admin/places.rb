@@ -41,6 +41,7 @@ ActiveAdmin.register Place do
       f.input :crawler_source
       f.input :dropin_price
       f.input :can_buy
+      f.input :facility_type
       f.input :category
       f.has_many :place_hours do |hour|
         hour.input :day_of_week
