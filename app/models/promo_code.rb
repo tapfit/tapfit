@@ -1,5 +1,8 @@
 class PromoCode < ActiveRecord::Base
   belongs_to :company
+  belongs_to :user_id
+
+  validates :code, :uniqueness => true
 
   before_create :default_values
 

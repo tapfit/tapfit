@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :checkins
   has_many :place_checkins, :through => :checkins, :source => :place
   has_many :credits
+  has_one :promo_code
   # after_create :send_welcome_email
   
   def write_review_for_place(params, place_id)

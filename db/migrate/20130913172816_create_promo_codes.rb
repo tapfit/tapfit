@@ -11,5 +11,6 @@ class CreatePromoCodes < ActiveRecord::Migration
 
     add_index :promo_codes, :company_id
     add_index :promo_codes, :has_used
+    add_index :promo_codes, :code
   end
 end
