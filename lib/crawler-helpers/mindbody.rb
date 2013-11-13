@@ -78,7 +78,6 @@ module Mindbody
           end
         end
 
-        opts[:tags] = [ Category::PilatesBarre ]
         opts[:place_id] = place_id
 
         process_class = ProcessClass.new(opts)

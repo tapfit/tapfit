@@ -6,6 +6,7 @@ require './lib/crawlers/moksha'
 require './lib/twitter/favorite'
 require './lib/twitter/follow'
 require './lib/crawler-helpers/mindbody'
+require './lib/crawler-helpers/casper_mindbody'
 
 desc "This task is called by the Heroku scheduler add-on"
 
@@ -15,6 +16,13 @@ task :start_crawl_jobs => :environment do
   Crawler.start_crawler_process  
 
   puts "Ending crawl process"
+end
+
+task :test_casper => :environment do
+ 
+  url = "https://clients.mindbodyonline.com/ASP/home.asp?studioid=30154" 
+  CasperMindbody.get_classes(url, 5, DateTime.now, "source")
+
 end
 
 task :get_zenplanner_jobs => :environment do
