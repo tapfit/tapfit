@@ -6,6 +6,6 @@ FactoryGirl.define do
     remaining 20
     expiration_date "2013-09-13 12:29:09"
     user_id 1
-    promo_id 1
+    promo_code_id 1
   end
 end

@@ -1,6 +1,6 @@
 class PromoCode < ActiveRecord::Base
   belongs_to :company
-  belongs_to :user_id
+  belongs_to :user
 
   validates :code, :uniqueness => true
 

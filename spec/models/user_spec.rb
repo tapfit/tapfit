@@ -33,7 +33,7 @@ describe User do
     @user.email = "scott@tapfit.co"
     @user.is_guest = false
     @user.save
-    @user.send_welcome_email
+    # @user.send_welcome_email
   end
 
   it 'should get total remaining credits' do
@@ -44,4 +44,55 @@ describe User do
     @user.use_credits(30)
     @user.credit_amount.should eql(10.0)
   end 
+
+  it 'should not create a promo code for user with no name' do
+    user = FactoryGirl.build(:user)
+    user.first_name = nil
+    user.last_name = nil
+    user.email = "joke@email.com"
+    user.save
+    user.promo_code.should be_nil
+  end
+
+  before(:all) do
+    @user2 = FactoryGirl.build(:user)
+    @user2.first_name = "Jim"
+    @user2.last_name = "Shannon"
+    @user2.email = "jim@shannon.com"
+    @user2.save
+  end
+
+  it 'should create a promocode from first name' do
+    promo_id = @user2.promo_code.id
+    @user2.first_name = "Jim"
+    @user2.last_name = nil
+    @user2.save
+    sleep(1)
+    user = User.find(@user2.id)
+    user.promo_code.id.should eql(promo_id)
+    user.promo_code.code.should eql(user.first_name)
+  end
+
+  it 'should create promo code from last name' do
+    @user2.first_name = nil
+    @user2.last_name = "Shannon"
+    @user2.save
+    sleep(1)
+    user = User.find(@user2.id)
+    user.promo_code.code.should eql(user.last_name)
+  end
+
+
+  it 'should create a promo code for a new user' do
+    promo_code = "#{@user.first_name[0]}#{@user.last_name}"
+    @user.promo_code.code.should eql(promo_code)
+  end
+
+  it 'should add wildcard to end of duplicate promo code' do
+    user = FactoryGirl.build(:user)
+    user.email = "joke1@gmail.com"
+    user.save
+    promo_code = "#{user.first_name[0]}#{user.last_name}1"
+    user.promo_code.code.should eql(promo_code)
+  end
 end

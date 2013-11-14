@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Api::V1::PromoCodesController do
 
-  before(:all) do
+  before(:each) do
     @promo_code = FactoryGirl.create(:promo_code)
     @promo_code.quantity = 2
     @promo_code.save
@@ -37,6 +37,31 @@ describe Api::V1::PromoCodesController do
     User.find(@user2.id).destroy
     post :create, user_id: "me", auth_token: @user3.authentication_token, promo_code: @promo_code.code
     response.body.should include("already been used")
+  end
+
+  it 'should redeem invitation from another' do
+    @user1.promo_code.code.should eql("ZMartinsek3")
+    @user2.promo_code.code.should eql("ZMartinsek")
+    @user3.promo_code.code.should eql("ZMartinsek1")
+
+    @user1.ensure_authentication_token!
+
+    post :create, user_id: "me", auth_token: @user1.authentication_token, promo_code: "zmartinsek"
+    response.body.should include("user")
+
+    post :create, user_id: "me", auth_token: @user1.authentication_token, promo_code: "zmartinsek1"
+    response.body.should include("Sorry")
+  end
+
+  it 'should not redeem for someone who has purchased' do
+    @user1.ensure_authentication_token!
+
+    receipt = FactoryGirl.build(:receipt)
+    receipt.user_id = @user1.id
+    receipt.save
+
+    post :create, user_id: "me", auth_token: @user1.authentication_token, promo_code: "zmartinsek"
+    response.body.should include("Sorry") 
   end
 
 end

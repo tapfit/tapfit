@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
   has_one :promo_code
   # after_create :send_welcome_email
   
+  after_save :set_promo_code
+  
   def write_review_for_place(params, place_id)
     return Rating.new(:rating => params[:rating].to_i, :review => params[:review], :place_id => place_id.to_i, :user_id => self.id)
   end
@@ -89,4 +91,37 @@ class User < ActiveRecord::Base
       end
     end
   end 
+
+  def set_promo_code
+    code = nil
+    if first_name.nil?
+      code = last_name
+    elsif last_name.nil?
+      code = first_name
+    else
+      code = "#{first_name[0]}#{last_name}"
+    end
+
+    if !code.nil?
+      i = 1
+      promo_code = PromoCode.where(:code => code).first
+      while (!promo_code.nil?)
+        new_code = "#{code}#{i}"
+        i = i + 1
+        promo_code = PromoCode.where(:code => new_code).first
+        if promo_code.nil?
+          code = new_code
+        end
+      end
+      previous_code = PromoCode.where(:user_id => self.id).first
+      if previous_code.nil?
+        PromoCode.create(:code => code, :user_id => self.id)
+      else
+        previous_code.code = code
+        previous_code.save
+      end
+    end
+
+  end
+
 end
