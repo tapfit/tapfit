@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
 
   def as_json(opts={})
     if (!opts[:auth].nil?)
-      opts[:methods] ||= [:credit_amount]
+      opts[:methods] ||= [:credit_amount, :invitation_code]
     end
     
     opts[:except] ||= [ :braintree_customer_id, :updated_at, :created_at, :title, :phone, :company_id ]
@@ -69,6 +69,15 @@ class User < ActiveRecord::Base
         ip_pool = "Main Pool"
         puts message
         mandrill.messages.send_template(template_name, template_content, message, async, ip_pool)
+    end
+  end
+
+  def invitation_code
+    promo_code = PromoCode.where(:user_id => self.id).first
+    if (!promo_code.nil?)
+      return promo_code.code.upcase
+    else
+      return nil
     end
   end
 
