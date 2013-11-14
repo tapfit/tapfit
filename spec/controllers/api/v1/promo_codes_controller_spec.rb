@@ -19,6 +19,9 @@ describe Api::V1::PromoCodesController do
     @user1.ensure_authentication_token!
     @user2.ensure_authentication_token!
     @user3.ensure_authentication_token!
+    @user1 = User.find(@user1.id)
+    @user2 = User.find(@user2.id)
+    @user3 = User.find(@user3.id)
   end 
 
   it 'should not redeem code for 3rd person' do
@@ -40,13 +43,13 @@ describe Api::V1::PromoCodesController do
   end
 
   it 'should redeem invitation from another' do
-    @user1.promo_code.code.should eql("ZMartinsek3")
-    @user2.promo_code.code.should eql("ZMartinsek")
+    @user1.promo_code.code.should eql("ZMartinsek")
+    @user2.promo_code.code.should eql("ZMartinsek3")
     @user3.promo_code.code.should eql("ZMartinsek1")
 
     @user1.ensure_authentication_token!
 
-    post :create, user_id: "me", auth_token: @user1.authentication_token, promo_code: "zmartinsek"
+    post :create, user_id: "me", auth_token: @user1.authentication_token, promo_code: "zmartinsek3"
     response.body.should include("user")
 
     post :create, user_id: "me", auth_token: @user1.authentication_token, promo_code: "zmartinsek1"

@@ -105,6 +105,19 @@ class User < ActiveRecord::Base
     if !code.nil?
       i = 1
       promo_code = PromoCode.where(:code => code).first
+      if !promo_code.nil?
+        puts "promo code not null"
+        if !self.promo_code.nil?
+          puts "user promo code not null"
+          if promo_code.id == self.promo_code.id
+            puts "user promo code id equal to promo code id"
+            if promo_code.code == self.promo_code.code
+              puts "user promo code equal to promo code"
+              return
+            end
+          end
+        end
+      end
       while (!promo_code.nil?)
         new_code = "#{code}#{i}"
         i = i + 1
@@ -120,6 +133,7 @@ class User < ActiveRecord::Base
         previous_code.code = code
         previous_code.save
       end
+
     end
 
   end

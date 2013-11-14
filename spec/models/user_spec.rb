@@ -82,6 +82,13 @@ describe User do
     user.promo_code.code.should eql(user.last_name)
   end
 
+  it 'should keep promo code if not changing name' do
+    promo_code = @user.promo_code
+    @user.email = "12334@mail.com"
+    @user.save
+    user = User.find(@user.id)
+    user.promo_code.code.should eql(promo_code.code)
+  end
 
   it 'should create a promo code for a new user' do
     promo_code = "#{@user.first_name[0]}#{@user.last_name}"
@@ -93,6 +100,7 @@ describe User do
     user.email = "joke1@gmail.com"
     user.save
     promo_code = "#{user.first_name[0]}#{user.last_name}1"
+    user = User.find(user.id)
     user.promo_code.code.should eql(promo_code)
   end
 end

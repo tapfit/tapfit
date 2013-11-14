@@ -62,8 +62,12 @@ module Api
           if (Receipt.where(:user_id => current_user.id).count > 0)
             render :json => { :error => "Sorry, the code you entered is only for new users" }
           else
-            Credit.create(:total => promo_code.amount, :user_id => current_user.id, :promo_code_id => promo_code.id)
-            render :json => { :user => current_user.as_json(:auth => true) }
+            if (promo_code.user_id == current_user.id)
+              render :json => { :error => "Sorry, can not use your own invitation code" }
+            else
+              Credit.create(:total => promo_code.amount, :user_id => current_user.id, :promo_code_id => promo_code.id)
+              render :json => { :user => current_user.as_json(:auth => true) }
+            end
           end
         end
       end
