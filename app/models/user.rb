@@ -2,6 +2,8 @@ require 'mandrill'
 
 class User < ActiveRecord::Base
 
+  @invitation_code_amount = 5
+
   devise :database_authenticatable, :registerable, :token_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -128,7 +130,7 @@ class User < ActiveRecord::Base
       end
       previous_code = PromoCode.where(:user_id => self.id).first
       if previous_code.nil?
-        PromoCode.create(:code => code, :user_id => self.id)
+        PromoCode.create(:code => code, :user_id => self.id, :amount => @invitation_code_amount)
       else
         previous_code.code = code
         previous_code.save
