@@ -43,7 +43,7 @@ module Api
           price = @workout.price
 
           if (current_user.credit_amount >= price)
-            Resque.enqueue(AddCreditToInvitor, current_user.id, Receipt.where(:user_id => current_user.id).count)
+            Resque.enqueue(AddCreditsToInvitor, current_user.id, Receipt.where(:user_id => current_user.id).count)
             receipt = @workout.buy_workout(current_user)
             current_user.use_credits(price)
             render :json => {
@@ -53,7 +53,7 @@ module Api
               :receipt => receipt } and return
           elsif (current_user.credit_amount > 0)
             price = price - current_user.credit_amount
-            Resque.enqueue(AddCreditToInvitor, current_user.id, Receipt.where(:user_id => current_user.id).count)
+            Resque.enqueue(AddCreditsToInvitor, current_user.id, Receipt.where(:user_id => current_user.id).count)
             current_user.use_credits(current_user.credit_amount)
           end
           result = Braintree::Transaction.sale(
