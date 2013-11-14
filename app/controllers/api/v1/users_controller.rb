@@ -78,7 +78,7 @@ module Api
             user.save
           end
 
-          render :json => { :email => user.email, :id => user.id, :auth_token => user.authentication_token, :first_name => user.first_name, :last_name => user.last_name }
+          render :json => { :email => user.email, :id => user.id, :auth_token => user.authentication_token, :first_name => user.first_name, :last_name => user.last_name, :credit_amount => user.credit_amount, :uid => user.uid, :invitation_code => user.invitation_code }
         else
           puts "user failed rendering json"
           puts "full messages: #{user.errors.full_messages.join(", ")}"
@@ -105,7 +105,7 @@ module Api
         if !user.nil? && (user.valid_password?(password) || !params[:access_token].nil?)
           sign_in(:user, user)
           user.reset_authentication_token!
-          render :json => { :email => user.email, :id => user.id, :auth_token => user.authentication_token, :first_name => user.first_name, :last_name => user.last_name }
+          render :json => { :email => user.email, :id => user.id, :auth_token => user.authentication_token, :first_name => user.first_name, :last_name => user.last_name, :credit_amount => user.credit_amount, :uid => user.uid, :invitation_code => user.invitation_code }
         else
           render :json => { :errors => "Not valid email or password" }, :status => 403
         end   
