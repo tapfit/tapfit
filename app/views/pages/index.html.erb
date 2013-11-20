@@ -1,38 +1,152 @@
-<div id="tapfit_splash">
-    <div id="header">
-    </div>
-    <div class="splash_container" id="top">
-        <div class="centerizer">
-            <%= image_tag "splash_iphone.png", :class => "splash_phone" %>
-            <div id="top_content">
-              <%= image_tag "logo_horizontal.png", :class => "splash_logo" %>
-              <p id="top_content_tagline">
-                <%= image_tag "tagline.png" %>
-                <br/><br/><br/>
-                <span class="tagline_text">
-                    Gyms give us their unsold classes. We show you the day's best values. You book workouts easily from your smartphone.
-                </span>
-              </p>
-              <a href="https://itunes.apple.com/us/app/tapfit/id683430709?ls=1&mt=8" id="top_content_apple" target="_blank"></a>
-              <a href="https://play.google.com/store/apps/details?id=co.tapfit.android" id="top_content_android" target="_blank"></a>
-            </div>
-        </div>
-    </div>
-    <div class="splash_container" id="benefits_link">
-        <div class="centerizer">
-        <a href="#benefits" class="link_to_benefits">Book last minute workouts, today.</a>
-        </div>
-    </div>
-    <div class="splash_container" id="benefits">
-        <div class="centerizer">
-        <%= image_tag "benefits_ss_1.png", :class => "benefits_ss" %>
-        <div id="benefits_content">
-            <p>TapFit is fitness on your own terms. Browse through hundreds of expertly-curated gyms and studios, view upcoming class schedules, and book classes - all through the convenience of your mobile phone.</p>
-            <a class="link_to_what"><h1 style="color:#ffffff;cursor:pointer;">&darr;</h1></a>
-        </div>
-        </div>
-    </div>
-    <div id="footer">
-        <p>&copy; 2013 TAPFIT, LLC &nbsp; &bull; &nbsp; <a href="http://blog.tapfit.co">Read Our Blog</a></p>
-    </div>
+
+<!doctype html>
+<html lang="en">
+<head>
+</head>
+<body>
+<header id="top">
+<div class="wrapper">
+<h1 class="logo"><a href="#">tap<strong>fit</strong></a></h1>
+<nav>
+<ul id="navigation">
+<li><a href="#plans">Plans</a></li>
+<li><a href="#portfolio">Our Locations</a></li>
+<li><a href="#schedule">Schedule</a></li>
+<li><a href="#order">Pre-Order</a></li>
+</ul>
+</nav>
 </div>
+</header>
+<div id="banner">
+<div class="wrapper">
+<h2>Your Last Gym Membership</h2><!--Adjust font-size in css if required here-->
+<a href="#" class="button-1">Learn More</a>
+</div>
+</div>
+
+<div class="wrapper"><a name="portfolio"></a>
+<!-- Category Filter -->
+
+<ul class="filter group"> 
+<li class="current all"><a href="#">All</a></li> 
+<li class="cat-1"><a href="#">Chicago</a></li> 
+<li class="cat-2"><a href="#">Cincy</a></li> 
+<li class="cat-3"><a href="#">LA</a></li> 
+<li class="cat-4"><a href="#">NYC</a></li> 
+<li class="cat-5"><a href="#">SF</a></li> 
+</ul><div class="clear"></div>          
+
+<!-- Portfolio Items -->
+<ul class="portfolio group"> 
+<li class="item" data-id="id-1" data-type="cat-1">
+<%= image_tag "project-1.jpg", :width => 300, :height => 225 %>
+<a href="img/project-1.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
+<h3>Lorem Ipsum Dolor Sit Amet</h3>
+<p>Consectetur adipiscing elit. Quisque ultricies quam felis. Aenean non sodales lectus. Phasellus justo nibh, convallis vitae dui sed, tincidunt auctor turpis.</p><span class="date">12 November 2013</span> 
+</a>
+</li> 
+<li class="item" data-id="id-2" data-type="cat-1">
+<%= image_tag "project-2.jpg", :width => 300, :height => 225 %>
+<a href="img/project-2.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
+<h3>Lorem Ipsum Dolor Sit Amet</h3>
+<p>Consectetur adipiscing elit. Quisque ultricies quam felis. Aenean non sodales lectus. Phasellus justo nibh, convallis vitae dui sed, tincidunt auctor turpis.</p><span class="date">12 November 2013</span> 
+</a>
+</li>
+<li class="item" data-id="id-3" data-type="cat-2">
+<%= image_tag "project-3.jpg", :width => 300, :height => 225 %>
+<a href="img/project-3.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
+<h3>Lorem Ipsum Dolor Sit Amet</h3>
+<p>Consectetur adipiscing elit. Quisque ultricies quam felis. Aenean non sodales lectus. Phasellus justo nibh, convallis vitae dui sed, tincidunt auctor turpis.</p><span class="date">12 November 2013</span> 
+</a>
+</li>
+<li class="item" data-id="id-4" data-type="cat-3">
+<%= image_tag "project-4.jpg", :width => 300, :height => 225 %>
+<a href="img/project-4.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
+<h3>Lorem Ipsum Dolor Sit Amet</h3>
+<p>Consectetur adipiscing elit. Quisque ultricies quam felis. Aenean non sodales lectus. Phasellus justo nibh, convallis vitae dui sed, tincidunt auctor turpis.</p><span class="date">12 November 2013</span> 
+</a>
+</li>
+<li class="item" data-id="id-5" data-type="cat-1">
+<%= image_tag "project-5.jpg", :width => 300, :height => 225 %>
+<a href="img/project-5.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
+<h3>Lorem Ipsum Dolor Sit Amet</h3>
+<p>Consectetur adipiscing elit. Quisque ultricies quam felis. Aenean non sodales lectus. Phasellus justo nibh, convallis vitae dui sed, tincidunt auctor turpis.</p><span class="date">12 November 2013</span> 
+</a>
+</li>
+<li class="item" data-id="id-6" data-type="cat-3">
+<%= image_tag "project-6.jpg", :width => 300, :height => 225 %>
+<a href="img/project-6.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
+<h3>Lorem Ipsum Dolor Sit Amet</h3>
+<p>Consectetur adipiscing elit. Quisque ultricies quam felis. Aenean non sodales lectus. Phasellus justo nibh, convallis vitae dui sed, tincidunt auctor turpis.</p><span class="date">12 November 2013</span> 
+</a>
+</li>
+<li class="item" data-id="id-7" data-type="cat-2">
+<%= image_tag "project-7.jpg", :width => 300, :height => 225 %>
+<a href="img/project-7.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
+<h3>Lorem Ipsum Dolor Sit Amet</h3>
+<p>Consectetur adipiscing elit. Quisque ultricies quam felis. Aenean non sodales lectus. Phasellus justo nibh, convallis vitae dui sed, tincidunt auctor turpis.</p><span class="date">12 November 2013</span> 
+</a>
+</li>
+<li class="item" data-id="id-8" data-type="cat-2">
+<%= image_tag "project-8.jpg", :width => 300, :height => 225 %>
+<a href="img/project-8.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
+<h3>Lorem Ipsum Dolor Sit Amet</h3>
+<p>Consectetur adipiscing elit. Quisque ultricies quam felis. Aenean non sodales lectus. Phasellus justo nibh, convallis vitae dui sed, tincidunt auctor turpis.</p><span class="date">12 November 2013</span> 
+</a>
+</li>
+<li class="item" data-id="id-9" data-type="cat-1">
+<%= image_tag "project-9.jpg", :width => 300, :height => 225 %>
+<a href="img/project-9.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
+<h3>Lorem Ipsum Dolor Sit Amet</h3>
+<p>Consectetur adipiscing elit. Quisque ultricies quam felis. Aenean non sodales lectus. Phasellus justo nibh, convallis vitae dui sed, tincidunt auctor turpis.</p><span class="date">12 November 2013</span> 
+</a>
+</li><div class="clear"></div>  
+</ul>
+</div>
+
+<div class="about"><a name="about"></a>
+<div class="wrapper">
+<ul>
+<li>
+<%= image_tag "team-1.png" %>
+<h3>Rachel Roberts</h3>
+<p class="job-role">The Yoga Bar</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ultricies quam felis. Aenean non sodales lectus. Phasellus justo nibh, convallis vitae dui sed, tincidunt auctor integrer turpis.</p>
+<p>Phasellus erat arcu, ullamcorper sit amet nunc nec, tempor dignissim dui.</p>
+</li>
+<li>
+<%= image_tag "team-2.png" %>
+<h3>Cydney Rabe</h3>
+<p class="job-role">Core A Movement Studio</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ultricies quam felis. Aenean non sodales lectus. Phasellus justo nibh, convallis vitae dui sed, tincidunt auctor integrer turpis.</p>
+<p>Phasellus erat arcu, ullamcorper sit amet nunc nec, tempor dignissim dui.</p>
+</li>
+<li>
+<%= image_tag "team-3.png" %>
+<h3>Jim Riggs</h3>
+<p class="job-role">Carew Towers</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ultricies quam felis. Aenean non sodales lectus. Phasellus justo nibh, convallis vitae dui sed, tincidunt auctor integrer turpis.</p>
+<p>Phasellus erat arcu, ullamcorper sit amet nunc nec, tempor dignissim dui.</p>
+</li><div class="clear"></div>
+</ul>
+</div>
+</div>
+
+<div class="blurb">
+<div class="wrapper">
+<h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ultricies quam felis. Aenean non sodales lectus. Phasellus justo nibh, convallis vitae dui sed, tincidunt auctor turpis.</h4>
+<a href="#" class="button-2">Pre-Order Today</a>
+</div>
+</div>
+
+<footer>
+<div class="wrapper">
+<p>Connect with us: <a href="#">Facebook</a> | <a href="#">Twitter</a> | <a href="#">Behance</a></p>
+<p><small>Copyright © 2013 TAPFIT, LLC. All rights reserved.</small></p>
+</div>
+</footer>
+
+<a href="#" class="back-to-top"><%= image_tag "arrow-up.svg" %></a>
+</body>
+
+</html>

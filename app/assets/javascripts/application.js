@@ -84,14 +84,9 @@ return false;
 
 /* Scroll the background layers */
 function parallaxScroll(){
-var scrolled = $(window).scrollTop();
-$('.splash_phone').css('top',(0-(scrolled*.25))+'px');
-$('.benefits_ss').css('top',(400-(scrolled*.40))+'px');
-//$('#what_icon').css('left',(1200-(scrolled*.25))+'px');
-//$('#who_icon').css('top',(920-(scrolled*.25))+'px');
-//$('#trainers_icon').css('left',(1080-(scrolled*.10))+'px');
-//$('#parallax-bg2').css('top',(0-(scrolled*.5))+'px');
-//$('#parallax-bg3').css('top',(0-(scrolled*.75))+'px');
+    var scrolled = $(window).scrollTop();
+    $('.splash_phone').css('top',(0-(scrolled*.25))+'px');
+    $('.benefits_ss').css('top',(400-(scrolled*.40))+'px');
 }
 
 /* Adjust screen elements such as the phone on resize */
