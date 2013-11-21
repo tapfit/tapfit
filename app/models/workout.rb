@@ -74,4 +74,19 @@ class Workout < ActiveRecord::Base
     return (self.ratings.count > 0) ? self.ratings.average(:rating).to_i : -1
   end
 
+  def classId
+    if self.crawler_info.nil?
+      return nil
+    else
+      return self.crawler_info['classId']
+    end
+  end
+
+  def paymentId
+    if self.crawler_info.nil?
+      return nil
+    else
+      return self.crawler_info['paymentId']
+    end
+  end
 end

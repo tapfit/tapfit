@@ -54,6 +54,8 @@ ActiveAdmin.register Workout do
       f.input :is_day_pass
       f.input :place_id
       f.input :original_price
+      f.input :classId
+      f.input :paymentId
     end
     
     f.inputs "Instructor", :for => [:instructor, f.object.instructor || Instructor.new] do |meta_form|
@@ -76,7 +78,11 @@ ActiveAdmin.register Workout do
       
       workout = permitted_params[:workout]
       instructor = "#{workout[:instructor][:first_name]} #{workout[:instructor][:last_name]}"
+      classId = workout[:classId]
+      paymentId = workout[:paymentId]
       workout = workout.except!(:instructor)
+      workout = workout.except!(:classId)
+      workout = workout.except!(:paymentId)
       workout = Workout.new(workout)
 
       place = Place.find(workout.place_id)
@@ -100,14 +106,60 @@ ActiveAdmin.register Workout do
       process_class = ProcessClass.new(opts)
       workout = process_class.save_to_database("admin")
 
+      crawler_info = {}
+      if !classId.nil?
+        crawler_info['classId'] = classId
+      end
+
+      if !paymentId.nil?
+        crawler_info['paymentId'] = paymentId
+      end
+
+      if !(crawler_info == {})
+        workout.crawler_info = crawler_info
+      end
+      
+      workout.save
+
       redirect_to admin_workout_path(workout) 
     end
 
     def update
       workout = permitted_params[:workout]
+      puts workout
+      classId = workout[:classId]
+      paymentId = workout[:paymentId]
+      
       workout = workout.except!(:instructor)
+      workout = workout.except!(:classId)
+      workout = workout.except!(:paymentId)
+
       workout = Workout.update(permitted_params[:id], workout)
 
+      crawler_info = workout.crawler_info
+      if crawler_info.nil?
+        crawler_info = {}
+      end
+
+      if !classId.nil?
+        crawler_info['classId'] = classId
+      end
+
+      if !paymentId.nil?
+        crawler_info['paymentId'] = paymentId
+      end
+
+      if !(crawler_info == {})
+        puts "updating crawler_info"
+        workout.crawler_info = crawler_info
+      end
+
+      puts "classId: #{classId}"
+      puts "paymentId: #{paymentId}"
+      puts "crawler_info: #{crawler_info}"
+
+      workout.save
+      puts "workout.crawler_info: #{workout.crawler_info}"
       redirect_to admin_workout_path(workout)
     end
 

@@ -1,5 +1,3 @@
-require "./lib/crawler_validation/process_location"
-
 ActiveAdmin.register Place do
 
   index do
@@ -45,7 +43,7 @@ ActiveAdmin.register Place do
       f.input :can_buy
       f.input :facility_type
       f.input :category
-      f.input :pass_detail_info, :as => :number
+      f.input :pass_detail_info, :as => :int
        
       f.has_many :place_hours do |hour|
         hour.input :day_of_week
@@ -79,46 +77,23 @@ ActiveAdmin.register Place do
   controller do
 
     def create
-      place_params = permitted_params[:place]
-      puts place_params
-      address_params = place_params[:address]
-      id = ProcessLocation.controller_helper(place_params, address_params)
-     
-      place = Place.find(id)
       
-      update_place_attributes(place.id)
-
-      place = Place.find(id)
-
-      if place.facility_type == 1 || place.facility_type == 2
-        place.place_hours.each do |hour|
-          DayPass.create_day_pass(place, hour, DateTime.now)
-          DayPass.create_day_pass(place, hour, DateTime.now + 1.days)
-        end
-      end
-
     end
 
     def update
 
       place_params = permitted_params[:place]
-      place_params = place_params.except!(:place_contract_attributes)
-      place_params = place_params.except!(:place_hours_attributes)
-      place_params = place_params.except!(:pass_detail_info)
-      place = Place.find(permitted_params[:id])
-
-      place.update_attributes!(place_params)
-
-      update_place_attributes(place.id)
-    end
-
-    def update_place_attributes(place_id)
-      place_params = permitted_params[:place]
       contract_params = place_params[:place_contract_attributes]
       hour_params = place_params[:place_hours_attributes]
-      pass_detail = place_params[:pass_detail_info]
-      contract_params[:place_id] = place_id
-      place = Place.find(place_id)
+      contract_params[:place_id] = permitted_params[:id]
+      place_id = permitted_params[:id]
+      place_params = place_params.except!(:place_contract_attributes)
+      place_params = place_params.except!(:place_hours_attributes)
+      place = Place.find(permitted_params[:id])
+      puts place_params
+      place.update_attributes!(place_params)
+
+      # puts contract_params
       
       if !hour_params.nil?
         hour_params.keys.each do |key|
@@ -127,10 +102,8 @@ ActiveAdmin.register Place do
           puts hour_param
 
           Time.zone = "UTC"
-          open = Time.parse(hour_param["open"])
-          close = Time.parse(hour_param["close"])
-          open = Time.now.utc.beginning_of_day.advance(:hours => open.hour, :minutes => open.min)
-          close = Time.now.utc.beginning_of_day.advance(:hours => close.hour, :minutes => close.min)
+          open = Time.now.utc.beginning_of_day.advance(:hours => hour_param["open(4i)"].to_i, :minutes => hour_param["open(5i)"].to_i)
+          close = Time.now.utc.beginning_of_day.advance(:hours => hour_param["close(4i)"].to_i, :minutes => hour_param["close(5i)"].to_i)
           puts "open: #{open}"
           puts "close: #{close}"
 
@@ -159,21 +132,6 @@ ActiveAdmin.register Place do
           contract_params = contract_params.except!(:id)
           contract_params = contract_params.except!(:_destroy)
           create_contract(contract_params, place)
-        end
-      end
-
-      # Create pass detail - RETHINK IF WE HAVE MULTIPLE PASS DETAILS FOR A PLACE
-      if pass_detail.nil?
-        if place.pass_details.count > 0
-          place.pass_details.destroy_all
-        end
-        PassDetail.create(:place_id => place.id, :pass_type => 0)
-      else
-        if place.pass_details.count > 0 
-          if !(place.pass_details.first.pass_type == pass_detail)
-            place.pass_details.destroy_all
-            PassDetail.create(:place_id => place.id, :pass_type => 1)
-          end
         end
       end
 

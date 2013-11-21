@@ -121,6 +121,15 @@ class Place < ActiveRecord::Base
     end
   end
 
+  def pass_detail_info
+    pass_detail = self.pass_details.first
+    if pass_detail.nil?
+      return nil
+    else
+      return self.pass_details.first.pass_type
+    end
+  end
+
   def class_times    
     return next_workouts.where(:is_day_pass => false).pluck(:start_time)
   end

@@ -18,23 +18,28 @@ class ProcessLocation < ProcessBase
       @dropin_price = opts[:dropin_price]
       @source = opts[:source]
       @source_id = opts[:source_id]
+      @can_buy = opts[:can_buy]
+      @facility_type = opts[:facility_type]
+      @crawler_source = opts[:crawler_source]
     end
   end
 
-  def self.controller_helper(place, address, tags, source_id)
+  def self.controller_helper(place, address)
     
     
     opts = {}
     opts[:name] = place[:name] if !place[:name].nil?
     opts[:address] = address if !address.nil?
-    opts[:tags] = tags if !tags.nil?
     opts[:url] = place[:url] if !(place[:url].nil? || place[:url] == "")
+    opts[:schedule_url] = place[:schedule_url] if !(place[:schedule_url].nil? || place[:schedule_url] == "")
     opts[:phone_number] = place[:phone_number] if !(place[:phone_number].nil? || place[:phone_number] == "")
     opts[:source_description] = place[:source_description] if !(place[:source_description].nil? || place[:source_description] == "")
     opts[:dropin_price] = place[:dropin_price] if !(place[:dropin_price].nil? || place[:dropin_price] == "")
     opts[:source] = place[:source] if !place[:source].nil?
-    opts[:source_id] = source_id if !(source_id.nil? || source_id == "")
     opts[:category] = place[:category]
+    opts[:can_buy] = place[:can_buy]
+    opts[:facility_type] = place[:facility_type]
+    opts[:crawler_source] = place[:crawler_source]
     process_location = ProcessLocation.new(opts)
     return process_location.save_to_database(place[:source])
   end

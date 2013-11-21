@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131113203740) do
+ActiveRecord::Schema.define(version: 20131120211741) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -111,8 +111,10 @@ ActiveRecord::Schema.define(version: 20131113203740) do
     t.text     "instructions"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "pass_type"
   end
 
+  add_index "pass_details", ["pass_type"], name: "index_pass_details_on_pass_type", using: :btree
   add_index "pass_details", ["place_id"], name: "index_pass_details_on_place_id", using: :btree
 
   create_table "photos", force: true do |t|
@@ -324,8 +326,10 @@ ActiveRecord::Schema.define(version: 20131113203740) do
     t.float    "original_price"
     t.boolean  "is_cancelled",       default: false
     t.integer  "pass_detail_id"
+    t.hstore   "crawler_info"
   end
 
+  add_index "workouts", ["crawler_info"], name: "index_workouts_on_crawler_info", using: :btree
   add_index "workouts", ["end_time"], name: "index_workouts_on_end_time", using: :btree
   add_index "workouts", ["instructor_id"], name: "index_workouts_on_instructor_id", using: :btree
   add_index "workouts", ["is_bookable"], name: "index_workouts_on_is_bookable", using: :btree
