@@ -48,7 +48,7 @@ ul, li {
 
 a {
         text-decoration: none; 
-        color: #e81b47;
+        color: #eb4840;
 }
 
 a:hover {
@@ -80,11 +80,14 @@ h1.logo a {
         float: left;
         color: #fff;
         font-weight: 400;
-        font-size: 100%;
-        margin: 19px 0 0 32px;
-        letter-spacing: -0.05em;
+        font-size: 130%;
+        margin: 15px 0 0 32px;
         width: 250px
         
+}
+
+h1.logo a img {
+    height: 50px;
 }
 
 header#top nav {
@@ -111,7 +114,7 @@ header#top nav ul li a {
 }
 
 header#top nav ul li a:hover {
-        background: #e81b47;
+        background: #eb4840;
 }
 
 .mnav {
@@ -134,7 +137,7 @@ header#top nav ul li a:hover {
 
 #banner {
         height: 466px;
-        background: url(banner-bg.jpg) no-repeat center;
+        background: url(banner-bg-2.png) no-repeat center;
         position: relative;
         padding-top: 1px;
 }
@@ -143,7 +146,7 @@ header#top nav ul li a:hover {
         margin: 140px auto 0;
         top: 140px;
         padding: 0 5%;
-        background-color: #e81b47;
+        background-color: #eb4840;
         opacity: 0.9;
         color: #fff;
         font-size: 400%;
@@ -173,9 +176,6 @@ header#top nav ul li a:hover {
 a.button-1 {
         color: #fff;
         background-color: #000;
-        background-image: url(../img/arrow.svg);
-        background-repeat: no-repeat;
-        background-position: 155px 15px;
         display: block;
         width: 180px;
         left: 50%;
@@ -186,10 +186,7 @@ a.button-1 {
 }
 
 a.button-1:hover {
-        background: #e81b47;
-        background-image: url(../img/arrow-hover.svg);
-        background-repeat: no-repeat;
-        background-position: 155px 15px;
+        background: #eb4840;
         opacity: 0.9;
         color: #fff;
 }
@@ -235,7 +232,7 @@ ul.filter li a:hover {
 }
 
 ul.filter li.current a {
-        color: #e81b47;
+        color: #eb4840;
 }
 
 ul.portfolio li {
@@ -261,7 +258,7 @@ ul.portfolio li:hover .photo-overlay {
 }
 
 ul.portfolio li .photo-overlay h3 {
-        color: #e64367;
+        color: #eb4840;
         font-size: 13px;
         text-transform: uppercase;
         position: absolute;
@@ -292,12 +289,12 @@ ul.portfolio li .photo-overlay .date {
         }
 }
 
-.about {
+.testimonials {
         background: #292929;
         margin-top: 80px;
 }
 
-.about ul li {
+.testimonials ul li {
         width: 300px;
         display: inline-block;
         float: left;
@@ -306,14 +303,14 @@ ul.portfolio li .photo-overlay .date {
         text-align: center;
 }
 
-.about ul li h3 {
+.testimonials ul li h3 {
         font-size: 32px;
         color: #fff;
         margin-top: 20px;
 }
 
-.about ul li p.job-role {
-        color: #e64367;
+.testimonials ul li p.job-role {
+        color: #eb4840;
         font-size: 13px;
         text-transform: uppercase;
         font-weight: 700;
@@ -321,21 +318,67 @@ ul.portfolio li .photo-overlay .date {
         margin-bottom: 20px;
 }
 
-.about ul li p {
+.testimonials ul li p {
         color: #fff;
         font-size: 13px;
 }
 
 @media only screen and (max-width: 640px) {
-        .about ul {
+        .testimonials ul {
         width: 320px;
         margin: 0 auto;
         }
 }
 
-.blurb h4 {
-        font-size: 23px;
+.about {
+    background: #FFF;
+    position: relative;
+    min-height: 800px;
+    color: #111;
+}
+
+.benefits {
+    background: #008de4;
+    position: relative;
+    padding-top: 1px;
+    min-height: 800px;
+    color: #fff;
+}
+
+.wrapup {
+    background: url("yoga_blur.png") no-repeat center;
+    position: relative;
+    min-height: 800px;
+    color: #fff;
+}
+
+.dividerBlurb {
+    z-index: 1000;
+    background: #fff;
+    width: 100%;
+}
+
+.dividerBlurb h4 {
+        font-size: 25px;
         font-weight: 600;
+        text-align: center;
+        padding: 20px 60px;
+        text-transform: uppercase;
+}
+
+.sectionHeader h4 {
+        font-size: 25px;
+        font-weight: 600;
+        text-align: center;
+        margin: 40px 0 0 0;
+        padding: 40px 60px 0 60px;
+        text-transform: uppercase;
+}
+
+.blurb h4 {
+    color: #555555;
+        font-size: 23px;
+        font-weight: 200;
         text-align: center;
         margin: 40px 0 40px 0;
         padding: 0 60px;
@@ -344,9 +387,6 @@ ul.portfolio li .photo-overlay .date {
 a.button-2 {
         color: #fff;
         background-color: #000;
-        background-image: url(../img/arrow.svg);
-        background-repeat: no-repeat;
-        background-position: 155px 15px;
         display: block;
         width: 180px;
         margin: 0 auto;
@@ -355,10 +395,7 @@ a.button-2 {
 }
 
 a.button-2:hover {
-        background: #e81b47;
-        background-image: url(../img/arrow-hover.svg);
-        background-repeat: no-repeat;
-        background-position: 155px 15px;
+        background: #eb4840;
         opacity: 0.9;
         color: #fff;
 }
@@ -382,7 +419,7 @@ footer p {
     right: 2em;
     text-decoration: none;
     color: #fff;
-    background-color: #e81b47;
+    background-color: #eb4840;
     font-size: 12px;
     padding: 1em;
     display: none;
@@ -390,4 +427,193 @@ footer p {
 
 .back-to-top:hover {    
     background-color: rgba(135, 135, 135, 0.50);
+}
+
+#plans,#plans ul,#plans ul li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+}
+
+#pricePlans:after {
+        content: '';
+        display: table;
+        clear: both;
+}
+
+#pricePlans {
+        zoom: 1;
+}
+
+#pricePlans {
+        max-width: 69em;
+        margin: 0 auto;
+}
+
+#pricePlans #plans .plan {
+        background: #fff;
+        float: left;
+        width: 100%;
+        text-align: center;
+        border-radius: 5px;
+        margin: 0 0 20px 0;
+
+        -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.planContainer .title h2 {
+        font-size: 2.125em;
+        font-weight: 300;
+        color: #3e4f6a;
+        margin: 0;
+        padding: .6em 0;
+}
+
+.planContainer .price p {
+        background: #eb4840;
+        color: #fff;
+        font-size: 2em;
+        font-weight: 700;
+        height: 2.2em;
+        line-height: 2.2em;
+        margin: 0 0 0.4em;
+}
+
+.planContainer .price p span {
+        color: #222;
+        font-size: 70%;
+}
+
+.planContainer .options {
+        margin-top: 10em;
+}
+
+.planContainer .options li {
+        font-weight: 700;
+        color: #364762;
+        line-height: 2.5;
+}
+
+.planContainer .options li span {
+        font-weight: 400;
+        color: #979797;
+}
+
+.planContainer .button a {
+        text-transform: uppercase;
+        text-decoration: none;
+        color: #3e4f6a;
+        font-weight: 700;
+        letter-spacing: 3px;
+        line-height: 2.8em;
+        border: 2px solid #3e4f6a;
+        display: inline-block;
+        width: 80%;
+        height: 2.8em;
+        border-radius: 4px;
+        margin: 1.5em 0 1.8em;
+}
+
+#credits {
+        text-align: center;
+        font-size: .8em;
+        font-style: italic;
+        color: #777;
+}
+
+#credits a {
+        color: #333;
+}
+
+#credits a:hover {
+        text-decoration: none;
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+
+#pricePlans #plans .plan {
+        width: 49%;
+        margin: 0 2% 20px 0;
+}
+
+#pricePlans #plans > li:nth-child(2n) {
+        margin-right: 0;
+}
+
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+
+#pricePlans #plans .plan {
+        width: 49%;
+        margin: 0 2% 20px 0;
+}
+
+#pricePlans #plans > li:nth-child(2n) {
+        margin-right: 0;
+}
+
+}
+
+@media screen and (min-width: 1025px) {
+
+#pricePlans {
+        margin: 2em auto;
+}
+
+#pricePlans #plans .plan {
+        width: 32%;
+        margin: 0 2% 20px 0;
+
+        -webkit-transition: all .25s;
+           -moz-transition: all .25s;
+            -ms-transition: all .25s;
+             -o-transition: all .25s;
+                transition: all .25s;
+}
+
+#pricePlans #plans > li:last-child {
+        margin-right: 0;
+}
+
+#pricePlans #plans .plan:hover {
+        -webkit-transform: scale(1.04);
+           -moz-transform: scale(1.04);
+            -ms-transform: scale(1.04);
+             -o-transform: scale(1.04);
+                transform: scale(1.04);
+}
+
+.planContainer .button a {
+        -webkit-transition: all .25s;
+           -moz-transition: all .25s;
+            -ms-transition: all .25s;
+             -o-transition: all .25s;
+                transition: all .25s;
+}
+
+.planContainer .button a:hover {
+        background: #3e4f6a;
+        color: #fff;
+}
+
+}
+
+.dock {
+    position: fixed;
+    top: 0;
+}
+
+.iphone {
+    position: relative;
+    margin-top: 100px;
+}
+
+#iphone-2 {
+    margin-left: -1000px;
+}
+
+#iphone-3 {
+    opacity: 0;
 }
