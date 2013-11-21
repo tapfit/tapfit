@@ -19,15 +19,17 @@ var previousOffset;
 
 $(document).ready(function() {
     
-    var timer; 
+    //var timer; 
 
     /* Scroll event handler */
     $(window).bind('scroll',function(e){
-        clearTimeout(timer);
-        timer = setTimeout(parralaxScrolling, 100);
+       // clearTimeout(timer);
+       // timer = setTimeout(parralaxScrolling, 100);
+        parralaxScrolling();
         handleStickyDiv();
     });
     
+    parralaxScrolling();
     handleStickyDiv();
 });
 
@@ -46,14 +48,14 @@ function handleStickyDiv(){
     } 
     else if (scrolled <= offsetTwo) {
         $(".stickyDiv").addClass("dock");
-        $(".stickyDiv h4").text("Mobility is a breeze. Ain't no commitements");
+        $(".stickyDiv h4").text("TapFit gives you the freedom to work out whenever and however you want.");
         $("body").css("padding-top", $(".stickyDiv").height());
     } 
     else if (scrolled <= offsetThree) {
-        $(".stickyDiv h4").text("Working out is more fun when it's social"); 
+        $(".stickyDiv h4").text("Any workout, any class, everywhere you are.");
     }
     else if (scrolled <= offsetFour) {
-        $(".stickyDiv h4").text("Variety is the essence of life. And life is TapFit.");
+        $(".stickyDiv h4").text("No more contracts or commitments. TapFit is fitness that fits your life.");
     }
 
     if (scrolled >= offsetFour) {
@@ -66,40 +68,30 @@ function handleStickyDiv(){
 
 function parralaxScrolling(){
     var scrolled = $(window).scrollTop();
-    var marginOne = parseInt($("#iphone-1").css("margin-top")); 
-    var marginTwo = parseInt($("#iphone-2").css("margin-right")); 
-    var marginThree = parseInt($("#iphone-3").css("margin-top"));
+    var phoneWidth = parseInt($(".iphone").css("width"));
+    var phoneTop = parseInt($(".iphone").css("top"));
+    var phoneOpacity = $("#iphone-1").css("opacity");
+    var phoneOpacityTwo = $("#iphone-2").css("opacity");
     
     var offset = $("#banner").height() + $("#top").height();
     var offsetTwo = offset + $(".about").height();
     var offsetThree = offsetTwo + $(".benefits").height();
     var offsetFour = offsetThree + $(".wrapup").height();
-
-    if (scrolled - previousOffset > 0) {
-        if (scrolled <= offset) {
-        }
-        else if (scrolled <= offsetThree) {
-            $("#iphone-2").animate({
-                marginLeft: "0px",
-            }, 500, function() {
-            });
-        }
-        else if (scrolled <= offsetFour) {
-            $("#iphone-3").animate({
-                opacity: "1",
-            }, 500, function() {
-            });
-        }
-    }
-    else {
-        if (scrolled <= offset) {
-            $("#iphone-2").animate({
-                marginLeft: "-1000px",
-            }, 500, function() {
-            });
-        }
-        else if (scrolled <= offsetThree) {
-        }
+    
+    if (scrolled <= offset) {
+        $(".iphone").css("top", "100px");
+    } else if (scrolled <= offsetTwo) {
+        $(".iphone").css({
+            "top": scrolled-450 + "px",
+        });
+        $("#iphone-1").css("opacity", (offsetTwo-2*(scrolled-offset))/offsetTwo);
+    } else if (scrolled <= offsetThree) {
+        $(".iphone").css({
+            "top": scrolled-450 + "px",
+        });
+        $("#iphone-2").css("opacity", (offsetThree-3*(scrolled-offsetTwo))/offsetThree);
+    } else if (scrolled <= offsetFour) {
+    } else {
     }
    
     previousOffset = scrolled;

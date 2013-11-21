@@ -331,9 +331,10 @@ ul.portfolio li .photo-overlay .date {
 }
 
 .about {
-    background: #FFF;
+    background: #eeeeee;
     position: relative;
     min-height: 800px;
+    padding-top: 1px;
     color: #111;
 }
 
@@ -348,6 +349,7 @@ ul.portfolio li .photo-overlay .date {
 .wrapup {
     background: url("yoga_blur.png") no-repeat center;
     position: relative;
+    padding-top: 1px;
     min-height: 800px;
     color: #fff;
 }
@@ -606,14 +608,20 @@ footer p {
 }
 
 .iphone {
-    position: relative;
-    margin-top: 100px;
+    top: 100px;
+    z-index: 999;
+    height: 500px;
+    position: absolute;
 }
 
 #iphone-2 {
-    margin-left: -1000px;
+    z-index: 998;
 }
 
 #iphone-3 {
-    opacity: 0;
+    z-index: 997;
+}
+
+.hidden {
+    display: none;
 }

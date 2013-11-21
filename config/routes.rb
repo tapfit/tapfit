@@ -16,6 +16,7 @@ Tapfit::Application.routes.draw do
   resources :places do
     resources :photos
   end
+  
   # Api Calls
   namespace :api, defaults: {format: 'json'} do
 

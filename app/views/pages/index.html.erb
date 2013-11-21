@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -32,18 +31,18 @@
 <div class="about"><a name="about"></a>
     <div class="wrapper">
         <%= image_tag "iphone_map.png", :class => "iphone", :id => "iphone-1" %>
+        <%= image_tag "iphone_favorites.png", :class => "iphone", :id => "iphone-2" %>
+        <%= image_tag "iphone_profile.png", :class => "iphone", :id => "iphone-3" %>
     </div>
 </div>
 
 <div class="benefits"><a name="benefits"></a>
     <div class="wrapper">
-        <%= image_tag "iphone_profile.png", :class => "iphone", :id => "iphone-2" %>
     </div>
 </div>
 
 <div class="wrapup"><a name="wrapup"></a>
     <div class="wrapper">
-        <%= image_tag "iphone_favorites.png", :class => "iphone", :id => "iphone-3" %>
     </div>
 </div>
 
@@ -67,9 +66,9 @@
 <ul class="portfolio group">
 
 <% $i = 1 %>
-<% while $i < 7 do %>
-    <li class="item" data-id="id-<%= $i %>" data-type="cat-<%= $i % 2 %>">
-    <%= image_tag "gym-" + $i.to_s + ".png", :width => 300, :height => 225 %>
+<% while $i < 10 do %>
+    <li class="item" data-id="id-<%= $i %>" data-type="cat-<%= ($i%2)+1 %>">
+    <%= image_tag "gym-" + (($i % 2) + 1).to_s + ".png", :width => 300, :height => 225 %>
     <a href="gym-<%= $i.to_s %>.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
     <h3>Core a Movement Studio</h3>
     <p>Consectetur adipiscing elit. Quisque ultricies quam felis. Aenean non sodales lectus. Phasellus justo nibh, convallis vitae dui sed, tincidunt auctor turpis.</p><span class="date">12 November 2013</span> 
@@ -145,7 +144,7 @@
 
 <div class="blurb">
 <div class="wrapper">
-<h4>Credits are used like cash in the TapFit app. Workouts cost between 1 and 3 credits depending on the type of class. For example, the 25-pack will get you approximately 25 gym visits, 12 yoga classes, 8 pilates classes.</h4>
+<h4>Credits are used like cash in the TapFit app. Workouts cost between 1 and 3 credits depending on the type of class. For example, the 25-pack will get you approximately 25 gym visits, 12 yoga classes, or 8 pilates classes.</h4>
 </div>
 </div>
 
