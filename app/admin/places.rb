@@ -102,10 +102,20 @@ ActiveAdmin.register Place do
     def update
 
       place_params = permitted_params[:place]
+      address_params = place_params[:address]
       place_params = place_params.except!(:place_contract_attributes)
       place_params = place_params.except!(:place_hours_attributes)
       place_params = place_params.except!(:pass_detail_info)
+      place_params = place_params.except!(:address)
       place = Place.find(permitted_params[:id])
+
+      address = place.address
+
+      if address.nil?
+        place.address = Address.create(address_params)
+      else
+        address.update_attributes!(address_params)
+      end
 
       place.update_attributes!(place_params)
 
@@ -117,7 +127,9 @@ ActiveAdmin.register Place do
       contract_params = place_params[:place_contract_attributes]
       hour_params = place_params[:place_hours_attributes]
       pass_detail = place_params[:pass_detail_info]
-      contract_params[:place_id] = place_id
+      if !contract_params.nil?
+        contract_params[:place_id] = place_id
+      end
       place = Place.find(place_id)
       
       if !hour_params.nil?
@@ -147,19 +159,21 @@ ActiveAdmin.register Place do
           end
         end
       end
-
-      if contract_params[:id].nil?
-        contract_params = contract_params.except!(:_destroy)
-        create_contract(contract_params, place)
-      else
-        if contract_params[:_destroy] == "1"
-          PlaceContract.find(contract_params[:id]).destroy
-        else
-          PlaceContract.find(contract_params[:id]).destroy
-          contract_params = contract_params.except!(:id)
+      
+      if !contract_params.nil?
+        if contract_params[:id].nil?
           contract_params = contract_params.except!(:_destroy)
           create_contract(contract_params, place)
-        end
+        else
+          if contract_params[:_destroy] == "1"
+            PlaceContract.find(contract_params[:id]).destroy
+          else
+            PlaceContract.find(contract_params[:id]).destroy
+            contract_params = contract_params.except!(:id)
+            contract_params = contract_params.except!(:_destroy)
+            create_contract(contract_params, place)
+          end
+      end
       end
 
       # Create pass detail - RETHINK IF WE HAVE MULTIPLE PASS DETAILS FOR A PLACE
