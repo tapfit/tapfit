@@ -5,7 +5,7 @@ module CasperMindbody
 
     
 
-    cmd = "casperjs ./lib/casperjs/mindbody.js --url=#{url} --date=#{date.strftime("%m/%d/%Y")}"
+    cmd = "casperjs ./lib/casperjs/mindbody.js --url=#{url} --date='#{date.strftime("%m/%d/%Y")}'"
 
     output = `#{cmd}`
 
