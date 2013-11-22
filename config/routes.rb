@@ -4,6 +4,9 @@ require 'api_constraints'
 Tapfit::Application.routes.draw do
 
   match 'about' => 'pages#about', :via => :get
+  match 'plans' => 'pages#plans', :via => :get
+  match 'credits' => 'pages#credits', :via => :get
+  match 'locations' => 'pages#locations', :via => :get
   match 'terms' => 'pages#terms', :via => :get
   match 'privacy' => 'pages#privacy', :via => :get
   match 'faq' => 'pages#faq', :via => :get

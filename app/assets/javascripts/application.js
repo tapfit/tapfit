@@ -15,7 +15,8 @@
 //= require turbolinks
 //= require_tree .
 
-var previousOffset;
+var previousOffset = 0;
+var isAnimating = false;
 
 $(document).ready(function() {
     
@@ -23,8 +24,12 @@ $(document).ready(function() {
 
     /* Scroll event handler */
     $(window).bind('scroll',function(e){
-       // clearTimeout(timer);
-       // timer = setTimeout(parralaxScrolling, 100);
+
+        /*if (isAnimating == false) {
+            clearTimeout(timer);
+            timer = setTimeout(onePageScrolling, 50);
+        }*/
+
         parralaxScrolling();
         handleStickyDiv();
     });
@@ -43,12 +48,12 @@ function handleStickyDiv(){
 
     if (scrolled < offset) {
         $(".stickyDiv").removeClass("dock");
-        $(".stickyDiv h4").html("A single membership to your city's best fitness. <a href='#packages'>Pre-Order Today</a>");
+        $(".stickyDiv h4").text("A single membership to your city's best fitness.");
         $("body").css("padding-top", "0");
     } 
     else if (scrolled <= offsetTwo) {
         $(".stickyDiv").addClass("dock");
-        $(".stickyDiv h4").text("TapFit gives you the freedom to work out whenever and however you want.");
+        $(".stickyDiv h4").text("Finally...the freedom to work out whenever and however you want.");
         $("body").css("padding-top", $(".stickyDiv").height());
     } 
     else if (scrolled <= offsetThree) {
@@ -66,7 +71,63 @@ function handleStickyDiv(){
     }
 }
 
+function onePageScrolling(){
+    
+    isAnimating = true;
+
+    var scrolled = $(window).scrollTop();
+    var offset = $("#banner").height() + $("#top").height();
+    var offsetTwo = offset + $(".about").height();
+    var offsetThree = offsetTwo + $(".benefits").height() + 50;
+    var offsetFour = offsetThree + $(".wrapup").height();
+    var scrollTo = 0;
+
+    if (scrolled <= offsetFour) {
+        $('body').addClass('stop-scrolling');
+
+        if (scrolled >= previousOffset) {
+            // The user is scrolling down
+            if (scrolled <= offset) {
+                scrollTo = offset;
+            } else if (scrolled <= offsetTwo) {
+                scrollTo = offsetTwo;
+            } else if (scrolled <= offsetThree) {
+                scrollTo = offsetThree;
+            } else if (scrolled <= offsetFour) {
+                scrollTo = offsetFour;
+            } else {
+            }
+        }
+        else {
+            // The user is scrolling up
+            if (scrolled <= offset) {
+                scrollTo = 0;
+            } else if (scrolled <= offsetTwo) {
+                scrollTo = offset;
+            } else if (scrolled <= offsetThree) {
+                scrollTo = offsetTwo;
+            } else {
+                scrollTo = offsetThree;
+            }
+        }
+        
+        $('body').animate({
+            scrollTop: scrollTo,
+        }, 500, function() {
+            previousOffset = scrolled;
+            isAnimating = false;
+            $('body').removeClass('stop-scrolling');
+        });
+    }
+    else {
+        previousOffset = scrolled;
+        isAnimating = false;
+    }
+    
+}
+
 function parralaxScrolling(){
+
     var scrolled = $(window).scrollTop();
     var phoneWidth = parseInt($(".iphone").css("width"));
     var phoneTop = parseInt($(".iphone").css("top"));
@@ -75,24 +136,22 @@ function parralaxScrolling(){
     
     var offset = $("#banner").height() + $("#top").height();
     var offsetTwo = offset + $(".about").height();
-    var offsetThree = offsetTwo + $(".benefits").height();
+    var offsetThree = offsetTwo + $(".benefits").height() + 80;
     var offsetFour = offsetThree + $(".wrapup").height();
-    
+
     if (scrolled <= offset) {
-        $(".iphone").css("top", "100px");
+        $(".iphone").css("top", "70px");
     } else if (scrolled <= offsetTwo) {
         $(".iphone").css({
-            "top": scrolled-450 + "px",
+            "top": scrolled-493 + "px",
         });
         $("#iphone-1").css("opacity", (offsetTwo-2*(scrolled-offset))/offsetTwo);
     } else if (scrolled <= offsetThree) {
         $(".iphone").css({
-            "top": scrolled-450 + "px",
+            "top": scrolled-493 + "px",
         });
         $("#iphone-2").css("opacity", (offsetThree-3*(scrolled-offsetTwo))/offsetThree);
     } else if (scrolled <= offsetFour) {
     } else {
     }
-   
-    previousOffset = scrolled;
 }

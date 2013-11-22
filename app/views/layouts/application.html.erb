@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>TapFit - A Better Gym Membership</title>
@@ -27,8 +27,42 @@
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
 <body>
+    <header id="top">
 
-<%= yield %>
+    <div class="top-nav">
+        <div class="wrapper">
+            <nav>
+                <ul class="navigation">
+                    <li><a href="#">Studio Partners</a></li>
+                    <li><a href="#">Employers</a></li>
+                    <li><a href="/users/sign_in">Log &nbsp;In</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="wrapper">
+    <h1 class="logo"><a href="/">tap<strong>fit</strong></a></h1>
+    <nav>
+    <ul id="navigation">
+    <li><a href="/plans">Plans</a></li>
+    <li><a href="/locations">Locations</a></li>
+    <li><a href="/#schedule">Schedule</a></li>
+    <li><a href="/#about">About</a></li>
+    <li><a href="http://blog.tapfit.co" target="_blank">Blog</a></li>
+    </ul>
+    </nav>
+    </div>
+    </header>
+
+    <%= yield %>
+    
+    <footer>
+    <div class="wrapper">
+    <p>Connect with us: <a href="http://www.facebook.com/tapfit">Facebook</a> | <a href="http://www.twitter.com/tapfit">Twitter</a> | <a href="http://www.linkedin.com/company/tapfit-llc">LinkedIn</a></p>
+    <p><small>Copyright © 2013 TAPFIT, LLC. All rights reserved.</small></p>
+    </div>
+    </footer>
 
 </body>
 </html>

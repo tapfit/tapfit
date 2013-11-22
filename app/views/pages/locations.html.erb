@@ -1,0 +1,35 @@
+<div class="promotion"><a href="/plans">30 days left to get the 30% pre-order discount!</a></div>
+<div class="wrapper"><a name="portfolio"></a>
+<!-- Category Filter -->
+
+<div class="sectionHeader">
+<div class="wrapper">
+<h4>Our Partner Fitness Studios</h4>
+</div>
+</div>
+
+<ul class="filter group"> 
+<li class="current all"><a href="#">Featured</a></li> 
+<li class="cat-1"><a href="#">Chicago</a></li> 
+<li class="cat-2"><a href="#">Cincinnati</a></li> 
+<li class="cat-5"><a href="#">San Francisco</a></li> 
+</ul><div class="clear"></div>          
+
+<!-- Portfolio Items -->
+<ul class="portfolio group">
+
+<% $i = 1 %>
+<% while $i < 10 do %>
+    <li class="item" data-id="id-<%= $i %>" data-type="cat-<%= ($i%2)+1 %>">
+    <%= image_tag "gym-" + (($i % 2) + 1).to_s + ".png", :width => 300, :height => 225 %>
+    <a href="gym-<%= $i.to_s %>.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
+    <h3>Core a Movement Studio</h3>
+    <p>Consectetur adipiscing elit. Quisque ultricies quam felis. Aenean non sodales lectus. Phasellus justo nibh, convallis vitae dui sed, tincidunt auctor turpis.</p><span class="date">12 November 2013</span> 
+    </a>
+    </li>
+  <% $i += 1 %>
+<% end %>
+ 
+<div class="clear"></div>  
+</ul>
+</div>

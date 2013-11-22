@@ -8,6 +8,15 @@ class PagesController < ApplicationController
   def about
   end
 
+  def plans
+  end
+
+  def credits
+  end
+
+  def locations
+  end
+
   def terms
   end
 
