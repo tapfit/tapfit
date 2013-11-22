@@ -168,8 +168,8 @@ header#top nav ul li a:hover {
 }
 
 #banner {
-        height: 466px;
-        background: url(banner-bg-2.png) no-repeat center;
+        height: 550px;
+        background: url(banner-bg-3.png) no-repeat center;
         position: relative;
         padding-top: 1px;
 }
@@ -181,7 +181,7 @@ header#top nav ul li a:hover {
         background-color: #eb4840;
         opacity: 0.9;
         color: #fff;
-        font-size: 400%;
+        font-size: 340%;
         text-align: center;
         line-height: 166px;
         text-transform: uppercase;
@@ -328,7 +328,7 @@ ul.portfolio li .photo-overlay .date {
         width: 300px;
         display: inline-block;
         float: left;
-        margin: 80px 10px;
+        margin: 20px 10px;
         padding: 0 20px;
         text-align: center;
 }
@@ -350,7 +350,7 @@ ul.portfolio li .photo-overlay .date {
 
 .testimonials ul li p {
         color: #111;
-        font-size: 15px;
+        font-size: 18px;
 }
 
 .testimonials ul li p span {
@@ -366,27 +366,11 @@ ul.portfolio li .photo-overlay .date {
 }
 
 .about {
-    background: #eeeeee;
-    position: relative;
-    min-height: 800px;
-    padding-top: 1px;
-    color: #111;
-}
-
-.benefits {
-    background: #008de4;
-    position: relative;
-    padding-top: 1px;
-    min-height: 800px;
-    color: #fff;
-}
-
-.wrapup {
     background: url("yoga_blur.png") no-repeat center;
     position: relative;
+    min-height: 700px;
     padding-top: 1px;
-    min-height: 800px;
-    color: #fff;
+    color: #111;
 }
 
 .dividerBlurb {
@@ -422,7 +406,6 @@ ul.portfolio li .photo-overlay .date {
         font-size: 25px;
         font-weight: 600;
         text-align: center;
-        margin: 40px 0 0 0;
         padding: 40px 60px 0 60px;
         text-transform: uppercase;
 }
@@ -658,7 +641,7 @@ footer p {
 }
 
 .iphone {
-    top: 70px;
+    top: 150px;
     z-index: 999;
     height: 500px;
     position: absolute;
@@ -731,7 +714,7 @@ footer p {
         font-weight: 200;
         color: #222222;
         font-size: 1.2em;
-        line-height: 2;
+        line-height: 1.5em;
         width: 80%;
         padding-left: 10%;
 }

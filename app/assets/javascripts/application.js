@@ -131,8 +131,6 @@ function parralaxScrolling(){
     var scrolled = $(window).scrollTop();
     var phoneWidth = parseInt($(".iphone").css("width"));
     var phoneTop = parseInt($(".iphone").css("top"));
-    var phoneOpacity = $("#iphone-1").css("opacity");
-    var phoneOpacityTwo = $("#iphone-2").css("opacity");
     
     var offset = $("#banner").height() + $("#top").height();
     var offsetTwo = offset + $(".about").height();
@@ -140,17 +138,8 @@ function parralaxScrolling(){
     var offsetFour = offsetThree + $(".wrapup").height();
 
     if (scrolled <= offset) {
-        $(".iphone").css("top", "70px");
     } else if (scrolled <= offsetTwo) {
-        $(".iphone").css({
-            "top": scrolled-493 + "px",
-        });
-        $("#iphone-1").css("opacity", (offsetTwo-2*(scrolled-offset))/offsetTwo);
     } else if (scrolled <= offsetThree) {
-        $(".iphone").css({
-            "top": scrolled-493 + "px",
-        });
-        $("#iphone-2").css("opacity", (offsetThree-3*(scrolled-offsetTwo))/offsetThree);
     } else if (scrolled <= offsetFour) {
     } else {
     }
