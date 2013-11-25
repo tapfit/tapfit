@@ -1,4 +1,5 @@
 require "./lib/crawler_validation/process_location"
+require "./lib/crawler-helpers/casper_mindbody"
 
 ActiveAdmin.register Place do
 
@@ -28,14 +29,12 @@ ActiveAdmin.register Place do
   filter :source
 
 
-  member_action :workouts, :method => :get do
+  member_action :get_classes, :method => :get do
+
     place = Place.find(params[:id])
-    redirect_to admin_place_path(place)
-
-
-    #CasperMindbody.get_classes(place.schedule_url, place.id, DateTime.now, place.source)
-    #CasperMindbody.get_classes(place.schedule_url, place.id, DateTime.now + 1.days, place.source) 
-
+    CasperMindbody.get_classes(place.schedule_url, place.id, DateTime.now, place.source)
+    CasperMindbody.get_classes(place.schedule_url, place.id, DateTime.now + 1.days, place.source) 
+    redirect_to "/admin/places/#{params[:id]}"
   end
 
   action_item :only => :show do
@@ -110,10 +109,6 @@ ActiveAdmin.register Place do
           DayPass.create_day_pass(place, hour, DateTime.now + 1.days)
         end
       end
-
-    end
-
-    def get_classes
 
     end
 
