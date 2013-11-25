@@ -276,13 +276,12 @@ ul.portfolio li {
 
 ul.portfolio li .photo-overlay {
         position: absolute;
-        top: 0;
+        bottom: 0;
         left: 0;
         background: rgba(0, 0, 0, .8);
         width: 300px;
-        height: 225px;
+        height: 60px;
         color: #fff;
-        display: none;
 }
 
 ul.portfolio li:hover .photo-overlay {
@@ -294,7 +293,7 @@ ul.portfolio li .photo-overlay h3 {
         font-size: 13px;
         text-transform: uppercase;
         position: absolute;
-        top: 20px;
+        top: 14px;
         left: 20px;
 }
 
@@ -302,7 +301,7 @@ ul.portfolio li .photo-overlay p {
         color: #fff;
         font-size: 13px;
         position: absolute;
-        top: 40px;
+        top: 20px;
         left: 20px;
 }
 
@@ -538,7 +537,8 @@ footer p {
 .planContainer .button a {
         text-transform: uppercase;
         text-decoration: none;
-        color: #3e4f6a;
+        background-color: #3e4f6a;
+        color: #ffffff;
         font-weight: 700;
         letter-spacing: 3px;
         line-height: 2.8em;
@@ -688,9 +688,7 @@ footer p {
         width: 100%;
         text-align: center;
         border-radius: 5px;
-        
         border: 1px solid #cccccc;
-
         -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         opacity: 0.9;
@@ -711,12 +709,12 @@ footer p {
 .lightboxContainer .options li {
     position: relative;
     left: 10%;
-        font-weight: 200;
-        color: #222222;
-        font-size: 1.2em;
-        line-height: 2em;
-        width: 80%;
-        padding-left: 10%;
+    font-weight: 200;
+    color: #222222;
+    font-size: 1.2em;
+    line-height: 2em;
+    width: 80%;
+    padding-left: 10%;
 }
 
 .lightboxContainer .options li span {
@@ -727,7 +725,8 @@ footer p {
 .lightboxContainer .button a {
         text-transform: uppercase;
         text-decoration: none;
-        color: #3e4f6a;
+        background-color: #3e4f6a;
+        color: #ffffff;
         font-weight: 700;
         letter-spacing: 3px;
         line-height: 2.8em;
