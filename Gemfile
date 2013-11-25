@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-# ruby '2.0.0'
+# ruby '2.0.0p247'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
@@ -36,7 +36,7 @@ gem 'omniauth-facebook'
 gem 'responders',          github: 'plataformatec/responders'
 gem 'inherited_resources', github: 'josevalim/inherited_resources'
 gem 'ransack',             github: 'ernie/ransack', branch: 'rails-4'
-gem 'activeadmin',         github: 'gregbell/active_admin', branch: 'rails4'
+gem 'activeadmin',         github: 'gregbell/active_admin'
 gem 'formtastic',          github: 'justinfrench/formtastic'
 
 group :test, :development do
