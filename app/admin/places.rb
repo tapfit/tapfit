@@ -23,14 +23,28 @@ ActiveAdmin.register Place do
     default_actions 
   end
 
-  action_item :only => :show do 
-    link_to('Add a Photo', new_place_photo_path(place))
-  end
-
-
   filter :name, :label => "Name"
   filter :address_city, :label => "City", :as => :string
   filter :source
+
+
+  member_action :workouts, :method => :get do
+    place = Place.find(params[:id])
+    redirect_to admin_place_path(place)
+
+
+    #CasperMindbody.get_classes(place.schedule_url, place.id, DateTime.now, place.source)
+    #CasperMindbody.get_classes(place.schedule_url, place.id, DateTime.now + 1.days, place.source) 
+
+  end
+
+  action_item :only => :show do
+    link_to("Get Classes", get_classes_admin_place_path(place)) if place.can_buy
+  end 
+  
+  action_item :only => :show do 
+    link_to('Add a Photo', new_place_photo_path(place))
+  end
 
   form do |f|
     f.inputs "Place Details" do
@@ -96,6 +110,10 @@ ActiveAdmin.register Place do
           DayPass.create_day_pass(place, hour, DateTime.now + 1.days)
         end
       end
+
+    end
+
+    def get_classes
 
     end
 

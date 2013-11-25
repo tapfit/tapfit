@@ -3,9 +3,7 @@ module CasperMindbody
 
   def self.get_classes(url, place_id, date, source)
 
-    
-
-    cmd = "casperjs ./lib/casperjs/mindbody.js --url=#{url} --date='#{date.strftime("%m/%d/%Y")}'"
+    cmd = "casperjs ./lib/casperjs/mindbody.js --url='#{url}' --date='#{date.strftime("%m/%d/%Y")}'"
 
     output = `#{cmd}`
 
@@ -22,9 +20,15 @@ module CasperMindbody
 
           if !workout['signup_button'].to_s.upcase.include?("SIGNUP")
             opts[:is_cancelled] = true
+          else
+            button = Nokogiri::HTML(workout['signup_button'])
+            classId = button.to_s.split('classId=')[1].split('&')[0]
+            if !classId.nil?
+              opts[:class_id] = classId
+            end
           end
 
-          button = Nokogiri::HTML(workout['signup_button'])
+          
           if workout['signup_button'].to_s.include?("Open")
             button = Nokogiri::HTML(workout['signup_button'])
             text = button.text
