@@ -35,7 +35,7 @@ gem 'omniauth-facebook'
 # These gems for active admin
 gem 'responders',          github: 'plataformatec/responders'
 gem 'inherited_resources', github: 'josevalim/inherited_resources'
-gem 'ransack',             github: 'ernie/ransack', branch: 'rails-4'
+gem 'ransack'
 gem 'activeadmin',         github: 'gregbell/active_admin'
 gem 'formtastic',          github: 'justinfrench/formtastic'
 
