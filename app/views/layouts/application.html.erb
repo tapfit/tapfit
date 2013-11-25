@@ -34,8 +34,12 @@
             <nav>
                 <ul class="navigation">
                     <li><a href="#">Studio Partners</a></li>
-                    <li><a href="#">Employers</a></li>
-                    <li><a href="/users/sign_in">Log &nbsp;In</a></li>
+                    <li><a href="/corporate">Corporate Partners</a></li>
+                    <% if current_user %>
+                        <li><a href="#">Account</a></li>
+                    <% else %>  
+                        <li><a href="/users/sign_in">Log &nbsp;In</a></li>
+                    <% end %>
                 </ul>
             </nav>
         </div>

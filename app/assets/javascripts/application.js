@@ -20,10 +20,12 @@ var isAnimating = false;
 
 $(document).ready(function() {
     /* Scroll event handler */
-    $(window).bind('scroll',function(e){
+    if (screen.width > 500) {
+        $(window).bind('scroll',function(e){
+            handleStickyDiv();
+        });
         handleStickyDiv();
-    });
-    handleStickyDiv();
+    }
 });
 
 /* Scroll the background layers */

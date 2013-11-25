@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   @invitation_code_amount = 5
 
   devise :database_authenticatable, :registerable, :token_authenticatable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :omniauthable, :rememberable, :trackable, :validatable
 
   has_many :favorite_places
   has_many :favorite_workouts
