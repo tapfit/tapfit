@@ -93,7 +93,6 @@ ActiveAdmin.register Place do
 
     def create
       place_params = permitted_params[:place]
-      puts place_params
       address_params = place_params[:address]
       id = ProcessLocation.controller_helper(place_params, address_params)
      
@@ -116,7 +115,8 @@ ActiveAdmin.register Place do
 
       place_params = permitted_params[:place]
       address_params = place_params[:address]
-      place_params = place_params.except!(:place_contract_attributes)
+      attribute_params = place_params.clone
+      place_params = attribute_params.except!(:place_contract_attributes)
       place_params = place_params.except!(:place_hours_attributes)
       place_params = place_params.except!(:pass_detail_info)
       place_params = place_params.except!(:address)
@@ -138,6 +138,7 @@ ActiveAdmin.register Place do
     def update_place_attributes(place_id)
       place_params = permitted_params[:place]
       contract_params = place_params[:place_contract_attributes]
+      puts contract_params
       hour_params = place_params[:place_hours_attributes]
       pass_detail = place_params[:pass_detail_info]
       if !contract_params.nil?
