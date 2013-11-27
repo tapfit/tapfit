@@ -42,7 +42,7 @@ module CasperMindbody
           begin
             starts = Time.parse(workout['start_time'].strip)
           rescue
-            puts output
+            return
           end
           opts[:start_time] = DateTime.parse(date.to_s).beginning_of_day.advance(:hours => starts.strftime("%H").to_i, :minutes => starts.strftime("%M").to_i)
           opts[:end_time] = opts[:start_time].advance(:hours => 1)
@@ -51,10 +51,8 @@ module CasperMindbody
 
           opts[:instructor] = workout['instructor'].split("(")[0].strip
           opts[:source] = source
-          begin
+          if !workout['description'].nil?
             opts[:source_description] = workout['description'].strip
-          rescue
-            puts output
           end
           if !place.nil? && !place.dropin_price.nil?
             opts[:price] = place.dropin_price
