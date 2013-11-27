@@ -67,7 +67,11 @@ class ProcessClass < ProcessBase
       if !place.place_contract.nil?
         if place.place_contract.price.nil?
           if !place.place_contract.discount.nil? && !@price.nil?
-            @price = ((1 - place.place_contract.discount) * @price).round
+            begin
+              @price = ((1 - place.place_contract.discount) * @price).round
+            rescue
+              puts "discount: #{place.place_contract.discount}, price: #{@price}"
+            end
           end
         else
           @price = place.place_contract.price
