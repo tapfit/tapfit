@@ -200,7 +200,7 @@ ActiveAdmin.register Place do
         if place.pass_details.count > 0 
           if !(place.pass_details.first.pass_type == pass_detail)
             place.pass_details.destroy_all
-            PassDetail.create(:place_id => place.id, :pass_type => 1)
+            PassDetail.create(:place_id => place.id, :pass_type => pass_detail)
           end
         end
       end
