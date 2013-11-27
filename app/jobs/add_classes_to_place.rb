@@ -1,5 +1,6 @@
 require 'resque'
 require './lib/resque_job'
+require './lib/crawler_source'
 
 class AddClassesToPlace < ResqueJob
 
