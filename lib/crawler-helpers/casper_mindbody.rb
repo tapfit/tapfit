@@ -14,6 +14,7 @@ module CasperMindbody
       return 
     end
 
+    puts output
     place = Place.find(place_id)
 
     parsed.each do |key, value|
