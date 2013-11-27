@@ -26,7 +26,7 @@ html, body {
 body {
     font-size: 100%;
     color: #818386;
-    font-family: "effra", "Helvetica Neue", Helvetica, sans-serif;
+    font-family: "proxima-nova", sans-serif;
     background: #f8fafb; 
 }
 
@@ -68,22 +68,27 @@ a:hover {
 .wrapper {
     max-width: 960px;
     margin: 0 auto;
-    position: relative; }
+}
 
 header#top {
-    background: #262626;
-    height: 100px;
+    position: fixed;
+    z-index: 10000;
+    background: #fff;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    opacity: 0.98;
 }
 
 header#top .top-nav {
-    height: 30px;
-    background: #333;
+    height: 40px;
+    background: #eb4840;
+    border-bottom: 1px solid #ededed;
 }
 
 header#top .top-nav nav {
     display: inline-block;
     float: right;
-    height: 30px;
+    height: 40px;
     width: auto;
 }
 
@@ -95,24 +100,38 @@ header#top .top-nav nav ul li {
 header#top .top-nav nav ul li a {
     display: inline-block;
     height: 29px;
-    background: none;
-    padding: 7px 20px 0 20px;
-    color: #aaa;
-    text-transform: none;
-    font-weight: 100;
-    font-size: 80%;
+    padding: 10px 20px 0 20px;
+    color: #fff;
+    text-transform: uppercase;
+    text-shadow: none;
+    font-weight: 600;
+    font-size: 100%;
 }
 
 header#top .top-nav nav ul li a:hover {
-    color: #777;
-    background: none;
+    color: #cccccc !important;
+}
+
+.promotion-img {
+    margin-top: 4px;
+    background: url("gift.png") no-repeat;
+    background-size: contain;
+}
+
+h1.logo a {
+    background: url("logo_horizontal.png") no-repeat;
+    background-size: contain;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 h1.logo a {
     display: inline-block;
     float: left;
-    color: #fff;
-    font-weight: 400;
+    color: #000;
+    font-family: "effra", sans-serif;
+    font-weight: 500;
     font-size: 130%;
     margin: 8px 0 0 32px;
     width: 250px
@@ -137,16 +156,23 @@ header#top nav ul li {
 header#top nav ul li a {
     display: inline-block;
     height: 70px;
-    background: none;
     padding:  28px 20px 0 20px;
-    color: #fff;
+    color: #111;
     font-weight: 700;
     text-transform: uppercase;
     font-size: 90%;
 }
 
 header#top nav ul li a:hover {
-    background: #eb4840;
+    color: #eb4840 !important;
+}
+
+.active {
+    color: #eb4840 !important;
+}
+
+.inactive {
+    background: none;
 }
 
 .mnav {
@@ -160,26 +186,159 @@ header#top {
 }
 }
 
+a.anchor {
+    position: relative;
+    top: -160px;
+    display: block;
+    height: 0;
+    width: 0;
+}
+
+/* About TapFit Section */
+
+.process {
+    background: url("debut_light.png") repeat #eee;
+    padding: 90px 0 120px 0;
+    float: left;
+    clear: both;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+}
+
+.process h3, .locations h3, .plans h3 {
+  color: #333f48;
+  font-size: 1.625em;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.process ul li {
+  float: left;
+  max-width: 22%;
+  margin: 20px 4% 0 0;
+}
+.process ul li.last {
+  margin-right: 0;
+}
+.process ul li .animation {
+  margin: 0 auto 40px auto;
+  text-align: center;
+}
+.process ul li.pass .animation {
+  background-image: url("about_download.png");
+  width: 220px;
+  height: 220px;
+}
+.process ul li.ruler .animation {
+  background-image: url("about_preload.png");
+  width: 220px;
+  height: 220px;
+}
+.process ul li.plane .animation {
+  background-image: url("about_book.png");
+  width: 220px;
+  height: 220px;
+}
+.process ul li.glass .animation {
+  background-image: url("about_go.png");
+  width: 220px;
+  height: 220px;
+}
+.process .drop-cap {
+  float: left;
+  margin: 0 4px 0 0;
+  color: #acacac;
+  font-size: 3.25em;
+  font-family: "ff-kievit-web", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 48px;
+}
+.lt-ie9 .process .drop-cap,
+.ie9 .process .drop-cap {
+  line-height: 40px;
+}
+.process h4 {
+  color: #333f48;
+  font-size: 1em;
+  font-family: "ff-kievit-web", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 2px;
+}
+.process p {
+  color: #6f6f6f;
+  font-size: 1em;
+  line-height: 24px;
+}
+
 #banner {
-    height: 550px;
+    height: 800px;
     background: url(banner-bg-3.png) no-repeat center;
+    background-size: cover;
     position: relative;
     padding-top: 1px;
+    overflow: hidden;
+    border-bottom: 1px solid #333;
 }
 
 #banner h2 {
-    margin: 140px auto 0;
-    top: 140px;
-    padding: 0 5%;
-    background-color: #eb4840;
+    margin: 160px 0 0 50%;
+    padding: 10px;
     opacity: 0.9;
     color: #fff;
-    font-size: 340%;
-    text-align: center;
-    line-height: 166px;
+    font-size: 370%;
+    text-align: left;
+    line-height: 80px;
     text-transform: uppercase;
     font-weight: 900;
     letter-spacing: -0.03em;
+}
+
+#banner ul {
+    margin: 20px 0 0 50%;
+    padding: 10px;
+    text-align: left;
+    line-height: 40px;
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    opacity: 0.9;
+}
+
+#banner ul li {
+    width: 600px;
+    display: none;
+}
+
+#banner ul li a {
+    color: #fff;
+    font-size: 240%;
+}
+
+#banner .cta {
+    margin: 40px 0 0 50%;
+    padding: 10px;
+    text-align: center;
+    background: #eb4840;
+    width: 300px;
+    border-radius: 3px;
+}
+
+#banner .cta a {
+    color: #fff;
+    font-weight: 600;
+    font-size: 150%;
+}
+
+.inView {
+    display: block !important;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -226,7 +385,6 @@ header#top {
     display: inline-block;
     width: 60%;
     height: 2.8em;
-    border-radius: 4px;
     margin: 1.5em 0 1.8em 20%;
     padding: 0;
 }
@@ -291,6 +449,14 @@ ul.filter li a:hover {
 
 ul.filter li.current a {
     color: #eb4840;
+}
+
+.locations {
+    padding: 100px 0;
+    float: left;
+    clear: both;
+    width: 100%;
+    background: #f4f4f4;
 }
 
 ul.portfolio li {
@@ -390,18 +556,11 @@ ul.portfolio li .photo-overlay .date {
     }
 }
 
-.about {
-    background: url("yoga_blur.png") no-repeat center;
-    position: relative;
-    min-height: 700px;
-    padding-top: 1px;
-    color: #111;
-}
-
 .dividerBlurb {
     z-index: 1000;
     background: #fff;
     width: 100%;
+    border-bottom: 1px solid #eee;
 }
 
 .dividerBlurb h4 {
@@ -414,33 +573,36 @@ ul.portfolio li .photo-overlay .date {
 
 .promotion {
     width: 100%;
-    height: 60px;
-    line-height: 60px;
+    height: 40px;
+    line-height: 40px;
     text-align: center;
     background: #eb4840;
 }
 
 .promotion a {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 400;
     color: #fff;
     text-decoration: none;
 }
 
 .sectionHeader h4 {
-    font-size: 25px;
-    font-weight: 600;
-    text-align: center;
-    padding: 40px 60px 0 60px;
-    text-transform: uppercase;
+  color: #333f48;
+  font-size: 1.625em;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 70px;
 }
 
 .blurb h4 {
     color: #555555;
     font-size: 23px;
-    font-weight: 200;
+    font-weight: 400;
     text-align: center;
-    margin: 40px 0 40px 0;
+    margin: 40px 0 60px 0;
     padding: 0 60px;
 }
 
@@ -462,10 +624,12 @@ a.button-2:hover {
 
 footer {
     background: #292929;
-    margin-top: 60px;
     color: #fff;
     text-align: center;
     padding: 20px 0;
+    float: left;
+    clear: both;
+    width: 100%;
 }
 
 footer p {
@@ -489,6 +653,15 @@ footer p {
     background-color: rgba(135, 135, 135, 0.50);
 }
 
+.plans {
+    padding: 100px 0;
+    float: left;
+    clear: both;
+    width: 100%;
+    background: #ffffff;
+    border-top: 1px solid #eee;
+}
+
 #plans,#plans ul,#plans ul li {
     margin: 0;
     padding: 0;
@@ -510,13 +683,12 @@ footer p {
     margin: 0 auto;
 }
 
-#pricePlans #plans .plan {
-    background: #fff;
+#pricePlans #container .plan {
+    background: #fafafa;
     float: left;
     width: 100%;
     text-align: center;
-    border-radius: 5px;
-    margin: 0 0 20px 0;
+    margin: 0;
 
     -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
@@ -546,7 +718,7 @@ footer p {
 }
 
 .planContainer .options {
-    margin-top: 10em;
+    margin-top: 1em;
 }
 
 .planContainer .options li {
@@ -572,7 +744,6 @@ footer p {
     display: inline-block;
     width: 80%;
     height: 2.8em;
-    border-radius: 4px;
     margin: 1.5em 0 1.8em;
 }
 
@@ -598,7 +769,7 @@ footer p {
     margin: 0 2% 20px 0;
 }
 
-#pricePlans #plans > li:nth-child(2n) {
+#pricePlans #container > li:nth-child(2n) {
     margin-right: 0;
 }
 
@@ -606,12 +777,12 @@ footer p {
 
 @media screen and (min-width: 769px) and (max-width: 1024px) {
 
-#pricePlans #plans .plan {
+#pricePlans #container .plan {
     width: 49%;
     margin: 0 2% 20px 0;
 }
 
-#pricePlans #plans > li:nth-child(2n) {
+#pricePlans #container > li:nth-child(2n) {
     margin-right: 0;
 }
 
@@ -620,10 +791,10 @@ footer p {
 @media screen and (min-width: 1025px) {
 
 #pricePlans {
-    margin: 2em auto;
+    padding: 2em auto;
 }
 
-#pricePlans #plans .plan {
+#pricePlans #container .plan {
     width: 32%;
     margin: 0 2% 20px 0;
 
@@ -634,16 +805,18 @@ footer p {
             transition: all .25s;
 }
 
-#pricePlans #plans > li:last-child {
+#pricePlans #container > li:last-child {
     margin-right: 0;
 }
 
-#pricePlans #plans .plan:hover {
+#pricePlans #container .plan:hover {
     -webkit-transform: scale(1.04);
        -moz-transform: scale(1.04);
         -ms-transform: scale(1.04);
          -o-transform: scale(1.04);
             transform: scale(1.04);
+
+    background: lightyellow;
 }
 
 .planContainer .button a {
@@ -667,18 +840,10 @@ footer p {
 }
 
 .iphone {
-    top: 150px;
-    z-index: 999;
-    height: 500px;
     position: absolute;
-}
-
-#iphone-2 {
-    z-index: 998;
-}
-
-#iphone-3 {
-    z-index: 997;
+    top: 150px;
+    width: 26%;
+    left: 17%;
 }
 
 .hidden {
@@ -687,150 +852,10 @@ footer p {
 
 /* Lightboxes */
 
-#boxes,#boxes ul,#boxes ul li {
+#boxes, #boxes ul, #boxes ul li {
     margin: 0;
     padding: 0;
     list-style: none;
-}
-
-#lightbox:after {
-    content: '';
-    display: table;
-    clear: both;
-}
-
-#lightbox {
-    zoom: 1;
-}
-
-#lightbox {
-    max-width: 69em;
-    margin: 0 auto;
-}
-
-#lightbox #boxes .box {
-    background: #fff;
-    float: right;
-    width: 100%;
-    text-align: center;
-    border-radius: 5px;
-    border: 1px solid #cccccc;
-    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    opacity: 0.9;
-}
-
-.lightboxContainer .title h2 {
-    font-size: 2em;
-    font-weight: 400;
-    color: #eb4840;
-    margin: 0;
-    padding: .6em 0;
-}
-
-.lightboxContainer .options {
-    margin-top: 10em;
-}
-
-.lightboxContainer .options li {
-    position: relative;
-    left: 5%;
-    font-weight: 200;
-    color: #222222;
-    font-size: 1.2em;
-    line-height: 2em;
-    width: 90%;
-}
-
-.lightboxContainer .options li span {
-    font-weight: 400;
-    color: #eb4840;
-}
-
-.lightboxContainer .button a {
-    text-transform: uppercase;
-    text-decoration: none;
-    background-color: #3e4f6a;
-    color: #ffffff;
-    font-weight: 700;
-    letter-spacing: 3px;
-    line-height: 2.8em;
-    border: 2px solid #3e4f6a;
-    display: inline-block;
-    width: 80%;
-    height: 2.8em;
-    border-radius: 4px;
-    margin: 1.5em 0 1.8em;
-}
-
-@media screen and (min-width: 481px) and (max-width: 768px) {
-
-#lightbox #boxes .box {
-    width: 49%;
-    margin: 0 2% 20px 0;
-}
-
-#lightbox #boxes > li:nth-child(2n) {
-    margin-right: 0;
-}
-
-}
-
-@media screen and (min-width: 769px) and (max-width: 1024px) {
-
-#lightbox #boxes .box {
-    width: 49%;
-    margin: 0 2% 20px 0;
-}
-
-#lightbox #boxes > li:nth-child(2n) {
-    margin-right: 0;
-}
-
-}
-
-@media screen and (min-width: 1025px) {
-
-#lightbox {
-    margin: auto;
-}
-
-#lightbox #boxes .box {
-    width: 67%;
-    margin: 200px 2% 20px 0;
-
-    -webkit-transition: all .25s;
-       -moz-transition: all .25s;
-        -ms-transition: all .25s;
-         -o-transition: all .25s;
-            transition: all .25s;
-}
-
-#lightbox #boxes > li:last-child {
-    margin-right: 0;
-}
-
-#lightbox #boxes .box:hover {
-    -webkit-transform: scale(1.04);
-       -moz-transform: scale(1.04);
-        -ms-transform: scale(1.04);
-         -o-transform: scale(1.04);
-            transform: scale(1.04);
-}
-
-.lightboxContainer .button a {
-    -webkit-transition: all .25s;
-       -moz-transition: all .25s;
-        -ms-transition: all .25s;
-         -o-transition: all .25s;
-            transition: all .25s;
-}
-
-.lightboxContainer .button a:hover {
-    background: #3e4f6a;
-    color: #fff;
-}
-
 }
 
 .stop-scrolling {

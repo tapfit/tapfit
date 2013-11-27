@@ -21,9 +21,24 @@ var isAnimating = false;
 $(document).ready(function() {
     /* Scroll event handler */
     if (screen.width > 500) {
+        
+        // Bind handleStickDiv to scroll
         $(window).bind('scroll',function(e){
             handleStickyDiv();
         });
+
+        // Bind anchor scrolling to click
+        $('a').click(function(){
+            $('html, body').animate({
+                scrollTop: $('[name="' + $.attr(this, 'href').substr(1) + '"]').offset().top,
+            }, 500);
+            return false;
+        });
+        
+        // Set up slideshow
+        setInterval(slideshow, 3000);
+
+        // Handle stickyDiv on document ready
         handleStickyDiv();
     }
 });
@@ -31,22 +46,44 @@ $(document).ready(function() {
 /* Scroll the background layers */
 function handleStickyDiv(){
     var scrolled = $(window).scrollTop();
-    var offset = $("#banner").height() + $("#top").height();
-    var offsetTwo = offset + $(".about").height();
+    var offset = $("#banner").height() - $("header#top").height();
+    var offsetTwo = offset + $(".process").height();
+    var offsetThree = offsetTwo + $(".plans").height();
+    var offsetFour = offsetThree + $(".locations").height();
+
+    $(".sticky_links").removeClass("active");
+    $(".sticky_links").addClass("inactive");
 
     if (scrolled < offset) {
-        $(".stickyDiv").removeClass("dock");
-        $("body").css("padding-top", "0");
     } 
     else if (scrolled <= offsetTwo) {
-        $(".stickyDiv").addClass("dock");
-        $("body").css("padding-top", $(".stickyDiv").height());
-    } 
-
-    if (scrolled >= offsetTwo) {
-        $(".stickyDiv").css("top", offsetTwo-scrolled + "px");
+        $("#link_about").addClass("active");
+        $("#link_about").removeClass("inactive");
+    }
+    else if (scrolled <= offsetThree) {
+        $("#link_plans").addClass("active");
+        $("#link_plans").removeClass("inactive");
+    }
+    else if (scrolled <= offsetFour) {
+        $("#link_locations").addClass("active");
+        $("#link_locations").removeClass("inactive");
     }
     else {
-        $(".stickyDiv").css("top", "0");
+        $(".sticky_links").removeClass("active");
+        $(".sticky_links").addClass("inactive");
     }
+}
+
+function slideshow() {
+    var $active = $('.slideshow li.inView');
+    if ( $active.length == 0 ) $active = $('.slideshow li:last');
+    var $next = $active.next().length ? $active.next()
+                                      : $('.slideshow li:first');
+
+    $active.removeClass('inView');
+
+    $next.css({opacity: 0.0})
+        .addClass('inView')
+        .animate({opacity: 1.0}, 1000, function(){
+        });
 }

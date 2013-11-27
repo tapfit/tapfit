@@ -1,101 +1,74 @@
 <div id="banner">
 <div class="wrapper">
-<h2>Less work. More workouts.</h2>
-<a href="#about" class="button-1">Learn More</a>
+<%= image_tag "iphone_favorites.png", :class => "iphone" %>
+<h2>The Gym Membership. Reinvented.</h2>
+
+<ul class="slideshow">
+    <li class="inView"><a href="#about">A single pass to Cincinnati's best gyms and studios.</a></li>
+    <li><a href="#about">Hundreds of exercise options. One app.</a></li>
+    <li><a href="#about">No long-term commitments, contracts, or hidden fees.</a></li>
+</ul>
+<div class="cta">
+    <a href="#about">
+        Learn More
+    </a>
+</div>
 </div>
 </div>
 
-<div class="dividerBlurb stickyDiv">
-    <div class="promotion"><a href="/plans">30 days left to get the 30% pre-order discount!</a></div>
-    <h4>A Single Membership to Your City's Best Fitness.</h4>
-</div>
-
-<div class="about"><a name="about"></a>
+<div class="process"><a name="about" class="anchor"></a>
     <div class="wrapper">
-        <%= image_tag "iphone_map.png", :class => "iphone", :id => "iphone-1" %>
-        
-        <section id="lightbox">
-            <ul id="boxes">
-                <li class="box">
-                    <ul class="lightboxContainer">
-                        <li class="title"><h2>What is TapFit?</h2></li>
-                        <li>
-                            <ul class="options">
-                                <li>&bull; A single membership to your city's best fitness studios.</li>
-                                <li>&bull; View and book your workouts with our app or on the web.</li>
-                                <li>&bull; Access to over 100 classes each week at the best studios.</li>
-                                <li>&bull; No annual contracts, monthly minimums, or hidden fees.</li>
-                            </ul>
-                        </li>
-                        <li class="button"><a href="/plans">Request An Invite</a></li>
-                    </ul>
+        <h3>How it works</h3>
+            <ul>
+                <li class="pass">
+                    <div class="animation"></div> <!-- eo .animation -->
+                    <span class="drop-cap">1</span>
+                    <h4>Get The App</h4>
+                    <p>Get started by downloading our free mobile app, available for either <a href="https://itunes.apple.com/us/app/tapfit/id683430709?mt=8" target="_blank">iPhone</a> or <a href="https://play.google.com/store/apps/details?id=co.tapfit.android" target="_blank">Android</a>.</p>              
                 </li>
-            </ul> <!-- End ul#plans -->
-        </section>
+                <li class="even ruler">
+                    <div class="animation"></div> <!-- eo .animation -->
+                    <span class="drop-cap">2</span>
+                    <h4>Add FitCoins</h4>
+                    <p>Load your TapFit account with <a href="/credits">FitCoins</a> that you can use at any of our partner gyms and studios.</p> 
+                </li>
+                <li class="plane">
+                    <div class="animation"></div> <!-- eo .animation -->
+                    <span class="drop-cap">3</span>
+                    <h4>Book</h4>
+                    <p>Once you find a workout you want to join, simply book it with our quick, one-click booking system.</p>                
+</li>
+                <li class="even last glass">
+                    <div class="animation"></div> <!-- eo .animation -->
+                    <span class="drop-cap">4</span>
+                    <h4>Go!</h4>
+                    <p>That's it! All you have to worry about now is how you're gonna look in those new yoga pants you bought.</p>
+                </li>
+            </ul>
     </div>
 </div>
 
-
-<div class="wrapper"><a name="portfolio"></a>
-<!-- Category Filter -->
-
-<div class="sectionHeader">
-<div class="wrapper">
-<h4>Our Partner Fitness Studios</h4>
-</div>
-</div>
-
-<ul class="filter group"> 
-<li class="current all"><a href="#">Featured</a></li> 
-<li class="cat-1"><a href="#">Chicago</a></li> 
-<li class="cat-2"><a href="#">Cincinnati</a></li> 
-<li class="cat-5"><a href="#">San Francisco</a></li> 
-</ul><div class="clear"></div>          
-
-<!-- Portfolio Items -->
-<ul class="portfolio group">
-
-<% $i = 1 %>
-<% while $i < 10 do %>
-    <li class="item" data-id="id-<%= $i %>" data-type="cat-<%= ($i%2)+1 %>">
-    <%= image_tag "gym-" + (($i % 2) + 1).to_s + ".png", :width => 300, :height => 225 %>
-    <a href="gym-<%= $i.to_s %>.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
-    <h3>Core a Movement Studio</h3>
-    <p>Cincinnati, OH</p>
-    </a>
-    </li>
-  <% $i += 1 %>
-<% end %>
- 
-<div class="clear"></div>  
-</ul>
-</div>
-
-<ul class="filter group"> 
-</ul><div class="clear"></div>          
-
-<div class="plans" id="packages"><a name="plans"></a>
+<div class="plans"><a name="plans" class="anchor"></a>
 <div class="wrapper">
 
-<div class="sectionHeader">
+<h3>TapFit FitCoin Plans</h3>
+
+<div class="blurb">
 <div class="wrapper">
-<h4>TapFit Membership Packages</h4>
+<h4>TapFit memberships are similar to buying a multi-pack of classes at a single studio. Instead of buying classes, you buy FitCoins, which can be redeemed at any studio in our network. The more FitCoins you buy, the bigger discount you receive!</h4>
 </div>
 </div>
 
 <section id="pricePlans">
-<ul id="plans">
-
+<ul id="container">
 <li class="plan">
 <ul class="planContainer">
-<li class="title"><h2>10 FitCoins</h2></li>
+<li class="title"><h2>10</h2></li>
 <li class="price"><p>$56 <span style="text-decoration:line-through">$80</span></p></li>
 <li>
 <ul class="options">
 <li>10 <span>FitCoins</span></li>
 <li>$8 / FitCoin</li>
-<li>Free <span>mobile booking</span></li>
-<li>24/7 <span>customer support</span></li>
 <li><a href="/credits">What can I do with 10 FitCoins?</a></li>
 </ul>
 </li>
@@ -105,14 +78,12 @@
 
 <li class="plan">
 <ul class="planContainer">
-<li class="title"><h2>25 FitCoins</h2></li>
+<li class="title"><h2>25</h2></li>
 <li class="price"><p>$122 <span style="text-decoration:line-through">$175</span></p></li>
 <li>
 <ul class="options">
 <li>25 <span>FitCoins</span></li>
 <li>$7 / FitCoin <span> (save 12.5%)</span></li>
-<li>Free <span>mobile booking</span></li>
-<li>24/7 <span>customer support</span></li>
 <li><a href="/credits">What can I do with 25 FitCoins?</a></li>
 </ul>
 </li>
@@ -122,14 +93,12 @@
 
 <li class="plan">
 <ul class="planContainer">
-<li class="title"><h2>50 FitCoins</h2></li>
+<li class="title"><h2>50</h2></li>
 <li class="price"><p>$210 <span style="text-decoration:line-through">$300</span></p></li>
 <li>
 <ul class="options">
 <li>50 <span>FitCoins</span></li>
 <li>$6 / FitCoin <span> (save 25%)</span></li>
-<li>Free <span>mobile booking</span></li>
-<li>24/7 <span>customer support</span></li>
 <li><a href="/credits">What can I do with 50 FitCoins?</a></li>
 </ul>
 </li>
@@ -141,10 +110,82 @@
 </div>
 </div>
 
-<div class="blurb">
-<div class="wrapper">
-<h4>FitCoins are used like cash in the TapFit app. Workouts cost between 1 and 3 FitCoins depending on the type of class. For example, the Basic Plan will get you approximately 25 gym visits, 12 yoga classes, or 8 pilates classes.</h4>
-</div>
+<div class="locations"><a name="locations" class="anchor"></a>
+    <!-- Category Filter -->
+    <div class="wrapper">
+        <h3>Our Partner Fitness Studios</h3>
+        <div class="blurb">
+        <h4>All of our partner locations have been vetted by our team of experts and meet all of our standards for quality, including . We know you won't be disappointed with any of these gyms or studios.</h4>
+        </div>
+
+        <!-- Portfolio Items -->
+        <ul class="portfolio group">
+            <li class="item" data-id="id-1" data-type="cat-1">
+            <%= image_tag "gym-1.png", :width => 300, :height => 225 %>
+            <a href="gym-1.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
+            <h3>Core a Movement Studio</h3>
+            <p>Cincinnati, OH</p>
+            </a>
+            </li>
+            <li class="item" data-id="id-2" data-type="cat-1">
+            <%= image_tag "gym-2.png", :width => 300, :height => 225 %>
+            <a href="gym-2.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
+            <h3>The Yoga Bar</h3>
+            <p>Cincinnati, OH</p>
+            </a>
+            </li>
+            <li class="item" data-id="id-3" data-type="cat-1">
+            <%= image_tag "gym-3.jpeg", :width => 300, :height => 225 %>
+            <a href="gym-3.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
+            <h3>The Gym at Carew Towers</h3>
+            <p>Cincinnati, OH</p>
+            </a>
+            </li>
+            <li class="item" data-id="id-4" data-type="cat-1">
+            <%= image_tag "gym-4.png", :width => 300, :height => 225 %>
+            <a href="gym-4.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
+            <h3>The Punch House</h3>
+            <p>Cincinnati, OH</p>
+            </a>
+            </li>
+            <li class="item" data-id="id-5" data-type="cat-1">
+            <%= image_tag "gym-5.jpg", :width => 300, :height => 225 %>
+            <a href="gym-5.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
+            <h3>YMCA - Central Parkway</h3>
+            <p>Downtown</p>
+            </a>
+            </li>
+            <li class="item" data-id="id-6" data-type="cat-1">
+            <%= image_tag "gym-6.jpg", :width => 300, :height => 225 %>
+            <a href="gym-6.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
+            <h3>Cincinnati Bikram</h3>
+            <p>Cincinnati, OH</p>
+            </a>
+            </li>
+            <li class="item" data-id="id-7" data-type="cat-1">
+            <%= image_tag "gym-7.jpeg", :width => 300, :height => 225 %>
+            <a href="gym-7.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
+            <h3>Clear Wellness</h3>
+            <p>Cincinnati, OH</p>
+            </a>
+            </li>
+            <li class="item" data-id="id-8" data-type="cat-1">
+            <%= image_tag "gym-8.jpg", :width => 300, :height => 225 %>
+            <a href="gym-8.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
+            <h3>FitNext</h3>
+            <p>Over-The-Rhine</p>
+            </a>
+            </li>
+            <li class="item" data-id="id-9" data-type="cat-1">
+            <%= image_tag "gym-9.jpg", :width => 300, :height => 225 %>
+            <a href="gym-9.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
+            <h3>Pure Barre</h3>
+            <p>Cincinnati, OH</p>
+            </a>
+            </li>
+            <div class="clear"></div>  
+        </ul>
+    </div>
 </div>
 
 <a href="#" class="back-to-top"><%= image_tag "arrow-up.svg" %></a>
