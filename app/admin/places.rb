@@ -30,10 +30,7 @@ ActiveAdmin.register Place do
 
 
   member_action :get_classes, :method => :get do
-
-    place = Place.find(params[:id])
-    CasperMindbody.get_classes(place.schedule_url, place.id, DateTime.now, place.source)
-    CasperMindbody.get_classes(place.schedule_url, place.id, DateTime.now + 1.days, place.source) 
+    Resque.enqueue(AddClassesToPlace, params[:id])
     redirect_to "/admin/places/#{params[:id]}"
   end
 
