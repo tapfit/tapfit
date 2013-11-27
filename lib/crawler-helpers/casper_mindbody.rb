@@ -7,7 +7,12 @@ module CasperMindbody
 
     output = `#{cmd}`
 
-    parsed = JSON.parse(output)
+    parsed = ""
+    begin
+      parsed = JSON.parse(output)
+    rescue
+      return 
+    end
 
     place = Place.find(place_id)
 
