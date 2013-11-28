@@ -29,10 +29,18 @@ $(document).ready(function() {
 
         // Bind anchor scrolling to click
         $('a').click(function(){
-            $('html, body').animate({
-                scrollTop: $('[name="' + $.attr(this, 'href').substr(1) + '"]').offset().top,
-            }, 500);
-            return false;
+            if ($('[name="' + $.attr(this, 'href').substr(1) + '"]').length) {
+                $('html, body').animate({
+                    scrollTop: $('[name="' + $.attr(this, 'href').substr(1) + '"]').offset().top,
+                }, 500);
+                return false;
+            }
+            else if ($('[name="' + $.attr(this, 'href').substr(2) + '"]').length) {
+                $('html, body').animate({
+                    scrollTop: $('[name="' + $.attr(this, 'href').substr(2) + '"]').offset().top,
+                }, 500);
+                return false;
+            }
         });
         
         // Set up slideshow
