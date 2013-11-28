@@ -47,9 +47,11 @@ $(document).ready(function() {
 function handleStickyDiv(){
     var scrolled = $(window).scrollTop();
     var offset = $("#banner").height() - $("header#top").height();
-    var offsetTwo = offset + $(".process").height();
-    var offsetThree = offsetTwo + $(".plans").height();
-    var offsetFour = offsetThree + $(".locations").height();
+    var offsetTwo = offset + $(".process").outerHeight( true );
+    var offsetThree = offsetTwo + $(".plans").outerHeight( true );
+    var offsetFour = offsetThree + $(".cities").outerHeight( true );
+    var offsetFive = offsetFour + $(".locations").outerHeight( true );
+    var offsetSix = offsetFive + $(".employers").outerHeight( true );
 
     $(".sticky_links").removeClass("active");
     $(".sticky_links").addClass("inactive");
@@ -65,8 +67,16 @@ function handleStickyDiv(){
         $("#link_plans").removeClass("inactive");
     }
     else if (scrolled <= offsetFour) {
+        $("#link_cities").addClass("active");
+        $("#link_cities").removeClass("inactive");
+    }
+    else if (scrolled <= offsetFive) {
         $("#link_locations").addClass("active");
         $("#link_locations").removeClass("inactive");
+    }
+    else if (scrolled <= offsetSix) {
+        $("#link_employers").addClass("active");
+        $("#link_employers").removeClass("inactive");
     }
     else {
         $(".sticky_links").removeClass("active");

@@ -14,6 +14,9 @@ class PagesController < ApplicationController
   def credits
   end
 
+  def sale
+  end
+
   def locations
   end
 

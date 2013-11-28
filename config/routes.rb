@@ -6,6 +6,7 @@ Tapfit::Application.routes.draw do
   match 'about'     => 'pages#about', :via => :get
   match 'plans'     => 'pages#plans', :via => :get
   match 'corporate' => 'pages#corporate', :via => :get
+  match 'sale'      => 'pages#sale', :via => :get
   match 'credits'   => 'pages#credits', :via => :get
   match 'locations' => 'pages#locations', :via => :get
   match 'terms'     => 'pages#terms', :via => :get

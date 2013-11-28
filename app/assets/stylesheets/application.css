@@ -76,7 +76,6 @@ header#top {
     background: #fff;
     width: 100%;
     border-bottom: 1px solid #eee;
-    opacity: 0.98;
 }
 
 header#top .top-nav {
@@ -205,7 +204,7 @@ a.anchor {
     border-bottom: 1px solid #eee;
 }
 
-.process h3, .locations h3, .plans h3 {
+.process h3, .locations h3, .plans h3, .cities h3, .employers h3 {
   color: #333f48;
   font-size: 1.625em;
   font-weight: 700;
@@ -218,8 +217,8 @@ a.anchor {
 
 .process ul li {
   float: left;
-  max-width: 22%;
-  margin: 20px 4% 0 0;
+  width: 210px;
+  margin: 20px 30px 0 0;
 }
 .process ul li.last {
   margin-right: 0;
@@ -245,6 +244,26 @@ a.anchor {
 }
 .process ul li.glass .animation {
   background-image: url("about_go.png");
+  width: 220px;
+  height: 220px;
+}
+.process ul li.cincinnati .animation {
+  background-image: url("map_cincinnati.png");
+  width: 220px;
+  height: 220px;
+}
+.process ul li.chicago .animation {
+  background-image: url("map_chicago.png");
+  width: 220px;
+  height: 220px;
+}
+.process ul li.san_fran .animation {
+  background-image: url("map_sf.png");
+  width: 220px;
+  height: 220px;
+}
+.process ul li.new_york .animation {
+  background-image: url("map_ny.png");
   width: 220px;
   height: 220px;
 }
@@ -279,19 +298,26 @@ a.anchor {
 }
 
 #banner {
+    background: url(banner-bg-6.png) no-repeat center;
+}
+
+#sale_hero {
+    background: url(banner-bg-5.png) no-repeat center;
+}
+
+#banner, #sale_hero {
     height: 800px;
-    background: url(banner-bg-3.png) no-repeat center;
     background-size: cover;
     position: relative;
     padding-top: 1px;
     overflow: hidden;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #ccc;
 }
 
-#banner h2 {
-    margin: 160px 0 0 50%;
+
+#banner h2, #sale_hero h2 {
+    margin: 210px 0 0 50%;
     padding: 10px;
-    opacity: 0.9;
     color: #fff;
     font-size: 370%;
     text-align: left;
@@ -301,7 +327,7 @@ a.anchor {
     letter-spacing: -0.03em;
 }
 
-#banner ul {
+#banner ul, #sale_hero ul {
     margin: 20px 0 0 50%;
     padding: 10px;
     text-align: left;
@@ -312,17 +338,17 @@ a.anchor {
     opacity: 0.9;
 }
 
-#banner ul li {
+#banner ul li, #sale_hero ul li{
     width: 600px;
     display: none;
 }
 
-#banner ul li a {
+#banner ul li a, #sale_hero ul li a {
     color: #fff;
     font-size: 240%;
 }
 
-#banner .cta {
+#banner .cta, #sale_hero .cta {
     margin: 40px 0 0 50%;
     padding: 10px;
     text-align: center;
@@ -331,7 +357,7 @@ a.anchor {
     border-radius: 3px;
 }
 
-#banner .cta a {
+#banner .cta a, #sale_hero .cta a {
     color: #fff;
     font-weight: 600;
     font-size: 150%;
@@ -342,7 +368,7 @@ a.anchor {
 }
 
 @media only screen and (max-width: 1024px) {
-    #banner h2 {
+    #banner h2, #sale_hero h2 {
         font-size: 200%;
         line-height: 100px;
         padding: 0;
@@ -351,20 +377,27 @@ a.anchor {
 }
 
 @media only screen and (max-width: 480px) {
-    #banner h2 {
+    #banner h2, #sale_hero h2 {
+            margin: 14px 0 0 10px;
             font-size: 150%;
+            width: 300px;
             line-height: 40px;
+            text-align: center;
     }
-    .promotion, .stickyDiv, .iphone, .back-to-top {
+    .promotion, .stickyDiv, .back-to-top, #sale_hero ul, #banner ul, .cta {
         display: none;
+    }
+    .iphone {
+        margin-left: -34px;
+        margin-top: -40px;
     }
 }
 
-#banner form {
+#banner form, #sale_hero form {
     margin: 40px 0;
 }
 
-#banner form input {
+#banner form input, #sale_hero form input {
     width: 60%;
     margin-left: 20%;
     height: 40px;
@@ -373,7 +406,7 @@ a.anchor {
     font-size: 20px;
 }
 
-#banner form input[type="submit"] {
+#banner form input[type="submit"], #sale_hero form input[type="submit"] {
     text-transform: uppercase;
     text-decoration: none;
     background-color: #3e4f6a;
@@ -408,13 +441,13 @@ a.button-1:hover {
 }
 
 @media only screen and (max-width: 1024px) {
-    #banner {
+    #banner, #sale_hero {
         height: 420px;
     }
 }
 
 @media only screen and (max-width: 480px) {
-    #banner {
+    #banner, #sale_hero {
         height: 400px;
     }
 }
@@ -456,7 +489,15 @@ ul.filter li.current a {
     float: left;
     clear: both;
     width: 100%;
-    background: #f4f4f4;
+    background: #ffffff;
+}
+
+.employers {
+    padding: 100px 0;
+    float: left;
+    clear: both;
+    width: 100%;
+    background: url("debut_light.png") repeat #eee;
 }
 
 ul.portfolio li {
@@ -709,12 +750,44 @@ footer p {
     font-weight: 700;
     height: 2.2em;
     line-height: 2.2em;
-    margin: 0 0 0.4em;
+    margin: 0;
 }
 
 .planContainer .price p span {
     color: #222;
     font-size: 70%;
+}
+
+.planContainer .coins_total {
+    height: 100px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.planContainer .coins_total p {
+    color: #111;
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 40px;
+    margin: 0;
+    padding: 7px 0;
+}
+
+.planContainer .coins_total span {
+    color: #777;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.planContainer .good_for {
+    margin: 0;
+    padding: 5px 15px;
+    font-size: 16px;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #eee;
 }
 
 .planContainer .options {
@@ -745,6 +818,15 @@ footer p {
     width: 80%;
     height: 2.8em;
     margin: 1.5em 0 1.8em;
+}
+
+.arrow-down {
+    margin-left: 140px;
+    width: 0;
+    height: 0; 
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    border-top: 14px solid #eb4840;
 }
 
 #credits {
@@ -841,8 +923,9 @@ footer p {
 
 .iphone {
     position: absolute;
-    top: 150px;
-    width: 26%;
+    top: 200px;
+    width: 24%;
+    min-width: 280px;
     left: 17%;
 }
 
@@ -861,4 +944,108 @@ footer p {
 .stop-scrolling {
     height: 100%;
     overflow: hidden;
+}
+
+/* Cities Section */
+
+.cities {
+    background: url("debut_light.png") repeat #eee;
+    padding: 90px 0 120px 0;
+    float: left;
+    clear: both;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+}
+
+.cities h3, .locations h3, .plans h3, .cities h3, .employers h3 {
+  color: #333f48;
+  font-size: 1.625em;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.cities ul li {
+  float: left;
+  width: 210px;
+  margin: 20px 30px 0 0;
+}
+.cities ul li.last {
+  margin-right: 0;
+}
+.cities ul li .animation {
+  margin: 0 auto 40px auto;
+  text-align: center;
+}
+.cities ul li.pass .animation {
+  background-image: url("about_download.png");
+  width: 220px;
+  height: 220px;
+}
+.cities ul li.ruler .animation {
+  background-image: url("about_preload.png");
+  width: 220px;
+  height: 220px;
+}
+.cities ul li.plane .animation {
+  background-image: url("about_book.png");
+  width: 220px;
+  height: 220px;
+}
+.cities ul li.glass .animation {
+  background-image: url("about_go.png");
+  width: 220px;
+  height: 220px;
+}
+.cities ul li.cincinnati .animation {
+  background-image: url("map_cincinnati.png");
+  width: 220px;
+  height: 220px;
+}
+.cities ul li.chicago .animation {
+  background-image: url("map_chicago.png");
+  width: 220px;
+  height: 220px;
+}
+.cities ul li.san_fran .animation {
+  background-image: url("map_sf.png");
+  width: 220px;
+  height: 220px;
+}
+.cities ul li.new_york .animation {
+  background-image: url("map_ny.png");
+  width: 220px;
+  height: 220px;
+}
+.cities .drop-cap {
+  float: left;
+  margin: 0 4px 0 0;
+  color: #acacac;
+  font-size: 3.25em;
+  font-family: "ff-kievit-web", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 48px;
+}
+.lt-ie9 .cities .drop-cap,
+.ie9 .cities .drop-cap {
+  line-height: 40px;
+}
+.cities h4 {
+  color: #333f48;
+  font-size: 1em;
+  font-family: "ff-kievit-web", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 2px;
+}
+.cities p {
+  color: #6f6f6f;
+  font-size: 1em;
+  line-height: 24px;
 }
