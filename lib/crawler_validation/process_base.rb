@@ -248,7 +248,7 @@ class ProcessBase
   end
 
   def check_source_description?
-    special = "<>[]}{=*^`~{}"
+    special = "<>[]}{=*^`{}"
     regex = /[#{special.gsub(/./){|char| "\\#{char}"}}]/
     return !@source_description.nil? && !(@source_description =~ regex)
   end
