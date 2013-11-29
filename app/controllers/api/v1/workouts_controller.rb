@@ -1,4 +1,5 @@
 require 'braintree'
+require './lib/braintree/purchase_workout'
 
 module Api
   module V1
@@ -25,60 +26,12 @@ module Api
       end
 
       def buy
+        json = PurchaseWorkout.buy(current_user, params[:id], params[:venmo_sdk_payment_method_code])
         
-        if !current_user.has_payment_info?
-          render :json => { :error => "User has no credit card saved" }, :status => 422 and return
-        end
-
-        @workout = Workout.where(:id => params[:id]).first
-        # puts "can_buy: #{@workout.can_buy}"
-        if @workout.nil?
-          render :json => { :error => "Workout with id, #{params[:id]}, is nil" }, :status => 422
-        elsif @workout.can_buy.nil? || !@workout.can_buy
-          render :json => { :error => "Can't buy workout with id, #{params[:id]}" }, :status => 422
-        elsif !@workout.quantity_left.nil? && @workout.quantity_left < 1
-          render :json => { :error => "No more passes left for the workout with id: #{params[:id]}" }, :status => 422
+        if json[:success] == false
+          render :json => json, :status => 422
         else
-          
-          price = @workout.price
-
-          if (current_user.credit_amount >= price)
-            Resque.enqueue(AddCreditsToInvitor, current_user.id, Receipt.where(:user_id => current_user.id).count)
-            receipt = @workout.buy_workout(current_user)
-            current_user.use_credits(price)
-            render :json => {
-              :success => true,
-              :card_number => "Credits Used",
-              :credit_card_type => "credits",
-              :receipt => receipt } and return
-          elsif (current_user.credit_amount > 0)
-            price = price - current_user.credit_amount
-            Resque.enqueue(AddCreditsToInvitor, current_user.id, Receipt.where(:user_id => current_user.id).count)
-            current_user.use_credits(current_user.credit_amount)
-          end
-          result = Braintree::Transaction.sale(
-            :amount => price,
-            :customer_id => current_user.braintree_customer_id,
-            :venmo_sdk_payment_method_code => params[:venmo_sdk_payment_method_code],
-            :options => {
-              :submit_for_settlement => true
-            }       
-          )
-
-          if result.success?
-            receipt = @workout.buy_workout(current_user)
-            render :json => {
-              :success => true,
-              :card_number => result.transaction.credit_card_details.masked_number,
-              :credit_card_type => result.transaction.credit_card_details.card_type,
-              :receipt => receipt
-            }
-          else
-            render :json => {
-              :success => false,
-              :error_message => result.message
-            }, :status => 422
-          end
+          render :json => json
         end
       end
 
