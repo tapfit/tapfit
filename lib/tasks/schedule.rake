@@ -61,8 +61,8 @@ task :update_place_contracts => :environment do
 end
 
 task :scrape_core_movement => :environment do
-  place = Place.find(1931)
-  Mindbody.get_classes(place.schedule_url, place.id, DateTime.now + 1.days, place.source)
+  place = Place.find(13)
+  CasperMindbody.get_classes(place.schedule_url, place.id, DateTime.now + 1.days, place.source)
 end
 
 task :add_day_pass => :environment do
