@@ -36,7 +36,11 @@ Tapfit::Application.routes.draw do
           get 'search'
         end
       end
- 
+
+      resources :packages do
+        post 'buy', on: :member
+      end
+
       resources :regions
 
       def users_resources

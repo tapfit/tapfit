@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131120211741) do
+ActiveRecord::Schema.define(version: 20131129185734) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -72,8 +72,10 @@ ActiveRecord::Schema.define(version: 20131120211741) do
     t.integer  "promo_code_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "package_id"
   end
 
+  add_index "credits", ["package_id"], name: "index_credits_on_package_id", using: :btree
   add_index "credits", ["promo_code_id"], name: "index_credits_on_promo_code_id", using: :btree
   add_index "credits", ["user_id"], name: "index_credits_on_user_id", using: :btree
 
@@ -104,6 +106,15 @@ ActiveRecord::Schema.define(version: 20131120211741) do
 
   add_index "instructors", ["email"], name: "index_instructors_on_email", unique: true, using: :btree
   add_index "instructors", ["phone_number"], name: "index_instructors_on_phone_number", unique: true, using: :btree
+
+  create_table "packages", force: true do |t|
+    t.string   "description"
+    t.integer  "amount"
+    t.integer  "fit_coins"
+    t.float    "discount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "pass_details", force: true do |t|
     t.integer  "place_id"

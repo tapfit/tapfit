@@ -26,7 +26,7 @@ module Api
       end
 
       def buy
-        json = Purchase.buy_workout(current_user, params[:id], params[:venmo_sdk_payment_method_code])
+        json = Purchase.buy_workout(current_user, params[:id])
         
         if json[:success] == false
           render :json => json, :status => 422

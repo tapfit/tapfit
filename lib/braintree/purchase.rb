@@ -10,7 +10,7 @@ module Purchase
   #   returns hash:
   #     if error, hash contains, ":success => false"
   #     otherwise, hash contains, ":success => true"
-  def self.buy_workout(user, workout_id, payment_code)
+  def self.buy_workout(user, workout_id)
     return_hash = {}
     # Default value for success
     return_hash[:success] = false
@@ -48,7 +48,6 @@ module Purchase
       result = Braintree::Transaction.sale(
         :amount => price,
         :customer_id => user.braintree_customer_id,
-        :venmo_sdk_payment_method_code => payment_code,
         :options => {
           :submit_for_settlement => true
         }       
@@ -62,6 +61,43 @@ module Purchase
         return_hash[:receipt] = receipt
       else
         return_hash[:error_message] = result.message
+      end
+    end
+    return return_hash
+  end
+
+  def self.buy_package(user, package_id)
+    return_hash = {}
+    return_hash[:success] = false # default value
+
+    if !user.has_payment_info?
+      return_hash[:error] = "User has no credit card saved"
+      return return_hash
+    end 
+
+    package = Package.where(:id => package_id).first
+    if package.nil?
+      return_hash[:error] = "Package with id: #{package_id}, is nil"
+    else
+      amount = package.discounted_amount
+      
+      result = Braintree::Transaction.sale(
+        :amount => amount,
+        :customer_id => user.braintree_customer_id,
+        :options => {
+          :submit_for_settlement => true
+        }
+      )
+
+      if result.success?
+        package.buy_package(user)
+        user = User.find(user.id)
+        return_hash[:success] = true
+        return_hash[:card_number] = result.transaction.credit_card_details.masked_number
+        return_hash[:credit_card_type] = result.transaction.credit_card_details.card_type
+        return_hash[:total_credits] = user.credit_amount
+      else
+        return_hash[:error] = result.message
       end
     end
     return return_hash
