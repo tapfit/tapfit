@@ -1,5 +1,5 @@
 require 'braintree'
-require './lib/braintree/purchase_workout'
+require './lib/braintree/purchase'
 
 module Api
   module V1
@@ -26,7 +26,7 @@ module Api
       end
 
       def buy
-        json = PurchaseWorkout.buy(current_user, params[:id], params[:venmo_sdk_payment_method_code])
+        json = Purchase.buy_workout(current_user, params[:id], params[:venmo_sdk_payment_method_code])
         
         if json[:success] == false
           render :json => json, :status => 422
