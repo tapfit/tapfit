@@ -12,4 +12,8 @@ class PromoCode < ActiveRecord::Base
       return true
     end
   end
+
+  def codes_used
+    return Credit.where(:promo_code_id => self.id).count
+  end
 end
