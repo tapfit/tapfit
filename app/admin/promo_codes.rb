@@ -6,8 +6,7 @@ ActiveAdmin.register PromoCode do
     column :code
     column :amount
     column :quantity
-    column :user_id
-    column :company_id
+    column :user_id, :type => :integer
     column :random_promo
     column :codes_used
 
