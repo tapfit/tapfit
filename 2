@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="//use.typekit.net/pgg1qmn.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <script>
+    </script>
     <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
@@ -65,18 +67,23 @@
                 <div class="modal content reserve-form">
                     <div class="front">
                         <header></header>
-                        <button title="close" type="button" class="tf-close" onclick="closeOrderModal()">&times;</button>
                         <form id="payment-form" action="/" autocomplete="on" method="POST">
                             <fieldset>
                                 <div class="row order group">
-                                    <h3>FitCoins to Purchase</h3>
+                                    <h3>Order</h3>
                                     <div class="quantity-wrap">
                                         <div class="fancy-select">
-                                            <select id="quantity" name="order[quantity]" height="30px">
+                                            <select id="quantity" name="order[quantity]" class="fancified" style="width:1px; height:1px; display:block; position:absolute; top:0px; left:0px; opacity:0;">
                                                 <option value="100" selected>100</option>
                                                 <option value="250">250</option>
                                                 <option value="500">500</option>
                                             </select>
+                                            <div class="trigger">100</div>
+                                            <ul class="options">
+                                                <li data-value="100" class="selected">100</li>
+                                                <li data-value="250">250</li>
+                                                <li data-value="500">500</li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -106,6 +113,21 @@
                                                 <option value="11">Nov</option>
                                                 <option value="12">Dec</option>
                                             </select>
+                                            <div class="trigger">Jan</div>
+                                            <ul class="options">
+                                                <li data-value="1" class="selected">Jan</li>
+                                                <li data-value="2">Feb</li>
+                                                <li data-value="3">Mar</li>
+                                                <li data-value="4">Apr</li>
+                                                <li data-value="5">May</li>
+                                                <li data-value="6">Jun</li>
+                                                <li data-value="7">Jul</li>
+                                                <li data-value="8">Aug</li>
+                                                <li data-value="9">Sep</li>
+                                                <li data-value="10">Oct</li>
+                                                <li data-value="11">Nov</li>
+                                                <li data-value="12">Dec</li>
+                                            </ul>
                                         </div>
                                            
                                         <div class="fancy-select">
@@ -135,12 +157,14 @@
                             </div>
 
                             <div class="row summary group">
-                                <div class="price">$<del>1.00</del></div>
-                                <div class="sale-price">$0.56<br><span class="small">each</span></div>
+                                <div class="price">$<del>100</del></div>
+                                <div class="sale-price">$50<br><span class="small">each</span></div>
                                 <div class="multiply">x</div>
-                                <div class="quantity">100<br><span class="small">FitCoins</span></div>
+                                <div class="quantity">1<br><span class="small">cards</span></div>
+                                <div class="add">+</div>
+                                <div class="shipping">$5<br><span class="small">shipping</span></div>
                                 <div class="calculate-total">=</div>
-                                <div class="total">$56</div>
+                                <div class="total">$55</div>
                             </div>
 
                             <input type="hidden" name="order[product_id]" value="2">
@@ -155,24 +179,3 @@
     </div>
 </body>
 </html>
-
-<script type="text/javascript">
-    $("#quantity").change(function() {
-        var quantity = $("#quantity").val();
-        if (quantity == 250) {
-            $(".sale-price").html("$0.49<br><span class='small'>each</span>");
-            $(".quantity").html("250<br><span class='small'>FitCoins</span>");
-            $(".total").html("$122");
-        }
-        else if (quantity == 500) {
-            $(".sale-price").html("$0.42<br><span class='small'>each</span>");
-            $(".quantity").html("500<br><span class='small'>FitCoins</span>");
-            $(".total").html("$210");
-        }
-        else {
-            $(".sale-price").html("$0.56<br><span class='small'>each</span>");
-            $(".quantity").html("100<br><span class='small'>FitCoins</span>");
-            $(".total").html("$56");
-        }
-    });
-</script>

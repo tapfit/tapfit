@@ -298,7 +298,7 @@ a.anchor {
 }
 
 #banner {
-    background: url(banner-bg-6.png) no-repeat center;
+    background: url(banner-bg-6.png) no-repeat top left;
 }
 
 #sale_hero {
@@ -349,17 +349,14 @@ a.anchor {
 
 #banner .cta, #sale_hero .cta {
     margin: 40px 0 0 50%;
-    padding: 10px;
     text-align: center;
     background: #eb4840;
-    width: 300px;
     border-radius: 3px;
-}
-
-#banner .cta a, #sale_hero .cta a {
     color: #fff;
     font-weight: 600;
     font-size: 150%;
+    width: 300px;
+    padding: 10px;
 }
 
 .inView {
@@ -804,7 +801,7 @@ footer p {
     color: #979797;
 }
 
-.planContainer .button a {
+.planContainer .preorder-button a {
     text-transform: uppercase;
     text-decoration: none;
     background-color: #3e4f6a;
@@ -815,6 +812,7 @@ footer p {
     border: 2px solid #3e4f6a;
     display: inline-block;
     width: 80%;
+    cursor: pointer;
     height: 2.8em;
     margin: 1.5em 0 1.8em;
 }
@@ -900,7 +898,7 @@ footer p {
     background: lightyellow;
 }
 
-.planContainer .button a {
+.planContainer .preorder-button a {
     -webkit-transition: all .25s;
        -moz-transition: all .25s;
         -ms-transition: all .25s;
@@ -908,7 +906,7 @@ footer p {
             transition: all .25s;
 }
 
-.planContainer .button a:hover {
+.planContainer .preorder-button a:hover {
     background: #3e4f6a;
     color: #fff;
 }
@@ -1048,3 +1046,459 @@ footer p {
   font-size: 1em;
   line-height: 24px;
 }
+
+.tf-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999991;
+    overflow: hidden;
+    background: rgba(0,0,0,0.9);
+}
+
+.tf-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999992;
+    outline: none !important;
+}
+
+@media only screen and (max-width: 900px) {
+    .tf-container {
+        padding-left: 6px;
+        padding: right: 6px;
+    }
+}
+
+.tf-container {
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    padding: 0 8px;
+    box-sizing: border-box;
+    z-index: 9999999;
+}
+
+div.content-modal div.tf-content {
+    max-width: 400px;
+    margin: 0 auto;
+    margin-top: 125px;
+    background: #fff;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -o-border-radius: 20px;
+    color: #a9b1bb;
+    text-align: center;
+}
+
+.tf-content {
+    position: relative;
+    display: inline block;
+    vertical-align: middle;
+    margin: 0 auto;
+    text-align: left;
+    z-index: 999994;
+}
+
+.modal.reserve-form {
+    margin: -10px;
+    transition: all 500ms linear;
+    max-width: 400px;
+}
+
+.modal.reserve-form .front {
+    position: absolute;
+    width: 100%;
+    height: 515px;
+    transition: all 0.5s;
+    background: #fff;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -o-border-radius: 20px;
+    padding: 20px;
+}
+
+.modal.reserve-form .front > header {
+    position: absolute;
+    top: -80px;
+    width: 100%;
+    left: 0;
+    text-align: left;
+}
+
+.modal.reserve-form form .row {
+    margin-bottom: 10px;
+}
+
+.modal.reserve-form form .row.payment {
+    margin-bottom: 0;
+}
+
+.modal.reserve-form form .row.payment h3 {
+float: left;
+}
+
+.modal.reserve-form form .row.summary {
+    font-size: 24px;
+    font-weight: 600;
+    color: #727981;
+    margin: 0 0 0 5px;
+}
+
+.modal.reserve-form form h3 {
+    color: #727981;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: left;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.modal.reserve-form form .quantity-wrap {
+    position: relative;
+    top: 0;
+    width: 87px;
+    float: left;
+}
+
+.modal-reserve-form form .quantity-wrap .fancy-select {
+    width: 100%;
+    margin-left: 0;
+}
+
+div.fancy-select {
+    position: relative;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #a7afb9;
+    float: left;
+}
+
+.modal.reserve-form form .row.order .sale-price {
+    text-transform: uppercase;
+    float: right;
+    width: 150px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background: #a5adb7;
+    padding: 11px 8px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.modal.reserve-form form .row.payment .cards-accepted {
+font-size: 12px;
+color: #A7AFB9;
+text-transform: uppercase;
+float: right;
+padding-top: 1px;
+}
+
+.modal.reserve-form form input[type="text"]#card_number, .modal.reserve-form form input[type="number"]#card_number, .modal.reserve-form form input[type="email"]#card_number, .modal.reserve-form form input[type="password"]#card_number {
+width: 100%;
+}
+
+.modal.reserve-form form input[type="text"].inline, .modal.reserve-form form input[type="number"].inline, .modal.reserve-form form input[type="email"].inline, .modal.reserve-form form input[type="password"].inline {
+float: left;
+margin-right: 20px;
+width: 220px;
+}
+
+.modal.reserve-form form input[type="text"], .modal.reserve-form form input[type="number"], .modal.reserve-form form input[type="email"], .modal.reserve-form form input[type="password"] {
+background: #fff;
+width: 100%;
+color: #A7AFB9;
+font-size: 14px;
+padding-left: 10px;
+border-radius: 5px;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+-o-border-radius: 5px;
+text-transform: uppercase;
+outline: none;
+border: 2px solid #A7AFB9;
+transition: all 100ms linear;
+-webkit-transition: all 100ms linear;
+-moz-transition: all 100ms linear;
+-o-transition: all 100ms linear;
+-ms-transition: all 100ms linear;
+font-weight: bold;
+-webkit-appearance: none;
+height: 41px;
+font-family: "Open Sans", sans-serif;
+}
+
+.modal.reserve-form form #visa {
+margin-left: 316px;
+display: none;
+background-image: url("//d2tqk49yez7kzo.cloudfront.net/shared/icons/cc_visa.gif");
+}
+
+.modal.reserve-form form .cc-icon {
+width: 40px;
+height: 26px;
+background-size: contain;
+background-repeat: no-repeat;
+position: absolute;
+top: 124px;
+}
+
+.modal.reserve-form form #mastercard {
+margin-left: 316px;
+display: none;
+background-image: url("//d2tqk49yez7kzo.cloudfront.net/shared/icons/cc_mc.gif");
+}
+
+.modal.reserve-form form #americanexpress {
+margin-left: 316px;
+display: none;
+background-image: url("//d2tqk49yez7kzo.cloudfront.net/shared/icons/cc_amex.gif");
+}
+
+.modal.reserve-form form #discover {
+margin-left: 316px;
+display: none;
+background-image: url("//d2tqk49yez7kzo.cloudfront.net/shared/icons/cc_discover.gif");
+}
+
+.modal.reserve-form form .exp {
+float: left;
+margin: 10px 0;
+-webkit-backface-visibility: hidden;
+}
+
+.modal.reserve-form form .exp .fancy-select:first-child {
+margin-right: 10px;
+}
+
+.modal.reserve-form form .exp .fancy-select {
+margin-left: 0;
+width: 70px;
+}
+
+.modal.reserve-form form .row.summary {
+font-size: 24px;
+font-weight: 600;
+color: #727981;
+margin: 0 0 0 5px;
+}
+
+.modal.reserve-form form .row.summary .price {
+font-size: 20px;
+float: left;
+margin-left: 5px;
+padding-top: 13px;
+color: #A7AFB9;
+}
+
+.modal.reserve-form form .row.summary .sale-price {
+float: left;
+margin-left: 10px;
+padding-top: 11px;
+}
+
+.modal.reserve-form form .row.summary span.small {
+font-size: 10px;
+vertical-align: top;
+text-align: center;
+}
+
+.modal.reserve-form form .row.summary .multiply {
+float: left;
+margin-left: 10px;
+padding-top: 11px;
+color: #A7AFB9;
+}
+
+.modal.reserve-form form .row.summary .quantity {
+float: left;
+margin-left: 5px;
+padding-top: 11px;
+}
+
+.modal.reserve-form form .row.summary .add {
+float: left;
+margin-left: 5px;
+padding-top: 11px;
+color: #A7AFB9;
+}
+
+.modal.reserve-form form .row.summary .shipping {
+float: left;
+margin-left: 5px;
+padding-top: 11px;
+}
+
+.modal.reserve-form form .row.summary .calculate-total {
+float: left;
+margin-left: 5px;
+padding-top: 11px;
+color: #A7AFB9;
+}
+
+.modal.reserve-form form .row.summary .total {
+float: left;
+font-size: 40px;
+color: #000;
+margin-left: 10px;
+}
+
+.modal.reserve-form form .button {
+cursor: pointer;
+padding: 10px 50px;
+font-size: 14px;
+}
+
+.button.light-bg, button.light-bg {
+box-shadow: none;
+-webkit-box-shadow: none;
+-moz-box-shadow: none;
+-o-box-shadow: none;
+}
+
+.button.blue, button.blue {
+background: #eb4840 url("//d2tqk49yez7kzo.cloudfront.net/shared/noise-3.png");
+border: none;
+box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+-o-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+color: #fff !important;
+}
+
+.button.light-bg, button.light-bg {
+box-shadow: none;
+-webkit-box-shadow: none;
+-moz-box-shadow: none;
+-o-box-shadow: none;
+}
+
+.button, button {
+background: transparent;
+padding: 10px 20px;
+border-radius: 25px;
+-webkit-border-radius: 25px;
+-moz-border-radius: 25px;
+-o-border-radius: 25px;
+border: 2px solid #fff;
+color: #fff;
+text-decoration: none;
+text-transform: uppercase;
+font-size: 14px;
+font-weight: 600;
+display: inline-block;
+position: relative;
+transition: all 200ms linear 0;
+-webkit-transition: all 200ms linear 0;
+-moz-transition: all 200ms linear 0;
+-o-transition: all 200ms linear 0;
+-ms-transition: all 200ms linear 0;
+white-space: nowrap;
+}
+
+button.tf-close, button.tf-arrow {
+overflow: visible;
+cursor: pointer;
+background: transparent;
+border: 0;
+-webkit-appearance: none;
+display: block;
+padding: 0;
+z-index: 1046;
+-webkit-box-shadow: none;
+box-shadow: none;
+}
+
+.tf-close {
+width: 44px;
+height: 44px;
+line-height: 44px;
+position: absolute;
+right: 0;
+top: 0;
+text-decoration: none;
+text-align: center;
+opacity: 0.65;
+padding: 0 0 18px 10px;
+color: #a7afb9;
+font-style: normal;
+font-size: 24px;
+font-family: "Open Sans", sans-serif;
+font-weight: 600;
+}
+
+.tf-close, .tf-arrow, .tf-preloader, .tf-counter {
+-webkit-user-select: none;
+-moz-user-select: none;
+user-select: none;
+}
+
+.modal.reserve-form form input[type="text"].inline:last-child, .modal.reserve-form form input[type="number"].inline:last-child, .modal.reserve-form form input[type="email"].inline:last-child, .modal.reserve-form form input[type="password"].inline:last-child {
+margin-right: 0;
+}
+
+.modal.reserve-form form input[type="text"]#address_zip, .modal.reserve-form form input[type="number"]#address_zip, .modal.reserve-form form input[type="email"]#address_zip, .modal.reserve-form form input[type="password"]#address_zip {
+margin-bottom: 10px;
+}
+
+.modal.reserve-form form input[type="text"]#card_cvc, .modal.reserve-form form input[type="number"]#card_cvc, .modal.reserve-form form input[type="email"]#card_cvc, .modal.reserve-form form input[type="password"]#card_cvc {
+float: left;
+margin: 10px 0 10px 10px;
+width: 59px;
+}
+
+.modal.reserve-form .front p.secure {
+    margin: 20px 0 0 0;
+    text-transform: uppercase;
+    text-align: center;
+    color: #000;
+}
+
+div.content-modal {
+    display: none;
+}
+
+div.content-modal div.tf-content p {
+font-weight: 600;
+font-size: 14px;
+margin-top: 10px;
+}
+
+.group:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+
+.tf-align-top .tp-container:before {
+    display: none;
+}
+
+.tf-container:before {
+    content: '';
+    display: inline block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+fieldset {
+    border: none;
+}
+

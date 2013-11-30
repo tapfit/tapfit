@@ -19,9 +19,9 @@ var previousOffset = 0;
 var isAnimating = false;
 
 $(document).ready(function() {
+
     /* Scroll event handler */
     if (screen.width > 500) {
-        
         // Bind handleStickDiv to scroll
         $(window).bind('scroll',function(e){
             handleStickyDiv();
@@ -104,4 +104,31 @@ function slideshow() {
         .addClass('inView')
         .animate({opacity: 1.0}, 1000, function(){
         });
+}
+
+function displayOrderModal(quantity) {
+    $('html, body').scrollTop(0); 
+    
+    $("#quantity").val(quantity);
+    if (quantity == 250) {
+        $(".sale-price").html("$0.49<br><span class='small'>each</span>");
+        $(".quantity").html("250<br><span class='small'>FitCoins</span>");
+        $(".total").html("$122");
+    }
+    else if (quantity == 500) {
+        $(".sale-price").html("$0.42<br><span class='small'>each</span>");
+        $(".quantity").html("500<br><span class='small'>FitCoins</span>");
+        $(".total").html("$210");
+    }
+    else {
+        $(".sale-price").html("$0.56<br><span class='small'>each</span>");
+        $(".quantity").html("100<br><span class='small'>FitCoins</span>");
+        $(".total").html("$56");
+    }
+
+    $(".content-modal").fadeIn();
+}
+
+function closeOrderModal() {
+    $(".content-modal").fadeOut();
 }
