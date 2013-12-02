@@ -56,10 +56,11 @@ function handleStickyDiv(){
     var scrolled = $(window).scrollTop();
     var offset = $("#banner").height() - $("header#top").height();
     var offsetTwo = offset + $(".process").outerHeight( true );
-    var offsetThree = offsetTwo + $(".plans").outerHeight( true );
-    var offsetFour = offsetThree + $(".cities").outerHeight( true );
-    var offsetFive = offsetFour + $(".locations").outerHeight( true );
-    var offsetSix = offsetFive + $(".employers").outerHeight( true );
+    var offsetThree = offsetTwo + $(".features").outerHeight( true );
+    var offsetFour = offsetThree + $(".plans").outerHeight( true );
+    var offsetFive = offsetFour + $(".cities").outerHeight( true );
+    var offsetSix = offsetFive + $(".locations").outerHeight( true );
+    var offsetSeven = offsetSix + $(".employers").outerHeight( true );
 
     $(".sticky_links").removeClass("active");
     $(".sticky_links").addClass("inactive");
@@ -71,18 +72,22 @@ function handleStickyDiv(){
         $("#link_about").removeClass("inactive");
     }
     else if (scrolled <= offsetThree) {
+        $("#link_features").addClass("active");
+        $("#link_features").removeClass("inactive");
+    }
+    else if (scrolled <= offsetFour) {
         $("#link_plans").addClass("active");
         $("#link_plans").removeClass("inactive");
     }
-    else if (scrolled <= offsetFour) {
+    else if (scrolled <= offsetFive) {
         $("#link_cities").addClass("active");
         $("#link_cities").removeClass("inactive");
     }
-    else if (scrolled <= offsetFive) {
+    else if (scrolled <= offsetSix) {
         $("#link_locations").addClass("active");
         $("#link_locations").removeClass("inactive");
     }
-    else if (scrolled <= offsetSix) {
+    else if (scrolled <= offsetSeven) {
         $("#link_employers").addClass("active");
         $("#link_employers").removeClass("inactive");
     }
@@ -111,19 +116,16 @@ function displayOrderModal(quantity) {
     
     $("#quantity").val(quantity);
     if (quantity == 250) {
-        $(".sale-price").html("$0.49<br><span class='small'>each</span>");
         $(".quantity").html("250<br><span class='small'>FitCoins</span>");
-        $(".total").html("$122");
+        $(".total").html("$125");
     }
     else if (quantity == 500) {
-        $(".sale-price").html("$0.42<br><span class='small'>each</span>");
         $(".quantity").html("500<br><span class='small'>FitCoins</span>");
-        $(".total").html("$210");
+        $(".total").html("$250");
     }
     else {
-        $(".sale-price").html("$0.56<br><span class='small'>each</span>");
         $(".quantity").html("100<br><span class='small'>FitCoins</span>");
-        $(".total").html("$56");
+        $(".total").html("$50");
     }
 
     $(".content-modal").fadeIn();

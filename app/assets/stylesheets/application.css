@@ -26,6 +26,7 @@ html, body {
 body {
     font-size: 100%;
     color: #818386;
+    width: 100%;
     font-family: "proxima-nova", sans-serif;
     background: #f8fafb; 
 }
@@ -66,7 +67,8 @@ a:hover {
 }
     
 .wrapper {
-    max-width: 960px;
+    max-width: 1170px;
+    padding: 0;
     margin: 0 auto;
 }
 
@@ -217,8 +219,8 @@ a.anchor {
 
 .process ul li {
   float: left;
-  width: 210px;
-  margin: 20px 30px 0 0;
+  max-width: 22%;
+  margin: 20px 4% 0 0;
 }
 .process ul li.last {
   margin-right: 0;
@@ -307,6 +309,7 @@ a.anchor {
 
 #banner, #sale_hero {
     height: 800px;
+    width: 100%;
     background-size: cover;
     position: relative;
     padding-top: 1px;
@@ -351,6 +354,7 @@ a.anchor {
     margin: 40px 0 0 50%;
     text-align: center;
     background: #eb4840;
+    text-transform: uppercase;
     border-radius: 3px;
     color: #fff;
     font-weight: 600;
@@ -436,18 +440,6 @@ a.button-1:hover {
     color: #fff;
 }
 
-@media only screen and (max-width: 1024px) {
-    #banner, #sale_hero {
-        height: 420px;
-    }
-}
-
-@media only screen and (max-width: 480px) {
-    #banner, #sale_hero {
-        height: 400px;
-    }
-}
-
 ul.filter {
     display: inline-block;
     margin: 20px 0px;
@@ -508,7 +500,7 @@ ul.portfolio li .photo-overlay {
     bottom: 0;
     left: 0;
     background: rgba(0, 0, 0, .8);
-    width: 300px;
+    width: 350px;
     height: 60px;
     color: #fff;
 }
@@ -546,6 +538,10 @@ ul.portfolio li .photo-overlay .date {
     ul.portfolio {
     width: 320px;
     margin: 0 auto;
+    }
+
+    ul.portfolio li .photo-overlay {
+        width: 300px;
     }
 }
 
@@ -818,7 +814,7 @@ footer p {
 }
 
 .arrow-down {
-    margin-left: 140px;
+    margin-left: 45%;
     width: 0;
     height: 0; 
     border-left: 14px solid transparent;
@@ -967,8 +963,8 @@ footer p {
 
 .cities ul li {
   float: left;
-  width: 210px;
-  margin: 20px 30px 0 0;
+  max-width: 22%;
+  margin: 20px 4% 0 0;
 }
 .cities ul li.last {
   margin-right: 0;
@@ -1136,6 +1132,43 @@ div.content-modal div.tf-content {
     text-align: left;
 }
 
+.modal.reserve-form .front>header .title-wrap {
+display: inline-block;
+width: 100%;
+text-align: center;
+margin: 0;
+padding: 0;
+}
+
+.modal.reserve-form .front>header h2 {
+display: inline-block;
+color: #fff;
+font-weight: 300;
+font-size: 30px;
+}
+
+div.content-modal div.tf-content h2 {
+color: #737980;
+font-weight: 600;
+font-size: 24px;
+}
+
+.modal.reserve-form .front>header p {
+text-transform: uppercase;
+font-size: 13px;
+text-align: center;
+}
+
+div.content-modal div.tf-content p {
+font-weight: 600;
+font-size: 14px;
+margin-top: 10px;
+}
+
+.modal.reserve-form .front>header p strong {
+color: #fff;
+}
+
 .modal.reserve-form form .row {
     margin-bottom: 10px;
 }
@@ -1242,6 +1275,10 @@ height: 41px;
 font-family: "Open Sans", sans-serif;
 }
 
+.modal.reserve-form form input[type="text"]#email, .modal.reserve-form form input[type="number"]#email, .modal.reserve-form form input[type="email"]#email, .modal.reserve-form form input[type="password"]#email {
+width: 100%;
+}
+
 .modal.reserve-form form #visa {
 margin-left: 316px;
 display: none;
@@ -1317,6 +1354,11 @@ vertical-align: top;
 text-align: center;
 }
 
+.modal.reserve-form form .fancy-select span.small {
+padding-top: 3px;
+font-size: 12px;
+}
+
 .modal.reserve-form form .row.summary .multiply {
 float: left;
 margin-left: 10px;
@@ -1361,6 +1403,24 @@ margin-left: 10px;
 cursor: pointer;
 padding: 10px 50px;
 font-size: 14px;
+}
+
+.modal.reserve-form .front nav {
+position: absolute;
+bottom: -55px;
+left: 0;
+width: 100%;
+}
+
+.modal.reserve-form .front nav p {
+text-transform: uppercase;
+font-size: 13px;
+}
+
+div.content-modal div.tf-content p {
+font-weight: 600;
+font-size: 14px;
+margin-top: 10px;
 }
 
 .button.light-bg, button.light-bg {
@@ -1462,7 +1522,8 @@ width: 59px;
 }
 
 .modal.reserve-form .front p.secure {
-    margin: 20px 0 0 0;
+    margin: 16px 0 0 0;
+    font-weight: normal;
     text-transform: uppercase;
     text-align: center;
     color: #000;
@@ -1502,3 +1563,126 @@ fieldset {
     border: none;
 }
 
+.mobile-promotion {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 70px;
+    width: 100%;
+    text-align: center;
+    background: #fff;
+    opacity: 0.95;
+}
+
+.mobile-promotion nav ul#navigation {
+    width: 100%;
+}
+
+.mobile-promotion nav ul li {
+    width: 80%;
+    height: 44px;
+    margin: 13px 10%;
+    background: #eb4840;
+    color: #fff;
+    line-height: 44px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -o-border-radius: 15px;
+}
+
+/* Features */
+
+.features {
+  padding: 70px 0 70px;
+  float: left;
+  clear: both;
+  width: 100%;
+  border-bottom: 1px solid #e6e6e6;
+  overflow: hidden;
+}
+.heading {
+  max-width: 630px;
+  margin: 0 auto 40px auto;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #333f48;
+}
+.heading h3 {
+  font-size: 1.625em;
+  font-weight: 700;
+}
+.heading p {
+  font-size: 1.5em;
+  font-weight: 300;
+}
+.features ul li {
+  float: left;
+  width: 40%;
+  margin: 20px 5%;
+  min-height: 100px;
+  position: relative;
+}
+.lt-ie9 .features ul li,
+.ie9 .features ul li {
+  opacity: 1;
+}
+.features ul li span {
+  display: block;
+  text-indent: -9999em;
+  width: 100px;
+  height: 80px;
+  position: absolute;
+  left: 0;
+  background-image: url("sprite.png");
+  background-repeat: no-repeat;
+  background-position: 12px 6px;
+}
+.features ul li span.no-expiration {
+  background-position: 20px -310px;
+}
+.features ul li span.loyalty {
+  background-position: 27px -196px;
+}
+.features ul li span.save-money {
+  background-position: 22px -406px;
+}
+.features ul li span.exclusive-access {
+  background-position: 28px -510px;
+}
+.features ul li span.analytics {
+  background-position: 26px -90px;
+}
+.features ul li h5 {
+  padding-left: 120px;
+  font-size: 1em;
+  color: #333f48;
+  margin: 10px 0 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.features ul li p {
+  padding-left: 120px;
+  font-size: 1em;
+  color: #6f6f6f;
+  line-height: 22px;
+}
+
+@media only screen and (max-width: 1024px) {
+}
+
+@media only screen and (max-width: 480px) {
+    #banner {
+        height: 480px;
+    }
+    .cities ul li, .process ul li {
+        max-width: 70%;
+        margin-left: 15%;
+    }
+
+    .mobile-promotion {
+        display: block;
+    }
+}
