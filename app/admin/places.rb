@@ -199,6 +199,8 @@ ActiveAdmin.register Place do
             place.pass_details.destroy_all
             PassDetail.create(:place_id => place.id, :pass_type => pass_detail)
           end
+        else
+          PassDetail.create(:place_id => place.id, :pass_type => pass_detail)
         end
       end
 
