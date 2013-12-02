@@ -72,6 +72,12 @@ a:hover {
     margin: 0 auto;
 }
 
+.wrapper-narrow {
+    max-width: 800px;
+    padding: 0;
+    margin: 0 auto;
+}
+
 header#top {
     position: fixed;
     z-index: 10000;
@@ -488,51 +494,30 @@ ul.filter li.current a {
     background: url("debut_light.png") repeat #eee;
 }
 
+.city-title {
+    max-width: 900px;
+    margin: 10px auto;
+    text-align: left;
+    font-size: 16px;
+    color: #eb4840;
+    text-transform: uppercase;
+}
+
+ul.portfolio {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
 ul.portfolio li {
     display: inline-block;
     float: left;
-    margin: 10px;
-    position: relative;
-}
-
-ul.portfolio li .photo-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background: rgba(0, 0, 0, .8);
-    width: 350px;
-    height: 60px;
-    color: #fff;
-}
-
-ul.portfolio li:hover .photo-overlay {
-    display: block;
-}
-
-ul.portfolio li .photo-overlay h3 {
-    color: #eb4840;
-    font-size: 13px;
+    width: 30%;
+    line-height: 24px;
+    margin-right: 3%;
     text-transform: uppercase;
-    position: absolute;
-    top: 14px;
-    left: 20px;
+    overflow: hidden;
 }
 
-ul.portfolio li .photo-overlay p {
-    color: #fff;
-    font-size: 13px;
-    position: absolute;
-    top: 20px;
-    left: 20px;
-}
-
-ul.portfolio li .photo-overlay .date {
-    color: #c4c4c4;
-    font-size: 13px;
-    position: absolute;
-    top: 190px;
-    right: 20px;
-}
 
 @media only screen and (max-width: 640px) {
     ul.portfolio {
@@ -543,6 +528,22 @@ ul.portfolio li .photo-overlay .date {
     ul.portfolio li .photo-overlay {
         width: 300px;
     }
+}
+
+.faqs {
+    padding: 170px 0 100px 0;
+    float: left;
+    clear: both;
+    width: 100%;
+    min-height: 800px;
+    background: #ffffff;
+    border-top: 1px solid #eee;
+}
+
+.faqs section p.question {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #000;
 }
 
 .testimonials {

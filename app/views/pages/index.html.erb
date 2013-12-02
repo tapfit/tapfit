@@ -1,7 +1,7 @@
 <div id="banner"><a name="home" class="anchor"></a>
 <div class="wrapper">
 <%= image_tag "iphone_favorites.png", :class => "iphone" %>
-<h2>The Gym Membership. Redefined.</h2>
+<h2>The Gym Membership, Redefined.</h2>
 
 <ul class="slideshow">
     <li class="inView"><a href="#about">A single pass to Cincinnati's best gyms and studios.</a></li>
@@ -91,7 +91,9 @@
 <div class="plans"><a name="plans" class="anchor"></a>
 <div class="wrapper">
 
-<h3>TapFit Flexible Fitness Plans</h3>
+<div class="heading">
+    <h3>TapFit Flexible Fitness Plans</h3>
+</div>
 
 <section id="pricePlans">
     <ul id="container">
@@ -147,7 +149,9 @@
 <div class="cities"><a name="cities" class="anchor"></a>
     <!-- Category Filter -->
     <div class="wrapper">
-        <h3>Coming Soon to a City Near You</h3>
+        <div class="heading">
+            <h3>Coming Soon to a City Near You</h3>
+        </div>
             <ul>
                 <li class="cincinnati">
                     <div class="animation"></div> <!-- eo .animation -->
@@ -165,13 +169,13 @@
                     <div class="animation"></div> <!-- eo .animation -->
                     <span class="drop-cap">3</span>
                     <h4>San Francisco</h4>
-                    <p><strong>Coming Spring 2014!</strong> Want us to notify you when we're available in San Francisco? <a href="#">Sign up today!</a></p>
+                    <p><strong>Coming Spring 2014!</strong> Want us to notify you when we're available in San Francisco? <a href="/users/sign_up">Sign up today!</a></p>
                 </li>
                 <li class="even last new_york">
                     <div class="animation"></div> <!-- eo .animation -->
                     <span class="drop-cap">4</span>
                     <h4>New York City</h4>
-                    <p><strong>Coming Spring 2014!</strong> Want us to notify you when we're available in New York? <a href="#">Sign up today!</a></p>
+                    <p><strong>Coming Spring 2014!</strong> Want us to notify you when we're available in New York? <a href="/users/sign_up">Sign up today!</a></p>
                 </li>
             </ul>
     </div>
@@ -180,76 +184,43 @@
 <div class="locations"><a name="locations" class="anchor"></a>
     <!-- Category Filter -->
     <div class="wrapper">
-        <h3>Our Partner Fitness Studios</h3>
-        <div class="blurb">
-        <h4>All of our partner locations have been vetted by our team of experts and meet all of our standards for quality, including . We know you won't be disappointed with any of these gyms or studios.</h4>
+        <div class="heading">
+            <h3>Partner Fitness Studios</h3>
         </div>
 
         <!-- Portfolio Items -->
+        <p class="city-title">Cincinnati, OH</p>
         <ul class="portfolio group">
-            <li class="item" data-id="id-1" data-type="cat-1">
-            <%= image_tag "gym-1.png", :width => 350, :height => 225 %>
-            <a href="gym-1.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
-            <h3>Core a Movement Studio</h3>
-            <p>Cincinnati, OH</p>
-            </a>
-            </li>
-            <li class="item" data-id="id-2" data-type="cat-1">
-            <%= image_tag "gym-2.png", :width => 350, :height => 225 %>
-            <a href="gym-2.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
-            <h3>The Yoga Bar</h3>
-            <p>Cincinnati, OH</p>
-            </a>
-            </li>
-            <li class="item" data-id="id-3" data-type="cat-1">
-            <%= image_tag "gym-3.jpeg", :width => 350, :height => 225 %>
-            <a href="gym-3.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
-            <h3>The Gym at Carew Towers</h3>
-            <p>Cincinnati, OH</p>
-            </a>
-            </li>
-            <li class="item" data-id="id-4" data-type="cat-1">
-            <%= image_tag "gym-4.png", :width => 350, :height => 225 %>
-            <a href="gym-4.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
-            <h3>The Punch House</h3>
-            <p>Cincinnati, OH</p>
-            </a>
-            </li>
-            <li class="item" data-id="id-5" data-type="cat-1">
-            <%= image_tag "gym-5.jpg", :width => 350, :height => 225 %>
-            <a href="gym-5.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
-            <h3>YMCA - Central Parkway</h3>
-            <p>Downtown</p>
-            </a>
-            </li>
-            <li class="item" data-id="id-6" data-type="cat-1">
-            <%= image_tag "gym-6.jpg", :width => 350, :height => 225 %>
-            <a href="gym-6.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
-            <h3>Cincinnati Bikram</h3>
-            <p>Cincinnati, OH</p>
-            </a>
-            </li>
-            <li class="item" data-id="id-7" data-type="cat-1">
-            <%= image_tag "gym-7.jpeg", :width => 350, :height => 225 %>
-            <a href="gym-7.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
-            <h3>Clear Wellness</h3>
-            <p>Cincinnati, OH</p>
-            </a>
-            </li>
-            <li class="item" data-id="id-8" data-type="cat-1">
-            <%= image_tag "gym-8.jpg", :width => 350, :height => 225 %>
-            <a href="gym-8.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
-            <h3>FitNext</h3>
-            <p>Over-The-Rhine</p>
-            </a>
-            </li>
-            <li class="item" data-id="id-9" data-type="cat-1">
-            <%= image_tag "gym-9.jpg", :width => 350, :height => 225 %>
-            <a href="gym-9.jpg" rel="prettyPhoto[portfolio]" class="photo-overlay">
-            <h3>Pure Barre</h3>
-            <p>Cincinnati, OH</p>
-            </a>
-            </li>
+            <li>The Breathing Room</li>
+            <li>Burdo Studios</li>
+            <li>Cincinnati Yoga School</li>
+            <li>Clear Wellness</li>
+            <li>Core a Movement Studio</li>
+            <li>Elemental OM</li>
+            <li>The Gym at Carew Towers</li>
+            <li>It's Working Out</li>
+            <li>Kenwood Hot Yoga</li>
+            <li>Modo Yoga - Clifton</li>
+            <li>Modo Yoga - Cincinnati</li>
+            <li>Moksha Yoga - Clifton</li>
+            <li>Move Your Hyde Power Yoga</li>
+            <li>The Punch House</li>
+            <li>Pure Barre</li>
+            <li>Revolution Fitness</li>
+            <li>Samara Yoga</li>
+            <li>YMCA - Blue Ash</li>
+            <li>YMCA - Campbell County</li>
+            <li>YMCA - Carl H. Lindner</li>
+            <li>YMCA - Central Parkway</li>
+            <li>YMCA - Clermont</li>
+            <li>YMCA - Clippard</li>
+            <li>YMCA - Duck Creek</li>
+            <li>YMCA - Gamble-Nippert</li>
+            <li>YMCA - M.E. Lyons</li>
+            <li>YMCA - Melrose</li>
+            <li>YMCA - Powell Crosley</li>
+            <li>YMCA - R.C. Durr<li>
+            <li>The Yoga Bar</li>
             <div class="clear"></div>  
         </ul>
     </div>
