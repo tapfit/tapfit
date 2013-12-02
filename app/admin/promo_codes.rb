@@ -13,4 +13,11 @@ ActiveAdmin.register PromoCode do
     default_actions
   end
 
+  controller do
+    
+    def permitted_params
+      params.permit!
+    end
+  end
+
 end
