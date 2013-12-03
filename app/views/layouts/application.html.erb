@@ -41,15 +41,15 @@
     $("#quantity").change(function() {
         var quantity = $("#quantity").val();
         if (quantity == 250) {
-            $(".quantity").html("250<br><span class='small'>FitCoins</span>");
+            $(".original-price").html("$<del>250</del>");
             $(".total").html("$125");
         }
         else if (quantity == 500) {
-            $(".quantity").html("500<br><span class='small'>FitCoins</span>");
+            $(".original-price").html("$<del>500</del>");
             $(".total").html("$250");
         }
         else {
-            $(".quantity").html("100<br><span class='small'>FitCoins</span>");
+            $(".original-price").html("$<del>100</del>");
             $(".total").html("$50");
         }
     });

@@ -496,10 +496,11 @@ ul.filter li.current a {
 
 .city-title {
     max-width: 900px;
-    margin: 10px auto;
+    margin: 20px auto;
     text-align: left;
     font-size: 16px;
     color: #eb4840;
+    border-bottom: 1px solid #eb4840;
     text-transform: uppercase;
 }
 
@@ -512,7 +513,7 @@ ul.portfolio li {
     display: inline-block;
     float: left;
     width: 30%;
-    line-height: 24px;
+    line-height: 28px;
     margin-right: 3%;
     text-transform: uppercase;
     overflow: hidden;
@@ -531,7 +532,7 @@ ul.portfolio li {
 }
 
 .faqs {
-    padding: 170px 0 100px 0;
+    padding: 100px 0 100px 0;
     float: left;
     clear: both;
     width: 100%;
@@ -749,6 +750,7 @@ footer p {
 .planContainer .price p span {
     color: #222;
     font-size: 70%;
+    text-decoration: line-through;
 }
 
 .planContainer .coins_total {
@@ -1335,7 +1337,7 @@ color: #727981;
 margin: 0 0 0 5px;
 }
 
-.modal.reserve-form form .row.summary .price {
+.modal.reserve-form form .row.summary .original-price {
 font-size: 20px;
 float: left;
 margin-left: 5px;
@@ -1516,12 +1518,23 @@ margin-right: 0;
 margin-bottom: 10px;
 }
 
-.modal.reserve-form form input[type="text"]#card_cvc, .modal.reserve-form form input[type="number"]#card_cvc, .modal.reserve-form form input[type="email"]#card_cvc, .modal.reserve-form form input[type="password"]#card_cvc {
+.modal.reserve-form form input[type="text"]#card_cvv, .modal.reserve-form form input[type="number"]#card_cvv, .modal.reserve-form form input[type="email"]#card_cvv, .modal.reserve-form form input[type="password"]#card_cvv {
 float: left;
-margin: 10px 0 10px 10px;
 width: 59px;
+margin: 10px 0 10px 10px;
 }
 
+.modal.reserve-form form input[type="text"]#card_month, .modal.reserve-form form input[type="number"]#card_month, .modal.reserve-form form input[type="email"]#card_month, .modal.reserve-form form input[type="password"]#card_month {
+float: left;
+width: 70px;
+margin: 10px 0 10px 0;
+}
+
+.modal.reserve-form form input[type="text"]#card_year, .modal.reserve-form form input[type="number"]#card_year, .modal.reserve-form form input[type="email"]#card_year, .modal.reserve-form form input[type="password"]#card_year {
+float: left;
+width: 70px;
+margin: 10px 0 10px 10px;
+}
 .modal.reserve-form .front p.secure {
     margin: 16px 0 0 0;
     font-weight: normal;
@@ -1595,7 +1608,7 @@ fieldset {
 
 /* Features */
 
-.features {
+.features, .fitcoins {
   padding: 70px 0 70px;
   float: left;
   clear: both;
@@ -1604,7 +1617,7 @@ fieldset {
   overflow: hidden;
 }
 .heading {
-  max-width: 630px;
+  max-width: 700px;
   margin: 0 auto 40px auto;
   text-align: center;
   text-transform: uppercase;
@@ -1614,11 +1627,41 @@ fieldset {
 .heading h3 {
   font-size: 1.625em;
   font-weight: 700;
+  margin-bottom: 0;
 }
 .heading p {
   font-size: 1.5em;
   font-weight: 300;
 }
+
+.fitcoins section {
+    width: 100%;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee;
+    float: left;
+    clear: both;
+}
+
+.fitcoins section:last-child {
+    border-bottom: none;
+}
+
+.fitcoins section .text-wrap {
+    width: 66%;
+}
+
+.fitcoins section .image-wrap {
+    width: 33%;
+}
+
+.fitcoins section.left .text-wrap, .fitcoins section.right .image-wrap {
+    float: left;
+}
+
+.fitcoins section.right .text-wrap, .fitcoins section.left .image-wrap {
+    float: right;
+}
+
 .features ul li {
   float: left;
   width: 40%;

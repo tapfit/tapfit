@@ -60,7 +60,6 @@ function handleStickyDiv(){
     var offsetFour = offsetThree + $(".plans").outerHeight( true );
     var offsetFive = offsetFour + $(".cities").outerHeight( true );
     var offsetSix = offsetFive + $(".locations").outerHeight( true );
-    var offsetSeven = offsetSix + $(".employers").outerHeight( true );
 
     $(".sticky_links").removeClass("active");
     $(".sticky_links").addClass("inactive");
@@ -83,17 +82,9 @@ function handleStickyDiv(){
         $("#link_cities").addClass("active");
         $("#link_cities").removeClass("inactive");
     }
-    else if (scrolled <= offsetSix) {
+    else {
         $("#link_locations").addClass("active");
         $("#link_locations").removeClass("inactive");
-    }
-    else if (scrolled <= offsetSeven) {
-        $("#link_employers").addClass("active");
-        $("#link_employers").removeClass("inactive");
-    }
-    else {
-        $(".sticky_links").removeClass("active");
-        $(".sticky_links").addClass("inactive");
     }
 }
 
@@ -115,16 +106,17 @@ function displayOrderModal(quantity) {
     $('html, body').scrollTop(0); 
     
     $("#quantity").val(quantity);
+    
     if (quantity == 250) {
-        $(".quantity").html("250<br><span class='small'>FitCoins</span>");
+        $(".original-price").html("$<del>250</del>");
         $(".total").html("$125");
     }
     else if (quantity == 500) {
-        $(".quantity").html("500<br><span class='small'>FitCoins</span>");
+        $(".original-price").html("$<del>500</del>");
         $(".total").html("$250");
     }
     else {
-        $(".quantity").html("100<br><span class='small'>FitCoins</span>");
+        $(".original-price").html("$<del>100</del>");
         $(".total").html("$50");
     }
 
