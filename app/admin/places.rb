@@ -52,6 +52,7 @@ ActiveAdmin.register Place do
       f.input :source_description
       f.input :source
       f.input :crawler_source
+      f.input :dropin_price
       f.input :show_place
       f.input :can_buy
       f.input :facility_type
