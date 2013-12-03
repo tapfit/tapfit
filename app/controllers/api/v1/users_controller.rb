@@ -78,7 +78,15 @@ module Api
             user.save
           end
 
-          render :json => { :email => user.email, :id => user.id, :auth_token => user.authentication_token, :first_name => user.first_name, :last_name => user.last_name, :credit_amount => user.credit_amount, :uid => user.uid, :invitation_code => user.invitation_code, :gender => user.gender, :location => user.location }
+          location = user.location
+          uid = user.uid
+          gender = user.gender
+
+          location = "" if location.nil?
+          uid = "" if uid.nil?
+          gender = "" if gender.nil?
+
+          render :json => { :email => user.email, :id => user.id, :auth_token => user.authentication_token, :first_name => user.first_name, :last_name => user.last_name, :credit_amount => user.credit_amount, :uid => uid, :invitation_code => user.invitation_code, :gender => gender, :location => location }
         else
           puts "user failed rendering json"
           puts "full messages: #{user.errors.full_messages.join(", ")}"
@@ -102,10 +110,18 @@ module Api
           user = User.where(:email => email).first
         end
         
+        location = user.location
+        uid = user.uid
+        gender = user.gender
+
+        location = "" if location.nil?
+        uid = "" if uid.nil?
+        gender = "" if gender.nil?
+
         if !user.nil? && (user.valid_password?(password) || !params[:access_token].nil?)
           sign_in(:user, user)
           user.reset_authentication_token!
-          render :json => { :email => user.email, :id => user.id, :auth_token => user.authentication_token, :first_name => user.first_name, :last_name => user.last_name, :credit_amount => user.credit_amount, :uid => user.uid, :invitation_code => user.invitation_code, :gender => user.gender, :location => user.location }
+          render :json => { :email => user.email, :id => user.id, :auth_token => user.authentication_token, :first_name => user.first_name, :last_name => user.last_name, :credit_amount => user.credit_amount, :uid => uid, :invitation_code => user.invitation_code, :gender => gender, :location => location }
         else
           render :json => { :errors => "Not valid email or password" }, :status => 403
         end   
