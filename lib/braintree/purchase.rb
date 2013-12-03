@@ -66,16 +66,52 @@ module Purchase
     return return_hash
   end
 
-  def self.buy_package(user, package_id)
+  def self.buy_package(user, params)
     return_hash = {}
     return_hash[:success] = false # default value
+    
+    package = Package.where(:id => params[:id]).first
+
+    if user.nil?
+      
+      if package.nil?
+        return_hash[:error] = "Package with id: #{params[:id]}, is nil"
+      else
+        
+        amount = package.discounted_amount
+
+        result = Braintree::Transaction.sale(
+          :amount => amount,
+          :credit_card => {
+            :number => params[:number],
+            :cvv => params[:cvv],
+            :expiration_month => params[:month],
+            :expiration_year => params[:year]
+          },
+          :options => {
+            :submit_for_settlement => true
+          }
+        )
+        if result.success?
+          Resque.enqueue(SendPackageConfirmEmail, params[:email], params[:id])
+          return_hash[:success] = true
+          return_hash[:card_number] = result.transaction.credit_card_details.masked_number
+          return_hash[:credit_card_type] = result.transaction.credit_card_details.card_type
+        else
+          return_hash[:error] = result.message
+        end
+
+      end
+
+      return return_hash
+    end
+
 
     if !user.has_payment_info?
       return_hash[:error] = "User has no credit card saved"
       return return_hash
     end 
 
-    package = Package.where(:id => package_id).first
     if package.nil?
       return_hash[:error] = "Package with id: #{package_id}, is nil"
     else
