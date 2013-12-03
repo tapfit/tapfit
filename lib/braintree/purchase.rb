@@ -70,12 +70,14 @@ module Purchase
     return_hash = {}
     return_hash[:success] = false # default value
     
-    package = Package.where(:id => params[:id]).first
+    package_id = params[:package_id]
+
+    package = Package.where(:id => package_id).first
 
     if user.nil?
       
       if package.nil?
-        return_hash[:error] = "Package with id: #{params[:id]}, is nil"
+        return_hash[:error] = "Package with id: #{package_id}, is nil"
       else
         
         amount = package.discounted_amount
@@ -93,7 +95,7 @@ module Purchase
           }
         )
         if result.success?
-          Resque.enqueue(SendPackageConfirmEmail, params[:email], params[:id])
+          Resque.enqueue(SendPackageConfirmEmail, params[:email], package_id)
           return_hash[:success] = true
           return_hash[:card_number] = result.transaction.credit_card_details.masked_number
           return_hash[:credit_card_type] = result.transaction.credit_card_details.card_type

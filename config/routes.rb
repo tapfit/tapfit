@@ -38,7 +38,7 @@ Tapfit::Application.routes.draw do
       end
 
       resources :packages do
-        post 'buy', on: :member
+        post 'buy', on: :collection
       end
 
       resources :regions
