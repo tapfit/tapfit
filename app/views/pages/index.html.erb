@@ -89,8 +89,8 @@
 <div class="wrapper">
 
 <div class="heading">
-    <h3>Purchase workout credits</h3>
-    <p>Credits can be used at over 100 different gyms and studios in our network and never expire. Pre-load your account and save up to 50% on each workout.</p>
+    <h3>Give the gift of fitness</h3>
+    <p>TapFit workout credits can be used at any gym or studio in our network and never expire. Pre-load your account and save up to 50% on each workout.</p>
 </div>
 
 <section id="pricePlans">
@@ -105,12 +105,12 @@
                     </ul>
                     <div class="clear"></div>
                     <ul class="planDetails">
-                        <li class="left">Price:</li>
+                        <li class="left">Sale Price:</li>
                         <li class="right showoff"><strong>$<%= package.amount %></strong></li>
                     </ul>
                     <div class="clear"></div>
                     <ul class="planDetails">
-                        <li class="left">You Save:</li>
+                        <li class="left">Savings:</li>
                         <li class="right"><strong>$<%= (package.fit_coins - package.amount) %></strong> (<%= (100 - (package.amount.to_f/package.fit_coins.to_f)*100).to_i %>%)</li>
                     </ul>
                     <div class="clear"></div>
@@ -134,7 +134,7 @@
                     <div class="animation"></div> <!-- eo .animation -->
                     <span class="drop-cap">1</span>
                     <h4>Cincinnati</h4>
-                    <p>Available now with studios in Downtown, Over-The-Rhine, Hyde Park, and more! <a onclick="displayOrderModal()">Purchase today!</a></p>
+                    <p>Available now with studios in Downtown, Over-The-Rhine, Hyde Park, and more! <a href="#plans">Purchase today!</a></p>
                 </li>
                 <li class="even chicago">
                     <div class="animation"></div> <!-- eo .animation -->
@@ -242,4 +242,8 @@
 
 <!-- Pre-order form modal -->
 <%= render 'shared/modal' %>
+
+<%= javascript_tag do %>
+    window.packages = <%=raw Package.limit(4).to_json %>;
+<% end %>
     
