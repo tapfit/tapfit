@@ -8,6 +8,8 @@ module Api
 
       def create
         code = params[:promo_code]
+
+        code = code.gsub("-", "")
         
         if (!code.nil?)
           promo_code = PromoCode.where("upper(code) = ?", code.upcase).first
