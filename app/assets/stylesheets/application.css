@@ -1083,7 +1083,7 @@ footer p {
 @media only screen and (max-width: 900px) {
     .tf-container {
         padding-left: 6px;
-        padding: right: 6px;
+        padding-right: 6px;
     }
 }
 
