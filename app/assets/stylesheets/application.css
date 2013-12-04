@@ -771,9 +771,9 @@ footer p {
 }
 
 .planContainer .planDetails li.left {
-    width: 40%;
+    width: 50%;
     float: left;
-    margin-left: 10%;
+    margin-left: 0%;
     text-align: right;
 }
 
@@ -1130,7 +1130,7 @@ div.content-modal div.tf-content {
 .modal.reserve-form .front {
     position: absolute;
     width: 100%;
-    height: 590px;
+    height: 555px;
     transition: all 0.5s;
     background: #fff;
     border-radius: 20px;
@@ -1186,7 +1186,7 @@ color: #fff;
 }
 
 .modal.reserve-form form .row {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .modal.reserve-form form .row.payment {
@@ -1431,12 +1431,6 @@ width: 100%;
 .modal.reserve-form .front nav p {
 text-transform: uppercase;
 font-size: 13px;
-}
-
-div.content-modal div.tf-content p {
-font-weight: 600;
-font-size: 14px;
-margin-top: 10px;
 }
 
 .button.light-bg, button.light-bg {

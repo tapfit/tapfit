@@ -49,6 +49,10 @@ $(document).ready(function() {
         // Handle stickyDiv on document ready
         handleStickyDiv();
     }
+
+    $('#quantity').bind('change',function(e){
+        displayOrderModal($('#quantity').val());
+    });
 });
 
 /* Scroll the background layers */
@@ -102,31 +106,29 @@ function slideshow() {
         });
 }
 
-function displayOrderModal(quantity) {
-    $('html, body').scrollTop(0); 
-    
-    $("#quantity").val(quantity);
-    
-    if (quantity == 2) {
-        $(".original-price").html("$<del>200</del>");
-        $(".quantity").html("40%<br><span class='small'>discount</span>");
-        $(".total").html("$120");
-    }
-    else if (quantity == 3) {
-        $(".original-price").html("$<del>350</del>");
-        $(".quantity").html("50%<br><span class='small'>discount</span>");
-        $(".total").html("$175");
-    }
-    else if (quantity == 4) {
-        $(".original-price").html("$<del>50</del>");
-        $(".quantity").html("20%<br><span class='small'>discount</span>");
-        $(".total").html("$40");
-    }
-    else {
-        $(".original-price").html("$<del>100</del>");
-        $(".quantity").html("30%<br><span class='small'>discount</span>");
-        $(".total").html("$70");
-    }
+function displayOrderModal(package_id) {
+    $("#quantity").val(package_id);
+
+    var price = packages[0]['amount'];
+    var total = packages[0]['fit_coins'];
+    var discount = Math.round((1-price/total)*100);
+
+    $(".original-price").html("$<del>" + total + "</del>");
+    $(".quantity").html(discount + "%<br><span class='small'>discount</span>");
+    $(".total").html("$" + price);
+
+    $.each( packages, function(key, value) {
+        if (value['id'] == package_id) {
+            
+            price = value['amount'];
+            total = value['fit_coins'];
+            discount = Math.round((1-price/total)*100);
+
+            $(".original-price").html("$<del>" + total + "</del>");
+            $(".quantity").html(discount + "%<br><span class='small'>discount</span>");
+            $(".total").html("$" + price);
+        }
+    });
 
     $(".content-modal").fadeIn();
 }
