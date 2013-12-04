@@ -27,10 +27,10 @@
                                 <h3>Pre-Load Amount</h3>
                                 <div class="quantity-wrap">
                                     <div class="fancy-select">
-                                        <select id="quantity" name="order[quantity]" height="30px">
-                                            <option value="100" selected>$100</option>
-                                            <option value="250">$250</option>
-                                            <option value="500">$500</option>
+                                        <select id="quantity" name="package_id" height="30px">
+                                            <% @packages.each do |package| %>
+                                                <option value="<%= package.id %>">$<%= package.fit_coins %></option>
+                                            <% end %>
                                         </select>
                                     </div>
                                 </div>
@@ -40,7 +40,7 @@
                                 <h3>Payment</h3>
                                 <div class="cards-accepted">Visa, MasterCard, AMEX, Discover</div>
 
-                                <input class="inline" type="text" id="card_number" size="20" maxlength="20" placeholder="Credit Card Number" autocomplete="off" data-encrypted-name"number"/>
+                                <input class="inline" type="text" id="card_number" size="20" maxlength="20" placeholder="Credit Card Number" autocomplete="off" data-encrypted-name="number"/>
                                 <div id="visa" class="cc-icon"></div>
                                 <div id="mastercard" class="cc-icon"></div>
                                 <div id="americanexpress" class="cc-icon"></div>
@@ -64,8 +64,7 @@
                                 <div class="calculate-total">=</div>
                                 <div class="total">$50</div>
                             </div>
-
-                            <input type="hidden" name="order[product_id]" value="2">
+                            
                             <button id="order" type="submit" class="button blue light-bg flipper">Pre-Order Now</button>
                         </fieldset>
                         <p class="secure">Secured with 128-bit encryption</p>
@@ -81,6 +80,24 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $("#quantity").change(function() {
+        var quantity = $("#quantity").val();
+        if (quantity == 2) {
+            $(".original-price").html("$<del>250</del>");
+            $(".total").html("$125");
+        }
+        else if (quantity == 3) {
+            $(".original-price").html("$<del>500</del>");
+            $(".total").html("$250");
+        }
+        else {
+            $(".original-price").html("$<del>100</del>");
+            $(".total").html("$50");
+        }
+    });
+</script>
 
 <script src="https://js.braintreegateway.com/v1/braintree.js"></script>
 <script>

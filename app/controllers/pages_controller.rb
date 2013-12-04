@@ -3,6 +3,7 @@ class PagesController < ApplicationController
   #before_filter :check_for_mobile
 
   def index
+    @packages = Package.order(:amount)
   end
 
   def about

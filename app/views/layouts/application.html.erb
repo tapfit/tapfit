@@ -31,26 +31,5 @@
     <!-- Footer -->
     <%= render 'shared/footer' %>
 
-    <!-- Pre-order form modal -->
-    <%= render 'shared/modal' %>
-    
 </body>
 </html>
-
-<script type="text/javascript">
-    $("#quantity").change(function() {
-        var quantity = $("#quantity").val();
-        if (quantity == 250) {
-            $(".original-price").html("$<del>250</del>");
-            $(".total").html("$125");
-        }
-        else if (quantity == 500) {
-            $(".original-price").html("$<del>500</del>");
-            $(".total").html("$250");
-        }
-        else {
-            $(".original-price").html("$<del>100</del>");
-            $(".total").html("$50");
-        }
-    });
-</script>

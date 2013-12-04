@@ -107,11 +107,11 @@ function displayOrderModal(quantity) {
     
     $("#quantity").val(quantity);
     
-    if (quantity == 250) {
+    if (quantity == 2) {
         $(".original-price").html("$<del>250</del>");
         $(".total").html("$125");
     }
-    else if (quantity == 500) {
+    else if (quantity == 3) {
         $(".original-price").html("$<del>500</del>");
         $(".total").html("$250");
     }

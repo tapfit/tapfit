@@ -98,50 +98,21 @@
 
 <section id="pricePlans">
     <ul id="container">
-        <li class="plan">
-            <ul class="planContainer">
-                <li class="price"><p>$50 <span>$90</span></p></li>
-                <div class="arrow-down"></div> 
-                <li class="coins_total"><p>$100</p><span>in credits</span></li>
-                <li class="good_for">
-                    <p>Sample some new classes, supplement your existing membership, or stay fit while you're traveling. Give TapFit a try w/ this bundle.</p>
-                </li>
-                <li class="good_for">
-                    <p>You save $50</p>
-                </li>
-                <li class="preorder-button"><a onclick="displayOrderModal(100)">Pre-Order</a></li>
-            </ul>
-        </li>
-
-        <li class="plan">
-            <ul class="planContainer">
-                <li class="price"><p>$125 <span>$200</span></p></li>
-                <div class="arrow-down"></div> 
-                <li class="coins_total"><p>$250</p><span>in credits</span></li>
-                <li class="good_for">
-                    <p>Ditch the boring box gym membership for one that lets you work out anywhere and try out new classes while you're at it!</p>
-                </li>
-                <li class="good_for">
-                    <p>You save $125</p>
-                </li>
-                <li class="preorder-button"><a onclick="displayOrderModal(250)">Pre-Order</a></li>
-            </ul>
-        </li>
-
-        <li class="plan">
-            <ul class="planContainer">
-                <li class="price"><p>$250 <span>$350</span></p></li>
-                <div class="arrow-down"></div> 
-                <li class="coins_total"><p>$500</p><span>in credits</span></li>
-                <li class="good_for">
-                    <p>For the fitness enthusiast who wants the best studios available, this bundle will save you the hassle of managing multiple memberships.</p>
-                </li>
-                <li class="good_for">
-                    <p>You save $250</p>
-                </li>
-                <li class="preorder-button"><a onclick="displayOrderModal(500)">Pre-Order</a></li>
-            </ul>
-        </li>
+        <% @packages.each do |package| %>
+            <li class="plan">
+                <ul class="planContainer">
+                    <li class="price"><p>$<%= package.amount %></p></li>
+                    <div class="arrow-down"></div> 
+                    <li class="coins_total"><p>$<%= package.fit_coins %></p><span>in credits</span></li>
+                    <li class="good_for">
+                        <p>Sample some new classes, supplement your existing membership, or stay fit while you're traveling. Give TapFit a try w/ this bundle.</p>
+                    </li>
+                    <li class="good_for">
+                    </li>
+                    <li class="preorder-button"><a onclick="displayOrderModal(<%= package.id %>)">Pre-Order</a></li>
+                </ul>
+            </li>
+        <% end %>
     </ul> <!-- End ul#plans -->
 </section>
 </div>
@@ -262,3 +233,7 @@
 </div>
 
 <a href="#home" class="back-to-top"><%= image_tag "arrow-up.svg" %></a>
+
+<!-- Pre-order form modal -->
+<%= render 'shared/modal' %>
+    
