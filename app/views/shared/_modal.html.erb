@@ -16,25 +16,15 @@
                 <div class="front">
                     <header>
                         <div class="title-wrap">
-                            <h2>Pre-Order for 50% Off!</h2>
+                            <h2>Order Now & Save!</h2>
                         </div>
                         <p><strong>Your card will be charged immediately.</strong></p>
                     </header>
                     <button title="close" type="button" class="tf-close" onclick="closeOrderModal()">&times;</button>
                     <form action="/api/packages/buy"  method="POST" id="braintree-payment-form">
                         <fieldset>
-                            <div class="row order group">
-                                <h3>Pre-Load Amount</h3>
-                                <div class="quantity-wrap">
-                                    <div class="fancy-select">
-                                        <select id="quantity" name="package_id" height="30px">
-                                            <% @packages.each do |package| %>
-                                                <option value="<%= package.id %>">$<%= package.fit_coins %></option>
-                                            <% end %>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="sale-price">Limited quantity!</div>
+                            <div class="sale-price">
+                                Sale ends soon!
                             </div>
                             <div class="row payment group">
                                 <h3>Payment</h3>
@@ -54,25 +44,43 @@
 
                             <div class="row account group">
                                 <h3 class="first">Contact</h3>
-                                <input class="inline" name="email" id="email" type="email" placeholder="Email address">
+                                <input class="inline" name="email" id="email" type="email" placeholder="Your email address">
+                            </div>
+                            
+                            <div class="row account group">
+                                <h3 class="first">Gift Instructions</h3>
+                                <input class="inline" name="email_gift" id="email_gift" type="email" placeholder="Gift recipient's email (optional)">
+                            </div>
+                            
+                            <div class="row order group">
+                                <h3>Workout Credits</h3>
+                                <div class="quantity-wrap">
+                                    <div class="fancy-select">
+                                        <select id="quantity" name="package_id" height="30px">
+                                            <% @packages.each do |package| %>
+                                                <option value="<%= package.id %>">$<%= package.fit_coins %></option>
+                                            <% end %>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row summary group">
                                 <div class="original-price">$<del>100</del></div>
                                 <div class="multiply">x</div>
-                                <div class="quantity">50%<br><span class="small">discount</span></div>
+                                <div class="quantity">30%<br><span class="small">discount</span></div>
                                 <div class="calculate-total">=</div>
-                                <div class="total">$50</div>
+                                <div class="total">$70</div>
                             </div>
                             
-                            <button id="order" type="submit" class="button blue light-bg flipper">Pre-Order Now</button>
+                            <button id="order" type="submit" class="button blue light-bg flipper">Purchase Now</button>
                         </fieldset>
                         <p class="secure">Secured with 128-bit encryption</p>
                     </form>
                     <nav>
                         <p>
-                            Available in Cincinnati January 2014<br/>
-                            and other cities by Spring 2014
+                            We'll send you an email with instructions<br/>
+                            on how to redeem your workout credits
                         </p>
                     </nav>
                 </div>
@@ -85,16 +93,24 @@
     $("#quantity").change(function() {
         var quantity = $("#quantity").val();
         if (quantity == 2) {
-            $(".original-price").html("$<del>250</del>");
-            $(".total").html("$125");
+            $(".original-price").html("$<del>200</del>");
+            $(".quantity").html("40%<br><span class='small'>discount</span>");
+            $(".total").html("$120");
         }
         else if (quantity == 3) {
-            $(".original-price").html("$<del>500</del>");
-            $(".total").html("$250");
+            $(".original-price").html("$<del>350</del>");
+            $(".quantity").html("50%<br><span class='small'>discount</span>");
+            $(".total").html("$175");
+        }
+        else if (quantity == 4) {
+            $(".original-price").html("$<del>50</del>");
+            $(".quantity").html("20%<br><span class='small'>discount</span>");
+            $(".total").html("$40");
         }
         else {
             $(".original-price").html("$<del>100</del>");
-            $(".total").html("$50");
+            $(".quantity").html("30%<br><span class='small'>discount</span>");
+            $(".total").html("$70");
         }
     });
 </script>

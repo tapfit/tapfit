@@ -43,8 +43,8 @@ $(document).ready(function() {
             }
         });
         
-        // Set up slideshow
-        setInterval(slideshow, 3000);
+        // Uncomment this for splash page slideshow
+        // setInterval(slideshow, 3000);
 
         // Handle stickyDiv on document ready
         handleStickyDiv();
@@ -108,16 +108,24 @@ function displayOrderModal(quantity) {
     $("#quantity").val(quantity);
     
     if (quantity == 2) {
-        $(".original-price").html("$<del>250</del>");
-        $(".total").html("$125");
+        $(".original-price").html("$<del>200</del>");
+        $(".quantity").html("40%<br><span class='small'>discount</span>");
+        $(".total").html("$120");
     }
     else if (quantity == 3) {
-        $(".original-price").html("$<del>500</del>");
-        $(".total").html("$250");
+        $(".original-price").html("$<del>350</del>");
+        $(".quantity").html("50%<br><span class='small'>discount</span>");
+        $(".total").html("$175");
+    }
+    else if (quantity == 4) {
+        $(".original-price").html("$<del>50</del>");
+        $(".quantity").html("20%<br><span class='small'>discount</span>");
+        $(".total").html("$40");
     }
     else {
         $(".original-price").html("$<del>100</del>");
-        $(".total").html("$50");
+        $(".quantity").html("30%<br><span class='small'>discount</span>");
+        $(".total").html("$70");
     }
 
     $(".content-modal").fadeIn();

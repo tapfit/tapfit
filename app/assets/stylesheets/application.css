@@ -306,7 +306,7 @@ a.anchor {
 }
 
 #banner {
-    background: url(banner-bg-6.png) no-repeat top left;
+    background: url(banner-bg-5.png) no-repeat top left;
 }
 
 #sale_hero {
@@ -361,7 +361,7 @@ a.anchor {
     text-align: center;
     background: #eb4840;
     text-transform: uppercase;
-    border-radius: 3px;
+    border-radius: 4px;
     color: #fff;
     font-weight: 600;
     font-size: 150%;
@@ -695,6 +695,7 @@ footer p {
     width: 100%;
     background: #ffffff;
     border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
 }
 
 #plans,#plans ul,#plans ul li {
@@ -711,6 +712,7 @@ footer p {
 
 #pricePlans {
     zoom: 1;
+    text-align: center;
 }
 
 #pricePlans {
@@ -737,52 +739,63 @@ footer p {
     padding: .6em 0;
 }
 
-.planContainer .price p {
+.planContainer .price {
     background: #eb4840;
+    padding: 10px;
+}
+
+.planContainer .price h2 {
     color: #fff;
     font-size: 2em;
     font-weight: 700;
-    height: 2.2em;
-    line-height: 2.2em;
     margin: 0;
 }
 
-.planContainer .price p span {
-    color: #222;
-    font-size: 70%;
-    text-decoration: line-through;
+.planContainer .price p {
+    color: #eee;
+    margin: 0;
 }
 
-.planContainer .coins_total {
-    height: 100px;
-    padding: 10px 0;
+.planContainer .planDetails {
+    float: left;
+    width: 100%;
+    margin: 0;
+    padding: 15px;
+    font-size: 16px;
+    border-top: 1px solid #fff;
     border-bottom: 1px solid #eee;
+    clear: both;
 }
 
-.planContainer .coins_total p {
+.planContainer .planDetails li {
+}
+
+.planContainer .planDetails li.left {
+    width: 40%;
+    float: left;
+    margin-left: 10%;
+    text-align: right;
+}
+
+.planContainer .planDetails li.right {
+    width: 44%;
+    margin-left: 1%;
+    float: right;
+    text-align: left;
+}
+
+.showoff {
+    font-size: 120%;
+    color: #eb4840;
+}
+
+.planContainer .planDetails h2 {
     color: #111;
     font-size: 40px;
     font-weight: 800;
     line-height: 40px;
     margin: 0;
     padding: 7px 0;
-}
-
-.planContainer .coins_total span {
-    color: #777;
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 20px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-.planContainer .good_for {
-    margin: 0;
-    padding: 5px 15px;
-    font-size: 16px;
-    border-top: 1px solid #fff;
-    border-bottom: 1px solid #eee;
 }
 
 .planContainer .options {
@@ -873,8 +886,8 @@ footer p {
 }
 
 #pricePlans #container .plan {
-    width: 32%;
-    margin: 0 2% 20px 0;
+    width: 24%;
+    margin: 0 1.33% 20px 0;
 
     -webkit-transition: all .25s;
        -moz-transition: all .25s;
@@ -1117,7 +1130,7 @@ div.content-modal div.tf-content {
 .modal.reserve-form .front {
     position: absolute;
     width: 100%;
-    height: 515px;
+    height: 590px;
     transition: all 0.5s;
     background: #fff;
     border-radius: 20px;
@@ -1221,19 +1234,15 @@ div.fancy-select {
     float: left;
 }
 
-.modal.reserve-form form .row.order .sale-price {
+.modal.reserve-form form .sale-price {
     text-transform: uppercase;
-    float: right;
     width: 150px;
     font-size: 14px;
     font-weight: 600;
-    color: #fff;
-    background: #a5adb7;
-    padding: 11px 8px;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -o-border-radius: 5px;
+    color: #eb4840;
+    text-align: left;
+    padding: 8px 8px 8px 0;
+    margin: -8px 0 8px 0;
 }
 
 .modal.reserve-form form .row.payment .cards-accepted {
@@ -1279,6 +1288,10 @@ font-family: "Open Sans", sans-serif;
 }
 
 .modal.reserve-form form input[type="text"]#email, .modal.reserve-form form input[type="number"]#email, .modal.reserve-form form input[type="email"]#email, .modal.reserve-form form input[type="password"]#email {
+width: 100%;
+}
+
+.modal.reserve-form form input[type="text"]#email_gift, .modal.reserve-form form input[type="number"]#email_gift, .modal.reserve-form form input[type="email"]#email_gift, .modal.reserve-form form input[type="password"]#email_gift {
 width: 100%;
 }
 
@@ -1536,7 +1549,7 @@ width: 70px;
 margin: 10px 0 10px 10px;
 }
 .modal.reserve-form .front p.secure {
-    margin: 16px 0 0 0;
+    margin: 8px 0 0 0;
     font-weight: normal;
     text-transform: uppercase;
     text-align: center;
@@ -1620,11 +1633,11 @@ fieldset {
   max-width: 700px;
   margin: 0 auto 40px auto;
   text-align: center;
-  text-transform: uppercase;
   letter-spacing: 2px;
   color: #333f48;
 }
 .heading h3 {
+  text-transform: uppercase;
   font-size: 1.625em;
   font-weight: 700;
   margin-bottom: 0;

@@ -1,19 +1,16 @@
 <div id="banner"><a name="home" class="anchor"></a>
-<div class="wrapper">
-<%= image_tag "iphone_favorites.png", :class => "iphone" %>
-<h2>Fitness<br/>Reimagined.</h2>
-
-<ul class="slideshow">
-    <li class="inView"><a href="#about">A single pass to the best gyms and studios.</a></li>
-    <li><a href="#about">Thousands of exercise options. One app.</a></li>
-    <li><a href="#about">No long-term commitments, contracts, or hidden fees.</a></li>
-</ul>
-<a href="#plans">
-    <div class="cta">
-        Pre-Order Now
+    <div class="wrapper">
+        <%= image_tag "iphone_favorites.png", :class => "iphone" %>
+        <h2>Give the Gift<br/>of
+        <span style="color:#eb4840; text-shadow: 1px 1px #333;">Fitness</span><br/>
+        This Holiday<br/>
+        Season</h2>
+        <a href="#plans">
+            <div class="cta">
+                Order Now & Save
+            </div>
+        </a>
     </div>
-</a>
-</div>
 </div>
 
 <div class="process"><a name="about" class="anchor"></a>
@@ -30,7 +27,7 @@
                     <div class="animation"></div> <!-- eo .animation -->
                     <span class="drop-cap">2</span>
                     <h4>Pre-Load</h4>
-                    <p>Load your TapFit account with credits that you can use at any of our partner gyms and studios.</p> 
+                    <p>Load your TapFit account with money that you can use at any of our partner gyms and studios.</p> 
                 </li>
                 <li class="plane">
                     <div class="animation"></div> <!-- eo .animation -->
@@ -57,7 +54,7 @@
             <li class="left">
                 <span>Thousands of Options</span>
                 <h5>One app, thousands of options</h5>
-                <p>TapFit credits are redeemable towards thousands of fitness classes; including yoga, pilates, barre, gyms, boxing, and more.</p>
+                <p>TapFit offers thousands of fitness classes - including yoga, pilates, barre, gyms, boxing, and more.</p>
             </li>
             <li class="right">
                 <span class="no-expiration">No Expiration</span>
@@ -71,7 +68,7 @@
             </li>
             <li class="right">
                 <span class="save-money">Pre-Load and Save</span>
-                <h5>Save with deals & discounts</h5>
+                <h5>Pre-load and Save</h5>
                 <p>The more you buy, the more you save! <strong>Save up to 30%</strong> on your fitness when you pre-load money into your account.</p>
             </li>
             <li class="left">
@@ -92,8 +89,8 @@
 <div class="wrapper">
 
 <div class="heading">
-    <h3>Pre-Load and Save Plans</h3>
-    <p>Order today for 50% all of our plans</p>
+    <h3>Purchase workout credits</h3>
+    <p>Credits can be used at over 100 different gyms and studios in our network and never expire. Pre-load your account and save up to 50% on each workout.</p>
 </div>
 
 <section id="pricePlans">
@@ -101,15 +98,23 @@
         <% @packages.each do |package| %>
             <li class="plan">
                 <ul class="planContainer">
-                    <li class="price"><p>$<%= package.amount %></p></li>
-                    <div class="arrow-down"></div> 
-                    <li class="coins_total"><p>$<%= package.fit_coins %></p><span>in credits</span></li>
-                    <li class="good_for">
-                        <p>Sample some new classes, supplement your existing membership, or stay fit while you're traveling. Give TapFit a try w/ this bundle.</p>
-                    </li>
-                    <li class="good_for">
-                    </li>
-                    <li class="preorder-button"><a onclick="displayOrderModal(<%= package.id %>)">Pre-Order</a></li>
+                    <li class="price"><h2>$<%= package.fit_coins %></h2><p>in workout credits</p></li>
+                    <ul class="planDetails">
+                        <li class="left">List Price:</li>
+                        <li class="right">$<del><%= package.fit_coins %></del></li>
+                    </ul>
+                    <div class="clear"></div>
+                    <ul class="planDetails">
+                        <li class="left">Price:</li>
+                        <li class="right showoff"><strong>$<%= package.amount %></strong></li>
+                    </ul>
+                    <div class="clear"></div>
+                    <ul class="planDetails">
+                        <li class="left">You Save:</li>
+                        <li class="right"><strong>$<%= (package.fit_coins - package.amount) %></strong> (<%= (100 - (package.amount.to_f/package.fit_coins.to_f)*100).to_i %>%)</li>
+                    </ul>
+                    <div class="clear"></div>
+                    <li class="preorder-button"><a onclick="displayOrderModal(<%= package.id %>)">Purchase</a></li>
                 </ul>
             </li>
         <% end %>
@@ -129,13 +134,13 @@
                     <div class="animation"></div> <!-- eo .animation -->
                     <span class="drop-cap">1</span>
                     <h4>Cincinnati</h4>
-                    <p><strong>Coming January 2014</strong> with studios in Downtown, Over-The-Rhine, Hyde Park, Covington, and more! <a onclick="displayOrderModal()">Pre-order today!</a></p>
+                    <p>Available now with studios in Downtown, Over-The-Rhine, Hyde Park, and more! <a onclick="displayOrderModal()">Purchase today!</a></p>
                 </li>
                 <li class="even chicago">
                     <div class="animation"></div> <!-- eo .animation -->
                     <span class="drop-cap">2</span>
                     <h4>Chicago</h4>
-                    <p><strong>Coming January 2014!</strong> Want us to notify you when we're available in Chicago? <a href="/users/sign_up">Sign up today!</a></p>
+                    <p><strong>Coming Spring 2014!</strong> Want us to notify you when we're available in Chicago? <a href="/users/sign_up">Sign up today!</a></p>
                 </li>
                 <li class="san_fran">
                     <div class="animation"></div> <!-- eo .animation -->
@@ -161,7 +166,7 @@
         </div>
 
         <!-- Portfolio Items -->
-
+        <!--
         <p class="city-title">Chicago, Illinois</p>
         <ul class="portfolio group">
             <li>1 on 1 Health Fitness</li>
@@ -193,6 +198,7 @@
             <li>Healing Foundations</li>
             <li>and more...</li>
         </ul>
+        -->
 
         <p class="city-title">Cincinnati, Ohio</p>
         <ul class="portfolio group">
