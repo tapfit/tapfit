@@ -1,38 +1,245 @@
-<div id="tapfit_splash">
-    <div id="header">
-    </div>
-    <div class="splash_container" id="top">
-        <div class="centerizer">
-            <%= image_tag "splash_iphone.png", :class => "splash_phone" %>
-            <div id="top_content">
-              <%= image_tag "logo_horizontal.png", :class => "splash_logo" %>
-              <p id="top_content_tagline">
-                <%= image_tag "tagline.png" %>
-                <br/><br/><br/>
-                <span class="tagline_text">
-                    Gyms give us their unsold classes. We show you the day's best values. You book workouts easily from your smartphone.
-                </span>
-              </p>
-              <a href="https://itunes.apple.com/us/app/tapfit/id683430709?ls=1&mt=8" id="top_content_apple" target="_blank"></a>
-              <a href="https://play.google.com/store/apps/details?id=co.tapfit.android" id="top_content_android" target="_blank"></a>
+<div id="banner"><a name="home" class="anchor"></a>
+    <div class="wrapper">
+        <%= image_tag "iphone_favorites.png", :class => "iphone" %>
+        <h2>Give the Gift<br/>of
+        <span style="color:#eb4840; text-shadow: 1px 1px #333;">Fitness</span><br/>
+        This Holiday<br/>
+        Season</h2>
+        <a href="#plans">
+            <div class="cta">
+                Order Now & Save
             </div>
-        </div>
-    </div>
-    <div class="splash_container" id="benefits_link">
-        <div class="centerizer">
-        <a href="#benefits" class="link_to_benefits">Book last minute workouts, today.</a>
-        </div>
-    </div>
-    <div class="splash_container" id="benefits">
-        <div class="centerizer">
-        <%= image_tag "benefits_ss_1.png", :class => "benefits_ss" %>
-        <div id="benefits_content">
-            <p>TapFit is fitness on your own terms. Browse through hundreds of expertly-curated gyms and studios, view upcoming class schedules, and book classes - all through the convenience of your mobile phone.</p>
-            <a class="link_to_what"><h1 style="color:#ffffff;cursor:pointer;">&darr;</h1></a>
-        </div>
-        </div>
-    </div>
-    <div id="footer">
-        <p>&copy; 2013 TAPFIT, LLC &nbsp; &bull; &nbsp; <a href="http://blog.tapfit.co">Read Our Blog</a></p>
+        </a>
     </div>
 </div>
+
+<div class="process"><a name="about" class="anchor"></a>
+    <div class="wrapper">
+        <h3>How it works</h3>
+            <ul>
+                <li class="pass">
+                    <div class="animation"></div> <!-- eo .animation -->
+                    <span class="drop-cap">1</span>
+                    <h4>Download</h4>
+                    <p>Get started by downloading our free mobile app, available for either <a href="https://itunes.apple.com/us/app/tapfit/id683430709?mt=8" target="_blank">iPhone</a> or <a href="https://play.google.com/store/apps/details?id=co.tapfit.android" target="_blank">Android</a>.</p>              
+                </li>
+                <li class="even ruler">
+                    <div class="animation"></div> <!-- eo .animation -->
+                    <span class="drop-cap">2</span>
+                    <h4>Pre-Load</h4>
+                    <p>Load your TapFit account with money that you can use at any of our partner gyms and studios.</p> 
+                </li>
+                <li class="plane">
+                    <div class="animation"></div> <!-- eo .animation -->
+                    <span class="drop-cap">3</span>
+                    <h4>Book</h4>
+                    <p>Once you find a workout you want to join, simply book it and go! TapFit will take care of the rest.</p>                
+</li>
+                <li class="even last glass">
+                    <div class="animation"></div> <!-- eo .animation -->
+                    <span class="drop-cap">4</span>
+                    <h4>Earn</h4>
+                    <p>The more you work out, the more we reward you for staying fit. Earn points towards free workouts!</p>
+                </li>
+            </ul>
+    </div>
+</div>
+
+<div class="features"><a name="features" class="anchor"></a>
+    <div class="wrapper">
+        <div class="heading">
+            <h3>Less work. More workouts.</h3>
+        </div>
+        <ul>
+            <li class="left">
+                <span>Thousands of Options</span>
+                <h5>One app, thousands of options</h5>
+                <p>TapFit offers thousands of fitness classes - including yoga, pilates, barre, gyms, boxing, and more.</p>
+            </li>
+            <li class="right">
+                <span class="no-expiration">No Expiration</span>
+                <h5>No expiration, no fees</h5>
+                <p>Credits are pay-as-you-go, never expire, and are not required to be used in a specific timeframe. Simply use them when you need them!</p>
+            </li>
+            <li class="left">
+                <span class="loyalty">Loyalty Rewards</span>
+                <h5>Awesome loyalty rewards</h5>
+                <p>TapFit rewards you for getting fit by giving you points toward free workouts when you check in at the gym or invite your friends.</p>
+            </li>
+            <li class="right">
+                <span class="save-money">Pre-Load and Save</span>
+                <h5>Pre-load and Save</h5>
+                <p>The more you buy, the more you save! <strong>Save up to 30%</strong> on your fitness when you pre-load money into your account.</p>
+            </li>
+            <li class="left">
+                <span class="exclusive-access">Ultimate Flexibility</span>
+                <h5>Convenience is king</h5>
+                <p>Browse through 100's of nearby studios and book workouts with a single click. Perfect for people on-the-go or who just want to try something new.</p> 
+            </li>
+            <li class="right">
+                <span class="analytics">Track Your Fitness</span>
+                <h5>Track your fitness</h5>
+                <p>Automatically track your fitness, know how many times you went to the gym each week, and easily manage your fitness expenses.</p>
+            </li>
+        </ul>
+    </div> <!-- eo .container -->
+</div> <!-- eo .features -->
+
+<div class="plans"><a name="plans" class="anchor"></a>
+<div class="wrapper">
+
+<div class="heading">
+    <h3>Purchase workout credits</h3>
+    <p>Credits can be used at over 100 different gyms and studios in our network and never expire. Pre-load your account and save up to 50% on each workout.</p>
+</div>
+
+<section id="pricePlans">
+    <ul id="container">
+        <% @packages.each do |package| %>
+            <li class="plan">
+                <ul class="planContainer">
+                    <li class="price"><h2>$<%= package.fit_coins %></h2><p>in workout credits</p></li>
+                    <ul class="planDetails">
+                        <li class="left">List Price:</li>
+                        <li class="right">$<del><%= package.fit_coins %></del></li>
+                    </ul>
+                    <div class="clear"></div>
+                    <ul class="planDetails">
+                        <li class="left">Price:</li>
+                        <li class="right showoff"><strong>$<%= package.amount %></strong></li>
+                    </ul>
+                    <div class="clear"></div>
+                    <ul class="planDetails">
+                        <li class="left">You Save:</li>
+                        <li class="right"><strong>$<%= (package.fit_coins - package.amount) %></strong> (<%= (100 - (package.amount.to_f/package.fit_coins.to_f)*100).to_i %>%)</li>
+                    </ul>
+                    <div class="clear"></div>
+                    <li class="preorder-button"><a onclick="displayOrderModal(<%= package.id %>)">Purchase</a></li>
+                </ul>
+            </li>
+        <% end %>
+    </ul> <!-- End ul#plans -->
+</section>
+</div>
+</div>
+
+<div class="cities"><a name="cities" class="anchor"></a>
+    <!-- Category Filter -->
+    <div class="wrapper">
+        <div class="heading">
+            <h3>Coming Soon to a City Near You</h3>
+        </div>
+            <ul>
+                <li class="cincinnati">
+                    <div class="animation"></div> <!-- eo .animation -->
+                    <span class="drop-cap">1</span>
+                    <h4>Cincinnati</h4>
+                    <p>Available now with studios in Downtown, Over-The-Rhine, Hyde Park, and more! <a onclick="displayOrderModal()">Purchase today!</a></p>
+                </li>
+                <li class="even chicago">
+                    <div class="animation"></div> <!-- eo .animation -->
+                    <span class="drop-cap">2</span>
+                    <h4>Chicago</h4>
+                    <p><strong>Coming Spring 2014!</strong> Want us to notify you when we're available in Chicago? <a href="/users/sign_up">Sign up today!</a></p>
+                </li>
+                <li class="san_fran">
+                    <div class="animation"></div> <!-- eo .animation -->
+                    <span class="drop-cap">3</span>
+                    <h4>San Francisco</h4>
+                    <p><strong>Coming Spring 2014!</strong> Want us to notify you when we're available in San Francisco? <a href="/users/sign_up">Sign up today!</a></p>
+                </li>
+                <li class="even last new_york">
+                    <div class="animation"></div> <!-- eo .animation -->
+                    <span class="drop-cap">4</span>
+                    <h4>New York City</h4>
+                    <p><strong>Coming Spring 2014!</strong> Want us to notify you when we're available in New York? <a href="/users/sign_up">Sign up today!</a></p>
+                </li>
+            </ul>
+    </div>
+</div>
+
+<div class="locations"><a name="locations" class="anchor"></a>
+    <!-- Category Filter -->
+    <div class="wrapper">
+        <div class="heading">
+            <h3>Partner Fitness Studios</h3>
+        </div>
+
+        <!-- Portfolio Items -->
+        <!--
+        <p class="city-title">Chicago, Illinois</p>
+        <ul class="portfolio group">
+            <li>1 on 1 Health Fitness</li>
+            <li>All About Dance</li>
+            <li>Atlas CrossFit</li>
+            <li>At the Core</li>
+            <li>Bare Feet Power Yoga</li>
+            <li>Barre Bee Fit</li>
+            <li>Bezz Training</li>
+            <li>Bikram Yoga - Andersonville</li>
+            <li>Bikram Yoga - Lincoln Park</li>
+            <li>Bikram Yoga - South Loop</li>
+            <li>Bikram Yoga - Wicker Park</li>
+            <li>Chaturanga Holistic Fitness</li>
+            <li>Chicago Dance - River North</li>
+            <li>Chicago River North Pilates<li>
+            <li>Chi-Town Shakti</li>
+            <li>Core Chicago Pilates & Fitness</li>
+            <li>Core Evolution</li>
+            <li>CrossTown Fitness</li>
+            <li>Divsion St. CrossFit</li>
+            <li>Eb & Flow Yoga Studio</li>
+            <li>Fit Girl Studio</li>
+            <li>Flex Pilates Chicago</li>
+            <li>Flow Studios - Lincoln Park</li>
+            <li>From Temple Pilates</li>
+            <li>FunDance Fitness</li>
+            <li>Harmoney Mind Body Fitness</li>
+            <li>Healing Foundations</li>
+            <li>and more...</li>
+        </ul>
+        -->
+
+        <p class="city-title">Cincinnati, Ohio</p>
+        <ul class="portfolio group">
+            <li>The Breathing Room</li>
+            <li>Burdo Studios</li>
+            <li>Cincinnati Yoga School</li>
+            <li>Clear Wellness</li>
+            <li>Core a Movement Studio</li>
+            <li>Elemental OM</li>
+            <li>The Gym at Carew Towers</li>
+            <li>It's Working Out</li>
+            <li>Kenwood Hot Yoga</li>
+            <li>Modo Yoga - Clifton</li>
+            <li>Modo Yoga - Cincinnati</li>
+            <li>Moksha Yoga - Clifton</li>
+            <li>Move Your Hyde Power Yoga</li>
+            <li>The Punch House</li>
+            <li>Pure Barre</li>
+            <li>Revolution Fitness</li>
+            <li>Samara Yoga</li>
+            <li>YMCA - Blue Ash</li>
+            <li>YMCA - Campbell County</li>
+            <li>YMCA - Carl H. Lindner</li>
+            <li>YMCA - Central Parkway</li>
+            <li>YMCA - Clermont</li>
+            <li>YMCA - Clippard</li>
+            <li>YMCA - Duck Creek</li>
+            <li>YMCA - Gamble-Nippert</li>
+            <li>YMCA - M.E. Lyons</li>
+            <li>YMCA - Melrose</li>
+            <li>YMCA - Powell Crosley</li>
+            <li>YMCA - R.C. Durr<li>
+            <li>The Yoga Bar</li>
+            <li>and more...</li>
+            <div class="clear"></div>  
+        </ul>
+    </div>
+</div>
+
+<a href="#home" class="back-to-top"><%= image_tag "arrow-up.svg" %></a>
+
+<!-- Pre-order form modal -->
+<%= render 'shared/modal' %>
+    

@@ -1,11 +1,27 @@
 class PagesController < ApplicationController
 
-  before_filter :check_for_mobile
+  #before_filter :check_for_mobile
 
   def index
+    @packages = Package.order(:amount)
   end
 
   def about
+  end
+
+  def plans
+  end
+
+  def credits
+  end
+
+  def sale
+  end
+
+  def locations
+  end
+
+  def corporate
   end
 
   def terms

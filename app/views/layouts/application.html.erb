@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>TapFit</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-  <meta name="apple-itunes-app" content="app-id=683430709">
-  <meta name="viewport" content="width=device-width" />
+    <title>TapFit - A Better Gym Membership</title>
+
+    <%= render 'shared/meta' %>
+    <script type="text/javascript" src="//use.typekit.net/pgg1qmn.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+    <!--<meta name="apple-itunes-app" content="app-id=683430709">-->
     <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -16,12 +19,17 @@
     ga('create', 'UA-43021003-1', 'tapfit.co');
     ga('send', 'pageview');
     </script>
-    <script type="text/javascript" src="//use.typekit.net/pgg1qmn.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
 <body>
 
-<%= yield %>
+    <!-- Header -->
+    <%= render 'shared/navigation' %>
+
+    <!-- Body -->
+    <%= yield %>
+
+    <!-- Footer -->
+    <%= render 'shared/footer' %>
 
 </body>
 </html>

@@ -15,88 +15,122 @@
 //= require turbolinks
 //= require_tree .
 
+var previousOffset = 0;
+var isAnimating = false;
+
 $(document).ready(function() {
 
-/* Scroll event handler */
-$(window).bind('scroll',function(e){
-parallaxScroll();
-});
+    /* Scroll event handler */
+    if (screen.width > 500) {
+        // Bind handleStickDiv to scroll
+        $(window).bind('scroll',function(e){
+            handleStickyDiv();
+        });
 
-$(window).bind('resize',function(e){
-adjustElementsOnResize();
-});
+        // Bind anchor scrolling to click
+        $('a').click(function(){
+            if ($('[name="' + $.attr(this, 'href').substr(1) + '"]').length) {
+                $('html, body').animate({
+                    scrollTop: $('[name="' + $.attr(this, 'href').substr(1) + '"]').offset().top,
+                }, 500);
+                return false;
+            }
+            else if ($('[name="' + $.attr(this, 'href').substr(2) + '"]').length) {
+                $('html, body').animate({
+                    scrollTop: $('[name="' + $.attr(this, 'href').substr(2) + '"]').offset().top,
+                }, 500);
+                return false;
+            }
+        });
+        
+        // Uncomment this for splash page slideshow
+        // setInterval(slideshow, 3000);
 
-$('a.link_to_top').click(function(){
-$('html, body').animate({
-scrollTop:$('#header').offset().top
-}, 1000, function() {
-parallaxScroll(); // Callback is required for iOS
-});
-return false;
-});
-
-$('a.link_to_benefits').click(function(){
-$('html, body').animate({
-scrollTop:$('#benefits').offset().top
-}, 1000, function() {
-parallaxScroll(); // Callback is required for iOS
-});
-return false;
-});
-
-$('a.link_to_what').click(function(){
-$('html, body').animate({
-scrollTop:$('#what').offset().top
-}, 1000, function() {
-parallaxScroll(); // Callback is required for iOS
-});
-return false;
-});
-
-$('a.link_to_who').click(function(){
-$('html, body').animate({
-scrollTop:$('#who').offset().top
-}, 1000, function() {
-parallaxScroll(); // Callback is required for iOS
-});
-return false;
-});
-
-$('a.link_to_trainers').click(function(){
-$('html, body').animate({
-scrollTop:$('#trainers').offset().top
-}, 1000, function() {
-parallaxScroll(); // Callback is required for iOS
-});
-return false;
-});
-
-$('a.link_to_wellness').click(function(){
-$('html, body').animate({
-scrollTop:$('#wellness').offset().top
-}, 1000, function() {
-parallaxScroll(); // Callback is required for iOS
-});
-return false;
-});
-
+        // Handle stickyDiv on document ready
+        handleStickyDiv();
+    }
 });
 
 /* Scroll the background layers */
-function parallaxScroll(){
-var scrolled = $(window).scrollTop();
-$('.splash_phone').css('top',(0-(scrolled*.25))+'px');
-$('.benefits_ss').css('top',(400-(scrolled*.40))+'px');
-//$('#what_icon').css('left',(1200-(scrolled*.25))+'px');
-//$('#who_icon').css('top',(920-(scrolled*.25))+'px');
-//$('#trainers_icon').css('left',(1080-(scrolled*.10))+'px');
-//$('#parallax-bg2').css('top',(0-(scrolled*.5))+'px');
-//$('#parallax-bg3').css('top',(0-(scrolled*.75))+'px');
+function handleStickyDiv(){
+    var scrolled = $(window).scrollTop();
+    var offset = $("#banner").height() - $("header#top").height();
+    var offsetTwo = offset + $(".process").outerHeight( true );
+    var offsetThree = offsetTwo + $(".features").outerHeight( true );
+    var offsetFour = offsetThree + $(".plans").outerHeight( true );
+    var offsetFive = offsetFour + $(".cities").outerHeight( true );
+    var offsetSix = offsetFive + $(".locations").outerHeight( true );
+
+    $(".sticky_links").removeClass("active");
+    $(".sticky_links").addClass("inactive");
+
+    if (scrolled < offset) {
+    } 
+    else if (scrolled <= offsetTwo) {
+        $("#link_about").addClass("active");
+        $("#link_about").removeClass("inactive");
+    }
+    else if (scrolled <= offsetThree) {
+        $("#link_features").addClass("active");
+        $("#link_features").removeClass("inactive");
+    }
+    else if (scrolled <= offsetFour) {
+        $("#link_plans").addClass("active");
+        $("#link_plans").removeClass("inactive");
+    }
+    else if (scrolled <= offsetFive) {
+        $("#link_cities").addClass("active");
+        $("#link_cities").removeClass("inactive");
+    }
+    else {
+        $("#link_locations").addClass("active");
+        $("#link_locations").removeClass("inactive");
+    }
 }
 
-/* Adjust screen elements such as the phone on resize */
-function adjustElementsOnResize(){
-var bodyHeight = $(window).height();
-//$('.splash_phone').css('height',bodyHeight*.8+'px');
+function slideshow() {
+    var $active = $('.slideshow li.inView');
+    if ( $active.length == 0 ) $active = $('.slideshow li:last');
+    var $next = $active.next().length ? $active.next()
+                                      : $('.slideshow li:first');
+
+    $active.removeClass('inView');
+
+    $next.css({opacity: 0.0})
+        .addClass('inView')
+        .animate({opacity: 1.0}, 1000, function(){
+        });
 }
 
+function displayOrderModal(quantity) {
+    $('html, body').scrollTop(0); 
+    
+    $("#quantity").val(quantity);
+    
+    if (quantity == 2) {
+        $(".original-price").html("$<del>200</del>");
+        $(".quantity").html("40%<br><span class='small'>discount</span>");
+        $(".total").html("$120");
+    }
+    else if (quantity == 3) {
+        $(".original-price").html("$<del>350</del>");
+        $(".quantity").html("50%<br><span class='small'>discount</span>");
+        $(".total").html("$175");
+    }
+    else if (quantity == 4) {
+        $(".original-price").html("$<del>50</del>");
+        $(".quantity").html("20%<br><span class='small'>discount</span>");
+        $(".total").html("$40");
+    }
+    else {
+        $(".original-price").html("$<del>100</del>");
+        $(".quantity").html("30%<br><span class='small'>discount</span>");
+        $(".total").html("$70");
+    }
+
+    $(".content-modal").fadeIn();
+}
+
+function closeOrderModal() {
+    $(".content-modal").fadeOut();
+}

@@ -39,8 +39,8 @@ Tapfit::Application.configure do
   ENV["OPENREDIS_URL"] = "redis://127.0.0.1:6379/0"
 
   ENV["BRAINTREE_ENV"] = "test"
-  ENV["BRAINTREE_MERCHANT_ID"] = "ych94qxscjgy583h"
-  ENV["BRAINTREE_PUBLIC_KEY"] = "y6md3zm5qz8cvb4g"
-  ENV["BRAINTREE_PRIVATE_KEY"] = "476ce644305022a93f05f8703481dd09"
+  ENV["BRAINTREE_MERCHANT_ID"] = "8jw86r7bmx93rxfn"
+  ENV["BRAINTREE_PUBLIC_KEY"] = "vxv67ybrg26z8796"
+  ENV["BRAINTREE_PRIVATE_KEY"] = "418e1f6c1ffdd1cd2cfd95e3d087271e"
 
 end

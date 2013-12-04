@@ -3,19 +3,24 @@ require 'api_constraints'
 
 Tapfit::Application.routes.draw do
 
-  match 'about' => 'pages#about', :via => :get
-  match 'terms' => 'pages#terms', :via => :get
-  match 'privacy' => 'pages#privacy', :via => :get
-  match 'faq' => 'pages#faq', :via => :get
-  
+  match 'about'     => 'pages#about', :via => :get
+  match 'plans'     => 'pages#plans', :via => :get
+  match 'corporate' => 'pages#corporate', :via => :get
+  match 'sale'      => 'pages#sale', :via => :get
+  match 'credits'   => 'pages#credits', :via => :get
+  match 'locations' => 'pages#locations', :via => :get
+  match 'terms'     => 'pages#terms', :via => :get
+  match 'privacy'   => 'pages#privacy', :via => :get
+  match 'faq'       => 'pages#faq', :via => :get
+ 
   devise_for :users
-  ActiveAdmin.routes(self)
 
-  root :to => "pages#index"
+  ActiveAdmin.routes(self)
 
   resources :places do
     resources :photos
   end
+
   # Api Calls
   namespace :api, defaults: {format: 'json'} do
 
@@ -84,4 +89,7 @@ Tapfit::Application.routes.draw do
   end
 
   mount Resque::Server.new, :at => "/resque"
+  
+  root :to => "pages#index"
+
 end
