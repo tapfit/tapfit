@@ -81,7 +81,7 @@
 
 <% if ENV["BRAINTREE_ENV"] == "test" %>
   <script type="text/javascript">
-    var braintree = Braintree.create('MIIBCgKCAQEAy/5KpvGIOdwoAvhFrbAhSH1tkEWEWxl0PWCp4ecWxBtWm0IVD+KM3G6ws3auadgAdT1ksLCSWEQrnHMW1hFZ4nUbi+cixRfAsTAR7ZjZvJZbvzpmA1U9OQNRw9oEUZ29G6yosMWm+n4hUvm89NEFAmkbh2vzz98EdIvcp4f6RwMGjZ9d6vQXjdVen0pa6Qgefd3Te7C5gfSuvZ8Bpt7Q1csmX658MJKJZp5bj0VLYLIX0KaN8G+hWyx/Yf3ggctWU5UlHMqowPigTJEMc0bnvHOHNmbVJ23p+SxvVPiKFwwBCvsQz3oNIy+GideHjH9lN0l8LVEaJlpY7cc75eS8BQIDAQAB');
+    var braintree = Braintree.create('MIIBCgKCAQEArH495ikrZadWQqoixGhKGORr1rU56LY8r0/TVJgacOVfv2i+QRYhN0rT4v8d1qNrBAExIx1Si7dBjzjoTDE/iBoW4d+6CyaSLmFUZ5faZesQqKR7D+gtgiFl4dMcJMQt8qpGPH44cfMKh9VJg8jfoLDZ6yYlgAxL31+cqixGP2/4lx15zJUTFCaD7qaHHkkVsIJnYg03dSIQ94SzhAZzEv1opZUS6Z6S149gE1hkoICN4oB6F+ffm/2nuVBqY18Mzu89eRoSx5yYOaEEUaZ+qYMRM9D66vNDkTOohuDTcEfotLNBIi/uYDbFvDfUlH4NEDi8vZ7IC/fexkpAN52+vwIDAQAB');
     braintree.onSubmitEncryptForm('braintree-payment-form');
   </script>
 <% else %>
