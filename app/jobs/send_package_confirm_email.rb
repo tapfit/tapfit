@@ -52,7 +52,7 @@ class SendPackageConfirmEmail < ResqueJob
     template_name = "package-receipt-nonuser"
     template_content = [{"content"=>"example content", "name" => "example name"}] 
     message = {}
-    message["subject"] = "Purchase Confirmed: Thanks for your purchase!"
+    message["subject"] = "Your TapFit Workout Credits. Thanks for your purchase!"
     message["from_email"] = "support@tapfit.co"
     message["from_name"] = "TapFit"
     message["to"] = [ {"email" => email} ]
@@ -78,7 +78,7 @@ class SendPackageConfirmEmail < ResqueJob
     template_name = "package-receipt-user"
     template_content = [{"content"=>"example content", "name" => "example name"}] 
     message = {}
-    message["subject"] = "Purchase Confirmed: Thanks for your purchase!"
+    message["subject"] = "Your TapFit Workout Credits. Thanks for your purchase!"
     message["from_email"] = "support@tapfit.co"
     message["from_name"] = "TapFit"
     message["to"] = [ {"email" => email} ]
@@ -104,7 +104,7 @@ class SendPackageConfirmEmail < ResqueJob
     template_name = "gift-recipient-user"
     template_content = [{"content"=>"example content", "name" => "example name"}] 
     message = {}
-    message["subject"] = "Purchase Confirmed: Thanks for your purchase!"
+    message["subject"] = "You've Been Gifted TapFit Workout Credits!"
     message["from_email"] = "support@tapfit.co"
     message["from_name"] = "TapFit"
     message["to"] = [ {"email" => gift_email} ]
@@ -131,7 +131,7 @@ class SendPackageConfirmEmail < ResqueJob
     template_name = "gift-receipt"
     template_content = [{"content"=>"example content", "name" => "example name"}] 
     message = {}
-    message["subject"] = "Purchase Confirmed: Thanks for your purchase!"
+    message["subject"] = "Your Gift Card Was Sent. Thanks for your purchase!"
     message["from_email"] = "support@tapfit.co"
     message["from_name"] = "TapFit"
     message["to"] = [ {"email" => email} ]
@@ -159,7 +159,7 @@ class SendPackageConfirmEmail < ResqueJob
     template_name = "gift-recipient"
     template_content = [{"content"=>"example content", "name" => "example name"}] 
     message = {}
-    message["subject"] = "Purchase Confirmed: Thanks for your purchase!"
+    message["subject"] = "You've Been Gifted TapFit Workout Credits!"
     message["from_email"] = "support@tapfit.co"
     message["from_name"] = "TapFit"
     message["to"] = [ {"email" => gift_email} ]
