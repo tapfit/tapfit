@@ -95,7 +95,7 @@ module Purchase
           }
         )
         if result.success?
-          Resque.enqueue(SendPackageConfirmEmail, params[:email], package_id)
+          Resque.enqueue(SendPackageConfirmEmail, params[:email], package_id, params[:gift_email])
           return_hash[:success] = true
           return_hash[:card_number] = result.transaction.credit_card_details.masked_number
           return_hash[:credit_card_type] = result.transaction.credit_card_details.card_type
