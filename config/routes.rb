@@ -25,6 +25,7 @@ Tapfit::Application.routes.draw do
     collection do
       post 'buy'
       get 'confirmation'
+      get 'oops'
     end
   end
 

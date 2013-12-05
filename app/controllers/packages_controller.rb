@@ -11,15 +11,16 @@ class PackagesController < ApplicationController
     json = Purchase.buy_package(current_user, params)
     
     if json[:success] == false
-        render :json => json, :status => 422
+        render :oops
     else
-        render :json => json
+        render :confirmation
     end
   end 
 
   def confirmation
-    @package = Package.find(params[:package_id])
-
-
   end
+
+  def oops
+  end
+
 end

@@ -1624,6 +1624,16 @@ fieldset {
   border-bottom: 1px solid #e6e6e6;
   overflow: hidden;
 }
+
+.confirmation {
+  padding: 160px 0 70px;
+  float: left;
+  clear: both;
+  width: 100%;
+  min-height: 700px;
+  overflow: hidden;
+}
+
 .heading {
   max-width: 700px;
   margin: 0 auto 40px auto;
