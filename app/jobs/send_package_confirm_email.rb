@@ -75,7 +75,7 @@ class SendPackageConfirmEmail < ResqueJob
   def self.send_user_receipt_email(gift_code, email, package)
         
     mandrill = Mandrill::API.new 
-    template_name = "tapfit-purchase-confirmation"
+    template_name = "package-receipt-user"
     template_content = [{"content"=>"example content", "name" => "example name"}] 
     message = {}
     message["subject"] = "Purchase Confirmed: Thanks for your purchase!"
@@ -101,7 +101,7 @@ class SendPackageConfirmEmail < ResqueJob
   def self.send_user_gift_email(gift_code, email, gift_email, package)
         
     mandrill = Mandrill::API.new 
-    template_name = "tapfit-purchase-confirmation"
+    template_name = "gift-recipient-user"
     template_content = [{"content"=>"example content", "name" => "example name"}] 
     message = {}
     message["subject"] = "Purchase Confirmed: Thanks for your purchase!"
@@ -128,7 +128,7 @@ class SendPackageConfirmEmail < ResqueJob
   def self.send_gift_receipt_email(email, gift_email, package)
         
     mandrill = Mandrill::API.new 
-    template_name = "tapfit-purchase-confirmation"
+    template_name = "gift-receipt"
     template_content = [{"content"=>"example content", "name" => "example name"}] 
     message = {}
     message["subject"] = "Purchase Confirmed: Thanks for your purchase!"
@@ -156,7 +156,7 @@ class SendPackageConfirmEmail < ResqueJob
   # ---------------------------------- #
   def self.send_gift_email(gift_code, email, gift_email, package)
     mandrill = Mandrill::API.new 
-    template_name = "tapfit-purchase-confirmation"
+    template_name = "gift-recipient"
     template_content = [{"content"=>"example content", "name" => "example name"}] 
     message = {}
     message["subject"] = "Purchase Confirmed: Thanks for your purchase!"
