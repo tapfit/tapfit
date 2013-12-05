@@ -100,6 +100,10 @@
                 <ul class="planContainer">
                     <li class="price"><h2>$<%= package.fit_coins %></h2><p>in workout credits</p></li>
                     <ul class="planDetails">
+                        <li class="left">Workouts:</li>
+                        <li class="right"><%= package.fit_coins / 12 %>*</li>
+                    </ul>
+                    <ul class="planDetails">
                         <li class="left">List Price:</li>
                         <li class="right">$<del><%= package.fit_coins %></del></li>
                     </ul>
@@ -119,6 +123,7 @@
             </li>
         <% end %>
     </ul> <!-- End ul#plans -->
+    <p>* Workout pricing varies by the type of class and the location, but averages around $12.<br/>If you attend more premium services like barre and pilates, the number of workouts you get will be slightly less.</p>
 </section>
 </div>
 </div>
