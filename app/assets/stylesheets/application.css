@@ -1732,22 +1732,30 @@ fieldset {
   line-height: 22px;
 }
 
-@media only screen and (max-width: 767px), only screen and (max-device-width: 767px)
-}
-
 @media only screen and (max-width: 480px) {
     #banner {
         height: 480px;
     }
+
     .cities ul li, .process ul li {
         max-width: 70%;
         margin-left: 15%;
     }
+
     .mobile-promotion {
         display: block;
     }
+
     .features ul li {
-    width: 100%;
-    margin: 20px 0;
+        width: 100%;
+        margin: 20px 0;
+    }
+    
+    .modal.reserve-form .front > header {
+        display: none;
+    }
+    
+    div.content-modal div.tf-content {
+        margin-top: 0;
     }
 }
