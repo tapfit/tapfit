@@ -79,6 +79,6 @@
 
 <script src="https://js.braintreegateway.com/v1/braintree.js"></script>
 <script>
-    var braintree = Braintree.create("MIIBCgKCAQEArH495ikrZadWQqoixGhKGORr1rU56LY8r0/TVJgacOVfv2i+QRYhN0rT4v8d1qNrBAExIx1Si7dBjzjoTDE/iBoW4d+6CyaSLmFUZ5faZesQqKR7D+gtgiFl4dMcJMQt8qpGPH44cfMKh9VJg8jfoLDZ6yYlgAxL31+cqixGP2/4lx15zJUTFCaD7qaHHkkVsIJnYg03dSIQ94SzhAZzEv1opZUS6Z6S149gE1hkoICN4oB6F+ffm/2nuVBqY18Mzu89eRoSx5yYOaEEUaZ+qYMRM9D66vNDkTOohuDTcEfotLNBIi/uYDbFvDfUlH4NEDi8vZ7IC/fexkpAN52+vwIDAQAB");
+  var braintree = Braintree.create(<%= ENV["CLIENT_SIDE_ENCRYPTION_KEY"] %>);
     braintree.onSubmitEncryptForm('braintree-payment-form');
 </script>
