@@ -17,6 +17,8 @@ class SendPackageConfirmEmail < ResqueJob
     
     code = PromoCode.create(:code => gift_code, :amount => package.fit_coins, :quantity => 1)
       
+    gift_code = SendPackageConfirmEmail.create_readable_code(gift_code)
+
     giftor = User.where(:email => email).first
     giftee = User.where(:email => gift_email).first
 
@@ -37,6 +39,13 @@ class SendPackageConfirmEmail < ResqueJob
       end
     end
 
+  end
+
+  def self.create_readable_code(gift_code)
+    gift_code = gift_code.upcase
+    gift_code = gift_code.insert(9, '-')
+    gift_code = gift_code.insert(4, '-')
+    return gift_code
   end
 
   def self.validate_email(email)
