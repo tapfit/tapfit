@@ -26,12 +26,14 @@ class SendPackageConfirmEmail < ResqueJob
       if giftee.nil?
         send_gift_email(gift_code, email, gift_email)
       else
+        Credit.create(:total => code.amount, :user_id => giftee.id, :promo_code_id => code.id)
         send_user_gift_email(email, gift_email)
       end
     else
       if giftor.nil?
         send_receipt_email(gift_code, email)
       else
+        Credit.create(:total => code.amount, :user_id => giftor.id, :promo_code_id => code.id) 
         send_user_receipt_email(email)
       end
     end
