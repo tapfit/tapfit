@@ -29,6 +29,8 @@ Tapfit::Application.routes.draw do
     end
   end
 
+  resources :email_collections
+
   # Api Calls
   namespace :api, defaults: {format: 'json'} do
 
