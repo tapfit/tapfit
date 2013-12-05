@@ -79,6 +79,6 @@
 
 <script src="https://js.braintreegateway.com/v1/braintree.js"></script>
 <script>
-  var braintree = Braintree.create(<%= ENV["CLIENT_SIDE_ENCRYPTION_KEY"] %>);
+  var braintree = Braintree.create("'" + <%= ENV["CLIENT_SIDE_ENCRYPTION_KEY"] %> + "'");
     braintree.onSubmitEncryptForm('braintree-payment-form');
 </script>
