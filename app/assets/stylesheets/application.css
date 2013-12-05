@@ -981,6 +981,7 @@ footer p {
   float: left;
   max-width: 22%;
   margin: 20px 4% 0 0;
+  overflow: hidden;
 }
 .cities ul li.last {
   margin-right: 0;
@@ -1721,7 +1722,7 @@ fieldset {
   line-height: 22px;
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 767px), only screen and (max-device-width: 767px)
 }
 
 @media only screen and (max-width: 480px) {
@@ -1732,8 +1733,11 @@ fieldset {
         max-width: 70%;
         margin-left: 15%;
     }
-
     .mobile-promotion {
         display: block;
+    }
+    .features ul li {
+    width: 100%;
+    margin: 20px 0;
     }
 }
