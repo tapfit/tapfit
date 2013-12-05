@@ -20,7 +20,7 @@ class SendPackageConfirmEmail < ResqueJob
     giftor = User.where(:email => email).first
     giftee = User.where(:email => gift_email).first
 
-    if !gift_email.nil?
+    if !gift_email.nil? && SendPackageConfirmEmail.validate_email(gift_email)
       SendPackageConfirmEmail.send_gift_receipt_email(email, gift_email, package)
       if giftee.nil?
         SendPackageConfirmEmail.send_gift_email(gift_code, email, gift_email, package)
@@ -37,6 +37,10 @@ class SendPackageConfirmEmail < ResqueJob
       end
     end
 
+  end
+
+  def self.validate_email(email)
+    return email =~ /\A\s*([-a-z0-9+._]{1,64})@((?:[-a-z0-9]+\.)+[a-z]{2,})\s*\z/i
   end
 
   # ---------------------------------- #
