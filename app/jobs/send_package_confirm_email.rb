@@ -21,26 +21,54 @@ class SendPackageConfirmEmail < ResqueJob
     giftee = User.where(:email => gift_email).first
 
     if !gift_email.nil?
-      send_gift_receipt_email(gift_code, email, gift_email)
-
+      send_gift_receipt_email(email, gift_email, package)
       if giftee.nil?
-        send_gift_email(gift_code, email, gift_email)
+        send_gift_email(gift_code, email, gift_email, package)
       else
         Credit.create(:total => code.amount, :user_id => giftee.id, :promo_code_id => code.id)
-        send_user_gift_email(email, gift_email)
+        send_user_gift_email(gift_code, email, gift_email, package)
       end
     else
       if giftor.nil?
-        send_receipt_email(gift_code, email)
+        send_receipt_email(gift_code, email, package)
       else
         Credit.create(:total => code.amount, :user_id => giftor.id, :promo_code_id => code.id) 
-        send_user_receipt_email(email)
+        send_user_receipt_email(gift_code, email, package)
       end
     end
 
   end
 
-  def send_receipt_email(gift_code, email)
+  # ---------------------------------- #
+  # ------ Receipt for non-user ------ #
+  # ---------------------------------- #
+  def send_receipt_email(gift_code, email, package)
+        
+    mandrill = Mandrill::API.new 
+    template_name = "package-receipt-nonuser"
+    template_content = [{"content"=>"example content", "name" => "example name"}] 
+    message = {}
+    message["subject"] = "Purchase Confirmed: Thanks for your purchase!"
+    message["from_email"] = "support@tapfit.co"
+    message["from_name"] = "TapFit"
+    message["to"] = [ {"email" => email} ]
+    message["html"] = ""
+    message["text"] = ""
+    message["merge_vars"] = [{"vars"=>[{"content"=>package.fit_coins, "name"=>"GIFT"},
+                                       {"content"=>gift_code, "name"=>"PROMO"}], "rcpt"=>email}]
+    message["merge"] = true
+    message["track_opens"] = true
+    message["track_clicks"] = true
+    async = true
+    ip_pool = "Main Pool"
+    mandrill.messages.send_template(template_name, template_content, message, async, ip_pool)
+
+  end
+  
+  # ---------------------------------- #
+  # -------- Receipt for user -------- #
+  # ---------------------------------- #
+  def send_user_receipt_email(gift_code, email, package)
         
     mandrill = Mandrill::API.new 
     template_name = "tapfit-purchase-confirmation"
@@ -52,13 +80,8 @@ class SendPackageConfirmEmail < ResqueJob
     message["to"] = [ {"email" => email} ]
     message["html"] = ""
     message["text"] = ""
-    message["merge_vars"] = [{"vars"=>[{"content"=>self.workout.name, "name"=>"WORKOUT"},
-                                       {"content"=>self.place.name, "name"=>"PLACE"},
-                                       {"content"=>self.workout.start_time.strftime("%A"), "name"=>"WORKOUT_DAY"},
-                                       {"content"=>self.workout.start_time.strftime("%l:%M%P"), "name"=>"WORKOUT_TIME"},
-                                       {"content"=>self.created_at.strftime("%A, %B %-d, %Y"), "name"=>"ORDER_DATE"},
-                                       {"content"=>self.price, "name"=>"SUBTOTAL"},
-                                       {"content"=>self.price, "name"=>"TOTAL"}], "rcpt"=>self.user.email}]
+    message["merge_vars"] = [{"vars"=>[{"content"=>package.fit_coins, "name"=>"GIFT"},
+                                       {"content"=>gift_code, "name"=>"PROMO"}], "rcpt"=>email}]
     message["merge"] = true
     message["track_opens"] = true
     message["track_clicks"] = true
@@ -67,36 +90,12 @@ class SendPackageConfirmEmail < ResqueJob
     mandrill.messages.send_template(template_name, template_content, message, async, ip_pool)
 
   end
-
-  def send_gift_receipt_email(gift_code, email, gift_email)
+  
+  # ---------------------------------- #
+  # --------- Gift for user ---------- #
+  # ---------------------------------- #
+  def send_user_gift_email(gift_code, email, gift_email, package)
         
-    mandrill = Mandrill::API.new 
-    template_name = "tapfit-purchase-confirmation"
-    template_content = [{"content"=>"example content", "name" => "example name"}] 
-    message = {}
-    message["subject"] = "Purchase Confirmed: Thanks for your purchase!"
-    message["from_email"] = "support@tapfit.co"
-    message["from_name"] = "TapFit"
-    message["to"] = [ {"email" => email} ]
-    message["html"] = ""
-    message["text"] = ""
-    message["merge_vars"] = [{"vars"=>[{"content"=>self.workout.name, "name"=>"WORKOUT"},
-                                       {"content"=>self.place.name, "name"=>"PLACE"},
-                                       {"content"=>self.workout.start_time.strftime("%A"), "name"=>"WORKOUT_DAY"},
-                                       {"content"=>self.workout.start_time.strftime("%l:%M%P"), "name"=>"WORKOUT_TIME"},
-                                       {"content"=>self.created_at.strftime("%A, %B %-d, %Y"), "name"=>"ORDER_DATE"},
-                                       {"content"=>self.price, "name"=>"SUBTOTAL"},
-                                       {"content"=>self.price, "name"=>"TOTAL"}], "rcpt"=>self.user.email}]
-    message["merge"] = true
-    message["track_opens"] = true
-    message["track_clicks"] = true
-    async = true
-    ip_pool = "Main Pool"
-    mandrill.messages.send_template(template_name, template_content, message, async, ip_pool)
-
-  end
-
-  def send_gift_email(gift_code, email, gift_email)
     mandrill = Mandrill::API.new 
     template_name = "tapfit-purchase-confirmation"
     template_content = [{"content"=>"example content", "name" => "example name"}] 
@@ -107,13 +106,64 @@ class SendPackageConfirmEmail < ResqueJob
     message["to"] = [ {"email" => gift_email} ]
     message["html"] = ""
     message["text"] = ""
-    message["merge_vars"] = [{"vars"=>[{"content"=>self.workout.name, "name"=>"WORKOUT"},
-                                       {"content"=>self.place.name, "name"=>"PLACE"},
-                                       {"content"=>self.workout.start_time.strftime("%A"), "name"=>"WORKOUT_DAY"},
-                                       {"content"=>self.workout.start_time.strftime("%l:%M%P"), "name"=>"WORKOUT_TIME"},
-                                       {"content"=>self.created_at.strftime("%A, %B %-d, %Y"), "name"=>"ORDER_DATE"},
-                                       {"content"=>self.price, "name"=>"SUBTOTAL"},
-                                       {"content"=>self.price, "name"=>"TOTAL"}], "rcpt"=>self.user.email}]
+    message["merge_vars"] = [{"vars"=>[{"content"=>package.fit_coins, "name"=>"GIFT"},
+                                       {"content"=>email, "name"=>"SENDER"},
+                                       {"content"=>gift_code, "name"=>"PROMO"}], "rcpt"=>gift_email}]
+    message["merge"] = true
+    message["track_opens"] = true
+    message["track_clicks"] = true
+    async = true
+    ip_pool = "Main Pool"
+    mandrill.messages.send_template(template_name, template_content, message, async, ip_pool)
+
+  end
+
+  # ---------------------------------- #
+  # ---- Gift receipt for giftor ----- #
+  # ---------------------------------- #
+  def send_gift_receipt_email(email, gift_email, package)
+        
+    mandrill = Mandrill::API.new 
+    template_name = "tapfit-purchase-confirmation"
+    template_content = [{"content"=>"example content", "name" => "example name"}] 
+    message = {}
+    message["subject"] = "Purchase Confirmed: Thanks for your purchase!"
+    message["from_email"] = "support@tapfit.co"
+    message["from_name"] = "TapFit"
+    message["to"] = [ {"email" => email} ]
+    message["html"] = ""
+    message["text"] = ""
+    message["merge_vars"] = [{"vars"=>[{"content"=>package.fit_coins, "name"=>"GIFT"},
+                                       {"content"=>gift_email, "name"=>"RECIPIENT"},
+                                       {"content"=>package.created_at.strftime("%A, %B %-d, %Y"), "name"=>"ORDER_DATE"},
+                                       {"content"=>package.amount, "name"=>"SUBTOTAL"},
+                                       {"content"=>package.amount, "name"=>"TOTAL"}], "rcpt"=>email}]
+    message["merge"] = true
+    message["track_opens"] = true
+    message["track_clicks"] = true
+    async = true
+    ip_pool = "Main Pool"
+    mandrill.messages.send_template(template_name, template_content, message, async, ip_pool)
+
+  end
+
+  # ---------------------------------- #
+  # -------- Gift for non-user ------- #
+  # ---------------------------------- #
+  def send_gift_email(gift_code, email, gift_email, package)
+    mandrill = Mandrill::API.new 
+    template_name = "tapfit-purchase-confirmation"
+    template_content = [{"content"=>"example content", "name" => "example name"}] 
+    message = {}
+    message["subject"] = "Purchase Confirmed: Thanks for your purchase!"
+    message["from_email"] = "support@tapfit.co"
+    message["from_name"] = "TapFit"
+    message["to"] = [ {"email" => gift_email} ]
+    message["html"] = ""
+    message["text"] = ""
+    message["merge_vars"] = [{"vars"=>[{"content"=>package.fit_coins, "name"=>"GIFT"},
+                                       {"content"=>email, "name"=>"SENDER"},
+                                       {"content"=>gift_code, "name"=>"PROMO"}], "rcpt"=>gift_email}]
     message["merge"] = true
     message["track_opens"] = true
     message["track_clicks"] = true
