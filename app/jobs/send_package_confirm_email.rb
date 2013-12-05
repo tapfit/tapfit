@@ -15,16 +15,25 @@ class SendPackageConfirmEmail < ResqueJob
       gift_code = SecureRandom.hex(7)
     end
     
-    PromoCode.create(:code => gift_code, :amount => package.fit_coins, :quantity => 1)
+    code = PromoCode.create(:code => gift_code, :amount => package.fit_coins, :quantity => 1)
       
+    giftor = User.where(:email => email).first
+    giftee = User.where(:email => gift_email).first
 
     if !gift_email.nil?
-
       send_gift_receipt_email(gift_code, email, gift_email)
 
-      send_gift_email(gift_code, email, gift_email)
+      if giftee.nil?
+        send_gift_email(gift_code, email, gift_email)
+      else
+        send_user_gift_email(email, gift_email)
+      end
     else
-      send_receipt_email(gift_code, email)
+      if giftor.nil?
+        send_receipt_email(gift_code, email)
+      else
+        send_user_receipt_email(email)
+      end
     end
 
   end
