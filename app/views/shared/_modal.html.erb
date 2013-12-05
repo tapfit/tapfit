@@ -78,8 +78,15 @@
 </div>
 
 <script src="https://js.braintreegateway.com/v1/braintree.js"></script>
-<%= javascript_tag do %>
-  var csek = <%= ENV["CLIENT_SIDE_ENCRYPTION_KEY"] %>;
-  var braintree = Braintree.create(csek);
-  braintree.onSubmitEncryptForm('braintree-payment-form');
+
+<% if ENV["BRAINTREE_ENV"] == "test" %>
+  <script type="text/javascript">
+    var braintree = Braintree.create('MIIBCgKCAQEAy/5KpvGIOdwoAvhFrbAhSH1tkEWEWxl0PWCp4ecWxBtWm0IVD+KM3G6ws3auadgAdT1ksLCSWEQrnHMW1hFZ4nUbi+cixRfAsTAR7ZjZvJZbvzpmA1U9OQNRw9oEUZ29G6yosMWm+n4hUvm89NEFAmkbh2vzz98EdIvcp4f6RwMGjZ9d6vQXjdVen0pa6Qgefd3Te7C5gfSuvZ8Bpt7Q1csmX658MJKJZp5bj0VLYLIX0KaN8G+hWyx/Yf3ggctWU5UlHMqowPigTJEMc0bnvHOHNmbVJ23p+SxvVPiKFwwBCvsQz3oNIy+GideHjH9lN0l8LVEaJlpY7cc75eS8BQIDAQAB');
+    braintree.onSubmitEncryptForm('braintree-payment-form');
+  </script>
+<% else %>
+  <script type="text/javascript">
+    var braintree = Braintree.create('MIIBCgKCAQEAyq1NFunBHmKeauBGuN1RX+JzD507Ck/bSJ186DXtW4cusdlK0SdervoMXAdpF/2I5SRtMxXR7P6mEiQaGUD+4j7jBsMqdl6JZ+BTQJ4uFM8pI85dtbAo3IUJPiEAloYYjnrX3ZSRetkPQaqr5spG5EjgOsPUNFV8tEzing271hirDABDTw7OvE9e6MdAFJxQNY7SBJDTW0Qa7a/jOIipwO4S2LffcRcddu46NTzoRqEd3KTiZ5QouUdc1BHUCamiINa9GcfInKqoW8E1BROvj8vVwBX6yjYr3aLvLS4AxacUBHLSmcZ6PyyEQpUNulIL1xbZhigwZv7QHpt1radpqwIDAQAB');
+    braintree.onSubmitEncryptForm('braintree-payment-form');
+  </script>
 <% end %>
