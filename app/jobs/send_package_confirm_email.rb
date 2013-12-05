@@ -21,19 +21,19 @@ class SendPackageConfirmEmail < ResqueJob
     giftee = User.where(:email => gift_email).first
 
     if !gift_email.nil?
-      send_gift_receipt_email(email, gift_email, package)
+      SendPackageConfirmEmail.send_gift_receipt_email(email, gift_email, package)
       if giftee.nil?
-        send_gift_email(gift_code, email, gift_email, package)
+        SendPackageConfirmEmail.send_gift_email(gift_code, email, gift_email, package)
       else
         Credit.create(:total => code.amount, :user_id => giftee.id, :promo_code_id => code.id)
-        send_user_gift_email(gift_code, email, gift_email, package)
+        SendPackageConfirmEmail.send_user_gift_email(gift_code, email, gift_email, package)
       end
     else
       if giftor.nil?
-        send_receipt_email(gift_code, email, package)
+        SendPackageConfirmEmail.send_receipt_email(gift_code, email, package)
       else
         Credit.create(:total => code.amount, :user_id => giftor.id, :promo_code_id => code.id) 
-        send_user_receipt_email(gift_code, email, package)
+        SendPackageConfirmEmail.send_user_receipt_email(gift_code, email, package)
       end
     end
 
@@ -42,7 +42,7 @@ class SendPackageConfirmEmail < ResqueJob
   # ---------------------------------- #
   # ------ Receipt for non-user ------ #
   # ---------------------------------- #
-  def send_receipt_email(gift_code, email, package)
+  def self.send_receipt_email(gift_code, email, package)
         
     mandrill = Mandrill::API.new 
     template_name = "package-receipt-nonuser"
@@ -68,7 +68,7 @@ class SendPackageConfirmEmail < ResqueJob
   # ---------------------------------- #
   # -------- Receipt for user -------- #
   # ---------------------------------- #
-  def send_user_receipt_email(gift_code, email, package)
+  def self.send_user_receipt_email(gift_code, email, package)
         
     mandrill = Mandrill::API.new 
     template_name = "tapfit-purchase-confirmation"
@@ -94,7 +94,7 @@ class SendPackageConfirmEmail < ResqueJob
   # ---------------------------------- #
   # --------- Gift for user ---------- #
   # ---------------------------------- #
-  def send_user_gift_email(gift_code, email, gift_email, package)
+  def self.send_user_gift_email(gift_code, email, gift_email, package)
         
     mandrill = Mandrill::API.new 
     template_name = "tapfit-purchase-confirmation"
@@ -121,7 +121,7 @@ class SendPackageConfirmEmail < ResqueJob
   # ---------------------------------- #
   # ---- Gift receipt for giftor ----- #
   # ---------------------------------- #
-  def send_gift_receipt_email(email, gift_email, package)
+  def self.send_gift_receipt_email(email, gift_email, package)
         
     mandrill = Mandrill::API.new 
     template_name = "tapfit-purchase-confirmation"
@@ -150,7 +150,7 @@ class SendPackageConfirmEmail < ResqueJob
   # ---------------------------------- #
   # -------- Gift for non-user ------- #
   # ---------------------------------- #
-  def send_gift_email(gift_code, email, gift_email, package)
+  def self.send_gift_email(gift_code, email, gift_email, package)
     mandrill = Mandrill::API.new 
     template_name = "tapfit-purchase-confirmation"
     template_content = [{"content"=>"example content", "name" => "example name"}] 
