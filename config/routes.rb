@@ -21,6 +21,13 @@ Tapfit::Application.routes.draw do
     resources :photos
   end
 
+  resources :packages do
+    collection do
+      post 'buy'
+      get 'confirmation'
+    end
+  end
+
   # Api Calls
   namespace :api, defaults: {format: 'json'} do
 
