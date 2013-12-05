@@ -9,7 +9,9 @@ class PackagesController < ApplicationController
 
   def buy
     json = Purchase.buy_package(current_user, params)
-    
+   
+    puts json
+
     if json[:success] == false
         render :oops
     else
