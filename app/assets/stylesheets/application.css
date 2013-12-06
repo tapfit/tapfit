@@ -187,12 +187,6 @@ header#top nav ul li a:hover {
     margin: 10px 5% 10px 5%;
 }
 
-@media only screen and (max-width: 640px) {
-header#top {
-    display: none;
-}
-}
-
 a.anchor {
     position: relative;
     top: -160px;
@@ -373,32 +367,6 @@ a.anchor {
     display: block !important;
 }
 
-@media only screen and (max-width: 1024px) {
-    #banner h2, #sale_hero h2 {
-        font-size: 200%;
-        line-height: 100px;
-        padding: 0;
-        width: 100%;
-    }
-}
-
-@media only screen and (max-width: 480px) {
-    #banner h2, #sale_hero h2 {
-            margin: 14px 0 0 10px;
-            font-size: 150%;
-            width: 300px;
-            line-height: 40px;
-            text-align: center;
-    }
-    .promotion, .stickyDiv, .back-to-top, #sale_hero ul, #banner ul, .cta {
-        display: none;
-    }
-    .iphone {
-        margin-left: -34px;
-        margin-top: -40px;
-    }
-}
-
 #banner form, #sale_hero form {
     margin: 40px 0;
 }
@@ -519,18 +487,6 @@ ul.portfolio li {
     overflow: hidden;
 }
 
-
-@media only screen and (max-width: 640px) {
-    ul.portfolio {
-    width: 320px;
-    margin: 0 auto;
-    }
-
-    ul.portfolio li .photo-overlay {
-        width: 300px;
-    }
-}
-
 .faqs {
     padding: 100px 0 100px 0;
     float: left;
@@ -582,13 +538,6 @@ ul.portfolio li {
 .testimonials ul li p span {
     color: #777;
     font-size: 14px;
-}
-
-@media only screen and (max-width: 640px) {
-    .testimonials ul {
-        width: 320px;
-        margin: 0 auto;
-    }
 }
 
 .dividerBlurb {
@@ -853,38 +802,6 @@ footer p {
     text-decoration: none;
 }
 
-@media screen and (min-width: 481px) and (max-width: 768px) {
-
-#pricePlans #plans .plan {
-    width: 49%;
-    margin: 0 2% 20px 0;
-}
-
-#pricePlans #container > li:nth-child(2n) {
-    margin-right: 0;
-}
-
-}
-
-@media screen and (min-width: 769px) and (max-width: 1024px) {
-
-#pricePlans #container .plan {
-    width: 49%;
-    margin: 0 2% 20px 0;
-}
-
-#pricePlans #container > li:nth-child(2n) {
-    margin-right: 0;
-}
-
-}
-
-@media screen and (min-width: 1025px) {
-
-#pricePlans {
-    padding: 2em auto;
-}
-
 #pricePlans #container .plan {
     width: 24%;
     margin: 0 1.33% 20px 0;
@@ -1079,13 +996,6 @@ footer p {
     height: 100%;
     z-index: 999992;
     outline: none !important;
-}
-
-@media only screen and (max-width: 900px) {
-    .tf-container {
-        padding-left: 6px;
-        padding-right: 6px;
-    }
 }
 
 .tf-container {
@@ -1732,7 +1642,52 @@ fieldset {
   line-height: 22px;
 }
 
+@media only screen and (max-width: 1024px) {
+    #banner h2, #sale_hero h2 {
+        font-size: 200%;
+        line-height: 100px;
+        padding: 0;
+        width: 100%;
+    }
+    #pricePlans {
+        padding: 2em auto;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    header#top {
+        display: none;
+    }
+    ul.portfolio {
+        width: 320px;
+        margin: 0 auto;
+    }
+
+    ul.portfolio li .photo-overlay {
+        width: 300px;
+    }
+    .testimonials ul {
+        width: 320px;
+        margin: 0 auto;
+    }
+}
+
 @media only screen and (max-width: 480px) {
+    
+    #banner h2, #sale_hero h2 {
+        margin: 14px 0 0 10px;
+        font-size: 150%;
+        width: 300px;
+        line-height: 40px;
+        text-align: center;
+    }
+    .process, .locations, .cities, .promotion, .stickyDiv, .back-to-top, #sale_hero ul, #banner ul, .cta {
+        display: none;
+    }
+    .iphone {
+        margin-left: -34px;
+        margin-top: -10px;
+    }
     #banner {
         height: 480px;
     }
@@ -1757,5 +1712,33 @@ fieldset {
     
     div.content-modal div.tf-content {
         margin-top: 0;
+    }
+    
+    #pricePlans #container .plan {
+        width: 100%;
+        margin: 0 2% 20px 0;
+    }
+    #pricePlans #container > li:nth-child(2n) {
+        margin-right: 0;
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    #pricePlans #container .plan {
+        width: 49%;
+        margin: 0 2% 20px 0;
+    }
+    #pricePlans #container > li:nth-child(2n) {
+        margin-right: 0;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    #pricePlans #container .plan {
+        width: 49%;
+        margin: 0 2% 20px 0;
+    }
+    #pricePlans #container > li:nth-child(2n) {
+        margin-right: 0;
     }
 }
