@@ -29,9 +29,15 @@ $(document).ready(function() {
 
         // Bind anchor scrolling to click
         $('a').click(function(){
-            if ($('[name="' + $.attr(this, 'href').substr(1) + '"]').length || $('[name="' + $.attr(this, 'href').substr(2) + '"]').length) {
+            if ($('[name="' + $.attr(this, 'href').substr(1) + '"]').length) {
                 $('html, body').animate({
                     scrollTop: $('[name="' + $.attr(this, 'href').substr(1) + '"]').offset().top,
+                }, 500, function(){
+                    anchorClick();
+                });
+            } else if ($('[name="' + $.attr(this, 'href').substr(2) + '"]').length) {
+                $('html, body').animate({
+                    scrollTop: $('[name="' + $.attr(this, 'href').substr(2) + '"]').offset().top,
                 }, 500, function(){
                     anchorClick();
                 });
