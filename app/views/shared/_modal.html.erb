@@ -39,16 +39,16 @@
                                 <h3>Payment</h3>
                                 <div class="cards-accepted">Visa, MasterCard, AMEX, Discover</div>
 
-                                <input class="inline" type="text" id="card_number" size="20" maxlength="20" placeholder="Credit Card Number" autocomplete="off" data-encrypted-name="number"/>
+                                <input class="inline" type="text" id="card_number" size="20" maxlength="20" placeholder="Credit Card Number" autocomplete="off" data-encrypted-name="number" required creditcard/>
                                 <div id="visa" class="cc-icon"></div>
                                 <div id="mastercard" class="cc-icon"></div>
                                 <div id="americanexpress" class="cc-icon"></div>
                                 <div id="discover" class="cc-icon"></div>
 
-                                <input class="inline" type="text" id="card_month" size="2" maxlength="2" placeholder="MM" autocomplete="off" name="month"/>
-                                <input class="inline" type="text" id="card_year" size="4" maxlength="4" placeholder="YYYY" autocomplete="off" name="year"/>
-                                <input class="inline" type="text" id="card_cvv" size="4" maxlength="4" autocomplete="off" data-encrypted-name="cvv" placeholder="CVV">
-                                <input class="inline" type="text" id="address_zip" size="12" maxlength="12" data-encrypted-name="address_zip" placeholder="Billing Zip Code">
+                                <input class="inline" type="text" id="card_month" size="2" maxlength="2" placeholder="MM" autocomplete="off" name="month" required/>
+                                <input class="inline" type="text" id="card_year" size="4" maxlength="4" placeholder="YYYY" autocomplete="off" name="year" required/>
+                                <input class="inline" type="text" id="card_cvv" size="4" maxlength="4" autocomplete="off" data-encrypted-name="cvv" placeholder="CVV" required/>
+                                <input class="inline" type="text" id="address_zip" size="12" maxlength="12" data-encrypted-name="address_zip" placeholder="Billing Zip Code"/>
                             </div>
 
                             <div class="row account group">
