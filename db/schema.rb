@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131209191520) do
+ActiveRecord::Schema.define(version: 20131209224009) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -273,6 +273,10 @@ ActiveRecord::Schema.define(version: 20131209191520) do
     t.integer  "radius"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.hstore   "nwbound"
+    t.hstore   "swbound"
+    t.hstore   "nebound"
+    t.hstore   "sebound"
   end
 
   create_table "taggings", force: true do |t|
