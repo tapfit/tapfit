@@ -1740,3 +1740,7 @@ fieldset {
         margin-right: 0;
     }
 }
+
+.header-padding {
+  padding-top: 200px;
+}

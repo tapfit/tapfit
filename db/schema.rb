@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131205233112) do
+ActiveRecord::Schema.define(version: 20131209191520) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -147,6 +147,8 @@ ActiveRecord::Schema.define(version: 20131205233112) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.string   "image_remote_url"
+    t.string   "url"
   end
 
   add_index "photos", ["imageable_id"], name: "index_photos_on_imageable_id", using: :btree
