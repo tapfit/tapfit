@@ -273,10 +273,10 @@ ActiveRecord::Schema.define(version: 20131209224009) do
     t.integer  "radius"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.hstore   "nwbound"
-    t.hstore   "swbound"
-    t.hstore   "nebound"
-    t.hstore   "sebound"
+    t.float    "low_lat"
+    t.float    "high_lat"
+    t.float    "low_lon"
+    t.float    "high_lon"
   end
 
   create_table "taggings", force: true do |t|
