@@ -30,7 +30,8 @@ class PhotosController < ApplicationController
 
   def create
     @photo = Photo.new(photo_params)
-    
+   
+    puts @photo 
     respond_to do |format|
       if @photo.save
         @place = check_place(params[:place_id])
@@ -58,6 +59,6 @@ class PhotosController < ApplicationController
   private
 
   def photo_params
-    params.require(:photo).permit(:user_id, :place_id, :image, :workout_key)
+    params.require(:photo).permit(:user_id, :place_id, :image, :workout_key, :url)
   end
 end
