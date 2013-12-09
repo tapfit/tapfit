@@ -1,6 +1,7 @@
 require 'mandrill'
 require 'resque'
 require './lib/resque_job'
+require './app/mailers/buy_notification_mailer'
 
 class SendPackageConfirmEmail < ResqueJob
 
@@ -39,6 +40,7 @@ class SendPackageConfirmEmail < ResqueJob
       end
     end
 
+    BuyNotificationMailer.send_package_email(email, gift_email)
   end
 
   def self.create_readable_code(gift_code)

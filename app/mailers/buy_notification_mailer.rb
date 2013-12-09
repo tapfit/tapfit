@@ -19,5 +19,20 @@ class BuyNotificationMailer < ActionMailer::Base
       end
       mail(to: @emails.join("; "), subject: 'New Class Purchased!')
     end
+  end
+
+  def send_package_email(giftor, giftee)
+    if ENV["SEND_TEXTS"] == 'true'
+      @numbers = [ "19377763643", "13126593275", "18474364229" ]
+      
+      body = "#{giftor} just sent #{giftee} a package"
+
+      @numbers.each do |number|
+        response = $nexmo.send_message({:to => number, :from => '17324409825', :text => body})
+        if !response.ok?
+          puts response.body
+        end
+      end
+    end
   end 
 end
