@@ -16,7 +16,7 @@ class Photo < ActiveRecord::Base
   validates_presence_of :image_remote_url, :if => :image_url_provided?, :message => 'is invalid or inaccessible'
 
   def self.image_base_url
-    return "https://s3-us-west-2.amazonaws.com/tapfit-staging"
+    return "https://s3-us-west-2.amazonaws.com/tapfit-production"
   end
 
   private
