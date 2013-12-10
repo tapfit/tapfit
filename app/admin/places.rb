@@ -1,5 +1,6 @@
 require "./lib/crawler_validation/process_location"
 require "./lib/crawler-helpers/casper_mindbody"
+require "./lib/add_rating"
 
 ActiveAdmin.register Place do
 
@@ -59,6 +60,8 @@ ActiveAdmin.register Place do
       f.input :facility_type
       f.input :category
       f.input :pass_detail_info, :as => :number
+      f.input :avg_rating, :as => :number
+      f.input :num_of_reviews, :as => :number
        
       f.has_many :place_hours do |hour|
         hour.input :day_of_week
@@ -120,6 +123,8 @@ ActiveAdmin.register Place do
       place_params = place_params.except!(:place_hours_attributes)
       place_params = place_params.except!(:pass_detail_info)
       place_params = place_params.except!(:address)
+      place_params = place_params.except!(:avg_rating)
+      place_params = place_params.except!(:num_of_reviews)
       place = Place.find(permitted_params[:id])
 
       address = place.address
@@ -141,6 +146,8 @@ ActiveAdmin.register Place do
       puts contract_params
       hour_params = place_params[:place_hours_attributes]
       pass_detail = place_params[:pass_detail_info]
+      average_rating = place_params[:avg_rating]
+      num_of_reviews = place_params[:num_of_reviews]
       if !contract_params.nil?
         contract_params[:place_id] = place_id
       end
@@ -204,6 +211,18 @@ ActiveAdmin.register Place do
           end
         else
           PassDetail.create(:place_id => place.id, :pass_type => pass_detail)
+        end
+      end
+
+      if !average_rating.nil? && !num_of_reviews.nil?
+        average_rating = average_rating.to_f
+        num_of_reviews = num_of_reviews.to_i
+        if Rating.where(:place_id => place.id).average(:rating) != average_rating
+          if Rating.where(:place_id => place.id).count != num_of_reviews
+            puts "deleting and replacing ratings"
+            Rating.where(:place_id => place.id).destroy_all
+            AddRating.add_rating(place.id, num_of_reviews, average_rating)
+          end
         end
       end
 

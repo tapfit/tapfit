@@ -138,6 +138,10 @@ class Place < ActiveRecord::Base
     return (self.ratings.count > 0) ? self.ratings.average(:rating).to_f : -1
   end
 
+  def num_of_reviews
+    return self.ratings.count
+  end
+
   def reviews
     return self.ratings.where.not(:review => nil).order("created_at DESC").limit(5).as_json(:list => true)
   end
