@@ -28,6 +28,7 @@ ActiveAdmin.register Place do
   filter :name, :label => "Name"
   filter :address_city, :label => "City", :as => :string
   filter :source
+  filter :category
 
 
   member_action :get_classes, :method => :get do
