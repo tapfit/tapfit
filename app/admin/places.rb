@@ -215,14 +215,12 @@ ActiveAdmin.register Place do
       end
 
       if !average_rating.nil? && !num_of_reviews.nil?
-        average_rating = average_rating.to_f
+        average_rating = (average_rating.to_f * 10).round / 10.0
         num_of_reviews = num_of_reviews.to_i
-        if Rating.where(:place_id => place.id).average(:rating) != average_rating
-          if Rating.where(:place_id => place.id).count != num_of_reviews
-            puts "deleting and replacing ratings"
-            Rating.where(:place_id => place.id).destroy_all
-            AddRating.add_rating(place.id, num_of_reviews, average_rating)
-          end
+        if (Rating.where(:place_id => place.id).average(:rating) * 10).round / 10.0 != average_rating || Rating.where(:place_id => place.id).count != num_of_reviews 
+          puts "deleting and replacing ratings"
+          Rating.where(:place_id => place.id).destroy_all
+          AddRating.add_rating(place.id, num_of_reviews, average_rating)
         end
       end
 
