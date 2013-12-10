@@ -15,9 +15,6 @@
 //= require turbolinks
 //= require_tree .
 
-var previousOffset = 0;
-var isAnimating = false;
-
 $(document).ready(function() {
 
     /* Scroll event handler */
@@ -60,8 +57,8 @@ $(document).ready(function() {
 function handleStickyDiv(){
     var scrolled = $(window).scrollTop();
     var offset = $("#banner").height() - $("header#top").height();
-    var offsetTwo = offset + $(".process").outerHeight( true );
-    var offsetThree = offsetTwo + $(".features").outerHeight( true );
+    var offsetTwo = offset + $(".features").outerHeight( true );
+    var offsetThree = offsetTwo + $(".process").outerHeight( true );
     var offsetFour = offsetThree + $(".plans").outerHeight( true );
     var offsetFive = offsetFour + $(".cities").outerHeight( true );
     var offsetSix = offsetFive + $(".locations").outerHeight( true );
