@@ -33,11 +33,11 @@ gem 'omniauth-facebook'
 
 
 # These gems for active admin
-gem 'responders',          github: 'plataformatec/responders'
-gem 'inherited_resources', github: 'josevalim/inherited_resources'
+gem 'responders'#,          github: 'plataformatec/responders'
+gem 'inherited_resources'#, github: 'josevalim/inherited_resources'
 gem 'ransack'
-gem 'activeadmin',         github: 'gregbell/active_admin'
-gem 'formtastic',          github: 'justinfrench/formtastic'
+gem "activeadmin",         github: 'gregbell/active_admin'
+gem 'formtastic'#,          github: 'justinfrench/formtastic'
 
 group :test, :development do
   gem "rspec-rails"  
