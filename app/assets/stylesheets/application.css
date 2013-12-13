@@ -1023,7 +1023,7 @@ div.content-modal div.tf-content {
 
 .tf-content {
     position: relative;
-    display: inline block;
+    display: inline-block;
     vertical-align: middle;
     margin: 0 auto;
     text-align: left;
@@ -1484,7 +1484,7 @@ margin-top: 10px;
 
 .tf-container:before {
     content: '';
-    display: inline block;
+    display: inline-block;
     height: 100%;
     vertical-align: middle;
 }
@@ -1648,7 +1648,7 @@ fieldset {
         width: 100%;
     }
     #pricePlans {
-        padding: 2em auto;
+        padding: 2em;
     }
 }
 
