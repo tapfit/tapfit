@@ -10,13 +10,20 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
 
 $(document).ready(function() {
 
+    var x = document.getElementsByClassName('preorder-button');
+    for (var i=0; i<x.length; i++) {
+        x[i].onclick = function() {
+            displayOrderModal(this.id);
+            return false;
+        }
+    }
+    
     /* Scroll event handler */
     if (screen.width > 500) {
         // Bind handleStickDiv to scroll
