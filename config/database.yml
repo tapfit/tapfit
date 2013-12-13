@@ -8,7 +8,7 @@ development:
   encoding: unicode
   database: tapfit_dev
   username: tapfit
-  password: 
+  password: password 
   pool: 5
 
 # Warning: The database defined as "test" will be erased and
