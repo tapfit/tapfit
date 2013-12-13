@@ -32,7 +32,6 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'rails_12factor', group: :production
 
-
 # These gems for active admin
 gem 'responders'#,          github: 'plataformatec/responders'
 gem 'inherited_resources'#, github: 'josevalim/inherited_resources'
@@ -44,6 +43,7 @@ group :test, :development do
   gem "rspec-rails"  
   gem "factory_girl_rails"
   gem 'database_cleaner'
+  gem 'therubyracer'
 end
 
 # Use SCSS for stylesheets

@@ -18,6 +18,7 @@ class Place < ActiveRecord::Base
   accepts_nested_attributes_for :place_contract
   self.per_page = 30
 
+
   # Methods
   def icon_photo
     photo = Photo.where(:id => self.icon_photo_id).first
