@@ -30,6 +30,7 @@ gem 'oauth'
 gem 'mandrill-api'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'rails_12factor', group: :production
 
 
 # These gems for active admin
