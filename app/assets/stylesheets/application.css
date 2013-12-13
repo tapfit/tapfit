@@ -93,7 +93,6 @@ header#top .top-nav {
 }
 
 header#top .top-nav nav {
-    display: inline-block;
     float: right;
     height: 40px;
     width: auto;
@@ -1023,7 +1022,6 @@ div.content-modal div.tf-content {
 
 .tf-content {
     position: relative;
-    display: inline-block;
     vertical-align: middle;
     margin: 0 auto;
     text-align: left;
@@ -1484,7 +1482,7 @@ margin-top: 10px;
 
 .tf-container:before {
     content: '';
-    display: inline-block;
+    display: inline;
     height: 100%;
     vertical-align: middle;
 }
