@@ -124,7 +124,7 @@ class Place < ActiveRecord::Base
   def category
     category = self.category_list[0]
     if category.nil?
-      return ""
+      return self.category
     else
       return category
     end
