@@ -13,6 +13,7 @@ module Api
 
       def buy
         json = Purchase.buy_package(current_user, params)
+       
         
         if json[:success] == false
             render :json => json, :status => 422

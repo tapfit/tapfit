@@ -59,6 +59,7 @@ ActiveAdmin.register Place do
       f.input :can_buy
       f.input :facility_type
       f.input :category
+      f.input :category_list
       f.input :pass_detail_info, :as => :number
       f.input :avg_rating, :as => :number
       f.input :num_of_reviews, :as => :number
@@ -125,6 +126,7 @@ ActiveAdmin.register Place do
       place_params = place_params.except!(:address)
       place_params = place_params.except!(:avg_rating)
       place_params = place_params.except!(:num_of_reviews)
+      place_params = place_params.except!(:category_list)
       place = Place.find(permitted_params[:id])
 
       address = place.address
@@ -148,6 +150,7 @@ ActiveAdmin.register Place do
       pass_detail = place_params[:pass_detail_info]
       average_rating = place_params[:avg_rating]
       num_of_reviews = place_params[:num_of_reviews]
+      category_list = place_params[:category_list]
       if !contract_params.nil?
         contract_params[:place_id] = place_id
       end
@@ -226,6 +229,17 @@ ActiveAdmin.register Place do
         end
       end
 
+      if !category_list.blank?
+        place.category_list.remove(place.category_list)
+        place.save
+        list = category_list.split(/,/)
+
+        list.each do |category|
+          place.category_list.add(category.strip)
+        end
+
+        place.save
+      end
       redirect_to admin_place_path(place)
 
     end

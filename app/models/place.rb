@@ -3,7 +3,7 @@ require './lib/facility_type'
 class Place < ActiveRecord::Base
   
   # Definitions
-  acts_as_taggable_on :categories
+  acts_as_ordered_taggable_on :categories
   before_save :normalize_tags
   belongs_to :address
   has_many :workouts
@@ -118,6 +118,15 @@ class Place < ActiveRecord::Base
       return self.next_workouts.where(:is_day_pass => true)
     else
       return nil
+    end
+  end
+
+  def category
+    category = self.category_list[0]
+    if category.nil?
+      return ""
+    else
+      return category
     end
   end
 
