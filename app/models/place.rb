@@ -120,7 +120,7 @@ class Place < ActiveRecord::Base
       return nil
     end
   end
-=begin
+
   def category
     category = self.category_list[0]
     if category.nil?
@@ -129,7 +129,7 @@ class Place < ActiveRecord::Base
       return category
     end
   end
-=end
+
   def pass_detail_info
     pass_detail = self.pass_details.first
     if pass_detail.nil?
