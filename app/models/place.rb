@@ -4,7 +4,7 @@ class Place < ActiveRecord::Base
   
   # Definitions
   acts_as_ordered_taggable_on :categories
-  before_save :normalize_tags
+  before_create :normalize_tags
   belongs_to :address
   has_many :workouts
   has_many :ratings
@@ -120,7 +120,7 @@ class Place < ActiveRecord::Base
       return nil
     end
   end
-
+=begin
   def category
     category = self.category_list[0]
     if category.nil?
@@ -129,7 +129,7 @@ class Place < ActiveRecord::Base
       return category
     end
   end
-
+=end
   def pass_detail_info
     pass_detail = self.pass_details.first
     if pass_detail.nil?
