@@ -109,17 +109,18 @@ module Api
           password = params[:password]
           user = User.where(:email => email).first
         end
-        
-        location = user.location
-        uid = user.uid
-        gender = user.gender
-
-        location = "" if location.nil?
-        uid = "" if uid.nil?
-        gender = "" if gender.nil?
 
         if !user.nil? && (user.valid_password?(password) || !params[:access_token].nil?)
           sign_in(:user, user)
+
+          location = user.location
+          uid = user.uid
+          gender = user.gender
+
+          location = "" if location.nil?
+          uid = "" if uid.nil?
+          gender = "" if gender.nil?
+
           user.reset_authentication_token!
           render :json => { :email => user.email, :id => user.id, :auth_token => user.authentication_token, :first_name => user.first_name, :last_name => user.last_name, :credit_amount => user.credit_amount, :uid => uid, :invitation_code => user.invitation_code, :gender => gender, :location => location }
         else
