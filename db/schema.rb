@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131211010124) do
+ActiveRecord::Schema.define(version: 20131217145135) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -185,7 +185,6 @@ ActiveRecord::Schema.define(version: 20131211010124) do
     t.string   "source"
     t.binary   "source_key"
     t.string   "url"
-    t.string   "category"
     t.string   "phone_number"
     t.text     "tapfit_description"
     t.text     "source_description"
@@ -205,7 +204,6 @@ ActiveRecord::Schema.define(version: 20131211010124) do
   end
 
   add_index "places", ["can_buy"], name: "index_places_on_can_buy", using: :btree
-  add_index "places", ["category"], name: "index_places_on_category", using: :btree
   add_index "places", ["crawler_source"], name: "index_places_on_crawler_source", using: :btree
   add_index "places", ["is_public"], name: "index_places_on_is_public", using: :btree
   add_index "places", ["show_place"], name: "index_places_on_show_place", using: :btree
