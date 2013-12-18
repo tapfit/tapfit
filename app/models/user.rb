@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
 
   @invitation_code_amount = 5
 
+  @new_user_credit_amount = 5
+
   devise :database_authenticatable, :registerable, :token_authenticatable,
          :recoverable, :omniauthable, :rememberable, :trackable, :validatable
 
@@ -15,7 +17,8 @@ class User < ActiveRecord::Base
   has_many :place_checkins, :through => :checkins, :source => :place
   has_many :credits
   has_one :promo_code
-  # after_create :send_welcome_email
+  
+  after_create :add_new_user_credit
   
   after_save :set_promo_code
   
@@ -102,6 +105,14 @@ class User < ActiveRecord::Base
       end
     end
   end 
+
+  def add_new_user_credit
+    id = self.id
+
+    if !id.nil?
+      Credit.create(:total => 5, :user_id => id)
+    end
+  end
 
   def set_promo_code
     code = nil
