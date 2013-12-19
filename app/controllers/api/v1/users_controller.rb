@@ -121,7 +121,7 @@ module Api
           uid = "" if uid.nil?
           gender = "" if gender.nil?
 
-          user.reset_authentication_token!
+          # user.reset_authentication_token!
           render :json => { :email => user.email, :id => user.id, :auth_token => user.authentication_token, :first_name => user.first_name, :last_name => user.last_name, :credit_amount => user.credit_amount, :uid => uid, :invitation_code => user.invitation_code, :gender => gender, :location => location }
         else
           render :json => { :errors => "Not valid email or password" }, :status => 403
@@ -152,7 +152,7 @@ module Api
       # POST users/logout
       def logout
         sign_out(current_user)
-        current_user.authentication_token = nil
+        # current_user.authentication_token = nil
         current_user.save
         render :json => { :messgae => "Successfully logged out" }        
       end
