@@ -17,6 +17,7 @@
 $(document).ready(function() {
 
     var x = document.getElementsByClassName('preorder-button');
+
     for (var i=0; i<x.length; i++) {
         x[i].onclick = function() {
             displayOrderModal(this.id);
@@ -48,9 +49,6 @@ $(document).ready(function() {
             }
         });
         
-        // Uncomment this for splash page slideshow
-        // setInterval(slideshow, 3000);
-
         // Handle stickyDiv on document ready
         handleStickyDiv();
     }
@@ -153,4 +151,39 @@ function anchorClick() {
     _gaq.push(['_trackPageview', {
         'page': location.pathname + location.search + location.hash,
         'title': location.hash.substring(1)}]);
+}
+
+function initialize() {
+    var latlng = new google.maps.LatLng(39.1000, -84.5167);
+    var settings = {
+        zoom: 12,
+        center: latlng,
+        scrollwheel: false,
+        mapTypeControl: true,
+        mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
+        navigationControl: true,
+        navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("map_canvas"), settings);
+    //var locations = places;
+    
+    $.each( places, function(key, value) {
+
+        name = value['name'];
+        lat = value['lat'];
+        lon = value['lon'];
+       
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(lat, lon),
+            map: map
+        });
+
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+                infowindow.setContent(name);
+                infowindow.open(map, marker);
+            }
+        })(marker, i));
+    });
 }

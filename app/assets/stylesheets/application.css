@@ -446,7 +446,7 @@ ul.filter li.current a {
 }
 
 .locations {
-    padding: 100px 0;
+    padding: 0;
     float: left;
     clear: both;
     width: 100%;
