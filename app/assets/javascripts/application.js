@@ -156,7 +156,7 @@ function anchorClick() {
 function initialize() {
     var latlng = new google.maps.LatLng(39.1000, -84.5167);
     var settings = {
-        zoom: 12,
+        zoom: 5,
         center: latlng,
         scrollwheel: false,
         mapTypeControl: true,
