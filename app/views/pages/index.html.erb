@@ -171,6 +171,6 @@
 
 <%= javascript_tag do %>
     window.packages = <%=raw Package.limit(4).to_json %>;
-    window.places = <%= Place.where(:can_buy => true).to_json %>;
+    window.places = <%=raw Place.where(:can_buy => true).to_json %>;
 <% end %>
     
