@@ -179,11 +179,11 @@ function initialize() {
             map: map
         });
 
-        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        google.maps.event.addListener(marker, 'click', (function(marker) {
             return function() {
                 infowindow.setContent(name);
                 infowindow.open(map, marker);
             }
-        })(marker, i));
+        })(marker));
     });
 }
