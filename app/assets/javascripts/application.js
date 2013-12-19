@@ -176,14 +176,8 @@ function initialize() {
        
         marker = new google.maps.Marker({
             position: new google.maps.LatLng(lat, lon),
-            map: map
+            map: map,
+            title: name
         });
-
-        google.maps.event.addListener(marker, 'click', (function(marker) {
-            return function() {
-                infowindow.setContent(name);
-                infowindow.open(map, marker);
-            }
-        })(marker));
     });
 }
