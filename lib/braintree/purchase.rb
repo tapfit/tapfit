@@ -30,7 +30,7 @@ module Purchase
     else
       
       price = workout.price
-
+      partial_credit = false
       if (user.credit_amount >= price)
         Resque.enqueue(AddCreditsToInvitor, user.id, Receipt.where(:user_id => user.id).count)
         receipt = workout.buy_workout(user)
@@ -41,9 +41,10 @@ module Purchase
         return_hash[:receipt] = receipt
         return return_hash
       elsif (user.credit_amount > 0)
+        partial_credit = true
         price = price - user.credit_amount
         Resque.enqueue(AddCreditsToInvitor, user.id, Receipt.where(:user_id => user.id).count)
-        user.use_credits(user.credit_amount)
+        # user.use_credits(user.credit_amount)
       end
       result = Braintree::Transaction.sale(
         :amount => price,
@@ -59,6 +60,9 @@ module Purchase
         return_hash[:card_number] = result.transaction.credit_card_details.masked_number
         return_hash[:credit_card_type] = result.transaction.credit_card_details.card_type
         return_hash[:receipt] = receipt
+        if partial_credit
+          user.use_credits(user.credit_amount)
+        end
       else
         return_hash[:error_message] = result.message
       end
