@@ -65,8 +65,8 @@ function handleStickyDiv(){
     var offsetTwo = offset + $(".features").outerHeight( true );
     var offsetThree = offsetTwo + $(".process").outerHeight( true );
     var offsetFour = offsetThree + $(".plans").outerHeight( true );
-    var offsetFive = offsetFour + $(".locations").outerHeight( true );
-    var offsetSix = offsetFive + $(".cities").outerHeight( true );
+    var offsetFive = offsetFour + $(".cities").outerHeight( true );
+    var offsetSix = offsetFive + $(".locations").outerHeight( true );
 
     $(".sticky_links").removeClass("active");
     $(".sticky_links").addClass("inactive");
@@ -86,12 +86,12 @@ function handleStickyDiv(){
         $("#link_plans").removeClass("inactive");
     }
     else if (scrolled <= offsetFive) {
-        $("#link_locations").addClass("active");
-        $("#link_locations").removeClass("inactive");
-    }
-    else {
         $("#link_cities").addClass("active");
         $("#link_cities").removeClass("inactive");
+    }
+    else {
+        $("#link_locations").addClass("active");
+        $("#link_locations").removeClass("inactive");
     }
 }
 

@@ -93,8 +93,7 @@
 <div class="wrapper">
 
 <div class="heading">
-    <h3>Give the gift of fitness</h3>
-    <p>TapFit workout credits can be used at any gym or studio in our network and never expire. Pre-load your account and save up to 50% on each workout.</p>
+    <h3>Workout credits can be used at any of our studios and never expire.</h3>
 </div>
 
 <section id="pricePlans">
@@ -105,7 +104,7 @@
                     <li class="price"><h2>$<%= package.fit_coins %></h2><p>in workout credits</p></li>
                     <ul class="planDetails">
                         <li class="left">Workouts:</li>
-                        <li class="right"><%= 5 * (package.fit_coins/45).round(0) %>*</li>
+                        <li class="right"><%= (package.fit_coins/10).round(0) %>*</li>
                     </ul>
                     <ul class="planDetails">
                         <li class="left">List Price:</li>
@@ -130,6 +129,41 @@
     <p>* Workout pricing varies based on the type of class and the location.<br/>The above workout estimates are for illustrative purposes only. Actual numbers may vary.</p>
 </section>
 </div>
+</div>
+
+<div class="cities"><a name="cities" class="anchor"></a>
+    <!-- Category Filter -->
+    <div class="wrapper">
+        <div class="heading">
+            <h3>Coming Soon to a City Near You</h3>
+        </div>
+            <ul>
+                <li class="cincinnati">
+                    <div class="animation"></div> <!-- eo .animation -->
+                    <span class="drop-cap">1</span>
+                    <h4>Cincinnati</h4>
+                    <p>Available now with studios in Downtown, Over-The-Rhine, Hyde Park, and more! <a href="#plans">Purchase today!</a></p>
+                </li>
+                <li class="even chicago">
+                    <div class="animation"></div> <!-- eo .animation -->
+                    <span class="drop-cap">2</span>
+                    <h4>Chicago</h4>
+                    <p><strong>Coming January 2014!</strong> Want us to notify you when we're available in Chicago? <a href="http://eepurl.com/Ldhnf">Yes, I'm Interested!</a></p>
+                </li>
+                <li class="san_fran">
+                    <div class="animation"></div> <!-- eo .animation -->
+                    <span class="drop-cap">3</span>
+                    <h4>San Francisco</h4>
+                    <p><strong>Coming Spring 2014!</strong> Want us to notify you when we're available in San Francisco? <a href="http://eepurl.com/Ldhnf">Yes, I'm Interested!</a></p>
+                </li>
+                <li class="even last new_york">
+                    <div class="animation"></div> <!-- eo .animation -->
+                    <span class="drop-cap">4</span>
+                    <h4>New York City</h4>
+                    <p><strong>Coming Spring 2014!</strong> Want us to notify you when we're available in New York? <a href="http://eepurl.com/Ldhnf">Yes, I'm Interested!</a></p>
+                </li>
+            </ul>
+    </div>
 </div>
 
 <div class="locations"><a name="locations" class="anchor"></a>
@@ -215,41 +249,6 @@
     <div id="map_canvas" style="width:100%; height:700px;">
     </div>
 </div>-->
-
-<div class="cities"><a name="cities" class="anchor"></a>
-    <!-- Category Filter -->
-    <div class="wrapper">
-        <div class="heading">
-            <h3>Coming Soon to a City Near You</h3>
-        </div>
-            <ul>
-                <li class="cincinnati">
-                    <div class="animation"></div> <!-- eo .animation -->
-                    <span class="drop-cap">1</span>
-                    <h4>Cincinnati</h4>
-                    <p>Available now with studios in Downtown, Over-The-Rhine, Hyde Park, and more! <a href="#plans">Purchase today!</a></p>
-                </li>
-                <li class="even chicago">
-                    <div class="animation"></div> <!-- eo .animation -->
-                    <span class="drop-cap">2</span>
-                    <h4>Chicago</h4>
-                    <p><strong>Coming Spring 2014!</strong> Want us to notify you when we're available in Chicago? <a href="/users/sign_up">Sign up today!</a></p>
-                </li>
-                <li class="san_fran">
-                    <div class="animation"></div> <!-- eo .animation -->
-                    <span class="drop-cap">3</span>
-                    <h4>San Francisco</h4>
-                    <p><strong>Coming Spring 2014!</strong> Want us to notify you when we're available in San Francisco? <a href="/users/sign_up">Sign up today!</a></p>
-                </li>
-                <li class="even last new_york">
-                    <div class="animation"></div> <!-- eo .animation -->
-                    <span class="drop-cap">4</span>
-                    <h4>New York City</h4>
-                    <p><strong>Coming Spring 2014!</strong> Want us to notify you when we're available in New York? <a href="/users/sign_up">Sign up today!</a></p>
-                </li>
-            </ul>
-    </div>
-</div>
 
 <!-- Pre-order form modal -->
 <%= render 'shared/modal' %>
