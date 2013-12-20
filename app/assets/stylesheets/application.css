@@ -446,11 +446,15 @@ ul.filter li.current a {
 }
 
 .locations {
-    padding: 0;
+    padding: 100px 0;
     float: left;
     clear: both;
     width: 100%;
     background: #ffffff;
+}
+
+.locations .anchor {
+    /*top: -100px;*/
 }
 
 .employers {
@@ -1741,4 +1745,8 @@ fieldset {
 
 .header-padding {
   padding-top: 200px;
+}
+
+.blue {
+  background: #3e4f6a !important;
 }
