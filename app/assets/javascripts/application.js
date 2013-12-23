@@ -16,23 +16,35 @@
 
 $(document).ready(function() {
 
-    var x = document.getElementsByClassName('preorder-button');
+    /* ------------------- */
+    /* Track Google Events */
+    /* ------------------- */
+    trackGoogleEvents();
 
-    for (var i=0; i<x.length; i++) {
-        x[i].onclick = function() {
-            displayOrderModal(this.id);
-            return false;
-        }
-    }
+    /* ---------------------- */
+    /* Handle Pre-Order Modal */
+    /* ---------------------- */
+    $('.preorder-button').click(function(){
+        displayOrderModal(this.id);
+        return false;
+    });
     
+    /* ---------------------------- */
+    /* Change Modal Display Amounts */
+    /* ---------------------------- */
+    $('#quantity').bind('change',function(e){
+        displayOrderModal($('#quantity').val());
+    });
+    
+    /* -------------------- */
     /* Scroll event handler */
+    /* -------------------- */
     if (screen.width > 500) {
         // Bind handleStickDiv to scroll
         $(window).bind('scroll',function(e){
             handleStickyDiv();
         });
 
-        // Bind anchor scrolling to click
         $('a').click(function(){
             if ($('[name="' + $.attr(this, 'href').substr(1) + '"]').length) {
                 $('html, body').animate({
@@ -48,17 +60,13 @@ $(document).ready(function() {
                 });
             }
         });
-        
-        // Handle stickyDiv on document ready
         handleStickyDiv();
     }
-
-    $('#quantity').bind('change',function(e){
-        displayOrderModal($('#quantity').val());
-    });
 });
 
-/* Scroll the background layers */
+/* --------------------------- */
+/* Handle Sticky Div Scrolling */
+/* --------------------------- */
 function handleStickyDiv(){
     var scrolled = $(window).scrollTop();
     var offset = $("#banner").height() - $("header#top").height();
@@ -95,20 +103,9 @@ function handleStickyDiv(){
     }
 }
 
-function slideshow() {
-    var $active = $('.slideshow li.inView');
-    if ( $active.length == 0 ) $active = $('.slideshow li:last');
-    var $next = $active.next().length ? $active.next()
-                                      : $('.slideshow li:first');
-
-    $active.removeClass('inView');
-
-    $next.css({opacity: 0.0})
-        .addClass('inView')
-        .animate({opacity: 1.0}, 1000, function(){
-        });
-}
-
+/* --------------------------------- */
+/* Handle display of pre-order modal */
+/* --------------------------------- */
 function displayOrderModal(package_id) {
 
     $("#quantity").val(package_id);
@@ -143,16 +140,44 @@ function closeOrderModal() {
     $(".content-modal").fadeOut();
 }
 
+/* --------------------- */
+/* Google Event Tracking */
+/* --------------------- */
+
+/* 1. Tracking purchase events */
 function trackPurchase() {
     _gaq.push(['_trackEvent', 'Purchase', 'submitted']);
 }
-        
+
+/* 2. Tracking anchors as page clicks */
 function anchorClick() {
     _gaq.push(['_trackPageview', {
         'page': location.pathname + location.search + location.hash,
         'title': location.hash.substring(1)}]);
 }
 
+/* 3. Track iPhone and Android button clicks */
+function trackGoogleEvents() {
+    // iPhone
+    $('.iphone-download-button').click(function(){
+        _gaq.push(['_trackEvent', 'Download Button', 'clicked', 'iPhone']);
+    });
+    // Android
+    $('.android-download-button').click(function(){
+        _gaq.push(['_trackEvent', 'Download Button', 'clicked', 'Android']);
+    });
+    // Interest Button
+    $('.interest-button').click(function(){
+        _gaq.push(['_trackEvent', 'Interest Button', 'clicked', this.id]);
+    });
+}
+
+/* ------- end of Google Tracking ------- */
+
+
+/* --------------------------------- */
+/* Initialization of Google Maps API */
+/* --------------------------------- */
 function initialize() {
     var latlng = new google.maps.LatLng(39.5000, -98.3500);
     var settings = {
