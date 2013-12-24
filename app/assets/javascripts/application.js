@@ -15,12 +15,47 @@
 //= require_tree .
 
 $(document).ready(function() {
+   
+    /* ---------------------------- */
+    /* Setup Google Map Global Vars */ 
+    /* ---------------------------- */
+    var latlng = new google.maps.LatLng(39.1000, -84.5167);
+    var settings = {
+        zoom: 12,
+        center: latlng,
+        scrollwheel: false,
+        mapTypeControl: true,
+        mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
+        navigationControl: true,
+        navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    window.gmap = new google.maps.Map(document.getElementById("map-canvas"), settings);
 
     /* ------------------- */
     /* Track Google Events */
     /* ------------------- */
     trackGoogleEvents();
     google.maps.event.addDomListener(window, 'load', initialize);
+    
+    /* -------------------------------------- */
+    /* Reset Google Map on Dropdown Selection */
+    /* -------------------------------------- */
+    $('.city a').click(function(){
+        var newCityString = this.id;
+        var latLonString = this.name;
+        var latLonParts = latLonString.split(",");
+        var newCenter = new google.maps.LatLng(latLonParts[0], latLonParts[1]);
+
+        gmap.setOptions({
+            center: newCenter,
+            zoom: 12
+        });
+
+        $('.your-city a').text(newCityString);
+
+        return false;
+    });
 
     /* ---------------------- */
     /* Handle Pre-Order Modal */
@@ -41,11 +76,6 @@ $(document).ready(function() {
     /* Scroll event handler */
     /* -------------------- */
     if (screen.width > 500) {
-        // Bind handleStickDiv to scroll
-        $(window).bind('scroll',function(e){
-            handleStickyDiv();
-        });
-
         $('a').click(function(){
             if ($('[name="' + $.attr(this, 'href').substr(1) + '"]').length) {
                 $('html, body').animate({
@@ -61,48 +91,8 @@ $(document).ready(function() {
                 });
             }
         });
-        handleStickyDiv();
     }
 });
-
-/* --------------------------- */
-/* Handle Sticky Div Scrolling */
-/* --------------------------- */
-function handleStickyDiv(){
-    var scrolled = $(window).scrollTop();
-    var offset = $("#banner").height() - $("header#top").height();
-    var offsetTwo = offset + $(".features").outerHeight( true );
-    var offsetThree = offsetTwo + $(".process").outerHeight( true );
-    var offsetFour = offsetThree + $(".plans").outerHeight( true );
-    var offsetFive = offsetFour + $(".cities").outerHeight( true );
-    var offsetSix = offsetFive + $(".locations").outerHeight( true );
-
-    $(".sticky_links").removeClass("active");
-    $(".sticky_links").addClass("inactive");
-
-    if (scrolled < offset) {
-    } 
-    else if (scrolled <= offsetTwo) {
-        $("#link_about").addClass("active");
-        $("#link_about").removeClass("inactive");
-    }
-    else if (scrolled <= offsetThree) {
-        $("#link_features").addClass("active");
-        $("#link_features").removeClass("inactive");
-    }
-    else if (scrolled <= offsetFour) {
-        $("#link_plans").addClass("active");
-        $("#link_plans").removeClass("inactive");
-    }
-    else if (scrolled <= offsetFive) {
-        $("#link_cities").addClass("active");
-        $("#link_cities").removeClass("inactive");
-    }
-    else {
-        $("#link_locations").addClass("active");
-        $("#link_locations").removeClass("inactive");
-    }
-}
 
 /* --------------------------------- */
 /* Handle display of pre-order modal */
@@ -180,17 +170,6 @@ function trackGoogleEvents() {
 /* Initialization of Google Maps API */
 /* --------------------------------- */
 function initialize() {
-    var latlng = new google.maps.LatLng(39.1000, -84.5167);
-    var settings = {
-        zoom: 11,
-        center: latlng,
-        scrollwheel: false,
-        mapTypeControl: true,
-        mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
-        navigationControl: true,
-        navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
     
     var locations = [
         ['The Gym at Carew Towers', 39.10084, -84.51323],
@@ -287,22 +266,19 @@ function initialize() {
         ['Coming Spring 2014!', 40.6700, -73.9400]
     ];
 
-    var map = new google.maps.Map(document.getElementById("map_canvas"), settings);
-
     var infowindow = new google.maps.InfoWindow();
-
     var marker, i;
 
     for (i = 0; i < locations.length; i++) {
         marker = new google.maps.Marker({
             position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-            map: map
+            map: gmap
         });
 
         google.maps.event.addListener(marker, 'click', (function(marker, i) {
             return function() {
                 infowindow.setContent(locations[i][0]);
-                infowindow.open(map, marker);
+                infowindow.open(gmap, marker);
             }
         })(marker, i));
     }
