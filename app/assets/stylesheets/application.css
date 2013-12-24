@@ -641,11 +641,11 @@ footer p {
 }
 
 .plans {
+    background: url("debut_light.png") repeat #eee;
     padding: 100px 0;
     float: left;
     clear: both;
     width: 100%;
-    background: #ffffff;
     border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
 }
@@ -876,12 +876,12 @@ footer p {
 /* Cities Section */
 
 .cities {
-    background: url("debut_light.png") repeat #eee;
-    padding: 90px 0 120px 0;
+    background: #ffffff;
+    padding: 70px 0 0 0;
     float: left;
     clear: both;
     width: 100%;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #ccc;
 }
 
 .cities h3, .locations h3, .plans h3, .cities h3, .employers h3 {
@@ -976,6 +976,98 @@ footer p {
   color: #6f6f6f;
   font-size: 1em;
   line-height: 24px;
+}
+
+/* CityPicker Base CSS */
+#citypicker-container {padding: 0; margin: 0; border: 0;}
+#citypicker-container ul, #citypicker-container li {list-style: none; margin: 0; padding: 0;}
+#citypicker-container ul {position: relative; z-index: 597; }
+#citypicker-container ul li { float: left; min-height: 1px; vertical-align: middle;}
+#citypicker-container ul li.hover,
+#citypicker-container ul li:hover {position: relative; z-index: 599; cursor: default;}
+#citypicker-container ul ul {visibility: hidden; position: absolute; top: 100%; left: 0; z-index: 598; width: 100%;}
+#citypicker-container ul ul li {float: none;}
+#citypicker-container ul ul ul {top: 0; left: auto; right: -99.5%; }
+#citypicker-container ul li:hover > ul { visibility: visible;}
+#citypicker-container ul ul {bottom: 0; left: 0;}
+#citypicker-container ul ul {margin-top: 0; }
+#citypicker-container ul ul li {font-weight: normal;}
+#citypicker-container a { display: block; line-height: 1em; text-decoration: none; }
+
+#citypicker-container {
+    background: #333;
+    border-bottom: 4px solid #eb4840;
+    font-size: 12px;
+}
+
+#citypicker-container > ul { *display: inline-block; }
+#citypicker-container > ul > li > a { line-height: 48px; }
+
+#citypicker-container ul li:hover > a, #citypicker-container ul li.active > a {
+    background; #1b9bff;
+    color: #fff;
+}
+
+#citypicker-container:after, #citypicker-container ul:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+#citypicker-container a {
+    background: #333;
+    color: #eb4840;
+    padding: 0 20px;
+}
+
+#citypicker-container ul {text-transform: uppercase;}
+
+#citypicker-container ul ul {
+    border-top: 4px solid #1b9bff;
+    text-transform: none;
+    min-width: 190px;
+}
+
+#citypicker-container ul ul a {
+    background: #1b9bff;
+    color: #fff;
+    border: 1px solid #0082e7;
+    border-top: 0 none;
+    line-height: 150%;
+    padding: 16px 20px;
+}
+
+#citypicker-container ul ul li {
+    position: relative;
+}
+
+#citypicker-container ul ul li:first-child > a {border-top: 1px solid #0082e7; }
+
+#citypicker-container ul ul li:hover > a { background: #35a6ff; }
+
+#citypicker-container ul ul li:last-child > a {
+    border-radius: 0 0 3px 3px;
+    box-shadow: 0 1px 0 #1b9bff;
+}
+
+#citypicker-container ul ul li:last-child:hover > a { border-radius: 0 0 0 3px; }
+
+#citypicker-container ul ul li.has-sub > a:after {
+    content: '+';
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    margin-top: -8px;
+}
+
+#citypicker-container ul li.has-sub > a:after {
+    content: '+';
+    margin-left: 5px;
+}
+
+#citypicker-container ul li.last ul ul {
+    left: auto;
+    right: 99.5%;
 }
 
 .tf-bg {

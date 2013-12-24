@@ -20,6 +20,7 @@ $(document).ready(function() {
     /* Track Google Events */
     /* ------------------- */
     trackGoogleEvents();
+    google.maps.event.addDomListener(window, 'load', initialize);
 
     /* ---------------------- */
     /* Handle Pre-Order Modal */
@@ -179,9 +180,9 @@ function trackGoogleEvents() {
 /* Initialization of Google Maps API */
 /* --------------------------------- */
 function initialize() {
-    var latlng = new google.maps.LatLng(39.5000, -98.3500);
+    var latlng = new google.maps.LatLng(39.1000, -84.5167);
     var settings = {
-        zoom: 5,
+        zoom: 11,
         center: latlng,
         scrollwheel: false,
         mapTypeControl: true,
