@@ -1,0 +1,48 @@
+<div class="plans"><a name="plans" class="anchor"></a>
+<div class="wrapper">
+
+<div class="heading">
+    <h3>Workout credits can be used at any of our studios and never expire.</h3>
+</div>
+
+<section id="pricePlans">
+    <ul id="container">
+        <% @packages.each do |package| %>
+            <li class="plan">
+                <ul class="planContainer">
+                    <li class="price"><h2>$<%= package.fit_coins %></h2><p>in workout credits</p></li>
+                    <ul class="planDetails">
+                        <li class="left">Workouts:</li>
+                        <li class="right"><%= (package.fit_coins/10).round(0) %>*</li>
+                    </ul>
+                    <ul class="planDetails">
+                        <li class="left">List Price:</li>
+                        <li class="right">$<del><%= package.fit_coins %></del></li>
+                    </ul>
+                    <div class="clear"></div>
+                    <ul class="planDetails">
+                        <li class="left">Sale Price:</li>
+                        <li class="right showoff"><strong>$<%= package.amount %></strong></li>
+                    </ul>
+                    <div class="clear"></div>
+                    <ul class="planDetails">
+                        <li class="left">Savings:</li>
+                        <li class="right"><strong>$<%= (package.fit_coins - package.amount) %></strong> (<%= (100 - (package.amount.to_f/package.fit_coins.to_f)*100).to_i %>%)</li>
+                    </ul>
+                    <div class="clear"></div>
+                    <li class="preorder-button" id="<%= package.id %>"><a href="#">Purchase</a></li>
+                </ul>
+            </li>
+        <% end %>
+    </ul> <!-- End ul#plans -->
+    <p>* Workout pricing varies based on the type of class and the location.<br/>The above workout estimates are for illustrative purposes only. Actual numbers may vary.</p>
+</section>
+</div>
+</div>
+
+<!-- Pre-order form modal -->
+<%= render 'shared/modal' %>
+
+<%= javascript_tag do %>
+    window.packages = <%=raw Package.limit(4).to_json %>;
+<% end %>
