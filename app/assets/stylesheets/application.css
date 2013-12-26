@@ -506,40 +506,52 @@ ul.portfolio li {
 }
 
 .testimonials {
+        background: #292929;
+        margin-top: 80px;
 }
 
 .testimonials ul li {
-    width: 300px;
-    display: inline-block;
-    float: left;
-    margin: 20px 10px;
-    padding: 0 20px;
-    text-align: center;
+        width: 370px;
+        display: inline-block;
+        float: left;
+        margin: 80px 10px;
+        padding: 0 20px;
+        text-align: center;
 }
 
 .testimonials ul li h3 {
-    font-size: 32px;
-    color: #111;
-    margin-top: 20px;
+        font-size: 32px;
+        color: #fff;
+        margin-top: 20px;
 }
 
 .testimonials ul li p.job-role {
-    color: #eb4840;
-    font-size: 15px;
-    text-transform: uppercase;
-    font-weight: 700;
-    margin-top: 0;
-    margin-bottom: 20px;
+        color: #e64367;
+        font-size: 16px;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin-top: 0;
+        margin-bottom: 20px;
 }
 
 .testimonials ul li p {
-    color: #111;
-    font-size: 18px;
+        color: #fff;
+        font-size: 18px;
 }
 
-.testimonials ul li p span {
-    color: #777;
-    font-size: 14px;
+@media only screen and (max-width: 640px) {
+        .testimonials ul {
+        width: 320px;
+        margin: 0 auto;
+        }
+}
+
+.blurb h4 {
+        font-size: 23px;
+        font-weight: 600;
+        text-align: center;
+        margin: 40px 0 40px 0;
+        padding: 0 60px;
 }
 
 .dividerBlurb {
@@ -1500,6 +1512,7 @@ fieldset {
   width: 100%;
   border-bottom: 1px solid #e6e6e6;
   overflow: hidden;
+  background: #fff;
 }
 
 .confirmation {
