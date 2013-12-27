@@ -1,3 +1,17 @@
+<div class="mobile-promotion">
+    <div class="wrapper">
+        <nav>
+            <ul class="navigation">
+                <% if request.user_agent =~ /Android/i %>
+                    <a href="https://play.google.com/store/apps/details?id=co.tapfit.android"><li>Download TapFit</li></a>
+                <% else %>
+                    <a href="https://itunes.apple.com/us/app/tapfit/id683430709?ls=1&mt=8"><li>Download TapFit</li></a>
+                <% end %>
+            </ul>
+        </nav>
+    </div>
+</div>
+
 <footer>
     <div class="wrapper">
         <p>Connect with us: <a href="http://www.facebook.com/tapfit">Facebook</a> | <a href="http://www.twitter.com/tapfit">Twitter</a> | <a href="http://www.linkedin.com/company/tapfit-llc">LinkedIn</a></p>

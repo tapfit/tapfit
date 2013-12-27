@@ -551,13 +551,6 @@ ul.portfolio li {
         font-size: 18px;
 }
 
-@media only screen and (max-width: 640px) {
-        .testimonials ul {
-        width: 320px;
-        margin: 0 auto;
-        }
-}
-
 .blurb h4 {
         font-size: 23px;
         font-weight: 600;
@@ -1668,8 +1661,12 @@ fieldset {
         width: 300px;
     }
     .testimonials ul {
-        width: 320px;
+        width: 300px;
         margin: 0 auto;
+    }
+    .testimonials ul li {
+        width: 300px;
+        margin: 10px 0;
     }
 }
 
@@ -1682,12 +1679,18 @@ fieldset {
         line-height: 40px;
         text-align: center;
     }
-    .process, .locations, .cities, .promotion, .stickyDiv, .back-to-top, #sale_hero ul, #banner ul, .cta {
+    .process, .cities, .locations, .promotion, .stickyDiv, .back-to-top, #sale_hero ul, #banner ul, #banner .cta {
         display: none;
+    } 
+    .cta {
+        font-size: 15px;
+        width: 80%;
+        margin-left: 10%;
+        margin-top: 30%;
     }
     .iphone {
         margin-left: -34px;
-        margin-top: -10px;
+        margin-top: 50px;
     }
     #banner {
         height: 480px;
