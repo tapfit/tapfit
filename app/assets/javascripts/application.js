@@ -165,7 +165,8 @@ function trackGoogleEvents() {
     });
     // Interest Button
     $('.interest-button').click(function(){
-        _gaq.push(['_trackEvent', 'Interest Button', 'clicked', this.id]);
+        var city = $('.your-city a').text();
+        _gaq.push(['_trackEvent', 'Interest Button', 'clicked', city]);
     });
 }
 
