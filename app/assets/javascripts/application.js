@@ -54,6 +54,12 @@ $(document).ready(function() {
 
         $('.your-city a').text(newCityString);
 
+        if (this.id == "New York" || this.id == "San Francisco") {
+            $('#map-canvas-overlay').show();
+        } else {
+            $('#map-canvas-overlay').hide();
+        }
+
         return false;
     });
 
