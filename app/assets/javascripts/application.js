@@ -157,13 +157,13 @@ function anchorClick() {
 function trackGoogleEvents() {
     // iPhone
     $('.iphone-download-button').click(function(){
-        mixpanel.track("Download button clicked", {
+        mixpanel.track("Download iPhone", {
             "Type": "iPhone"
         });
     });
     // Android
     $('.android-download-button').click(function(){
-        mixpanel.track("Download button clicked", {
+        mixpanel.track("Download Android", {
             "Type": "Android"
         });
     });
