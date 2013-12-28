@@ -22,14 +22,13 @@
     <script type="text/javascript">
         mixpanel.identify(<%= current_user.id %>);
         mixpanel.people.set({
-            "$email": <%= current_user.email %>,
-            "$first_name": <%= current_user.first_name %>,
-            "$last_name": <%= current_user.last_name %>,
-            "$created": <%= current_user.created_at %>,
-            "$last_login": <%= current_user.current_sign_in_at %>,
-            "credits": <%= current_user.credit_amount %>
+            "$email": <%=raw current_user.email.to_json %>,
+            "$first_name": <%=raw current_user.first_name.to_json %>,
+            "$last_name": <%=raw current_user.last_name.to_json %>,
+            "$created": <%=raw current_user.created_at.to_json %>,
+            "$last_login": <%=raw current_user.current_sign_in_at.to_json %>,
+            "credits": <%=raw current_user.credit_amount.to_json %>
         });
-
     </script>
 <% end %>
 
