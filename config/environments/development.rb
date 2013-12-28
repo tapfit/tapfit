@@ -39,6 +39,8 @@ Tapfit::Application.configure do
   
   ENV["MANDRILL_APIKEY"] = 'XdYDGPC2pLDIrcWUXiH7hg'
 
+  ENV["ANALYTICS_ENV"] = "test"
+
   ENV["SEND_TEXTS"] = 'false' 
 
   config.paperclip_defaults = {
