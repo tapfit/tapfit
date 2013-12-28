@@ -157,16 +157,21 @@ function anchorClick() {
 function trackGoogleEvents() {
     // iPhone
     $('.iphone-download-button').click(function(){
-        _gaq.push(['_trackEvent', 'Download Button', 'clicked', 'iPhone']);
+        mixpanel.track("Download button clicked", {
+            "Type": "iPhone"
+        });
     });
     // Android
     $('.android-download-button').click(function(){
-        _gaq.push(['_trackEvent', 'Download Button', 'clicked', 'Android']);
+        mixpanel.track("Download button clicked", {
+            "Type": "Android"
+        });
     });
     // Interest Button
     $('.interest-button').click(function(){
-        var city = $('.your-city a').text();
-        _gaq.push(['_trackEvent', 'Interest Button', 'clicked', city]);
+        mixpanel.track("Waitlist button clicked", {
+            "Waitlist City": $('.your-city a').text()
+        });
     });
 }
 
