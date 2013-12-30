@@ -29,6 +29,8 @@ Tapfit::Application.routes.draw do
     end
   end
 
+  resources :trackings
+
   resources :email_collections
 
   # Api Calls

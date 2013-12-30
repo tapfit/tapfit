@@ -30,8 +30,15 @@
             "credits": <%=raw current_user.credit_amount.to_json %>
         });
     </script>
+<% elsif %>
+  <script type="text/javascript">
+    mixpanel.identify(<%= @distinct_id %>);
+  </script>  
 <% end %>
 
-<script type="text/javascript">
-    mixpanel.track("Splash page loaded");
+<!-- mixpanel javascript -->
+
+<script type="text/javascript"> 
+  mixpanel.track("Splash Page");
 </script>
+

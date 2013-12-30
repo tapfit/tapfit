@@ -3,6 +3,12 @@ class PagesController < ApplicationController
   #before_filter :check_for_mobile
 
   def index
+    if cookies[:distinct_id].nil?
+      cookies.permanent[:distinct_id] = SecureRandom.base64
+    end
+
+    @distinct_id = cookies[:distinct_id]
+
     @packages = Package.order(:amount)
   end
 
