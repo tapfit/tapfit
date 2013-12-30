@@ -58,7 +58,7 @@ class PagesController < ApplicationController
 
     tracker = Tracking.where(:distinct_id => @distinct_id).first
     if tracker.nil?
-      tracker = Tracking.create(:distinct_id => @distinct_id, :utm_source => params[:utm_source], :utm_campaign => params[:utm_campaign], :ip_address => request.remote_ip)
+      tracker = Tracking.create(:distinct_id => @distinct_id, :utm_medium => params[:utm_medium], :utm_content => params[:utm_content], :utm_source => params[:utm_source], :utm_campaign => params[:utm_campaign], :ip_address => request.remote_ip)
     end
     
     if !tracker.user_id.nil?
