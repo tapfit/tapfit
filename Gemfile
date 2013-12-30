@@ -31,6 +31,7 @@ gem 'mandrill-api'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'rails_12factor', group: :production
+gem 'mixpanel'
 
 # These gems for active admin
 gem 'responders'#,          github: 'plataformatec/responders'
