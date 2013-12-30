@@ -9,7 +9,8 @@ class CreateTrackings < ActiveRecord::Migration
       t.boolean :download_iphone, :default => false
       t.boolean :download_android, :default => false
       t.string :ip_address
-      t.string :user_id
+      t.integer :user_id
+      t.string :hexicode
 
       t.timestamps
     end

@@ -303,7 +303,8 @@ ActiveRecord::Schema.define(version: 20131228222856) do
     t.boolean  "download_iphone",  default: false
     t.boolean  "download_android", default: false
     t.string   "ip_address"
-    t.string   "user_id"
+    t.integer  "user_id"
+    t.string   "hexicode"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
