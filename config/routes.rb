@@ -62,6 +62,8 @@ Tapfit::Application.routes.draw do
 
       resources :regions
 
+      resources :trackings
+
       def users_resources
         resources :favorites
         resources :checkins
