@@ -11,6 +11,7 @@ class CreateTrackings < ActiveRecord::Migration
       t.string :hexicode
       t.string :region
       t.string :city
+      t.string :ip_address
 
       t.timestamps
     end
