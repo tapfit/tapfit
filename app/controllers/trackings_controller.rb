@@ -1,4 +1,4 @@
-class TrackingsController < ApplicationController do
+class TrackingsController < ApplicationController
   
   def create
     puts "create tracking entry"
@@ -11,5 +11,6 @@ class TrackingsController < ApplicationController do
   def tracking_params
     params.require(:tracking).permit(:distinct_id, :utm_medium, :utm_source, :utm_campaign, :utm_content, :download_iphone, :download_android)
   end 
+  
   
 end
