@@ -4,6 +4,8 @@ module Api
       
       def create
         puts "params: #{params}"
+
+        render :json => [] 
       end
 
     end
