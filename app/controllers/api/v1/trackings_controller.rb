@@ -3,7 +3,8 @@ module Api
     class TrackingsController < ApplicationController
       
       def create
-        puts "params: #{params}"
+        
+        FindTrackingSource.new.async.perform({ :device => params[:device], :device_token => params[:device_token], :ip_address => params[:ip_address] }) 
 
         render :json => [] 
       end
