@@ -4,15 +4,15 @@
         <h2>A single pass<br/>
             to your city's<br/>
             best workouts</h2>
-        <a target="_blank" href="https://itunes.apple.com/us/app/tapfit/id683430709?ls=1&mt=8" class="iphone-download-button">
+          <%= link_to(iphone_path, :class => "iphone-download-button", :target => "_blank") do %>
             <div class="cta">
                 TapFit for iPhone
             </div>
-        </a>
-        <a target="_blank" href="https://play.google.com/store/apps/details?id=co.tapfit.android" class="android-download-button">
+          <% end %>
+          <%= link_to(android_path, :class => "android-download-button", :target => "_blank") do %>
             <div class="cta blue">
                 TapFit for Android
             </div>
-        </a>
+          <% end %>
     </div>
 </div>
