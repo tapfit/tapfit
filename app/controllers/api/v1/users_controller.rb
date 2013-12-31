@@ -58,11 +58,12 @@ module Api
           return
         end
 
-        if user.valid?
+        if user.valid? 
           user.save
           sign_in(:user, user)
           user.ensure_authentication_token!
 
+          SyncAccountToTrackingSource.new.async.perform({ :user_id => user.id, :device_token => params[:device_token]})
           Resque.enqueue(SendWelcomeEmail, user.id)
           # user.send_welcome_email
           

@@ -32,6 +32,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'rails_12factor', group: :production
 gem 'sucker_punch', '~> 1.0'
+gem 'mixpanel-ruby'
 
 # These gems for active admin
 gem 'responders'#,          github: 'plataformatec/responders'
