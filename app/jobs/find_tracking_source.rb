@@ -76,7 +76,7 @@ class FindTrackingSource
   end
 
   def mixpanel_downloaded_app(tracking_record, device_string)
-    $mixpanel.track(tracking_record.user_id, "Downloaded app", {
+    $mixpanel.track(tracking_record.distinct_id, "Downloaded app", {
       'Type' => device_string
     })  
   end
