@@ -28,7 +28,9 @@ Tapfit::Application.configure do
   config.assets.debug = true
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-  
+ 
+  ENV["MIXPANEL_TOKEN"] = "8da0869d7ee062dfed009dc9fb6d2b27"
+
   ENV["OPENREDIS_URL"] = "redis://127.0.0.1:6379/0"
 
   ENV["BRAINTREE_ENV"] = "test"

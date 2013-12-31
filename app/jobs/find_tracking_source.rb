@@ -1,3 +1,5 @@
+require 'mixpanel-ruby'
+
 class FindTrackingSource
   include SuckerPunch::Job
 
@@ -33,6 +35,7 @@ class FindTrackingSource
 
           
           ip_address_with_source.update_attribute(:hexicode, opts[:device_token])
+          mixpanel_downloaded_app(ip_address_with_source, opts[:device])
           return return_string
         end
 
@@ -41,20 +44,28 @@ class FindTrackingSource
         if opts[:device].upcase == "IPHONE"
           parse_iphone_events = tracking_events.where(:download_iphone => true)
           if parse_iphone_events.count == 1
-            parse_iphone_events.first.update_attribute(:hexicode, opts[:device_token])
+            tracking_source = parse_iphone_events.first
+            tracking_source.update_attribute(:hexicode, opts[:device_token])
+            mixpanel_downloaded_app(tracking_source, opts[:device])
             return return_string
           elsif parse_iphone_events.count > 1 && parse_iphone_events.select(:utm_source).distinct.count == 1
-            parse_iphone_events.first.update_attribute(:hexicode, opts[:device_token])
+            tracking_source = parse_iphone_events.first
+            tracking_source.update_attribute(:hexicode, opts[:device_token])
+            mixpanel_downloaded_app(tracking_source, opts[:device])
             return return_string
           end   
         # Once for Android
         elsif opts[:device].upcase == "ANDROID"
           parse_android_events = tracking_events.where(:download_android => true)
           if parse_android_events.count == 1
-            parse_android_events.first.update_attribute(:hexicode, opts[:device_token])
+            tracking_source = parse_android_events.first
+            tracking_source.update_attribute(:hexicode, opts[:device_token])
+            mixpanel_downloaded_app(tracking_source, opts[:device])
             return return_string
           elsif parse_android_events.count > 1 && parse_android_events.select(:utm_source).distinct.count == 1
-            parse_android_events.first.update_attribute(:hexicode, opts[:device_token])
+            tracking_source = parse_android_events.first
+            tracking_source.update_attribute(:hexicode, opts[:device_token])
+            mixpanel_downloaded_app(tracking_source, opts[:device])
             return return_string
           end   
         end
@@ -62,6 +73,12 @@ class FindTrackingSource
 
       return "Failed to match tracking" 
     end
+  end
+
+  def mixpanel_downloaded_app(tracking_record, device_string)
+    $mixpanel.track(tracking_record.user_id, "Downloaded app", {
+      'Type' => device_string
+    })  
   end
 
 end
