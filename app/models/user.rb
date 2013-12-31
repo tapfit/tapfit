@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :checkins
   has_many :place_checkins, :through => :checkins, :source => :place
   has_many :credits
+  has_many :receipts
   has_one :promo_code
   
   after_create :add_new_user_credit

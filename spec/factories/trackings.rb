@@ -2,13 +2,13 @@
 
 FactoryGirl.define do
   factory :tracking do
-    distinct_id "MyString"
-    utm_medium "MyString"
-    utm_source "MyString"
-    utm_campaign "MyString"
-    utm_content "MyString"
+    distinct_id "kdkdkdkdkddk"
+    utm_medium "Email"
+    utm_source "MailChimp"
+    utm_campaign "Reactivate"
+    utm_content "Free Credits"
     download_iphone false
     download_android false
-    hexicode "MyString"
+    user_id 5
   end
 end
