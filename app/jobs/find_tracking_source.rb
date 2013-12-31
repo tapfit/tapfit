@@ -8,7 +8,7 @@ class FindTrackingSource
       if tracking_events.count > 0 
         ip_address_tracking = tracking_events.where(:ip_address => opts[:ip_address]).first
         if !ip_address_tracking.nil?
-          ip_address_tacking.update_attribute(:hexicode, opts[:device_token])
+          ip_address_tracking.update_attribute(:hexicode, opts[:device_token])
           return
         end
         parse_events = tracking_events.where(:download_android => true)
