@@ -54,6 +54,11 @@ $(document).ready(function() {
 
         $('.your-city a').text(newCityString);
 
+        // Track city on map
+        mixpanel.track("Map changed", {
+            "New City": newCityString
+        });
+
         if (this.id == "New York" || this.id == "San Francisco") {
             $('#map-canvas-overlay').show();
         } else {
@@ -125,8 +130,10 @@ function displayOrderModal(package_id) {
             $(".original-price").html("$<del>" + total + "</del>");
             $(".quantity").html(discount + "%<br><span class='small'>discount</span>");
             $(".total").html("$" + price);
-    
-            _gaq.push(['_trackEvent', 'Purchase', 'clicked', total.toString()]);
+   
+            mixpanel.track("Package button clicked", {
+                "Amount": total.toString()
+            });
         }
     });
 
@@ -143,14 +150,12 @@ function closeOrderModal() {
 
 /* 1. Tracking purchase events */
 function trackPurchase() {
-    _gaq.push(['_trackEvent', 'Purchase', 'submitted']);
+    mixpanel.track("Package purchased");
 }
 
 /* 2. Tracking anchors as page clicks */
 function anchorClick() {
-    _gaq.push(['_trackPageview', {
-        'page': location.pathname + location.search + location.hash,
-        'title': location.hash.substring(1)}]);
+    mixpanel.track(location.hash.substring(1) + " page loaded");
 }
 
 /* 3. Track iPhone and Android button clicks */
