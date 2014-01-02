@@ -1,0 +1,7 @@
+<% content_for :refresh_tag do %>
+  <meta http-equiv='refresh' content='0;url=<%= @url %>' />
+<% end %>
+
+<script type="text/javascript">
+  mixpanel.track("Download android link");
+</script> 
