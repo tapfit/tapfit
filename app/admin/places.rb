@@ -58,7 +58,7 @@ ActiveAdmin.register Place do
       f.input :show_place
       f.input :can_buy
       f.input :facility_type
-      f.input :category
+      # f.input :category
       f.input :category_list
       f.input :pass_detail_info, :as => :number
       f.input :avg_rating, :as => :number

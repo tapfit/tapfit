@@ -2,11 +2,15 @@
     <div class="wrapper">
         <nav>
             <ul class="navigation">
-                <% if request.user_agent =~ /Android/i %>
-                    <a href="https://play.google.com/store/apps/details?id=co.tapfit.android"><li>Download TapFit</li></a>
-                <% else %>
-                    <a href="https://itunes.apple.com/us/app/tapfit/id683430709?ls=1&mt=8"><li>Download TapFit</li></a>
+              <% if request.user_agent =~ /Android/i %>
+                <%= link_to(android_path, :class => "android-download-button") do %>
+                  <li>Download TapFit</li>
                 <% end %>
+              <% else %>
+                <%= link_to(iphone_path, :class => "iphone-download-button") do %>
+                  <li>Download TapFit</li>
+                <% end %>
+              <% end %>
             </ul>
         </nav>
     </div>

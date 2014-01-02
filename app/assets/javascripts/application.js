@@ -169,7 +169,7 @@ function trackGoogleEvents() {
     });
     // Android
     $('.android-download-button').click(function(){
-        mixpanel.track("Download clicked", {
+        mixpanel.track("Download button clicked", {
             "Type": "Android"
         });
     });

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131228222856) do
+ActiveRecord::Schema.define(version: 20131230204840) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -302,10 +302,9 @@ ActiveRecord::Schema.define(version: 20131228222856) do
     t.string   "utm_content"
     t.boolean  "download_iphone",  default: false
     t.boolean  "download_android", default: false
-    t.string   "hexicode"
-    t.string   "region"
-    t.string   "city"
     t.string   "ip_address"
+    t.integer  "user_id"
+    t.string   "hexicode"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -314,6 +313,7 @@ ActiveRecord::Schema.define(version: 20131228222856) do
   add_index "trackings", ["download_android"], name: "index_trackings_on_download_android", using: :btree
   add_index "trackings", ["download_iphone"], name: "index_trackings_on_download_iphone", using: :btree
   add_index "trackings", ["hexicode"], name: "index_trackings_on_hexicode", using: :btree
+  add_index "trackings", ["user_id"], name: "index_trackings_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",    null: false

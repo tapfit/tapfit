@@ -1,14 +1,11 @@
 class PagesController < ApplicationController
 
   #before_filter :check_for_mobile
+  after_filter :set_tracking_info, only: [ :android, :iphone ]
+  before_filter :set_tracking_info, except: [ :android, :iphone ]
 
   def index
-    if cookies[:distinct_id].nil?
-      cookies.permanent[:distinct_id] = SecureRandom.base64
-    end
-
-    @distinct_id = cookies[:distinct_id]
-
+    
     @packages = Package.order(:amount)
   end
 
@@ -37,5 +34,45 @@ class PagesController < ApplicationController
   end
 
   def faq
+  end
+
+  def android
+    params[:download_android] = true
+    redirect_to "https://play.google.com/store/apps/details?id=co.tapfit.android"
+  end
+
+  def iphone
+    params[:download_iphone] = true
+    redirect_to "https://itunes.apple.com/us/app/tapfit/id683430709?ls=1&mt=8"
+  end
+
+  private
+
+  def set_tracking_info
+    if cookies[:distinct_id].nil?
+      cookies.permanent[:distinct_id] = SecureRandom.base64
+    end
+
+    @distinct_id = cookies[:distinct_id]
+
+
+    tracker = Tracking.where(:distinct_id => @distinct_id).first
+    if tracker.nil?
+      tracker = Tracking.create(:distinct_id => @distinct_id, :utm_medium => params[:utm_medium], :utm_content => params[:utm_content], :utm_source => params[:utm_source], :utm_campaign => params[:utm_campaign], :ip_address => request.remote_ip)
+    end
+    
+    if !tracker.user_id.nil?
+      @distinct_id = tracker.user_id
+      tracker.update_attribute(:distinct_id, @distinct_id)
+      cookies.permanent[:distinct_id] = @distinct_id
+    end
+
+    if !params[:download_iphone].nil?
+      tracker.update_attribute(:download_iphone, params[:download_iphone])
+    end
+
+    if !params[:download_android].nil?
+      tracker.update_attribute(:download_android, params[:download_android])
+    end
   end
 end

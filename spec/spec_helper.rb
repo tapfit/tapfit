@@ -10,6 +10,7 @@ require 'rspec/rails'
 require 'rspec/autorun'
 require 'factory_girl_rails'
 require 'database_cleaner'
+require 'sucker_punch/testing/inline'
 
 # FactoryGirl.find_definitions
 # Requires supporting ruby files with custom matchers and macros, etc,
@@ -57,6 +58,14 @@ RSpec.configure do |config|
   end
 
   config.before(:each, :js => true) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before(:each, :job => true) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before(:all, :job => true) do
     DatabaseCleaner.strategy = :truncation
   end
 

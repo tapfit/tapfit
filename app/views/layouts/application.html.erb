@@ -41,7 +41,23 @@
     </script>
 </head>
 <body>
-
+<% if user_signed_in? %>
+    <script type="text/javascript">
+        mixpanel.identify("<%= current_user.id %>");
+        mixpanel.people.set({
+            "$email": <%=raw current_user.email.to_json %>,
+            "$first_name": <%=raw current_user.first_name.to_json %>,
+            "$last_name": <%=raw current_user.last_name.to_json %>,
+            "$created": <%=raw current_user.created_at.to_json %>,
+            "$last_login": <%=raw current_user.current_sign_in_at.to_json %>,
+            "credits": <%=raw current_user.credit_amount.to_json %>
+        });
+    </script>
+<% elsif %>
+  <script type="text/javascript">
+    mixpanel.identify("<%= @distinct_id %>");
+  </script>  
+<% end %>
     <!-- Header -->
     <%= render 'shared/navigation' %>
 
