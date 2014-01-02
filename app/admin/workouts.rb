@@ -9,7 +9,7 @@ ActiveAdmin.register Workout do
     column :source_description
     column :can_buy
     column :price
-    column :is_day_pass
+    column :original_price
     column "Place Name" do |i|
       i.place.name
     end 
