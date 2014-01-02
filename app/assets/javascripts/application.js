@@ -345,9 +345,7 @@ function initialize() {
         ['Pure Barre', 41.8947, -87.627962],
         ['Pure Barre', 41.910264, -87.674025],
         ['Pure Barre', 41.940917, -87.668327],
-        ['Pure Barre', 42.048466, -87.683909],
-        ['Coming Spring 2014!', 37.7833, -122.4167],
-        ['Coming Spring 2014!', 40.6700, -73.9400]
+        ['Pure Barre', 42.048466, -87.683909]
     ];
 
     var infowindow = new google.maps.InfoWindow();
