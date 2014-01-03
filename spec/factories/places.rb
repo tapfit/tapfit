@@ -6,7 +6,6 @@ FactoryGirl.define do
     source "MyString"
     source_key ""
     url "MyString"
-    category "MyString"
     phone_number "MyString"
     tapfit_description "MyText"
     source_description "MyText"

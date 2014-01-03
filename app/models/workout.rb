@@ -89,4 +89,8 @@ class Workout < ActiveRecord::Base
       return self.crawler_info['paymentId']
     end
   end
+
+  def local_start_time
+    return self.start_time.in_time_zone(self.place.address.timezone)
+  end
 end
