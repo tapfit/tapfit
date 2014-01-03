@@ -19,7 +19,7 @@ $(document).ready(function() {
     /* ---------------------------- */
     /* Setup Google Map Global Vars */ 
     /* ---------------------------- */
-    var latlng = new google.maps.LatLng(39.1000, -84.5167);
+    var latlng = new google.maps.LatLng(41.8819, -87.6278);
     var settings = {
         zoom: 10,
         center: latlng,
