@@ -38,7 +38,7 @@ ActiveAdmin.register Receipt do
 
   config.sort_order = "has_booked_asc"
 
-  filter :has_booked
+  filter :has_booked, :as => :select
 
   form do |f|
     f.inputs "Receipt Details" do

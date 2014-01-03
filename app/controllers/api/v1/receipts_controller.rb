@@ -1,7 +1,7 @@
 module Api
   module V1
     class ReceiptsController < ApplicationController
-      
+     
       before_filter :check_non_guest
 
       def index
