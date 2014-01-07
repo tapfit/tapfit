@@ -10,7 +10,7 @@ ActiveAdmin.register Receipt do
     end
 
     column "Workout start time" do |i|
-      i.workout.start_time
+      i.workout.local_start_time
     end
 
     column "Schedule Url" do |i|

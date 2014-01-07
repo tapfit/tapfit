@@ -36,6 +36,8 @@ Tapfit::Application.configure do
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
+  ENV["MANDRILL_APIKEY"] = 'XdYDGPC2pLDIrcWUXiH7hg'
+  
   ENV["OPENREDIS_URL"] = "redis://127.0.0.1:6379/0"
 
   ENV["MIXPANEL_TOKEN"] = "8da0869d7ee062dfed009dc9fb6d2b27" 
