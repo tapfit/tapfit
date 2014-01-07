@@ -6,7 +6,13 @@ class SyncAccountToTrackingSource
   def perform(opts)
 
     ActiveRecord::Base.connection_pool.with_connection do
-      tracking_code = Tracking.where(:hexicode => opts[:device_token]).first
+      tracking_code = Tracking.where(:hexicode => opts[:device_token])
+
+      if tracking_code.count > 1
+        return
+      else
+        tracking_code = tracking_code.first
+      end
 
       if !tracking_code.nil?
         tracking_code.update_attributes(:user_id => opts[:user_id])
