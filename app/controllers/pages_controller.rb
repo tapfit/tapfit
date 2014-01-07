@@ -51,15 +51,15 @@ class PagesController < ApplicationController
 
   def set_tracking_info
 
-    puts "checking cookies: #{cookies[:distinct_id]}"
+
 
     if cookies[:distinct_id].nil?
       cookies.permanent[:distinct_id] = { :value => SecureRandom.base64, :domain => '.tapfit.co' }
     end
 
     @distinct_id = cookies[:distinct_id]
-    puts "final cookie: #{@distinct_id}"
-=begin
+
+
 
     tracker = Tracking.where(:distinct_id => @distinct_id).first
     if tracker.nil?
@@ -73,6 +73,6 @@ class PagesController < ApplicationController
     if !params[:download_android].nil?
       tracker.update_attribute(:download_android, params[:download_android])
     end
-=end
+
   end
 end
