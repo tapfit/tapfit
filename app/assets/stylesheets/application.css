@@ -534,7 +534,7 @@ ul.portfolio li {
         text-align: center;
 }
 
-.testimonials ul li h3 {
+.testimonials ul li h3 a {
         font-size: 32px;
         color: #fff;
         margin-top: 20px;
