@@ -6,9 +6,13 @@ class SendReceiptEmail < ResqueJob
   @queue = :email
 
   def self.perform(receipt_id)
-    receipt = Receipt.find(receipt_id)
+    ActiveRecord::Base.connection_pool.with_connection do
+      
+      receipt = Receipt.find(receipt_id)
 
-    receipt.send_receipt_email 
+      receipt.send_receipt_email 
+    
+    end
   end
 
 end

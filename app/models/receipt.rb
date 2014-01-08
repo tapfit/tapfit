@@ -51,7 +51,7 @@ class Receipt < ActiveRecord::Base
                                        {"content"=>self.workout.local_start_time.strftime("%l:%M%P"), "name"=>"WORKOUT_TIME"},
                                        {"content"=>self.created_at.in_time_zone(self.place.address.timezone).strftime("%A, %B %-d, %Y"), "name"=>"ORDER_DATE"},
                                        {"content"=>self.price, "name"=>"SUBTOTAL"},
-                                       {"content"=>self.price, "name"=>"TOTAL"}], "rcpt"=>self.user.email}]
+                                       th{"content"=>self.price, "name"=>"TOTAL"}], "rcpt"=>self.user.email}]
     message["merge"] = true
     message["track_opens"] = true
     message["track_clicks"] = true
