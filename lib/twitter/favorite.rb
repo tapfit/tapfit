@@ -33,9 +33,18 @@ module FavoriteTweet
         
       json["statuses"].each do |status|
         
-        if !GetFollowers.followers.include?(status["user"]["id"].to_i)
+        user_id = status["user"]["id"].to_i
+
+        favorited_users = REDIS.get("favorited_users")
+
+        if !favorited_users.nil? && favorited_users.include?(user_id)
+          next
+        end
+
+        if !GetFollowers.followers.include?(user_id)
           response = access_token.request(:post, "https://api.twitter.com/1.1/favorites/create.json?id=#{status["id_str"]}")
           REDIS.set("since_id_#{search}", status["id_str"])
+          REDIS.rpush("favorited_users", user_id)
           puts "Favorited tweet: #{status["text"]}"
         end
       end
