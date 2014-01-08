@@ -50,7 +50,8 @@ class PagesController < ApplicationController
   private
 
   def set_tracking_info
-
+    
+    puts headers["HTTP_REFERER"]
 
 
     if cookies[:distinct_id].nil?
