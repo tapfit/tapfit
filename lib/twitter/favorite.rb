@@ -15,7 +15,7 @@ module FavoriteTweet
     end
 
     search_params = [ "bikram", "workout", "gym", "yoga", "fitness" ]
-    geocode = "41.882287,-87.627462,50"
+    geocode = "41.882287,-87.627462,50mi"
     search_params.each do |search|
       
       response = ""
