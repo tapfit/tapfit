@@ -10,7 +10,7 @@ class AddCreditsToInvitor < ResqueJob
     if (pass_count == 0)
       Credit.where(:user_id => user_id).each do |credit|
         puts "credit attributes: #{credit.attributes}"
-        if (!credit.promo_code.user_id.nil?)
+        if (!credit.promo_code.nil? && !credit.promo_code.user_id.nil?)
           Credit.create(:promo_code_id => credit.promo_code.id, :total => credit.promo_code.amount, :user_id => credit.promo_code.user_id)
         end
       end
