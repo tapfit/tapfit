@@ -1,0 +1,37 @@
+<h1>Listing contestants</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Has downloaded</th>
+      <th>Has shared</th>
+      <th>Index</th>
+      <th>Show</th>
+      <th>New</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @contestants.each do |contestant| %>
+      <tr>
+        <td><%= contestant.email %></td>
+        <td><%= contestant.has_downloaded %></td>
+        <td><%= contestant.has_shared %></td>
+        <td><%= contestant.index %></td>
+        <td><%= contestant.show %></td>
+        <td><%= contestant.new %></td>
+        <td><%= link_to 'Show', contestant %></td>
+        <td><%= link_to 'Edit', edit_contestant_path(contestant) %></td>
+        <td><%= link_to 'Destroy', contestant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Contestant', new_contestant_path %>

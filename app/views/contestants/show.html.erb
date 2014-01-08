@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @contestant.email %>
+</p>
+
+<p>
+  <strong>Has downloaded:</strong>
+  <%= @contestant.has_downloaded %>
+</p>
+
+<p>
+  <strong>Has shared:</strong>
+  <%= @contestant.has_shared %>
+</p>
+
+<p>
+  <strong>Index:</strong>
+  <%= @contestant.index %>
+</p>
+
+<p>
+  <strong>Show:</strong>
+  <%= @contestant.show %>
+</p>
+
+<p>
+  <strong>New:</strong>
+  <%= @contestant.new %>
+</p>
+
+<%= link_to 'Edit', edit_contestant_path(@contestant) %> |
+<%= link_to 'Back', contestants_path %>
