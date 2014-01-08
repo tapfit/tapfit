@@ -2,10 +2,58 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-body {
-    background: #f1f1f1;
-}
-
 #privacy_container {
     width: 320px;
+}
+
+// Promotions Page
+
+.promo-section {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+#email {
+    background: rgba(30, 42, 57, 1);
+    
+    h1 {
+        font-size: 60px;
+        color: #fff;
+        text-align: center;
+        text-transform: uppercase;
+        margin-top: 60px;
+    }  
+}
+
+#download {
+    background: rgba(155, 204, 172, 1);
+}
+
+#share {
+    background: #fff;
+    
+    h1 {
+        font-size: 60px;
+        color: #eb4840;
+        text-align: center;
+        text-transform: uppercase;
+        margin-top: 60px;
+    } 
+
+    h2 {
+        font-size: 40px;
+        color: #333;
+        text-align: center;
+        margin-top: 20px;
+        text-transform: uppercase;
+    }
+}
+
+.fitness-girl {
+    position: absolute;
+    bottom: 0;
+    height: 60%;
 }

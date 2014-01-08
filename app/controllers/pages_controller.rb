@@ -36,6 +36,9 @@ class PagesController < ApplicationController
   def faq
   end
 
+  def promotion
+  end
+
   def android
     params[:download_android] = true
     @url = "https://play.google.com/store/apps/details?id=co.tapfit.android"

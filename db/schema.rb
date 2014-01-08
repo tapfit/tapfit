@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131230204840) do
+ActiveRecord::Schema.define(version: 20140108034349) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -63,6 +63,34 @@ ActiveRecord::Schema.define(version: 20131230204840) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "contestants", force: true do |t|
+    t.string   "email"
+    t.boolean  "has_downloaded"
+    t.boolean  "has_shared"
+    t.string   "index"
+    t.string   "show"
+    t.string   "new"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "contest_id"
+  end
+
+  add_index "contestants", ["contest_id"], name: "index_contestants_on_contest_id", using: :btree
+
+  create_table "contests", force: true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.string   "body"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.boolean  "is_live"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "slug"
+  end
+
+  add_index "contests", ["slug"], name: "index_contests_on_slug", using: :btree
 
   create_table "credits", force: true do |t|
     t.float    "total"

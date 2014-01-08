@@ -30,44 +30,16 @@ $(document).ready(function() {
         navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-    window.gmap = new google.maps.Map(document.getElementById("map-canvas"), settings);
+
+    if ( document.getElementById('map-canvas') != null ) {
+        setupGoogleMap(settings);
+    }
 
     /* ------------------- */
     /* Track Google Events */
     /* ------------------- */
     trackGoogleEvents();
-    google.maps.event.addDomListener(window, 'load', initialize);
     
-    /* -------------------------------------- */
-    /* Reset Google Map on Dropdown Selection */
-    /* -------------------------------------- */
-    $('.city a').click(function(){
-        var newCityString = this.id;
-        var latLonString = this.name;
-        var latLonParts = latLonString.split(",");
-        var newCenter = new google.maps.LatLng(latLonParts[0], latLonParts[1]);
-
-        gmap.setOptions({
-            center: newCenter,
-            zoom: 10
-        });
-
-        $('.your-city a').text(newCityString);
-
-        // Track city on map
-        mixpanel.track("Map changed", {
-            "New City": newCityString
-        });
-
-        if (this.id == "New York" || this.id == "San Francisco") {
-            $('#map-canvas-overlay').show();
-        } else {
-            $('#map-canvas-overlay').hide();
-        }
-
-        return false;
-    });
-
     /* ---------------------- */
     /* Handle Pre-Order Modal */
     /* ---------------------- */
@@ -187,6 +159,43 @@ function trackGoogleEvents() {
 /* --------------------------------- */
 /* Initialization of Google Maps API */
 /* --------------------------------- */
+
+function setupGoogleMap(settings) {
+    
+    window.gmap = new google.maps.Map(document.getElementById("map-canvas"), settings);
+    google.maps.event.addDomListener(window, 'load', initialize);
+    
+    /* -------------------------------------- */
+    /* Reset Google Map on Dropdown Selection */
+    /* -------------------------------------- */
+    $('.city a').click(function(){
+        var newCityString = this.id;
+        var latLonString = this.name;
+        var latLonParts = latLonString.split(",");
+        var newCenter = new google.maps.LatLng(latLonParts[0], latLonParts[1]);
+
+        gmap.setOptions({
+            center: newCenter,
+            zoom: 10
+        });
+
+        $('.your-city a').text(newCityString);
+
+        // Track city on map
+        mixpanel.track("Map changed", {
+            "New City": newCityString
+        });
+
+        if (this.id == "New York" || this.id == "San Francisco") {
+            $('#map-canvas-overlay').show();
+        } else {
+            $('#map-canvas-overlay').hide();
+        }
+
+        return false;
+    });
+}
+
 function initialize() {
     
     var locations = [
