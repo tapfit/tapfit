@@ -1,6 +1,3 @@
-<%= form_for @contestant do |f| %>
+<%= form_for [@contest, @contestant] do |f| %>
   <%= render "#{@contestant.current_step}_step", :f => f %>
-  <p><%= @contestant.current_step %></p>
-  <p><%= f.submit "Continue" %></p>
-  <p><%= f.submit "Back", :name => "back_button" unless @contestant.first_step? %></p>
 <% end %>

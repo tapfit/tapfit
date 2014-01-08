@@ -10,6 +10,10 @@ def current_step
   @current_step || steps.first
 end
 
+def current_step_index
+  steps.index(current_step)+1
+end
+
 def steps
   %w[email download share]
 end
@@ -35,6 +39,10 @@ def all_valid?
     self.current_step = step
     valid?
   end
+end
+
+def email_has_downloaded?
+  User.exists?(email: self.email)
 end
 
 end

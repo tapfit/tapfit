@@ -1,3 +1,156 @@
 // Place all the styles related to the Contestants controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.promo-section {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    scroll: none;
+    
+    h1 {
+        font-size: 60px;
+        color: #fff;
+        text-align: center;
+        text-transform: uppercase;
+        margin-top: 60px;
+    } 
+}
+
+#email {
+    background: rgba(30, 42, 57, 1);
+}
+
+#download {
+    background: rgba(155, 204, 172, 1);
+}
+
+#share {
+    background: rgba(151, 198, 235, 1);
+}
+
+#congrats {
+    background: #fff;
+
+    h1 {
+        color: #eb4840;
+    }
+}
+
+.fitness-girl {
+    position: absolute;
+    bottom: 0;
+    height: 60%;
+}
+
+.form-input-container {
+    background: #fff;
+    width: 70%;
+    margin: 30px 0 30px 15%;
+    height: 80px;
+    overflow: hidden;
+}
+
+input[type="text"] {
+    width: 80%;
+    height: 60px;
+    line-height: 150%;
+    padding: 10px;
+    margin: 10px;
+    font-size: 150%;
+}
+
+button {
+    float: right;
+    color: #111;
+    border: none;
+    height: 60px;
+    margin: 10px;
+}
+
+button:hover {
+    cursor: pointer;
+    color: #eb4840;
+    border-color: #eb4840;
+}
+
+.promo-iphone {
+    position: absolute;
+    bottom: -70%;
+    width: 30%;
+    margin-left: 35%;
+}
+
+.promo-phone-link {
+    position: absolute;
+    width: 30%;
+    margin-top: 5%;
+    padding: 10px;
+    background: #eb4840;
+    color: #fff;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.promo-phone-link:hover {
+    color: #aaa;
+}
+
+.promo-phone-left {
+    left: 17%;
+}
+
+.promo-phone-right {
+    right: 17%;
+}
+
+@media only screen and (max-width:480px) {
+    
+    #email h1, #download h1 {
+        font-size: 40px;
+    }
+
+    .promo-iphone {
+        width: 80%;
+        margin-left: 10%;
+        bottom: -30%;
+    }
+
+    .promo-phone-link {
+        width: 44%;
+    }
+
+    .promo-phone-left {
+        left: 4%;
+    }
+
+    .promo-phone-right {
+        right: 4%;
+    }
+        
+    .form-input-container {
+        background: none;
+        width: 90%;
+        height: 120px;
+        margin: 30px 0 30px 5%;
+    }
+    
+    input[type="text"] {
+        text-align: center;
+        width: 100%;
+        margin: 0;
+    }
+
+    button {
+        width: 100%;
+        font-size: 150%;
+        color: #fff;
+    }
+}

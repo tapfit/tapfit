@@ -1,5 +1,8 @@
-<h2>Email Information</h2>
-<p>
-    <%= f.label :email %><br/>
-    <%= f.text_field :email %>
-</p>
+<div class="promo-section" id="email">
+    <h1><%= @contestant.current_step_index %> <small>of</small> <%= @contestant.steps.count %></h1>
+    <h1>Enter your email</h1>
+    <div class="form-input-container">
+      <%= f.text_field :email, placeholder: "Enter Your Email", autocomplete: "off" %>
+      <%= f.button "Continue", :type => "submit" %>
+    </div>
+</div>

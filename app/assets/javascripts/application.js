@@ -48,6 +48,23 @@ $(document).ready(function() {
         return false;
     });
     
+    /* -------------------------------- */
+    /* Handle Download App Anchor Click */
+    /* -------------------------------- */
+    $(".promo-phone-link").click(function() {
+        // Set the header to give the user a hint on what
+        // to do next
+        alert($(".promo-phone-link").value());    
+    });
+
+    $(".share-button").click(function() {
+        if (this.id == "facebook") {
+            showFacebookShareDialog();
+        } else if (this.id == "twitter") {
+            alert("tweet!");
+        }
+    });
+    
     /* ---------------------------- */
     /* Change Modal Display Amounts */
     /* ---------------------------- */
@@ -373,4 +390,25 @@ function initialize() {
             }
         })(marker, i));
     }
+}
+
+function showFacebookShareDialog() {
+       FB.ui(
+       {
+         method: 'feed',
+         name: 'Facebook Dialogs',
+         link: 'http://developers.facebook.com/docs/reference/dialogs/',
+         picture: 'http://fbrell.com/f8.jpg',
+         caption: 'Reference Documentation',
+         description: 'Dialogs provide a simple, consistent interface for applications to interface with users.',
+         message: 'Facebook Dialogs are easy!'
+       },
+       function(response) {
+         if (response && response.post_id) {
+           alert('Post was published.');
+         } else {
+           alert('Post was not published.');
+         }
+       }
+     );
 }

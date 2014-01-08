@@ -1,10 +1,15 @@
 class ContestantsController < ApplicationController
+  before_filter :set_contest
   before_action :set_contestant, only: [:show, :edit, :update, :destroy]
+
+  def index
+    @contestants = @contest.contestants
+  end
 
   # GET /contestants/new
   def new
     session[:contestant_params] ||= {}
-    @contestant = Contestant.new(session[:contestant_params])
+    @contestant = @contest.contestants.build
     @contestant.current_step = session[:contestant_step]
   end
 
@@ -14,14 +19,14 @@ class ContestantsController < ApplicationController
   # POST /contestants
   def create
     session[:contestant_params].deep_merge!(params[:contestant]) if params[:contestant]
-    @contestant = Contestant.new(session[:contestant_params])
+    @contestant = @contest.contestants.new(session[:contestant_params])
     @contestant.current_step = session[:contestant_step]
 
     if @contestant.valid?
       if params[:back_button]
         @contestant.previous_step
       elsif @contestant.last_step?
-        @contestant.save if @contestant.all_valid?
+        #@contestant.save if @contestant.all_valid?
       else
         @contestant.next_step
       end
@@ -31,13 +36,16 @@ class ContestantsController < ApplicationController
       render "new"
     else
       session[:contestant_step] = session[:contestant_params] = nil
-      flash[:notice] = "Contestant Saved!"
-      redirect_to @contestant
+      redirect_to contest_contestant_path(@contest, @contestant)
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_contest
+      @contest = Contest.find_by_slug!(params[:contest_id])
+    end
+    
     def set_contestant
       @contestant = Contestant.find(params[:id])
     end

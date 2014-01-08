@@ -1,5 +1,13 @@
-<h2>Has Shared</h2>
-<p>
-    <%= f.label :has_shared %><br/>
-    <%= f.check_box :has_shared %>
-</p>
+<div class="promo-section" id="share">
+    <h1><%= @contestant.current_step_index %> <small>of</small> <%= @contestant.steps.count %></h1>
+    <%= f.hidden_field :has_shared, :value => true %>
+    <h1>Share With Friends</h1> 
+    <div class="promo-share-links-container">
+        <div class="share-button" id="facebook">
+            Facebook
+        </div>
+        <div class="share-button" id="twitter">
+            Twitter
+        </div>
+    </div>
+</div>

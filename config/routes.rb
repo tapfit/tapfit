@@ -3,9 +3,9 @@ require 'api_constraints'
 
 Tapfit::Application.routes.draw do
 
-  resources :contests
-
-  resources :contestants
+  resources :contests do
+    resources :contestants
+  end
 
   match 'about'     => 'pages#about', :via => :get
   match 'plans'     => 'pages#plans', :via => :get
