@@ -14,17 +14,18 @@ module FavoriteTweet
       GetFollowers.get_followers
     end
 
-    search_params = [ "cincinnati", "health", "gym", "yoga", "fitness" ]
+    search_params = [ "bikram", "workout", "gym", "yoga", "fitness" ]
+    geocode = "41.882287,-87.627462,50"
     search_params.each do |search|
       
       response = ""
       since_id = REDIS.get("since_id_#{search}")
       if since_id == nil
         puts "since_id does not exist"
-        response = access_token.request(:get, "https://api.twitter.com/1.1/search/tweets.json?q=#{search}")
+        response = access_token.request(:get, "https://api.twitter.com/1.1/search/tweets.json?q=#{search}&geocode=#{geocode}")
       else
         puts "since_id = #{since_id}"
-        response = access_token.request(:get, "https://api.twitter.com/1.1/search/tweets.json?q=#{search}&since_id=#{since_id}")
+        response = access_token.request(:get, "https://api.twitter.com/1.1/search/tweets.json?q=#{search}&geocode=#{geocode}&since_id=#{since_id}")
       end
       
       puts response.body.to_str
