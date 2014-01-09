@@ -14,17 +14,18 @@ module FavoriteTweet
       GetFollowers.get_followers
     end
 
-    search_params = [ "cincinnati", "health", "gym", "yoga", "fitness" ]
+    search_params = [ "bikram", "workout", "gym", "yoga", "fitness" ]
+    geocode = "41.882287,-87.627462,50mi"
     search_params.each do |search|
       
       response = ""
       since_id = REDIS.get("since_id_#{search}")
       if since_id == nil
         puts "since_id does not exist"
-        response = access_token.request(:get, "https://api.twitter.com/1.1/search/tweets.json?q=#{search}")
+        response = access_token.request(:get, "https://api.twitter.com/1.1/search/tweets.json?q=#{search}&geocode=#{geocode}")
       else
         puts "since_id = #{since_id}"
-        response = access_token.request(:get, "https://api.twitter.com/1.1/search/tweets.json?q=#{search}&since_id=#{since_id}")
+        response = access_token.request(:get, "https://api.twitter.com/1.1/search/tweets.json?q=#{search}&geocode=#{geocode}&since_id=#{since_id}")
       end
       
       puts response.body.to_str
@@ -32,9 +33,18 @@ module FavoriteTweet
         
       json["statuses"].each do |status|
         
-        if !GetFollowers.followers.include?(status["user"]["id"].to_i)
+        user_id = status["user"]["id"]
+
+        favorited_users = REDIS.get("favorited_users")
+
+        if !favorited_users.nil? && favorited_users.include?(user_id)
+          next
+        end
+
+        if !GetFollowers.followers.include?(user_id.to_i)
           response = access_token.request(:post, "https://api.twitter.com/1.1/favorites/create.json?id=#{status["id_str"]}")
           REDIS.set("since_id_#{search}", status["id_str"])
+          REDIS.rpush("favorited_users", user_id)
           puts "Favorited tweet: #{status["text"]}"
         end
       end

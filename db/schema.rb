@@ -250,6 +250,7 @@ ActiveRecord::Schema.define(version: 20140108034349) do
     t.integer  "user_id"
   end
 
+  add_index "promo_codes", ["code"], name: "index_promo_codes_on_code", using: :btree
   add_index "promo_codes", ["company_id"], name: "index_promo_codes_on_company_id", using: :btree
   add_index "promo_codes", ["has_used"], name: "index_promo_codes_on_has_used", using: :btree
   add_index "promo_codes", ["user_id"], name: "index_promo_codes_on_user_id", using: :btree

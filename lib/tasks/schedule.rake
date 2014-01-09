@@ -106,7 +106,7 @@ end
 
 task :run_twitter_get_followers => :environment do
   GetFollowers.get_followers
-  FavoriteTweet.clear_favorites
+  #FavoriteTweet.clear_favorites
 end
 
 task :rerun_crawl_jobs => :environment do

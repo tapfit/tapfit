@@ -58,6 +58,7 @@ module Api
       end
 
       def redeem_invite_code(promo_code)
+
         if (Credit.joins(:promo_code).where("promo_codes.user_id IS NOT NULL").where(:user_id => current_user.id).count > 0)
           render :json => { :error => "Sorry, the code you entered is only for new users" }
         else
