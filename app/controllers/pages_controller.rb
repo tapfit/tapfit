@@ -6,7 +6,7 @@ class PagesController < ApplicationController
   respond_to :html
 
   def index
-    
+    puts "user agent: #{request.env["HTTP_USER_AGENT"]}" 
     @packages = Package.order(:amount)
   end
 
