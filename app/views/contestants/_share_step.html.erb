@@ -1,13 +1,14 @@
 <div class="promo-section" id="share">
     <h1><%= @contestant.current_step_index %> <small>of</small> <%= @contestant.steps.count %></h1>
-    <%= f.hidden_field :has_shared, :value => true %>
+    <%= f.hidden_field :has_shared, :id => "has_shared_field", :value => false %>
     <h1>Share With Friends</h1> 
+    <h2>Sharing doubles your chances of winning!</h2>
     <div class="promo-share-links-container">
-        <div class="share-button" id="facebook">
-            Facebook
-        </div>
-        <div class="share-button" id="twitter">
-            Twitter
-        </div>
+        <a href="#" class="share-button facebook" id="facebook" title="Facebook"></a>
+        <a href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fwww.tapfit.co&text=Check%20out%20this%20app" class="share-button twitter" id="twitter" title="Twitter"></a>
+        <a class="share-button gplus" id="gplus" href="https://plus.google.com/share?url={URL}" onclick="javascript:window.open(this.href,
+          '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img
+            src="https://www.gstatic.com/images/icons/gplus-64.png" alt="Share on Google+"/></a>
     </div>
 </div>
+<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>

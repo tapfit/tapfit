@@ -47,21 +47,31 @@ $(document).ready(function() {
         displayOrderModal(this.id);
         return false;
     });
+
+    /* ------- */
+    /* Twitter */
+    /* ------- */
+    window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="https://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+    }(document, "script", "twitter-wjs"));
     
     /* -------------------------------- */
     /* Handle Download App Anchor Click */
     /* -------------------------------- */
     $(".promo-phone-link").click(function() {
         // Set the header to give the user a hint on what
-        // to do next
-        alert($(".promo-phone-link").value());    
+        $("#has_downloaded_field").val(true);
+        $("#new_contestant").submit();
     });
 
     $(".share-button").click(function() {
         if (this.id == "facebook") {
             showFacebookShareDialog();
         } else if (this.id == "twitter") {
-            alert("tweet!");
+            showTwitterDialog();
         }
     });
     
@@ -396,19 +406,26 @@ function showFacebookShareDialog() {
        FB.ui(
        {
          method: 'feed',
-         name: 'Facebook Dialogs',
-         link: 'http://developers.facebook.com/docs/reference/dialogs/',
-         picture: 'http://fbrell.com/f8.jpg',
-         caption: 'Reference Documentation',
-         description: 'Dialogs provide a simple, consistent interface for applications to interface with users.',
-         message: 'Facebook Dialogs are easy!'
+         name: 'TapFit Free Fitness Contest',
+         link: 'http://www.tapfit.co/contests/free-fitness-for-a-year',
+         picture: 'http://pbs.twimg.com/profile_images/378800000515664364/e380e4eefedaa2890bb719e96b292b33.png',
+         caption: 'Win Free Fitness in 2014',
+         description: 'TapFit is giving away a free year of fitness to one lucky Chicagoan and $200 in other awesome prizes! Enter today!',
+         message: 'I entered for a chance to win free workouts for a year!'
        },
        function(response) {
          if (response && response.post_id) {
-           alert('Post was published.');
+            $("#has_shared_field").val(true);
+            $("#new_contestant").submit();
          } else {
-           alert('Post was not published.');
+            $("#has_shared_field").val(false);
+            $("#new_contestant").submit();
          }
        }
      );
+}
+
+function showTwitterDialog() {
+    $("#has_shared_field").val(true);
+    $("#new_contestant").submit();
 }

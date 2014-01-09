@@ -1,34 +1,25 @@
-<p id="notice"><%= notice %></p>
+<div class="promo-section" id="contest-home">
+    
+    <a href="/" class="back-to-home">Back to TapFit Home</a>
 
-<p>
-  <strong>Name:</strong>
-  <%= @contest.name %>
-</p>
+    <h1><%= @contest.name %></h1>
 
-<p>
-  <strong>Url:</strong>
-  <%= @contest.url %>
-</p>
+    <div class="promo-wrapper">
+        <p class="highlighted">Do you live in Chicago? You could win
+        <strong>free workouts</strong> for the rest of 2014.</p>
+        
+        <p>That's right. We're giving away a full year
+           of fitness for one lucky winner, as well as
+           $200 in other awesome prizes!</p>
 
-<p>
-  <strong>Body:</strong>
-  <%= @contest.body %>
-</p>
+        <p>Just click the link below to get started!</p>
+    </div>
 
-<p>
-  <strong>Start date:</strong>
-  <%= @contest.start_date %>
-</p>
-
-<p>
-  <strong>End date:</strong>
-  <%= @contest.end_date %>
-</p>
-
-<p>
-  <strong>Is live:</strong>
-  <%= @contest.is_live %>
-</p>
-
-<%= link_to 'Edit', edit_contest_path(@contest) %> |
-<%= link_to 'Back', contests_path %>
+    <form action="/contests/<%= @contest.slug %>/contestants/new">
+    <p>
+        <button type="submit" class="enter-contest-button">
+            Enter Contest
+        </button>
+    </p>
+    </form>
+</div>

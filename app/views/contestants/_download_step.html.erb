@@ -1,16 +1,17 @@
 <div class="promo-section" id="download">
     <h1><%= @contestant.current_step_index %> <small>of</small> <%= @contestant.steps.count %></h1>
-    <%= f.hidden_field :has_downloaded, :value => true %>
+    <%= f.hidden_field :has_downloaded, :id => "has_downloaded_field", :value => @contestant.email_has_downloaded? %>
     <h1 id="download-step-header">Download the App</h1>
       <% if @contestant.email_has_downloaded? %>
         <h2>Looks like you've already downloaded the app. You rock!</h2>
+        <button class="last-step-button" type="submit">Go To Last Step</button>
       <% else %>
-        <button type="submit" class="promo-phone-link promo-phone-left"i value="iphone">
+        <a href="http://www.tapfit.co/iphone" target="_blank" class="promo-phone-link promo-phone-left" id="iphone">
             TapFit for iPhone
-        </button>
-        <button type="submit" class="promo-phone-link promo-phone-right" value="android">
+        </a>
+        <a href="http://www.tapfit.co/android" target="_blank" class="promo-phone-link promo-phone-right" id="android">
             TapFit for Android
-        </button>
+        </a>
       <% end %>
     <%= image_tag "splash_iphone.png", :class => "promo-iphone" %>
 </div>

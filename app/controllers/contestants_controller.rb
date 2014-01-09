@@ -26,7 +26,7 @@ class ContestantsController < ApplicationController
       if params[:back_button]
         @contestant.previous_step
       elsif @contestant.last_step?
-        #@contestant.save if @contestant.all_valid?
+        @contestant.save if @contestant.all_valid?
       else
         @contestant.next_step
       end

@@ -18,6 +18,12 @@
         text-transform: uppercase;
         margin-top: 60px;
     } 
+
+    h2 {
+        text-align: center;
+        font-size: 24px;
+        color: rgba(30, 42, 57, 1);
+    }
 }
 
 #email {
@@ -36,6 +42,7 @@
     background: #fff;
 
     h1 {
+        margin-top: 20%;
         color: #eb4840;
     }
 }
@@ -77,6 +84,13 @@ button:hover {
     border-color: #eb4840;
 }
 
+.last-step-button {
+    position: relative;
+    display: inline-block;
+    float: none;
+    margin: 0 auto;
+}
+
 .promo-iphone {
     position: absolute;
     bottom: -70%;
@@ -109,6 +123,11 @@ button:hover {
 
 .promo-phone-right {
     right: 17%;
+}
+
+.promo-share-links-container {
+    width: 600px;
+    margin: 0 auto;
 }
 
 @media only screen and (max-width:480px) {
