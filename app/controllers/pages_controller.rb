@@ -11,6 +11,7 @@ class PagesController < ApplicationController
   end
 
   def dummy
+    puts "user agent: #{request.env["HTTP_USER_AGENT"]}"
     render :layout => false
   end
 
