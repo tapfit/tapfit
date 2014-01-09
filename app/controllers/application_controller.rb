@@ -50,6 +50,10 @@ class ApplicationController < ActionController::Base
   end
 
   def get_source_info
+    
+    if request.env['HTTP_USER_AGENT'].include?("NewRelicPinger")
+      return
+    end
 
     if cookies.signed[:distinct_id].nil?
       cookies.permanent.signed[:distinct_id] = { :value => SecureRandom.base64, :domain => ".tapfit.co" }
