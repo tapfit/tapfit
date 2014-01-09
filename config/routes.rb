@@ -3,8 +3,8 @@ require 'api_constraints'
 
 Tapfit::Application.routes.draw do
 
-  resources :contests do
-    resources :contestants
+  resources :contests, :only => :show do
+    resources :contestants, :except => [:index, :update, :edit, :destroy]
   end
 
   match 'about'     => 'pages#about', :via => :get
@@ -113,5 +113,6 @@ Tapfit::Application.routes.draw do
   mount Resque::Server.new, :at => "/resque"
   
   root :to => "pages#index"
+  match '*path' => "pages#index", :via => :get
 
 end
