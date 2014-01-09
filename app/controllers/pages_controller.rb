@@ -6,10 +6,16 @@ class PagesController < ApplicationController
   def index
     
     @packages = Package.order(:amount)
+    respond_to do |format|
+      format.html
+    end
   end
 
   def dummy
     render :layout => false
+    respond_to do |format|
+      format.html
+    end
   end
 
   def about
