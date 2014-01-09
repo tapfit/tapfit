@@ -3,7 +3,7 @@ require 'api_constraints'
 
 Tapfit::Application.routes.draw do
 
-  resources :contests, :only => :show do
+  resources :contests do
     resources :contestants, :except => [:index, :update, :edit, :destroy]
   end
 
