@@ -44,6 +44,7 @@ $(document).ready(function() {
     /* Twitter */
     /* ------- */
     twttr.events.bind('tweet', function(event){
+        mixpanel.track("Contest -> Twitter Share");
         $("#has_shared_field").val(true);
         $("#new_contestant").submit();
     });
@@ -414,6 +415,7 @@ function showFacebookShareDialog() {
        },
        function(response) {
          if (response && response.post_id) {
+            mixpanel.track("Contest -> Facebook Share");
             $("#has_shared_field").val(true);
             $("#new_contestant").submit();
          } else {
