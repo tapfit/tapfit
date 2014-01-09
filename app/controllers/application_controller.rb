@@ -52,7 +52,7 @@ class ApplicationController < ActionController::Base
   def get_source_info
 
     if cookies.signed[:distinct_id].nil?
-      cookies.permanent.signed[:distinct_id] = { :value => SecureRandom.base64, :domain => 'www.tapfit.co' }
+      cookies.permanent.signed[:distinct_id] = { :value => SecureRandom.base64, :domain => ".tapfit.co" }
     end
 
     @distinct_id = cookies.signed[:distinct_id]
