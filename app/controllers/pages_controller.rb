@@ -1,11 +1,15 @@
 class PagesController < ApplicationController
 
   #before_filter :check_for_mobile
-  before_filter :set_tracking_info
+  before_filter :set_tracking_info, :except => [:dummy]
 
   def index
     
     @packages = Package.order(:amount)
+  end
+
+  def dummy
+    render :layout => false
   end
 
   def about

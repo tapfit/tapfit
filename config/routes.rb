@@ -20,6 +20,7 @@ Tapfit::Application.routes.draw do
   match 'android'   => 'pages#android', :via => :get
   match 'iphone'    => 'pages#iphone', :via => :get
   match 'iPhone'    => 'pages#iphone', :via => :get
+  match 'dummy'     => 'pages#dummy', :via => :get
  
   devise_for :users
 
