@@ -66,6 +66,7 @@ GEM
       activesupport (>= 3.0)
     cocaine (0.5.2)
       climate_control (>= 0.0.3, < 1.0)
+    coderay (1.0.9)
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0.beta, < 5.0)
@@ -126,6 +127,7 @@ GEM
     mandrill-api (1.0.47)
       excon (>= 0.16.0, < 1.0)
       json (>= 1.7.7, < 2.0)
+    method_source (0.8.1)
     mime-types (1.25)
     mini_portile (0.5.1)
     minitest (4.7.5)
@@ -162,6 +164,10 @@ GEM
     polyamorous (0.6.4)
       activerecord (>= 3.0)
     polyglot (0.3.3)
+    pry (0.9.12.2)
+      coderay (~> 1.0.5)
+      method_source (~> 0.8)
+      slop (~> 3.4)
     rack (1.5.2)
     rack-protection (1.5.0)
       rack
@@ -230,6 +236,7 @@ GEM
       rack (~> 1.4)
       rack-protection (~> 1.4)
       tilt (~> 1.3, >= 1.3.4)
+    slop (3.4.5)
     sprockets (2.10.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -300,6 +307,7 @@ DEPENDENCIES
   omniauth-facebook
   paperclip (~> 3.0)
   pg
+  pry
   rails (= 4.0.0)
   rails_12factor
   ransack

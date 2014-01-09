@@ -44,6 +44,32 @@ class ApplicationController < ActionController::Base
     prepend_view_path Rails.root + 'app' + 'views_mobile'
   end
 
+  def set_tracking_info
+
+    TrackMobileAppTracking.new.async.perform(get_source_info)
+  end
+
+  def get_source_info
+
+    if cookies.signed[:distinct_id].nil?
+      cookies.permanent.signed[:distinct_id] = { :value => SecureRandom.base64, :domain => :all }
+    end
+
+    @distinct_id = cookies.signed[:distinct_id]
+
+    source = params[:utm_source]
+    if source.nil?
+      source = request.referer
+    end
+
+    opts = {}
+    opts[:utm_source] = source
+    opts[:utm_campaign] = params[:utm_campaign]
+    opts[:utm_medium] = params[:utm_medium]
+    opts[:unid] = @distinct_id
+    return opts
+  end
+
   def mobile_device?
     if session[:mobile_override]
       session[:mobile_override] == "1"
