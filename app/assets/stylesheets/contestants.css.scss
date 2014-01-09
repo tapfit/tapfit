@@ -9,20 +9,33 @@
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    scroll: none;
     
     h1 {
         font-size: 60px;
         color: #fff;
         text-align: center;
         text-transform: uppercase;
-        margin-top: 60px;
+        margin-top: 30px;
     } 
 
     h2 {
         text-align: center;
         font-size: 24px;
         color: rgba(30, 42, 57, 1);
+    }
+    
+    p {
+        text-align: center;
+    }
+
+    p.promo-step {
+        text-transform: uppercase;
+        font-size: 24px;
+        color: #eee;
+        text-align: center;
+        padding: 0;
+        margin-top: 20px;
+        margin-bottom: -40px;
     }
 }
 
@@ -59,6 +72,11 @@
     margin: 30px 0 30px 15%;
     height: 80px;
     overflow: hidden;
+}
+
+.facebook, .twitter, .gplus {
+    float: left;
+    margin: 50px 0px 20px 100px;
 }
 
 input[type="text"] {
@@ -132,14 +150,21 @@ button:hover {
 
 @media only screen and (max-width:480px) {
     
-    #email h1, #download h1 {
+    #email h1, #download h1, #share h1 {
         font-size: 40px;
     }
+    
+    .facebook, .twitter, .gplus {
+        margin: 50px 0px 20px 34px;
+    }
 
-    .promo-iphone {
-        width: 80%;
-        margin-left: 10%;
-        bottom: -30%;
+    h1 {
+        width: 300px;
+        margin-left: 10px;
+    }
+
+    .promo-iphone, .fitness-girl, h2 {
+        display: none;
     }
 
     .promo-phone-link {

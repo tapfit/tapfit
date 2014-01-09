@@ -39,6 +39,14 @@ $(document).ready(function() {
     /* Track Google Events */
     /* ------------------- */
     trackGoogleEvents();
+
+    /* ------- */
+    /* Twitter */
+    /* ------- */
+    twttr.events.bind('tweet', function(event){
+        $("#has_shared_field").val(true);
+        $("#new_contestant").submit();
+    });
     
     /* ---------------------- */
     /* Handle Pre-Order Modal */
@@ -47,22 +55,11 @@ $(document).ready(function() {
         displayOrderModal(this.id);
         return false;
     });
-
-    /* ------- */
-    /* Twitter */
-    /* ------- */
-    window.twttr = (function (d,s,id) {
-    var t, js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
-    js.src="https://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
-    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
-    }(document, "script", "twitter-wjs"));
-    
+ 
     /* -------------------------------- */
     /* Handle Download App Anchor Click */
     /* -------------------------------- */
     $(".promo-phone-link").click(function() {
-        // Set the header to give the user a hint on what
         $("#has_downloaded_field").val(true);
         $("#new_contestant").submit();
     });
@@ -71,7 +68,9 @@ $(document).ready(function() {
         if (this.id == "facebook") {
             showFacebookShareDialog();
         } else if (this.id == "twitter") {
-            showTwitterDialog();
+        } else {
+            $("#has_shared_field").val(true);
+            $("#new_contestant").submit();
         }
     });
     
@@ -419,13 +418,8 @@ function showFacebookShareDialog() {
             $("#new_contestant").submit();
          } else {
             $("#has_shared_field").val(false);
-            $("#new_contestant").submit();
+            $("#promo-notice").text("You need to share to enter. C'mon you're so close!");
          }
        }
      );
-}
-
-function showTwitterDialog() {
-    $("#has_shared_field").val(true);
-    $("#new_contestant").submit();
 }

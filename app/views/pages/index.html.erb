@@ -18,7 +18,23 @@
 <!-- Credit Plans Section -->
 <%= render 'shared/plans' %>
 
-<!-- mixpanel javascript -->
+<div class="mobile-promotion">
+    <div class="wrapper">
+        <nav>
+            <ul class="navigation">
+              <% if request.user_agent =~ /Android/i %>
+                <%= link_to(android_path, :class => "android-download-button") do %>
+                  <li>Download TapFit</li>
+                <% end %>
+              <% else %>
+                <%= link_to(iphone_path, :class => "iphone-download-button") do %>
+                  <li>Download TapFit</li>
+                <% end %>
+              <% end %>
+            </ul>
+        </nav>
+    </div>
+</div>
 
 <script type="text/javascript"> 
   mixpanel.track("Splash page loaded");

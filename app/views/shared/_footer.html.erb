@@ -1,21 +1,3 @@
-<div class="mobile-promotion">
-    <div class="wrapper">
-        <nav>
-            <ul class="navigation">
-              <% if request.user_agent =~ /Android/i %>
-                <%= link_to(android_path, :class => "android-download-button") do %>
-                  <li>Download TapFit</li>
-                <% end %>
-              <% else %>
-                <%= link_to(iphone_path, :class => "iphone-download-button") do %>
-                  <li>Download TapFit</li>
-                <% end %>
-              <% end %>
-            </ul>
-        </nav>
-    </div>
-</div>
-
 <footer>
     <div class="wrapper">
         <p>Connect with us: <a href="http://www.facebook.com/tapfit">Facebook</a> | <a href="http://www.twitter.com/tapfit">Twitter</a> | <a href="http://www.linkedin.com/company/tapfit-llc">LinkedIn</a></p>

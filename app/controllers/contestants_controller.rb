@@ -52,6 +52,6 @@ class ContestantsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contestant_params
-      params.require(:contestant).permit(:email, :has_downloaded, :has_shared, :index, :show, :new)
+      params.require(:contestant).permit(:email, :has_downloaded, :has_shared)
     end
 end

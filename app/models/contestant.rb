@@ -16,7 +16,7 @@ def current_step_index
 end
 
 def steps
-  %w[email download share]
+  %w[email share download]
 end
 
 def next_step
