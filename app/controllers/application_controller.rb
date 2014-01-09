@@ -45,17 +45,16 @@ class ApplicationController < ActionController::Base
   end
 
   def set_tracking_info
-
-    TrackMobileAppTracking.new.async.perform(get_source_info)
-  end
-
-  def get_source_info
-    
     if request.env['HTTP_USER_AGENT'].include?("Ruby")
       puts "Ruby user agent"
       return
     end
 
+    TrackMobileAppTracking.new.async.perform(get_source_info)
+  end
+
+  def get_source_info
+   
     if cookies.signed[:distinct_id].nil?
       cookies.permanent.signed[:distinct_id] = { :value => SecureRandom.base64, :domain => ".tapfit.co" }
     end
