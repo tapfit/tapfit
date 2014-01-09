@@ -1,0 +1,25 @@
+<div class="promo-section" id="contest-home">
+    
+    <a href="/" class="back-to-home">Back to TapFit Home</a>
+
+    <h1><%= @contest.name %></h1>
+
+    <div class="promo-wrapper">
+        <p class="highlighted">Do you live in Chicago? You could win
+        <strong>free workouts</strong> for the rest of 2014.</p>
+        
+        <p>That's right. We're giving away a full year
+           of fitness for one lucky winner, as well as
+           $200 in other awesome prizes!</p>
+
+        <p>Just click the link below to get started!</p>
+    </div>
+
+    <form action="/contests/<%= @contest.slug %>/contestants/new">
+    <p>
+        <button type="submit" class="enter-contest-button">
+            Enter Contest
+        </button>
+    </p>
+    </form>
+</div>

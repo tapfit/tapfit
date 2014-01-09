@@ -1,0 +1,41 @@
+<%= form_for(@contest) do |f| %>
+  <% if @contest.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@contest.errors.count, "error") %> prohibited this contest from being saved:</h2>
+
+      <ul>
+      <% @contest.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :url %><br>
+    <%= f.text_field :url %>
+  </div>
+  <div class="field">
+    <%= f.label :body %><br>
+    <%= f.text_field :body %>
+  </div>
+  <div class="field">
+    <%= f.label :start_date %><br>
+    <%= f.datetime_select :start_date %>
+  </div>
+  <div class="field">
+    <%= f.label :end_date %><br>
+    <%= f.datetime_select :end_date %>
+  </div>
+  <div class="field">
+    <%= f.label :is_live %><br>
+    <%= f.check_box :is_live %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

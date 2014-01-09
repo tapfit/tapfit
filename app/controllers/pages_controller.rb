@@ -37,6 +37,9 @@ class PagesController < ApplicationController
   def faq
   end
 
+  def promotion
+  end
+
   def android
     redirect_to "https://play.google.com/store/apps/details?id=co.tapfit.android"
   end

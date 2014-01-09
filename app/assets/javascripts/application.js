@@ -30,50 +30,48 @@ $(document).ready(function() {
         navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-    window.gmap = new google.maps.Map(document.getElementById("map-canvas"), settings);
+
+    if ( document.getElementById('map-canvas') != null ) {
+        setupGoogleMap(settings);
+    }
 
     /* ------------------- */
     /* Track Google Events */
     /* ------------------- */
     trackGoogleEvents();
-    google.maps.event.addDomListener(window, 'load', initialize);
-    
-    /* -------------------------------------- */
-    /* Reset Google Map on Dropdown Selection */
-    /* -------------------------------------- */
-    $('.city a').click(function(){
-        var newCityString = this.id;
-        var latLonString = this.name;
-        var latLonParts = latLonString.split(",");
-        var newCenter = new google.maps.LatLng(latLonParts[0], latLonParts[1]);
 
-        gmap.setOptions({
-            center: newCenter,
-            zoom: 10
-        });
-
-        $('.your-city a').text(newCityString);
-
-        // Track city on map
-        mixpanel.track("Map changed", {
-            "New City": newCityString
-        });
-
-        if (this.id == "New York" || this.id == "San Francisco") {
-            $('#map-canvas-overlay').show();
-        } else {
-            $('#map-canvas-overlay').hide();
-        }
-
-        return false;
+    /* ------- */
+    /* Twitter */
+    /* ------- */
+    twttr.events.bind('tweet', function(event){
+        $("#has_shared_field").val(true);
+        $("#new_contestant").submit();
     });
-
+    
     /* ---------------------- */
     /* Handle Pre-Order Modal */
     /* ---------------------- */
     $('.preorder-button').click(function(){
         displayOrderModal(this.id);
         return false;
+    });
+ 
+    /* -------------------------------- */
+    /* Handle Download App Anchor Click */
+    /* -------------------------------- */
+    $(".promo-phone-link").click(function() {
+        $("#has_downloaded_field").val(true);
+        $("#new_contestant").submit();
+    });
+
+    $(".share-button").click(function() {
+        if (this.id == "facebook") {
+            showFacebookShareDialog();
+        } else if (this.id == "twitter") {
+        } else {
+            $("#has_shared_field").val(true);
+            $("#new_contestant").submit();
+        }
     });
     
     /* ---------------------------- */
@@ -187,6 +185,43 @@ function trackGoogleEvents() {
 /* --------------------------------- */
 /* Initialization of Google Maps API */
 /* --------------------------------- */
+
+function setupGoogleMap(settings) {
+    
+    window.gmap = new google.maps.Map(document.getElementById("map-canvas"), settings);
+    google.maps.event.addDomListener(window, 'load', initialize);
+    
+    /* -------------------------------------- */
+    /* Reset Google Map on Dropdown Selection */
+    /* -------------------------------------- */
+    $('.city a').click(function(){
+        var newCityString = this.id;
+        var latLonString = this.name;
+        var latLonParts = latLonString.split(",");
+        var newCenter = new google.maps.LatLng(latLonParts[0], latLonParts[1]);
+
+        gmap.setOptions({
+            center: newCenter,
+            zoom: 10
+        });
+
+        $('.your-city a').text(newCityString);
+
+        // Track city on map
+        mixpanel.track("Map changed", {
+            "New City": newCityString
+        });
+
+        if (this.id == "New York" || this.id == "San Francisco") {
+            $('#map-canvas-overlay').show();
+        } else {
+            $('#map-canvas-overlay').hide();
+        }
+
+        return false;
+    });
+}
+
 function initialize() {
     
     var locations = [
@@ -364,4 +399,27 @@ function initialize() {
             }
         })(marker, i));
     }
+}
+
+function showFacebookShareDialog() {
+       FB.ui(
+       {
+         method: 'feed',
+         name: 'TapFit Free Fitness Contest',
+         link: 'http://www.tapfit.co/contests/free-fitness-for-a-year',
+         picture: 'http://pbs.twimg.com/profile_images/378800000515664364/e380e4eefedaa2890bb719e96b292b33.png',
+         caption: 'Win Free Fitness in 2014',
+         description: 'TapFit is giving away a free year of fitness to one lucky Chicagoan and $200 in other awesome prizes! Enter today!',
+         message: 'I entered for a chance to win free workouts for a year!'
+       },
+       function(response) {
+         if (response && response.post_id) {
+            $("#has_shared_field").val(true);
+            $("#new_contestant").submit();
+         } else {
+            $("#has_shared_field").val(false);
+            $("#promo-notice").text("You need to share to enter. C'mon you're so close!");
+         }
+       }
+     );
 }

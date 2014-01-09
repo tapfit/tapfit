@@ -1,0 +1,3 @@
+<%= form_for [@contest, @contestant] do |f| %>
+  <%= render "#{@contestant.current_step}_step", :f => f %>
+<% end %>
