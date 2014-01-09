@@ -1,5 +1,3 @@
-require 'pry'
-
 class PagesController < ApplicationController
 
   #before_filter :check_for_mobile
