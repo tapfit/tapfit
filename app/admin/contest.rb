@@ -6,6 +6,14 @@ ActiveAdmin.register Contest do
 
   filter :name
   controller do
+    def to_param
+      slug
+    end
+
+    def generate_slug
+      self.slug ||= name.parameterize
+    end
+
     def permitted_params
       params.permit!
     end
