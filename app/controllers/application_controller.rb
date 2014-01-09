@@ -52,6 +52,7 @@ class ApplicationController < ActionController::Base
   def get_source_info
     
     if request.env['HTTP_USER_AGENT'].include?("NewRelicPinger")
+      puts "NewRelicPinger"
       return
     end
 
