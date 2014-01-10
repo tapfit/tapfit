@@ -2,14 +2,27 @@
 
 <table border="1" width="400">
   <tr>
-    <td><b> Total Purchases </b></td>
-    <td><b> Week Total Purchases </b></td>
-    <td><b>WoW Purchase Growth </b></td>
+    <th><b> Total Purchases </b></th>
+    <th><b> Week Total Purchases </b></th>
+    <th><b>WoW Purchase Growth </b></th>
+    <th><b> Total Amount Purchased </b> </th>
+    <th><b> Week Purchase Amount </b> </th>
+    <th><b> WoW Amount Growth </b> </th>
+    <th><b> Total Registers </b> </th>
+    <th><b> Week Registers </b> </th>
+    <th><b> WoW Registers </b> </th>
   </tr>
   <tr>
     <td> <%= @stats.total_purchases %> </td>
     <td> <%= @stats.wow_purchase_total %> </td>
     <td> <%= @stats.wow_purchase_total_percentage %> </td>
+    <td> <%= @stats.total_amount_purchased %> </td>
+    <td> <%= @stats.wow_purchase_amount %> </td>
+    <td> <%= @stats.wow_purchase_amount_percentage %> </td>
+    <td> <%= @stats.total_registers %> </td>
+    <td> <%= @stats.wow_register_total %> </td>
+    <td> <%= @stats.wow_register_total_percentage %> </td>
+
   </tr>
 </table>
 
