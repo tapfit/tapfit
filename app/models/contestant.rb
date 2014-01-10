@@ -4,8 +4,6 @@ belongs_to :contest
 attr_writer :current_step
 
 validates_presence_of :email, :if => lambda { |c| c.current_step == "email" }
-validates_presence_of :has_downloaded, :if => lambda { |c| c.current_step == "download" }
-validates_presence_of :has_shared, :if => lambda { |c| c.current_step == "share" }
 
 def current_step
   @current_step || steps.first
