@@ -1,0 +1,12 @@
+#!/bin/bash 
+
+echo "Capturing production..."
+heroku pgbackups:capture --remote prod --expire
+ 
+echo "Fetching latest URL..."
+curl -o latest.dump `heroku pgbackups:url --remote prod`
+ 
+echo "Restoring local to latest..."
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -U tapfit -d tapfit_dev latest.dump
+
+echo "Done."
