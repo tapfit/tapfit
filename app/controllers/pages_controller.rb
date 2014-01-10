@@ -3,19 +3,14 @@ class PagesController < ApplicationController
   #before_filter :check_for_mobile
   before_filter :set_tracking_info, :except => [:dummy]
 
+  respond_to :html
+
   def index
-    
     @packages = Package.order(:amount)
-    respond_to do |format|
-      format.html
-    end
   end
 
   def dummy
     render :layout => false
-    respond_to do |format|
-      format.html
-    end
   end
 
   def about

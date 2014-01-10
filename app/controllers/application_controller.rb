@@ -45,22 +45,21 @@ class ApplicationController < ActionController::Base
   end
 
   def set_tracking_info
+    if request.env['HTTP_USER_AGENT'].include?("Ruby")
+      puts "Ruby user agent"
+      return
+    end
 
     TrackMobileAppTracking.new.async.perform(get_source_info)
   end
 
   def get_source_info
-    
-    if request.env['HTTP_USER_AGENT'].include?("NewRelicPinger")
-      puts "NewRelicPinger"
-      return
+   
+    if cookies[:distinct_id].nil?
+      cookies.permanent[:distinct_id] = { :value => SecureRandom.base64 }
     end
 
-    if cookies.signed[:distinct_id].nil?
-      cookies.permanent.signed[:distinct_id] = { :value => SecureRandom.base64, :domain => ".tapfit.co" }
-    end
-
-    @distinct_id = cookies.signed[:distinct_id]
+    @distinct_id = cookies[:distinct_id]
 
     source = params[:utm_source]
     if source.nil?
