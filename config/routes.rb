@@ -8,7 +8,7 @@ Tapfit::Application.routes.draw do
   end
 
   match 'about'     => 'pages#about', :via => :get
-  match 'plans'     => 'pages#plans', :via => :get
+  # match 'plans'     => 'pages#plans', :via => :get
   match 'corporate' => 'pages#corporate', :via => :get
   match 'promotion' => 'pages#promotion', :via => :get
   match 'sale'      => 'pages#sale', :via => :get
