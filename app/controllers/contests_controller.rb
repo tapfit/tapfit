@@ -2,6 +2,8 @@ class ContestsController < ApplicationController
   before_action :set_contest, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, except: [:show]
 
+  before_filter :set_tracking_info, only: [ :show ]
+
   # GET /contests
   # GET /contests.json
   def index
