@@ -2,7 +2,7 @@ module Api
   module V1
     class UsersController < ApplicationController     
       # before_filter :authenticate_user!
-      before_filter :authenticate_user!, :only => [ :show ]
+      before_filter :authenticate_user!, :only => [ :show, :shared ]
       skip_before_filter :verify_authenticity_token, :only => [:login, :register, :forgotpassword]
 
       respond_to :json 
@@ -170,7 +170,24 @@ module Api
           render :json => { :errors => "Not valid email" }
         end
       end
-      
+
+      def shared
+        user = user_from_user_id
+        if (current_user == user && user.shared != true)
+          if (user.shared != true)
+            Credit.create(:total => 5, :user_id => user.id)
+            user.reload
+            user.shared = true
+            user.save
+            render :json => { :success => true, :user => user.as_json(:auth => true) }
+          else
+            render :json => { :success => false, :user => user.as_json(:auth => true) }
+          end
+        else
+          render :json => { :success => false, :user => user.as_json }
+        end
+      end      
+
       private
 
       def user_params

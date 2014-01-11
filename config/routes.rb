@@ -97,6 +97,7 @@ Tapfit::Application.routes.draw do
           post 'logout'
           post 'forgotpassword'
           post 'guest'
+          post 'shared'
         end
       end  
 
