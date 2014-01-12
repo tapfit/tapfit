@@ -173,11 +173,18 @@ module Api
 
       def shared
         user = user_from_user_id
-        if (current_user == user && user.shared != true)
-          if (user.shared != true)
-            Credit.create(:total => 5, :user_id => user.id)
+        if (current_user == user)
+          if (user.shared <= 10)
+            credit_total = params[:shares].to_i
+            if credit_total + user.shared > 10
+              credit_total = [10 - user.shared, 0].max
+            end
+            puts "Credits to add: #{credit_total}"
+            if credit_total > 0
+              Credit.create(:total => credit_total, :user_id => user.id)
+            end
             user.reload
-            user.shared = true
+            user.shared = credit_total + user.shared
             user.save
             render :json => { :success => true, :user => user.as_json(:auth => true) }
           else

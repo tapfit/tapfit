@@ -372,7 +372,7 @@ ActiveRecord::Schema.define(version: 20140111202729) do
     t.datetime "birthday"
     t.string   "location"
     t.text     "mb_email"
-    t.boolean  "shared",                 default: false
+    t.integer  "shared",                 default: 0
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
