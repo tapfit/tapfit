@@ -175,7 +175,7 @@ module Api
         user = user_from_user_id
         if (current_user == user)
           if (user.shared <= 10)
-            credit_total = params[:shares].to_i
+            credit_total = params[:amount].to_i
             if credit_total + user.shared > 10
               credit_total = [10 - user.shared, 0].max
             end
