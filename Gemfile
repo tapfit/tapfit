@@ -23,7 +23,6 @@ gem 'will_paginate'
 gem 'paperclip', "~> 3.0"
 gem 'aws-sdk'
 gem 'kaminari'
-gem 'pry'
 gem 'timezone'
 gem 'braintree'
 gem 'nexmo'
@@ -47,6 +46,7 @@ group :test, :development do
   gem "factory_girl_rails"
   gem 'database_cleaner'
   gem 'therubyracer'
+  gem 'pry'
 end
 
 # Use SCSS for stylesheets

@@ -71,6 +71,18 @@ class ApplicationController < ActionController::Base
     opts[:utm_campaign] = params[:utm_campaign]
     opts[:utm_medium] = params[:utm_medium]
     opts[:unid] = @distinct_id
+    opts[:headers] = {}
+    opts[:headers][:x_forwarded_for] = request.headers.env["REMOTE_ADDR"]
+    opts[:headers][:host] = request.headers.env["HTTP_HOST"]
+    opts[:headers][:connection] = request.headers.env["HTTP_CONNECTION"]
+    opts[:headers][:cache_control] = request.headers.env["HTTP_CACHE_CONTROL"]
+    opts[:headers][:accept] = request.headers.env["HTTP_ACCEPT"]
+    opts[:headers][:user_agent] = request.headers.env["HTTP_USER_AGENT"]
+    opts[:headers][:accept_encoding] = request.headers.env["HTTP_ACCEPT_ENCODING"]
+    opts[:headers][:accept_language] = request.headers.env["HTTP_ACCEPT_LANGUAGE"]
+    opts[:headers][:cookie] = request.headers.env["HTTP_COOKIE"]
+    opts[:headers][:if_none_match] = request.headers.env["HTTP_IF_NONE_MATCH"]
+    opts[:headers][:version] = request.headers.env["HTTP_VERSION"]
     return opts
   end
 
