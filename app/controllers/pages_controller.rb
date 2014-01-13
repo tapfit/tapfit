@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
 
   #before_filter :check_for_mobile
+  before_filter :set_contest, only: [:index]
   before_filter :set_tracking_info, :except => [:dummy]
 
   respond_to :html
@@ -50,6 +51,10 @@ class PagesController < ApplicationController
   def iphone
     redirect_to "https://itunes.apple.com/us/app/tapfit/id683430709?ls=1&mt=8"
   end
-
-
+  
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_contest
+      @contest = Contest.where(:is_live => true).first
+    end
 end
