@@ -5,3 +5,60 @@
 #privacy_container {
     width: 320px;
 }
+
+.promo-section {
+    float: left;
+    width: 100vw;
+    padding: 70px 0;
+    clear: both;
+
+    h1 {
+        font-size: 50px;
+        color: #fff;
+        text-align: center;
+        text-transform: uppercase;
+        margin-top: 60px;
+    } 
+
+    h2 {
+        font-size: 24px;
+        text-align: center;
+        color: rgba(30, 42, 57, 1);
+    }
+
+    p {
+        font-size: 36px;
+        text-align: center;
+        color: #fafafa;
+    }
+
+    p.highlighted {
+        color: #111;
+    }
+}
+
+.promo-wrapper {
+    width: 640px;
+    margin: 0 auto;
+}
+
+.back-to-home {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #fff;
+}
+
+.back-to-home:hover {
+    color: #aaa;
+}
+
+button:hover {
+    cursor: pointer;
+    color: rgba(30, 42, 57, 1);
+    border-color: rgba(30, 42, 57, 1);
+}
+
+#contest-home {
+    background: #eb4840;
+}
