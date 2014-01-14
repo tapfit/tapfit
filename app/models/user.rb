@@ -162,4 +162,12 @@ class User < ActiveRecord::Base
 
   end
 
+  def total_passes
+    return Receipt.where(:user_id => self.id).count
+  end
+
+  def total_packages
+    return Credit.where(:user_id => self.id).where("package_id IS NOT NULL").count
+  end
+
 end

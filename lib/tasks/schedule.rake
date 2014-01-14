@@ -10,6 +10,23 @@ require './lib/crawler-helpers/casper_mindbody'
 
 desc "This task is called by the Heroku scheduler add-on"
 
+
+task :get_tapfit_stats => :environment do
+
+  date = Date.today.beginning_of_week
+
+  while date > Date.parse('2013-08-01')
+    # puts date
+    receipt_total = Receipt.where("created_at >= ?", date).where("created_at <= ?", date + 1.week).sum('price')
+    package_total = Credit.joins(:package).where("package_id IS NOT NULL").where("credits.created_at >= ?", date).where("credits.created_at <= ?", date + 1.week).sum('packages.amount')
+
+    puts receipt_total + package_total
+    date = date - 1.week
+  end
+
+end
+
+
 task :start_crawl_jobs => :environment do
   puts "Starting crawl process"
 
