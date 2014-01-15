@@ -10,16 +10,19 @@ module Api
       # Returns array of place around you (default: cincinnati)
       def index
         # @places = Place.get_nearby_places(params[:lat], params[:lon]).paginate(:page => get_page)
-        @places = Kaminari.paginate_array(Place.get_nearby_places(params[:lat], params[:lon], params[:radius], params[:q])).page(get_page)
+        # @places = Kaminari.paginate_array(Place.get_nearby_places(params[:lat], params[:lon], params[:radius], params[:q])).page(get_page)
+        @places = Place.get_nearby_places(params[:lat], params[:lon], params[:radius], params[:q])
         render :json => 
             { 
-              :places => @places.as_json(:lean_list => true),
+              :places => @places
+=begin
               :page_info => 
                 { 
                   :page => get_page,
                   :per_page => Place.per_page,
                   :total_entries => @places.total_count 
                 }
+=end
             }
       end
       

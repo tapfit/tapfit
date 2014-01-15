@@ -74,8 +74,11 @@ class Place < ActiveRecord::Base
 
   scope :nearby, lambda { |lat, lon, radius, ids|
     if ids.nil?
+=begin
       return find_by_sql("SELECT places.*, 
                     3956 * 2 * asin( sqrt ( pow ( sin (( #{lat} - lat) * pi() / 180 / 2), 2) + cos (#{lat} * pi() / 180 ) * cos ( lat * pi() / 180 ) * pow ( sin (( #{lon} - lon ) * pi() / 180 / 2 ), 2) ) ) as distance FROM places INNER JOIN addresses ON places.address_id = addresses.id WHERE lat BETWEEN #{lat - radius} AND #{lat + radius} AND show_place = TRUE AND can_buy = TRUE AND lon BETWEEN #{lon - radius} AND #{lon + radius} ORDER BY distance LIMIT 30") 
+=end
+      return find_by_sql("SELECT places.*, 3956 * 2 * asin( sqrt ( pow ( sin (( #{lat} - lat) * pi() / 180 / 2), 2) + cos (#{lat} * pi() / 180 ) * cos ( lat * pi() / 180 ) * pow ( sin (( #{lon} - lon ) * pi() / 180 / 2 ), 2) ) ) as distance, addresses.*, workouts.* FROM places INNER JOIN workouts ON workouts.place_id = places.id INNER JOIN addresses ON places.address_id = addresses.id WHERE lat BETWEEN #{lat - radius} AND #{lat + radius} AND show_place = TRUE AND places.can_buy = TRUE AND workouts.start_time > '#{DateTime.now.utc.to_formatted_s(:db)}' AND lon BETWEEN #{lon - radius} AND #{lon + radius} ORDER BY workouts.start_time LIMIT 60")
     elsif ids.length == 0
       return []
     else
@@ -107,8 +110,8 @@ class Place < ActiveRecord::Base
       options[:include] ||= [ :address ]
       options[:methods] ||= [ :display_name ]
     elsif !options[:lean_list].nil?
-      except_array ||= [ :crawler_source, :url, :icon_photo_id, :cover_photo_id, :source, :source_key, :tapfit_description, :is_public, :dropin_price, :updated_at, :address_id, :is_cancelled, :phone_number, :source_description, :created_at, :schedule_url, :can_buy, :facility_type, :lowest_price, :lowest_original_price, :show_place ]
-      options[:include] ||= [ :address ]
+      except_array ||= [ :crawler_source, :url, :icon_photo_id, :cover_photo_id, :source, :source_key, :tapfit_description, :is_public, :dropin_price, :updated_at, :is_cancelled, :phone_number, :source_description, :created_at, :schedule_url, :can_buy, :facility_type, :lowest_price, :lowest_original_price, :show_place ]
+      options[:include] ||= [ :categories, :address ]
       options[:methods] ||= [ :cover_photo, :next_workouts_json ]
     end
 
