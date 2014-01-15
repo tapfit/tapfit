@@ -48,6 +48,15 @@ Tapfit::Application.routes.draw do
     devise_for :users
     ActiveAdmin.routes(self)
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
+      core_resources
+    end
+
+    scope module: :v2, constraints: ApiConstraints.new(version: 2, default: false) do
+      core_resources
+    end
+  end
+
+  def core_resources
       resources :places do
         resources :workouts do
           post 'buy', on: :member
@@ -108,8 +117,6 @@ Tapfit::Application.routes.draw do
       end
       
       get 'me', to: 'users#show' 
-
-    end
   end
 
   mount Resque::Server.new, :at => "/resque"
