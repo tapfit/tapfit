@@ -43,6 +43,8 @@ class Workout < ActiveRecord::Base
       except_array ||= [ :updated_at, :workout_key, :source, :pass_detail_id ]
       options[:include] ||= [ :instructor ]
       options[:methods] ||= [ :quantity_left, :avg_rating, :fine_print ]
+    elsif
+      except_array ||= [ :instructor_id, :place_id, :source_description, :workout_key, :source, :is_bookable, :created_at, :updated_at, :can_buy, :is_day_pass, :is_cancelled, :pass_detail_id, :crawler_info ]
     end
     options[:except] ||= except_array
     super(options)

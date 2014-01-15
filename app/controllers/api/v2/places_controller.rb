@@ -1,5 +1,5 @@
 module Api
-  module V1
+  module V2
     class PlacesController < ApplicationController
       
       before_filter :check_non_guest, :only => [ :favorite, :checkin ]
@@ -13,7 +13,7 @@ module Api
         @places = Kaminari.paginate_array(Place.get_nearby_places(params[:lat], params[:lon], params[:radius], params[:q])).page(get_page)
         render :json => 
             { 
-              :places => @places.as_json(:list => true),
+              :places => @places.as_json(:lean_list => true),
               :page_info => 
                 { 
                   :page => get_page,

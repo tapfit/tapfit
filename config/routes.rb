@@ -43,20 +43,8 @@ Tapfit::Application.routes.draw do
   resources :email_collections
 
   # Api Calls
-  namespace :api, defaults: {format: 'json'} do
-
-    devise_for :users
-    ActiveAdmin.routes(self)
-    scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
-      core_resources
-    end
-
-    scope module: :v2, constraints: ApiConstraints.new(version: 2, default: false) do
-      core_resources
-    end
-  end
-
-  def core_resources
+  
+    def core_resources
       resources :places do
         resources :workouts do
           post 'buy', on: :member
@@ -119,6 +107,20 @@ Tapfit::Application.routes.draw do
       get 'me', to: 'users#show' 
   end
 
+
+  namespace :api, defaults: {format: 'json'} do
+
+    devise_for :users
+    ActiveAdmin.routes(self)
+    scope module: :v2, constraints: ApiConstraints.new(version: 2) do
+      core_resources
+    end
+    scope module: :v1, constraints: ApiConstraints.new(version: 1, default: :true) do
+      core_resources
+    end
+  end
+
+  
   mount Resque::Server.new, :at => "/resque"
   
   root :to => "pages#index"

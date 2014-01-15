@@ -2,7 +2,7 @@ require 'braintree'
 require './lib/braintree/purchase'
 
 module Api
-  module V1
+  module V2
     class WorkoutsController < ApplicationController
      
       before_filter :check_non_guest, :only => [ :buy ] 

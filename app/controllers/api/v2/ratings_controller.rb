@@ -1,5 +1,5 @@
 module Api
-  module V1
+  module V2
     class RatingsController < ApplicationController
       
       before_filter :check_non_guest, :only => [ :create ]

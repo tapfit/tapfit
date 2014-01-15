@@ -20,13 +20,13 @@ class Place < ActiveRecord::Base
 
   # Methods
   def icon_photo
-    photo = Photo.where(:id => self.icon_photo_id).first
-    return "#{Photo.image_base_url}/images/icon/#{photo.id}.jpg" if !photo.nil?
+    # photo = Photo.where(:id => self.icon_photo_id).first
+    return "#{Photo.image_base_url}/images/icon/#{icon_photo_id}.jpg" if !icon_photo_id.nil?
   end
 
   def cover_photo
-    photo = Photo.where(:id => self.cover_photo_id).first
-    return "#{Photo.image_base_url}/images/large/#{photo.id}.jpg" if !photo.nil?
+    # photo = Photo.where(:id => self.cover_photo_id).first
+    return "#{Photo.image_base_url}/images/large/#{cover_photo_id}.jpg" if !cover_photo_id.nil?
   end
 
   def todays_workouts
@@ -43,13 +43,17 @@ class Place < ActiveRecord::Base
     self.workouts.where("start_time BETWEEN ? AND ?", start_of_day, end_of_day).where("price IS NOT NULL").where(:is_cancelled => false)
   end
 
+  def next_workouts_json
+    return self.next_workouts.as_json(:lean_list => true)
+  end
+
   def self.get_nearby_places(lat, lon, radius, search)
     if lat.nil? || lon.nil?
       lat = 39.110918
       lon = -84.515521
     end
     if radius.nil?
-      radius = 0.5
+      radius = 0.08
     else
       radius = radius.to_f / 69
     end
@@ -102,6 +106,10 @@ class Place < ActiveRecord::Base
       options[:only] ||= [ :id ]      
       options[:include] ||= [ :address ]
       options[:methods] ||= [ :display_name ]
+    elsif !options[:lean_list].nil?
+      except_array ||= [ :crawler_source, :url, :icon_photo_id, :cover_photo_id, :source, :source_key, :tapfit_description, :is_public, :dropin_price, :updated_at, :address_id, :is_cancelled, :phone_number, :source_description, :created_at, :schedule_url, :can_buy, :facility_type, :lowest_price, :lowest_original_price, :show_place ]
+      options[:include] ||= [ :address ]
+      options[:methods] ||= [ :cover_photo, :next_workouts_json ]
     end
 
     options[:except] ||= except_array

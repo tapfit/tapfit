@@ -1,5 +1,5 @@
 module Api
-  module V1
+  module V2
     class UsersController < ApplicationController     
       # before_filter :authenticate_user!
       before_filter :authenticate_user!, :only => [ :show, :shared ]
