@@ -112,7 +112,7 @@ Tapfit::Application.routes.draw do
 
     devise_for :users
     ActiveAdmin.routes(self)
-    scope module: :v2, constraints: ApiConstraints.new(version: 2) do
+    scope module: :v2, constraints: ApiConstraints.new(version: 2, default: false) do
       core_resources
     end
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
