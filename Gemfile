@@ -47,6 +47,7 @@ group :test, :development do
   gem 'database_cleaner'
   gem 'therubyracer'
   gem 'pry'
+  gem 'lol_dba'
 end
 
 # Use SCSS for stylesheets

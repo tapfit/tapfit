@@ -115,7 +115,7 @@ Tapfit::Application.routes.draw do
     scope module: :v2, constraints: ApiConstraints.new(version: 2) do
       core_resources
     end
-    scope module: :v1, constraints: ApiConstraints.new(version: 1, default: :true) do
+    scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
       core_resources
     end
   end

@@ -121,6 +121,10 @@ GEM
       activesupport (>= 3.0.0)
     kgio (2.8.1)
     libv8 (3.16.14.3)
+    lol_dba (1.6.0)
+      actionpack (>= 3.0)
+      activerecord (>= 3.0)
+      railties (>= 3.0)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -297,6 +301,7 @@ DEPENDENCIES
   jbuilder (~> 1.0.1)
   jquery-rails (>= 3.0.0)
   kaminari
+  lol_dba
   mandrill-api
   mixpanel-ruby
   newrelic_rpm
