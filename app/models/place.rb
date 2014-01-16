@@ -14,6 +14,13 @@ class Place < ActiveRecord::Base
   has_one :place_contract
   has_many :pass_details
   has_many :place_hours
+
+  has_many :current_workouts, -> {
+    self.select_values = 
+      ["workouts.*"]
+      where('workouts.start_time > ?', DateTime.now)
+  }, class_name: "Workout"
+
   accepts_nested_attributes_for :place_hours
   accepts_nested_attributes_for :place_contract
   self.per_page = 30
@@ -44,7 +51,7 @@ class Place < ActiveRecord::Base
   end
 
   def next_workouts_json
-    return self.next_workouts.as_json(:lean_list => true)
+    return self.current_workouts.as_json(:lean_list => true)
   end
 
   def self.get_nearby_places(lat, lon, radius, search)
@@ -85,6 +92,31 @@ class Place < ActiveRecord::Base
     end
   }
 
+  def get_close_places(lat, lon, radius)
+    if lat.nil? || lon.nil?
+      lat = 39.110918
+      lon = -84.515521
+    end
+    if radius.nil?
+      radius = 0.08
+    else
+      radius = radius.to_f / 69
+    end
+
+    return Place.close(lat.to_f, lon.to_f, radius)
+
+  end
+
+  scope :close, lambda { |lat, lon, radius|
+    joins(:address)
+    .select("places.*, 3956 * 2 * asin( sqrt ( pow ( sin (( #{lat} - addresses.lat) * pi() / 180 / 2), 2) + cos (#{lat} * pi() / 180 ) * cos ( addresses.lat * pi() / 180 ) * pow ( sin (( #{lon} - addresses.lon ) * pi() / 180 / 2 ), 2) ) ) as distance")
+    .order("distance")
+    .where("addresses.lat BETWEEN ? AND ?", lat - radius, lat + radius)
+    .where("addresses.lon BETWEEN ? AND ?", lon - radius, lon + radius)
+    .limit(30)
+    .preload(:address, :categories, :current_workouts)
+  }
+
   def passes_sold_today
     Time.zone = self.address.timezone
     starts = Time.now.beginning_of_day
@@ -115,6 +147,10 @@ class Place < ActiveRecord::Base
     options[:except] ||= except_array
     super(options)
 
+  end
+
+  def current_workouts_json
+    self.current_workouts.as_json(:lean_list => true)
   end
 
   def display_name
