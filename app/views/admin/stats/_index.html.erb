@@ -2,6 +2,7 @@
 
 <table border="1" width="400">
   <tr>
+    <th><b> Week </b> </th>
     <th><b> Total Purchases </b></th>
     <th><b> Week Total Purchases </b></th>
     <th><b>WoW Purchase Growth </b></th>
@@ -12,17 +13,20 @@
     <th><b> Week Registers </b> </th>
     <th><b> WoW Registers </b> </th>
   </tr>
-  <tr>
-    <td> <%= @stats.total_purchases %> </td>
-    <td> <%= @stats.wow_purchase_total %> </td>
-    <td> <%= @stats.wow_purchase_total_percentage %> </td>
-    <td> <%= @stats.total_amount_purchased %> </td>
-    <td> <%= @stats.wow_purchase_amount %> </td>
-    <td> <%= @stats.wow_purchase_amount_percentage %> </td>
-    <td> <%= @stats.total_registers %> </td>
-    <td> <%= @stats.wow_register_total %> </td>
-    <td> <%= @stats.wow_register_total_percentage %> </td>
+  <% @stats.each do |stat| %>
 
-  </tr>
+    <tr>
+      <td> <%= stat.start_date.strftime("%b %e %Y") %> </td>
+      <td> <%= stat.total_purchases %> </td>
+      <td> <%= stat.wow_purchase_total %> </td>
+      <td> <%= stat.wow_purchase_total_percentage %> </td>
+      <td> <%= stat.total_amount_purchased %> </td>
+      <td> <%= stat.wow_purchase_amount %> </td>
+      <td> <%= stat.wow_purchase_amount_percentage %> </td>
+      <td> <%= stat.total_registers %> </td>
+      <td> <%= stat.wow_register_total %> </td>
+      <td> <%= stat.wow_register_total_percentage %> </td>
+    </tr>
+  <% end %>
 </table>
 
