@@ -92,7 +92,7 @@ class Place < ActiveRecord::Base
     end
   }
 
-  def get_close_places(lat, lon, radius)
+  def self.get_close_places(lat, lon, radius)
     if lat.nil? || lon.nil?
       lat = 39.110918
       lon = -84.515521
