@@ -111,7 +111,7 @@ class User < ActiveRecord::Base
     id = self.id
 
     if !id.nil?
-      Credit.create(:total => 5, :user_id => id)
+      # Credit.create(:total => 5, :user_id => id)
     end
   end
 
