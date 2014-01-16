@@ -7,13 +7,13 @@ class Stats
   def initialize(start_date)
     @start_date = start_date
     puts @start_date
-    @total_purchases = Receipt.all.count + Credit.where("package_id IS NOT NULL").count
-    @total_amount_purchased = Receipt.all.sum('price') + Credit.joins(:package).where("package_id IS NOT NULL").sum('packages.amount')
+    @total_purchases = Receipt.where("created_at < ?", @start_date).count + Credit.where("created_at < ?", @start_date).where("package_id IS NOT NULL").count
+    @total_amount_purchased = Receipt.where("created_at < ?", @start_date).sum('price') + Credit.joins(:package).where("package_id IS NOT NULL").where("credits.created_at < ?", @start_date).sum('packages.amount')
     @wow_purchase_total = get_week_purchase_total
     @wow_purchase_total_percentage = "#{sprintf("%.2f", get_wow_purchase_total_percentage)}%"
     @wow_purchase_amount = get_week_purchase_amount
     @wow_purchase_amount_percentage = "#{sprintf("%.2f", get_wow_purchase_amount_percentage)}%"
-    @total_registers = User.all.count
+    @total_registers = User.where("created_at < ?", @start_date).count
     @wow_register_total = get_week_register_amount
     @wow_register_total_percentage = "#{sprintf("%.2f", get_wow_register_percentage)}%"
   end
@@ -41,7 +41,7 @@ class Stats
   end
 
   def last_weeks_registers
-    return User.where("created_at BETWEEN ? AND ?", @start_date - 14.days, @start_date - 7.days)
+    return User.where("created_at < ?", @start_date - 7.days)
   end
 
   def get_week_purchase_total
@@ -55,6 +55,8 @@ class Stats
     total = total + last_weeks_packages.count
     if total != 0
       return ((@wow_purchase_total.to_f - total.to_f) / total.to_f) * 100
+    elsif @wow_purchase_total != 0
+      return 100
     else
       return -100
     end
@@ -71,6 +73,8 @@ class Stats
     amount = amount + last_weeks_packages.joins(:package).sum('packages.amount')
     if amount != 0
       return ((@wow_purchase_amount.to_f - amount.to_f) / amount.to_f) * 100
+    elsif @wow_purchase_amount != 0
+      return 100
     else
       return -100
     end
@@ -84,7 +88,7 @@ class Stats
     this_total = weeks_registers.count
     last_total = last_weeks_registers.count
     if last_total != 0
-      return ((this_total.to_f) / @total_registers.to_f) * 100
+      return ((this_total.to_f) / last_total.to_f) * 100
     else
       return -100
     end
