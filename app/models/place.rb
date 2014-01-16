@@ -116,7 +116,7 @@ class Place < ActiveRecord::Base
     .where(:show_place => true)
     .where(:can_buy => true)
     .limit(30)
-    .preload(:address, :categories, :current_workouts)
+    .preload(:address, :current_workouts)
   }
 
   def passes_sold_today
@@ -141,7 +141,7 @@ class Place < ActiveRecord::Base
       options[:include] ||= [ :address ]
       options[:methods] ||= [ :display_name ]
     elsif !options[:lean_list].nil?
-      except_array ||= [ :crawler_source, :url, :icon_photo_id, :cover_photo_id, :source, :source_key, :tapfit_description, :is_public, :dropin_price, :updated_at, :address_id, :is_cancelled, :phone_number, :source_description, :created_at, :schedule_url, :can_buy, :facility_type, :lowest_price, :lowest_original_price, :show_place ]
+      except_array ||= [ :crawler_source, :url, :icon_photo_id, :cover_photo_id, :source, :source_key, :tapfit_description, :is_public, :dropin_price, :updated_at, :address_id, :is_cancelled, :phone_number, :source_description, :created_at, :schedule_url, :can_buy, :facility_type, :lowest_price, :lowest_original_price, :show_place, :distance ]
       options[:include] ||= [ :address ]
       options[:methods] ||= [ :cover_photo, :next_workouts_json ]
     end
