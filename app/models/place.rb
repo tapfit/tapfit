@@ -113,6 +113,8 @@ class Place < ActiveRecord::Base
     .order("distance")
     .where("addresses.lat BETWEEN ? AND ?", lat - radius, lat + radius)
     .where("addresses.lon BETWEEN ? AND ?", lon - radius, lon + radius)
+    .where(:show_place => true)
+    .where(:can_buy => true)
     .limit(30)
     .preload(:address, :categories, :current_workouts)
   }
