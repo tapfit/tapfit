@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140115205013) do
+ActiveRecord::Schema.define(version: 20140118212111) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -101,10 +101,13 @@ ActiveRecord::Schema.define(version: 20140115205013) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "package_id"
+    t.integer  "source_id"
+    t.string   "source_type"
   end
 
   add_index "credits", ["package_id"], name: "index_credits_on_package_id", using: :btree
   add_index "credits", ["promo_code_id"], name: "index_credits_on_promo_code_id", using: :btree
+  add_index "credits", ["source_id", "source_type"], name: "index_credits_on_source_id_and_source_type", using: :btree
   add_index "credits", ["user_id"], name: "index_credits_on_user_id", using: :btree
 
   create_table "email_collections", force: true do |t|
