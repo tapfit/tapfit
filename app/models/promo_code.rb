@@ -1,6 +1,7 @@
 class PromoCode < ActiveRecord::Base
   belongs_to :company
   belongs_to :user
+  has_many :credits, as: :source
 
   validates :code, :uniqueness => true
 

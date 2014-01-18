@@ -1,5 +1,7 @@
 class Package < ActiveRecord::Base
 
+  has_many :credits, as: :source
+
   def discounted_amount
     if self.discount.nil?
       return self.amount

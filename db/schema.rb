@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140118212111) do
+ActiveRecord::Schema.define(version: 20140118233700) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -252,11 +252,13 @@ ActiveRecord::Schema.define(version: 20140118212111) do
     t.integer  "quantity"
     t.float    "random_promo"
     t.integer  "user_id"
+    t.string   "type"
   end
 
   add_index "promo_codes", ["code"], name: "index_promo_codes_on_code", using: :btree
   add_index "promo_codes", ["company_id"], name: "index_promo_codes_on_company_id", using: :btree
   add_index "promo_codes", ["has_used"], name: "index_promo_codes_on_has_used", using: :btree
+  add_index "promo_codes", ["type"], name: "index_promo_codes_on_type", using: :btree
   add_index "promo_codes", ["user_id"], name: "index_promo_codes_on_user_id", using: :btree
 
   create_table "ratings", force: true do |t|

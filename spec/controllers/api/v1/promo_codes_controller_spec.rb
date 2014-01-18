@@ -31,14 +31,14 @@ describe Api::V1::PromoCodesController do
     @user1.authentication_token = nil
     @user1.save
     User.find(@user1.id).destroy
-    post :create, user_id: "me", auth_token: @user2.authentication_token, promo_code: @promo_code.code
+    post :create, user_id: @user2.id, auth_token: @user2.authentication_token, promo_code: @promo_code.code
     response.body.should include("user")
     sign_out(@user2)
     @user2.authentication_token = nil
     @user2.save
     @user2.destroy
     User.find(@user2.id).destroy
-    post :create, user_id: "me", auth_token: @user3.authentication_token, promo_code: @promo_code.code
+    post :create, user_id: @user3.id, auth_token: @user3.authentication_token, promo_code: @promo_code.code
     response.body.should include("already been used")
   end
 
