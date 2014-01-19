@@ -14,7 +14,11 @@ ActiveAdmin.register PromoCode do
   end
 
   controller do
-    
+   
+    def scoped_collection
+      PromoCode.where(:type => nil)
+    end
+
     def permitted_params
       params.permit!
     end
