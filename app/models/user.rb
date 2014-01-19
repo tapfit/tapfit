@@ -77,7 +77,7 @@ class User < ActiveRecord::Base
   end
 
   def invitation_code
-    promo_code = PromoCode.where(:user_id => self.id).first
+    promo_code = InvitationCode.where(:user_id => self.id).first
     if (!promo_code.nil?)
       return promo_code.code.upcase
     else
@@ -151,7 +151,7 @@ class User < ActiveRecord::Base
       end
       previous_code = PromoCode.where(:user_id => self.id).first
       if previous_code.nil?
-        PromoCode.create(:code => code, :user_id => self.id, :amount => 5)
+        InvitationCode.create(:code => code, :user_id => self.id, :amount => 5)
       else
         previous_code.code = code
         previous_code.amount = 5

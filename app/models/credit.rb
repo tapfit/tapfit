@@ -9,6 +9,12 @@ class Credit < ActiveRecord::Base
   def default_values
     if !self.total.nil?
       self.remaining = self.total
+    elsif !self.promo_code.nil?
+      self.total = self.promo_code.amount
+      self.remaining = self.total
+    elsif !self.package.nil?
+      self.total = self.package.fit_coins
+      self.remaining = self.total
     end
   end
 
