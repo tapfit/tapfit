@@ -65,6 +65,10 @@ a:hover {
     color: #ccc;
 }
 
+canvas {
+    display: inline;
+}
+
 ::selection {
     background: #262626;
     color: #fff;
@@ -202,9 +206,105 @@ a.anchor {
     width: 0;
 }
 
+.price-calendar {
+    width: 100%;
+    clear: both;
+}
+
+.price-calendar-day {
+    float: left;
+    width: 12.5%;
+    height: 12.5%;
+    background: #fff;
+    margin: 0.89%;
+}
+
+.price-calendar-day h4 {
+    width: 100%;
+    padding: 5px;
+    background: #eb4840;
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.price-calendar-day p {
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+#pricing-columns {
+    display: block;
+    margin: 50px auto;
+    padding: 40px 0;
+    width: 288px;
+
+}
+
+.pricing .column {
+    background: #eb4840;
+    float: left;
+    margin: 0 6px 0 6px;
+    position: relative;
+    width: 84px;
+}
+
+.pricing .column p.column-label {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    color: #fff;
+    font-weight: 700;
+    width: 100%;
+}
+
+.pricing .column:nth-child(1) {
+    margin-top: 0;
+    height: 300px;
+}
+
+.pricing .column:nth-child(2) {
+    margin-top: 150px;
+    height: 150px;
+}
+
+.pricing .column:nth-child(3) {
+    margin-top: 240px;
+    height: 60px;
+}
+
+.pricing .column:before {
+    background: #fff;
+    margin: 0 0 5px 0;
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    width: 84px;
+    height: 40px;
+    font-family: "effra", sans-serif;
+    font-size: 30px;
+    color: #003F87;
+    font-weight: 700;
+    text-align: center;
+}
+
+.pricing .column:nth-child(1):before {
+    content: "$15";
+}
+
+.pricing .column:nth-child(2):before {
+    content: "$10";
+}
+
+.pricing .column:nth-child(3):before {
+    content: "$5";
+}
+
 /* About TapFit Section */
 
-.process {
+.process, .pricing {
     background: url("debut_light.png") repeat #eee;
     padding: 90px 0 120px 0;
     float: left;
@@ -213,7 +313,7 @@ a.anchor {
     border-bottom: 1px solid #eee;
 }
 
-.process h3, .locations h3, .plans h3, .cities h3, .employers h3 {
+.process h3, .pricing h3, .locations h3, .plans h3, .cities h3, .employers h3 {
   color: #333f48;
   font-size: 1.625em;
   font-weight: 700;
@@ -412,26 +512,6 @@ font-family: inherit;
 font-size: 100%;
 }
 
-.cta {
-    position: absolute;
-    text-align: center;
-    margin: 17% 25%;
-    background: #eb4840;
-    text-transform: uppercase;
-    border-radius: 5px;
-    color: #fff;
-    font-weight: 600;
-    font-size: 150%;
-    width: 50%;
-    padding: 10px;
-}
-
-#banner .cta, #sale_hero .cta {
-    position: relative;
-    margin: 40px 0 0 50%;
-    width: 300px;
-}
-
 .inView {
     display: block !important;
 }
@@ -576,12 +656,67 @@ ul.portfolio li {
     color: #000;
 }
 
-.testimonials {
-    background: #292929;
-    padding-top: 80px;
+.testimonials, .instructors {
+    background: #65d7f7;
+    padding: 70px 0;
     float: left;
     width: 100%;
     clear: both;
+}
+
+.instructors .instructor-boxes
+{
+    width: 800px;
+    clear: both;
+    margin: 50px auto;
+}
+
+.instructors .instructor-boxes .instructor-box
+{
+    float: left;
+    position: relative;
+    width: 240px;
+    height: 240px;
+    background-size: cover; 
+    margin: 20px 12px 70px 12px;
+    border: 20px solid #fff;
+}
+
+.instructor-box:nth-child(1) {
+    background: url(annora.jpg) no-repeat center;
+}
+
+.instructor-box:nth-child(2) {
+    background: url(fitness-girl.png) #eee no-repeat center;
+}
+
+.instructor-box:nth-child(3) {
+    background: url(yoga-girl.jpg) no-repeat center;
+}
+
+.instructor-box:before {
+    background: #fff;
+    margin: 0 0 5px 0;
+    position: absolute;
+    left: -20px;
+    bottom: -70px;
+    width: 240px;
+    height: 40px;
+    font-size: 18px;
+    color: #111;
+    text-align: center;
+}
+
+.instructor-box:nth-child(1):before {
+    content: "Annora, 25";
+}
+
+.instructor-box:nth-child(2):before {
+    content: "Tina, 23";
+}
+
+.instructor-box:nth-child(3):before {
+    content: "Britney, 29";
 }
 
 .testimonials ul li {
@@ -636,6 +771,14 @@ ul.portfolio li {
     text-transform: uppercase;
 }
 
+.divider {
+    width: 300px;
+    height: 4px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    margin: 10px auto;
+}
+
 .promotion {
     width: 100%;
     height: 40px;
@@ -688,8 +831,8 @@ a.button-2:hover {
 }
 
 footer {
-    background: #292929;
-    color: #fff;
+    background: #eee;
+    color: #111;
     text-align: center;
     padding: 20px 0;
     float: left;
@@ -699,7 +842,7 @@ footer {
 
 footer p {
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 .back-to-top {
@@ -964,7 +1107,7 @@ footer p {
   margin-bottom: 50px;
 }
 
-.cities h3, .testimonials h3 {
+.cities h3, .testimonials h3, .instructors h3 {
   color: #ffffff;
 }
 
@@ -978,7 +1121,7 @@ footer p {
   letter-spacing: 2px;
   margin-bottom: 2px;
 }
-.cities p {
+.cities p, .instructors p {
   color: #ffffff;
   font-size: 1em;
   line-height: 24px;
@@ -1581,7 +1724,7 @@ fieldset {
 
 /* Features */
 
-.features, .fitcoins {
+.features, .cta, .fitcoins {
   padding: 70px 0 70px;
   float: left;
   clear: both;
@@ -1741,15 +1884,9 @@ fieldset {
         line-height: 40px;
         text-align: center;
     }
-    .process, .cities, .locations, .promotion, .stickyDiv, .back-to-top, #sale_hero ul, #banner ul, #banner .cta {
+    .process, .cities, .locations, .promotion, .stickyDiv, .back-to-top, #sale_hero ul, #banner ul {
         display: none;
     } 
-    .cta {
-        font-size: 15px;
-        width: 80%;
-        margin-left: 10%;
-        margin-top: 30%;
-    }
     .iphone {
         margin-left: -34px;
         margin-top: 50px;
