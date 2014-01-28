@@ -90,46 +90,6 @@ canvas {
     margin: 0 auto;
 }
 
-header#top {
-    position: absolute;
-    z-index: 10000;
-    background: rgba(255,255,255,0.8);
-    width: 100%;
-    height: 70px;
-}
-
-header#top .top-nav {
-    height: 40px;
-    background: #eb4840;
-    border-bottom: 1px solid #ededed;
-}
-
-header#top .top-nav nav {
-    float: right;
-    height: 40px;
-    width: auto;
-}
-
-header#top .top-nav nav ul li {
-    display: inline-block;
-    float: left;
-}
-
-header#top .top-nav nav ul li a {
-    display: inline-block;
-    height: 29px;
-    padding: 10px 20px 0 20px;
-    color: #fff;
-    text-transform: uppercase;
-    text-shadow: none;
-    font-weight: 600;
-    font-size: 100%;
-}
-
-header#top .top-nav nav ul li a:hover {
-    color: #cccccc !important;
-}
-
 .promotion-img {
     margin-top: 4px;
     background: url("gift.png") no-repeat;
@@ -137,7 +97,7 @@ header#top .top-nav nav ul li a:hover {
 }
 
 h1.logo a {
-    background: url("logo_horizontal.png") no-repeat;
+    background: url("banner-logo.png") no-repeat;
     background-size: contain;
     text-indent: 100%;
     white-space: nowrap;
@@ -150,19 +110,27 @@ h1.logo a {
     color: #000;
     font-family: "effra", sans-serif;
     font-weight: 500;
-    font-size: 130%;
-    margin: 8px 0 0 32px;
+    font-size: 100%;
+    margin: 7px 0 0 32px;
     width: 250px
 }
 
 h1.logo a img {
+    height: 30px;
+}
+
+header#top {
+    position: fixed;
+    z-index: 10000;
+    background: #eb4840;
+    width: 100%;
     height: 50px;
 }
 
 header#top nav {
     display: inline-block;
     float: right;
-    height: 70px;
+    height: 50px;
     width: auto;
 }
 
@@ -173,20 +141,20 @@ header#top nav ul li {
 
 header#top nav ul li a {
     display: inline-block;
-    height: 70px;
-    padding:  28px 20px 0 20px;
-    color: #111;
+    height: 50px;
+    padding:  17px 20px 0 20px;
+    color: #fff;
     font-weight: 700;
     text-transform: uppercase;
     font-size: 90%;
 }
 
 header#top nav ul li a:hover {
-    color: #eb4840 !important;
+    color: #ddd !important;
 }
 
 .active {
-    color: #eb4840 !important;
+    color: #ddd !important;
 }
 
 .inactive {
@@ -304,7 +272,7 @@ a.anchor {
 
 /* About TapFit Section */
 
-.process, .pricing {
+.process, .pricing, .workouts {
     background: url("debut_light.png") repeat #eee;
     padding: 90px 0 120px 0;
     float: left;
@@ -430,21 +398,35 @@ a.anchor {
     white-space: nowrap;
     overflow: hidden;
     font-size: 120px;
-    width: 191px;
-    height: 202px;
-    margin: 70px auto 50px auto;
+    width: 187px;
+    height: 182px;
+    margin: 100px auto 50px auto;
 }
 
 #banner h2, #sale_hero h2 {
-    margin: 50px auto;
+    margin: 0px auto;
     padding: 10px;
     color: #fff;
     font-size: 50px;
-    text-align: left;
-    line-height: 80px;
-    text-transform: uppercase;
-    font-weight: 900;
+    text-align: center;
+    line-height: 60px;
+    font-weight: 500;
     letter-spacing: -0.03em;
+}
+
+#banner h3 {
+    margin: 0px auto 50px auto;
+    padding: 10px;
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+    line-height: 40px;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+}
+
+#banner ul {
+    margin: 150px 0;
 }
 
 #banner ul li {
@@ -656,67 +638,12 @@ ul.portfolio li {
     color: #000;
 }
 
-.testimonials, .instructors {
-    background: #65d7f7;
+.testimonials {
+    background: #003F87;
     padding: 70px 0;
     float: left;
     width: 100%;
     clear: both;
-}
-
-.instructors .instructor-boxes
-{
-    width: 800px;
-    clear: both;
-    margin: 50px auto;
-}
-
-.instructors .instructor-boxes .instructor-box
-{
-    float: left;
-    position: relative;
-    width: 240px;
-    height: 240px;
-    background-size: cover; 
-    margin: 20px 12px 70px 12px;
-    border: 20px solid #fff;
-}
-
-.instructor-box:nth-child(1) {
-    background: url(annora.jpg) no-repeat center;
-}
-
-.instructor-box:nth-child(2) {
-    background: url(fitness-girl.png) #eee no-repeat center;
-}
-
-.instructor-box:nth-child(3) {
-    background: url(yoga-girl.jpg) no-repeat center;
-}
-
-.instructor-box:before {
-    background: #fff;
-    margin: 0 0 5px 0;
-    position: absolute;
-    left: -20px;
-    bottom: -70px;
-    width: 240px;
-    height: 40px;
-    font-size: 18px;
-    color: #111;
-    text-align: center;
-}
-
-.instructor-box:nth-child(1):before {
-    content: "Annora, 25";
-}
-
-.instructor-box:nth-child(2):before {
-    content: "Tina, 23";
-}
-
-.instructor-box:nth-child(3):before {
-    content: "Britney, 29";
 }
 
 .testimonials ul li {
@@ -1107,7 +1034,7 @@ footer p {
   margin-bottom: 50px;
 }
 
-.cities h3, .testimonials h3, .instructors h3 {
+.cities h3, .testimonials h3 {
   color: #ffffff;
 }
 
@@ -1121,7 +1048,7 @@ footer p {
   letter-spacing: 2px;
   margin-bottom: 2px;
 }
-.cities p, .instructors p {
+.cities p {
   color: #ffffff;
   font-size: 1em;
   line-height: 24px;
@@ -1724,7 +1651,7 @@ fieldset {
 
 /* Features */
 
-.features, .cta, .fitcoins {
+.features, .cta, .fitcoins, .instructors {
   padding: 70px 0 70px;
   float: left;
   clear: both;
