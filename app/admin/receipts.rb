@@ -2,23 +2,25 @@ ActiveAdmin.register Receipt do
 
   index do
     column "Place" do |i|
-      i.place.name
+      i.place.name if !i.place.nil?
     end
 
     column "Workout Name" do |i|
-      i.workout.name
+      if !i.workout.nil?
+        i.workout.name 
+      end
     end
 
     column "Workout start time" do |i|
-      i.workout.local_start_time
+      i.workout.local_start_time if !i.workout.nil?
     end
 
     column "Schedule Url" do |i|
-      i.place.schedule_url
+      i.place.schedule_url if !i.place.nil?
     end
 
     column "Url" do |i|
-      i.place.url
+      i.place.url if !i.place.nil?
     end
 
     column "First Name" do |i|

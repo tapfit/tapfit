@@ -47,7 +47,7 @@ class Receipt < ActiveRecord::Base
     message["text"] = ""
     message["merge_vars"] = [{"vars"=>[{"content"=>self.workout.name, "name"=>"WORKOUT"},
                                        {"content"=>self.place.name, "name"=>"PLACE"},
-                                       {"content"=>self.workout.start_time.strftime("%A"), "name"=>"WORKOUT_DAY"},
+                                       {"content"=>self.workout.local_start_time.strftime("%A"), "name"=>"WORKOUT_DAY"},
                                        {"content"=>self.workout.local_start_time.strftime("%l:%M%P"), "name"=>"WORKOUT_TIME"},
                                        {"content"=>self.created_at.in_time_zone(self.place.address.timezone).strftime("%A, %B %-d, %Y"), "name"=>"ORDER_DATE"},
                                        {"content"=>self.price, "name"=>"SUBTOTAL"},

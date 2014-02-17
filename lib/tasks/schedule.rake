@@ -26,6 +26,17 @@ task :get_tapfit_stats => :environment do
 
 end
 
+task :get_user_stats => :environment do
+
+  $stdout = File.new('./user_stats.csv', 'w')
+
+  puts "First Name, Last Name, Email, Location, Sign In Count, Total Passes, Total Packages"
+
+  User.all.each do |user|
+    puts "#{user.first_name}, #{user.last_name}, #{user.email}, \"#{user.location}\", #{user.sign_in_count}, #{user.receipts.count}, #{user.credits.joins(:package).where("package_id IS NOT NULL").count}"
+  end
+end
+
 
 task :start_crawl_jobs => :environment do
   puts "Starting crawl process"
